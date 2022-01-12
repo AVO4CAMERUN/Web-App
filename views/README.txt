@@ -1,0 +1,1 @@
+ci vanno i componenti che dono viste
