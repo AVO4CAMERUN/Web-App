@@ -1,4 +1,4 @@
-# avo4cam_webapp
+# webapp
 
 ## Project setup
 ```
