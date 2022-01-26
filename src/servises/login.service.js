@@ -1,37 +1,36 @@
-function login(username, password) {
+import service from './service'
 
-    // Option fetch data
-    const fetchOption = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
-    };
-
-    // Post request for login
-    return fetch(`${apiPathRoot}/api/v1/login`, fetchOption)
-        .then(handleResponse)
-        .then(user => {
-            // login successful if there's a jwt token in the response
-            if (user.token) {
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('user', JSON.stringify(user));
-            }
-
-            return user;
-        });
+// Function for login avo4cum
+async function login (username, password) {
+  const response = await service.genericRequest('http://localhost/api/v1/login', 'POST', { username, password })
+  return response
 }
 
-function logout() {
-    // remove user from local storage to log user out
-    localStorage.removeItem('user');
+// Function for login avo4cum
+async function refresh () {
+  const token = localStorage.getItem('refreshToken')
+
+  const response = await service.genericRequest('http://localhost/api/v1/login', 'PUT', { token })
+  const newToken = response.token
+
+  // Save a new accessToken
+  localStorage.setItem('accessToken', newToken)
+
+  return newToken
 }
 
-export const userService = {
-    login,
-    logout,
-    register,
-    getAll,
-    getById,
-    update,
-    delete: _delete
-};
+// Function for logout avo4cum
+async function logout () {
+  //
+  await service.genericRequest('http://localhost/api/v1/login', 'DELETE', {})
+
+  // Remove saved refreshToken and accessToken
+  localStorage.removeItem('refreshToken')
+  localStorage.removeItem('accessToken')
+}
+
+export const loginService = {
+  login,
+  refresh,
+  logout
+}

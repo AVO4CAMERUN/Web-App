@@ -12,13 +12,14 @@
   </template>
 
   <!--  -->
-  <router-view v-if="!isLogged"/>
+  <router-view v-else/>
 </template>
 
 <script>
 import Sidebar from '@/components/Sidebar.vue'
 // import Main from '@/components/Main.vue'  <Main></Main>
 import Header from '@/components/Header.vue'
+import store from './store/index'
 
 export default {
   components: {
@@ -26,14 +27,12 @@ export default {
     Header
   },
   data () {
-    return {
-      isLogged: false
-    }
+    return {}
   },
   computed: {
-    /* isLogged() {
-      //return this.author.books.length > 0 ? 'Yes' : 'No'
-    } */
+    isLogged () {
+      return store.state.isLogged
+    }
   }
 }
 </script>

@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
 import MyCourses from '../views/MyCourses.vue'
 import Search from '../views/Search.vue'
 import MyClasses from '../views/prof/MyClasses.vue'
 import Settings from '../views/Settings.vue'
 import Login from '../views/Login.vue'
+import Register from '../views/Register.vue'
 
 const routes = [
   {
@@ -13,9 +13,9 @@ const routes = [
     component: Login
   },
   {
-    path: '/',
-    name: 'home',
-    component: Home
+    path: '/register',
+    name: 'register',
+    component: Register
   },
   {
     path: '/search',
@@ -48,7 +48,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const publicPages = ['/login', '/register']
   const authRequired = !publicPages.includes(to.path)
-  const loggedIn = localStorage.getItem('user')// no vuex
+  const loggedIn = localStorage.getItem('refreshToken') // non vuex per f5
 
   if (authRequired && !loggedIn) {
     return next('/login')
