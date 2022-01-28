@@ -8,12 +8,12 @@
         </div>
         <div class="mt-8 space-y-6">
           <div class="rounded-md shadow-sm -space-y-px">
-            <BaseInputText name="Name" v-model="name" top />
-            <BaseInputText name="Surname" v-model="surname" />
-            <BaseInputText name="Username" v-model="username" />
-            <BaseInputText name="Email" v-model="email" />
-            <BaseInputText name="Password" v-model="password" />
-            <BaseInputText name="Password" v-model="confirmPassword" bottom />
+            <BaseInputText name="Name" v-model="name" type="text" top />
+            <BaseInputText name="Surname" v-model="surname" type="text" />
+            <BaseInputText name="Username" v-model="username" type="text" />
+            <BaseInputText name="Email" v-model="email" type="text" />
+            <BaseInputText name="Password" v-model="password" :type="type" />
+            <BaseInputText name="Password" v-model="confirmPassword" :type="type" bottom />
           </div>
 
           <div class="flex items-center justify-between">

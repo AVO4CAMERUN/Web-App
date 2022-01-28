@@ -7,7 +7,7 @@
         </div>
         <div class="mt-8 space-y-6">
           <div class="rounded-md shadow-sm -space-y-px">
-            <BaseInputText name="Username" v-model="username" top />
+            <BaseInputText name="Username" v-model="username" type="text" top />
             <BaseInputText name="Password" v-model="password" :type="type" bottom />
           </div>
           <div class="flex items-center justify-between">
