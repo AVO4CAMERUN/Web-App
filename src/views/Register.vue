@@ -1,9 +1,10 @@
 <template>
-  <div class="grid place-items-center bg-gradient-to-r from-[#3f87a6] to-[#63b377] h-[100vh]">
-    <div class="flex items-center justify-center w-[110] h-[600px] p-8 rounded-[18px] bg-slate-100 shadow-lg shadow-gray-700">
+  <div class="flex justify-center items-center place-items-center bg-gradient-to-r from-[#3f87a6] to-[#63b377] h-[100vh]">
+    <div class="flex items-center justify-center w-[110] h-[600px] p-8 rounded-[18px] bg-slate-100 shadow-lg shadow-gray-700 "
+    :class="{'opacity-[.15]': popupEmailConfirm}">
       <div class="max-w-md w-full">
         <div>
-          <img src="../assets/logo_esteso.png" alt="Avo4Camerun Logo" draggable="false" />
+          <img src="../assets/logo_esteso-min.png" alt="Avo4Camerun Logo" draggable="false" />
         </div>
         <div class="mt-8 space-y-6">
           <div class="rounded-md shadow-sm -space-y-px">
@@ -15,6 +16,7 @@
                 focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
                 placeholder="Name"
                 v-model="name"
+                :disabled="popupEmailConfirm"
               />
             </div>
             <div>
@@ -25,6 +27,7 @@
                 text-gray-900 focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm "
                 placeholder="Surname"
                 v-model="surname"
+                :disabled="popupEmailConfirm"
               />
             </div>
             <div>
@@ -35,6 +38,7 @@
                 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
                 placeholder="Username"
                 v-model="username"
+                :disabled="popupEmailConfirm"
               />
             </div>
             <div>
@@ -45,6 +49,7 @@
                   text-gray-900 focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
                 placeholder="Email"
                 v-model="email"
+                :disabled="popupEmailConfirm"
               />
             </div>
             <div>
@@ -56,6 +61,7 @@
                 focus:border-green-500 focus:z-10 sm:text-sm"
                 placeholder="Password"
                 v-model="password"
+                :disabled="popupEmailConfirm"
               />
             </div>
             <div>
@@ -67,6 +73,7 @@
                 focus:border-green-500 focus:z-10 sm:text-sm"
                 placeholder="Confirm Password"
                 v-model="confirmPassword"
+                :disabled="popupEmailConfirm"
               />
             </div>
           </div>
@@ -78,6 +85,7 @@
                 class="h-4 w-4 text-indigo-600 focus:ring-green-500 border-gray-300 rounded"
                 v-model="checked"
                 @click="showPassword"
+                :disabled="popupEmailConfirm"
               />
               <label for="remember-me" class="ml-2 block text-sm text-gray-900">
                 Show Password
@@ -93,6 +101,7 @@
                 hover:bg-green-700 focus:outline-none focus:ring-2
                 focus:ring-offset-2 focus:ring-green-500"
               @click="register"
+              :disabled="popupEmailConfirm"
             >
               <span class="absolute left-0 inset-y-0 flex items-center pl-3">
                 <svg
@@ -125,8 +134,8 @@
       </div>
     </div>
     <div
-    class="mt-3 text-center top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white"
-    v-if="popup"
+    class="text-center p-5 border w-96 shadow-lg rounded-md bg-white fixed self-center drop-shadow-2xl"
+    v-if="popupEmailConfirm"
     >
       <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
         <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -142,8 +151,7 @@
       <div class="items-center px-4 py-3">
         <button
         class="px-4 py-2 bg-green-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300"
-        @click="this.$router.push('/login')"
-        >
+        @click="this.$router.push('/login')">
         OK
         </button>
       </div>
@@ -167,7 +175,8 @@ export default {
       confirmPassword: '',
       checked: false,
       type: 'password',
-      popup: false
+      popupEmailConfirm: false,
+      popups: [false, false, false, false, false]
     }
   },
   computed: {},
@@ -179,11 +188,38 @@ export default {
         this.type = 'text'
       }
     },
+    // Match text with regex and return true or false
+    generalChecker (text, pattern) {
+      const regex = new RegExp(pattern)
+      return regex.test(text)
+    },
+    // Methods for checker user input
+    checker () {
+      // name surname username email password generalpopup
+      this.popups[0] = this.generalChecker(this.name, '^[a-zA-Z]+$')
+      this.popups[1] = this.generalChecker(this.surname, '^[a-zA-Z]+$')
+      this.popups[2] = this.generalChecker(this.username, '^[a-z0-9_.-]{3,20}$')
+      this.popups[3] = this.generalChecker(this.email, '^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')
+      if (this.password === this.confirmPassword) {
+        this.popups[4] = this.generalChecker(this.password, '^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$')
+      }
+    },
+    // Methods on submit
     register () {
-      as.createAccount(this.name, this.surname, this.email, this.username, this.password)
-        .then((response) => {
-          this.popup = !this.popup
-        })
+      this.checker()
+      // sum for check
+      let sum = 0; this.popups.forEach(popup => { sum += popup })
+      console.log(this.popups)
+      // Check all user input
+      console.log(sum)
+      if (sum === 5) {
+        as.createAccount(this.name, this.surname, this.email, this.username, this.password)
+          .then((response) => {
+            this.popupEmailConfirm = !this.popupEmailConfirm
+          })
+      } else {
+        console.log('tou padre ciclo a motore')
+      }
     }
   },
   components: {}

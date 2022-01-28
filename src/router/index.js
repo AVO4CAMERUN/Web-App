@@ -8,6 +8,10 @@ import Register from '../views/Register.vue'
 
 const routes = [
   {
+    path: '/',
+    component: Login
+  },
+  {
     path: '/login',
     name: 'login',
     component: Login
