@@ -7,6 +7,7 @@
                 + [top ? 'rounded-t-md' : bottom ? 'rounded-b-md' : '' ]  + ' focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm'"
         :placeholder="name"
         v-model="model"
+        :disabled="disabled"
         />
     </div>
 </template>
@@ -18,6 +19,7 @@ export default {
     name: String,
     modelValue: String,
     type: String,
+    disabled: Boolean,
     top: Boolean,
     bottom: Boolean
   },
