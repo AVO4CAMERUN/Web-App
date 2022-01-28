@@ -118,11 +118,13 @@ export default {
           if (obj) {
             localStorage.setItem('refreshToken', refreshToken)
             localStorage.setItem('accessToken', accessToken)
-            this.$router.push('/home')
+            this.$router.push('/search')
             store.commit('changeLogin')
+          } else {
+            console.log('error')
           }
-          // console.log(obj)
         })
+        .catch(() => {})
     }
   },
   components: {

@@ -1,6 +1,6 @@
 <template>
 
-  <!--  -->
+  <!-- Conditional rendering -->
   <template v-if="isLogged">
     <!-- Sidebar gestire role qui-->
     <Sidebar></Sidebar>
@@ -11,13 +11,12 @@
     </section>
   </template>
 
-  <!--  -->
+  <!-- Conditional rendering if false -->
   <router-view v-else/>
 </template>
 
 <script>
 import Sidebar from '@/components/Sidebar.vue'
-// import Main from '@/components/Main.vue'  <Main></Main>
 import Header from '@/components/Header.vue'
 import store from './store/index'
 
@@ -28,6 +27,19 @@ export default {
   },
   data () {
     return {}
+  },
+  created () {
+    // Add event handler for frecciette del browser
+    window.onpopstate = function (event) {
+      // Inplicit Logout
+      if (window.location.pathname === '/login') {
+        store.commit('changeLogin')
+        localStorage.removeItem('refreshToken')
+        localStorage.removeItem('accessToken')
+      }
+      //  && !store.state.isLogged
+      // console.log(window.location.pathname)
+    }
   },
   computed: {
     isLogged () {

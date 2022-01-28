@@ -32,7 +32,9 @@
       <!-- Bottom button -->
       <div class="bottom-content">
         <li class="">
-          <router-link to="/">
+          <router-link to="/"
+          @click="logout"
+          >
             <i class="bx bx-log-out icon"></i>
             <span class="text nav-text">Logout</span>
           </router-link>
@@ -43,6 +45,9 @@
 </template>
 
 <script>
+import { loginService as ls } from '../servises/login.service'
+import store from '../store/index'
+
 export default {
   name: 'Sidebar',
   data: function () {
@@ -57,8 +62,23 @@ export default {
     }
   },
   methods: {
-    name: function () {
-
+    logout () {
+      ls.logout()
+        .then((response) => {
+          console.log(response.status)
+          //
+          // if (response.status === 403) {}
+          // Remove saved refreshToken and accessToken
+          localStorage.removeItem('refreshToken')
+          localStorage.removeItem('accessToken')
+          // Kicking out from web app
+          this.$router.push('/login')
+          store.commit('changeLogin')
+          // console.log(obj) */
+        })
+        .catch(() => {
+          console.log('dddd')
+        })
     }
   }
 }

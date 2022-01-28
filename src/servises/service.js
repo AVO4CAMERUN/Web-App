@@ -1,5 +1,7 @@
 // Function for generic http requets => return a obj or err
 async function genericRequest (uri, method, bodyObj) {
+  //
+  console.log(bodyObj)
   // Option for http request
   const optionRequest = {
     method, // GET, POST, PUT, DELETE, etc.
