@@ -8,74 +8,12 @@
         </div>
         <div class="mt-8 space-y-6">
           <div class="rounded-md shadow-sm -space-y-px">
-            <div>
-              <label class="sr-only">Name</label>
-              <input
-                type="text"
-                class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md
-                focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
-                placeholder="Name"
-                v-model="name"
-                :disabled="popupEmailConfirm"
-              />
-            </div>
-            <div>
-              <label class="sr-only">Surname</label>
-              <input
-                type="text"
-                class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500
-                text-gray-900 focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm "
-                placeholder="Surname"
-                v-model="surname"
-                :disabled="popupEmailConfirm"
-              />
-            </div>
-            <div>
-              <label class="sr-only">Username</label>
-              <input
-                type="text"
-                class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300
-                placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
-                placeholder="Username"
-                v-model="username"
-                :disabled="popupEmailConfirm"
-              />
-            </div>
-            <div>
-              <label class="sr-only">Email</label>
-              <input
-                type="email"
-                class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500
-                  text-gray-900 focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
-                placeholder="Email"
-                v-model="email"
-                :disabled="popupEmailConfirm"
-              />
-            </div>
-            <div>
-              <label class="sr-only">Password</label>
-              <input
-                :type="type"
-                class="appearance-none rounded-none relative block w-full px-3 py-2
-                border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-green-500
-                focus:border-green-500 focus:z-10 sm:text-sm"
-                placeholder="Password"
-                v-model="password"
-                :disabled="popupEmailConfirm"
-              />
-            </div>
-            <div>
-              <label class="sr-only">Password</label>
-              <input
-                :type="type"
-                class=" appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300
-                placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-green-500
-                focus:border-green-500 focus:z-10 sm:text-sm"
-                placeholder="Confirm Password"
-                v-model="confirmPassword"
-                :disabled="popupEmailConfirm"
-              />
-            </div>
+            <BaseInputText name="Name" v-model="name" top />
+            <BaseInputText name="Surname" v-model="surname" />
+            <BaseInputText name="Username" v-model="username" />
+            <BaseInputText name="Email" v-model="email" />
+            <BaseInputText name="Password" v-model="password" />
+            <BaseInputText name="Password" v-model="confirmPassword" bottom />
           </div>
 
           <div class="flex items-center justify-between">
@@ -163,6 +101,8 @@
 import { accountService as as } from '../servises/account.service'
 // import store from '../store/index'
 
+import BaseInputText from '@/components/BaseInputText.vue'
+
 export default {
   name: 'register',
   data: function () {
@@ -222,7 +162,9 @@ export default {
       }
     }
   },
-  components: {}
+  components: {
+    BaseInputText
+  }
 }
 // @click=""
 </script>

@@ -7,26 +7,8 @@
         </div>
         <div class="mt-8 space-y-6">
           <div class="rounded-md shadow-sm -space-y-px">
-            <div>
-              <label class="sr-only">Username</label>
-              <input
-                type="text"
-                class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900
-                      rounded-t-md focus:outline-none focus:ring-green-500focus:border-green-500 focus:z-10 sm:text-sm"
-                placeholder="Username"
-                v-model="username"
-              />
-            </div>
-            <div>
-              <label class="sr-only">Password</label>
-              <input
-                class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900
-                  rounded-b-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
-                placeholder="Password"
-                v-model="password"
-                :type="type"
-              />
-            </div>
+            <BaseInputText name="Username" v-model="username" top />
+            <BaseInputText name="Password" v-model="password" :type="type" bottom />
           </div>
           <div class="flex items-center justify-between">
             <div class="flex items-center">
@@ -90,6 +72,8 @@
 import { loginService as ls } from '../servises/login.service'
 import store from '../store/index'
 
+import BaseInputText from '@/components/BaseInputText.vue'
+
 export default {
   name: 'login',
   data: function () {
@@ -128,6 +112,7 @@ export default {
     }
   },
   components: {
+    BaseInputText
   }
 }
 // @click=""
