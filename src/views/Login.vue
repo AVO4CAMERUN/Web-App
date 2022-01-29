@@ -1,6 +1,9 @@
 <template>
   <div class="grid place-items-center bg-gradient-to-r from-[#3f87a6] to-[#63b377] h-[100vh]">
-    <div class="flex items-center justify-center w-[110] h-[450px] p-8 rounded-[18px] bg-slate-100 shadow-lg shadow-gray-700">
+    <div
+    class="flex items-center justify-center w-[110] h-[450px] p-8 rounded-[18px] bg-slate-100 shadow-lg shadow-gray-700"
+    :class="{'opacity-[.15]': popupError}"
+    >
       <div class="max-w-md w-full">
         <div>
           <img src="../assets/logo_esteso.png" alt="Avo4Camerun Logo" draggable="false" />
@@ -83,6 +86,33 @@
         </div>
       </div>
     </div>
+    <div
+    class="text-center p-5 border w-96 shadow-lg rounded-md bg-white fixed self-center drop-shadow-2xl"
+    v-if="popupError"
+    >
+        <div class="mt-3 text-center">
+            <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
+                <svg class="h-6 w-6 text-red-600" fill="currentColor" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path>
+                </svg>
+            </div>
+            <h3 class="text-lg leading-6 font-medium text-gray-900">Warning!</h3>
+            <div class="mt-2 px-7 py-3">
+                <p class="text-sm text-gray-500">
+                    Tuo padre ciclo a motore
+                </p>
+            </div>
+            <div class="items-center px-4 py-3">
+                <button
+                  class="px-4 py-2 bg-red-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300"
+                  @click="popupError = !popupError"
+                >
+                    OK
+                </button>
+            </div>
+        </div>
+    </div>
   </div>
 </template>
 
@@ -97,7 +127,8 @@ export default {
       username: '',
       password: '',
       checked: false,
-      type: 'password'
+      type: 'password',
+      popupError: false
     }
   },
   computed: {},
@@ -111,18 +142,19 @@ export default {
     },
     login () {
       ls.login(this.username, this.password)
-        .then((response) => response.json())
-        .then((obj) => {
-          const { refreshToken, accessToken } = obj
+        .then((response) => {
           // Save a refreshToken and accessToken
-          if (obj) {
-            localStorage.setItem('refreshToken', refreshToken)
-            localStorage.setItem('accessToken', accessToken)
-            this.$router.push('/search')
-            store.commit('changeLogin')
+          if (response.status === 200) {
+            return response.json()
           } else {
-            console.log('error')
+            this.popupError = !this.popupError
           }
+        }).then((obj) => {
+          const { refreshToken, accessToken } = obj
+          localStorage.setItem('refreshToken', refreshToken)
+          localStorage.setItem('accessToken', accessToken)
+          this.$router.push('/search')
+          store.commit('changeLogin')
         })
         .catch(() => {})
     }

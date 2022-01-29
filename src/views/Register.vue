@@ -1,7 +1,8 @@
 <template>
   <div class="flex justify-center items-center place-items-center bg-gradient-to-r from-[#3f87a6] to-[#63b377] h-[100vh]">
     <div class="flex items-center justify-center w-[110] h-[600px] p-8 rounded-[18px] bg-slate-100 shadow-lg shadow-gray-700 "
-    :class="{'opacity-[.15]': popupEmailConfirm}">
+    :class="{'opacity-[.15]': popupEmailConfirm}"
+    >
       <div class="max-w-md w-full">
         <div>
           <img src="../assets/logo_esteso-min.png" alt="Avo4Camerun Logo" draggable="false" />

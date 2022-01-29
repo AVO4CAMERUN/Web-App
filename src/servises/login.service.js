@@ -6,7 +6,7 @@ async function login (username, password) {
   return response
 }
 
-// Function for login avo4cum
+// Function for login avo4cum da aggiustare
 async function refresh () {
   const token = localStorage.getItem('refreshToken')
 
