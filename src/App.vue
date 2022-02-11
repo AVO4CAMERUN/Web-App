@@ -41,6 +41,15 @@ export default {
       // console.log(window.location.pathname)
     }
   },
+  mounted () {
+    //
+    if (
+      localStorage.getItem('refreshToken') &&
+      localStorage.getItem('accessToken')
+    ) {
+      store.commit('changeLoginParameter', true)
+    }
+  },
   computed: {
     isLogged () {
       return store.state.isLogged

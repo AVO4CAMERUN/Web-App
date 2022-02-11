@@ -101,7 +101,6 @@
 <script>
 import { loginService as ls } from '../servises/login.service'
 import store from '../store/index'
-
 import BaseInputText from '@/components/BaseInputText.vue'
 
 export default {

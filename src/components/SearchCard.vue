@@ -1,12 +1,15 @@
 <template>
   <div class="card">
-    <div class="course">Anime Design 5B
-      <div class="under-course">
-        Henry Drackm
-      </div>
+    <div class="course">
+      {{courseName}}
+      <div class="under-course">{{creatorName}}</div>
     </div>
     <div class="course-box-icons">
-      <img src="../assets/icon.png" class="course-img" draggable="false">
+      <img
+        class="course-img"
+        :src="courseCover"
+        draggable="false"
+      >
       <a href="#" class="course-links">
         <i class='bx bx-message course-icons'></i>
       </a>
@@ -14,18 +17,7 @@
         <i class='bx bx-archive-in course-icons'></i>
       </a>
     </div>
-
-    <div class="course-description">
-      ciao, sono Henry Drackm, il tuo tutore personale di Lepsoy
-    </div>
-    <div class="progress-content">
-      <div class="percentage">{{progress}}%</div>
-      <div class="border-progress-bar">
-        <div class="overflow-progress-bar">
-          <div class="progress-bar" :style="styleObject"></div>
-        </div>
-      </div>
-    </div>
+    <div class="course-description">{{courseDescription}}</div>
   </div>
 </template>
 
@@ -45,7 +37,11 @@ export default {
   methods: {},
   computed: {},
   props: {
-    progress: Number
+    progress: Number,
+    courseName: String,
+    courseDescription: String,
+    courseCover: String,
+    creatorName: String
   }
 }
 

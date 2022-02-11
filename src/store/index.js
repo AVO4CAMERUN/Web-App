@@ -7,6 +7,9 @@ export default createStore({
   mutations: {
     changeLogin (state) {
       state.isLogged = !state.isLogged
+    },
+    changeLoginParameter (state, value) {
+      state.isLogged = value
     }
   },
   actions: {

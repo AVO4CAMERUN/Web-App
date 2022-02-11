@@ -22,7 +22,7 @@
       <div class="menu">
 
         <!--  -->
-        <li class="nav-link" v-for="button in dataButtons" :key="button">
+        <li class="nav-link" v-for="button in buttons" :key="button">
           <router-link :to="button.path">
             <i :class="button.icon"></i>
             <span class="text nav-text">{{ button.message }}</span>
@@ -53,7 +53,7 @@ export default {
   data: function () {
     return {
       isClose: true,
-      dataButtons: [
+      buttons: [
         { icon: 'bx bx-search icon', message: 'Search', path: '/search' },
         { icon: 'bx bx-book-bookmark icon', message: 'My Courses', path: '/mycourses' },
         { icon: 'bx bx-chalkboard icon', message: 'My Classes', path: '/myclasses' },

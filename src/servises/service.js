@@ -12,7 +12,7 @@ async function genericRequest (uri, method, bodyObj) {
     body: JSON.stringify(bodyObj) // Body
   }
   // Return a parse JSON response in native JavaScript objects .json()
-  return await fetch(uri, optionRequest)
+  return await fetch(`http://localhost/api/v1/${uri}`, optionRequest)
 }
 
 // Function for generic http requets with Authorization header
@@ -30,7 +30,7 @@ async function genericRequestWithAuth (uri, method, bodyObj, token) {
     body: JSON.stringify(bodyObj) // Body
   }
   // Return a parse JSON response in native JavaScript objects .json()
-  return await fetch(uri, optionRequest)
+  return await fetch(`http://localhost/api/v1/${uri}`, optionRequest)
 }
 
 export default {
