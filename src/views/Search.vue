@@ -5,7 +5,7 @@
         <input
           type="text"
           v-model="searchName"
-          @input="searchCourses"
+          @change="searchCourses"
           class="h-14 w-96 pr-8 pl-5 rounded-lg z-0 focus:shadow focus:outline-none"
           placeholder="Search anything..."
         >
@@ -19,7 +19,7 @@
     <SearchCard
       v-for="card in cards"
       :key="card"
-      :progress="card.progress"
+      :courseID="card.courseID"
       :courseName="card.courseName"
       :courseDescription="card.courseDescription"
       :courseCover="card.courseCover"
@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import SearchCard from '../components/SearchCard.vue'
+import SearchCard from '../components/cards/SearchCard.vue'
 import { coursesService as cs } from '../servises/course.service'
 // import store from '../store/index'
 
@@ -42,7 +42,9 @@ export default {
       // progress: 20
     }
   },
-  computed: {},
+  components: {
+    SearchCard
+  },
   mounted () {
     this.searchCourses()
   },
@@ -66,22 +68,17 @@ export default {
           this.cards = []
           for (const course of courses) {
             this.cards.push({
+              courseID: course.id_course,
               courseName: course.name,
               courseDescription: course.description,
               creatorName: course.email_creator,
-              courseCover: `data:image/png;base64,${course.img_cover}`
+              courseCover: course.img_cover
             })
           }
         })
         .catch(() => {})
     }
   },
-  components: {
-    SearchCard
-  }
+  computed: {}
 }
-
 </script>
-
-<style scoped>
-</style>

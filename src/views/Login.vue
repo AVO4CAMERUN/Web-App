@@ -136,6 +136,9 @@ export default {
           const { refreshToken, accessToken } = obj
           localStorage.setItem('refreshToken', refreshToken)
           localStorage.setItem('accessToken', accessToken)
+          // Extract data on jwt
+          // const data = atob(accessToken) da a fare
+          // console.log(data)
           this.$router.push('/search')
           store.commit('changeLogin')
         })

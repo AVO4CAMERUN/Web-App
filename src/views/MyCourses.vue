@@ -1,24 +1,41 @@
-<template>
-  <template v-for="card in cards">
-    {{card.icon}}
-  </template>
+<template v-on>
+  <div class="m-8 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(300px,_1fr))]">
+    <MyCourseCard
+      v-for="card in cards"
+      :key="card"
+    ></MyCourseCard>
+  </div>
 </template>
-
 <script>
-// @ is an alias to /src
+import MyCourseCard from '../components/cards/MyCourseCard.vue'
+import { subscribeService as ss } from '../servises/subscribe.service'
+
 export default {
   name: 'mycourses',
   data: function () {
     return {
-      isClose: true,
-      cards: [
-        { icon: 'bx bx-search icon', message: 'Search', path: '/search' },
-        { icon: 'bx bx-book-bookmark icon', message: 'My Courses', path: '/mycourses' },
-        { icon: 'bx bx-chalkboard icon', message: 'My Classes', path: '/myclasses' },
-        { icon: 'bx bx-cog icon', message: 'Settings', path: '/settings' }
-      ]
+      cards: []
     }
   },
-  components: {}
+  components: {
+    MyCourseCard
+  },
+  mounted () {
+    this.fetchMyCourses(`?email=[${1}]`)
+  },
+  methods: {
+    fetchMyCourses () {
+      ss.getSubscriptionByFilter()
+        .then((response) => {
+          if (response.status === 200) {
+            return response.json()
+          } else { }
+        })
+        .then((courses) => {
+          console.log(courses)
+        })
+        .catch(() => {})
+    }
+  }
 }
 </script>

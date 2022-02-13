@@ -6,42 +6,54 @@
     </div>
     <div class="course-box-icons">
       <img
+        v-if="courseCover !== ''"
+        :src="`data:image/png;base64,${courseCover}`"
         class="course-img"
-        :src="courseCover"
         draggable="false"
       >
-      <a href="#" class="course-links">
-        <i class='bx bx-message course-icons'></i>
-      </a>
-      <a href="#" class="course-links">
+      <img
+        v-else
+        src="@/assets/icon.png"
+        class="course-img"
+        draggable="false"
+      >
+      <span class="course-links" @click="addCourses">
         <i class='bx bx-archive-in course-icons'></i>
-      </a>
+      </span>
     </div>
     <div class="course-description">{{courseDescription}}</div>
   </div>
 </template>
 
 <script>
-// import { loginService as ls } from '../servises/login.service'
+import { subscribeService as sub } from '@/servises/subscribe.service'
 // import store from '../store/index'
 
 export default {
-  name: 'Sidebar',
+  name: 'SearchCard',
   data: function () {
     return {
-      styleObject: {
-        width: this.progress + '%'
-      }
+      id: this.courseID
     }
   },
-  methods: {},
-  computed: {},
   props: {
     progress: Number,
+    courseID: Number,
     courseName: String,
     courseDescription: String,
     courseCover: String,
     creatorName: String
+  },
+  methods: {
+    addCourses () {
+      // Request to subscribe
+      sub.subscribe(this.id)
+        .then((response) => {
+          if (response.status === 200) {
+            this.$router.push('/mycourses')
+          } else { /* err */ }
+        })
+    }
   }
 }
 
