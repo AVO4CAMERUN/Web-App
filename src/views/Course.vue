@@ -1,38 +1,39 @@
 <template>
-  <div class="overflow-auto bg-[#f0f3f6] scrollbar h-[100vh]">
-    <div class="grid grid-cols-[20%,_auto] grid-rows-[minmax(10rem,_88vh),_minmax(10rem,_88vh)] p-8 gap-8">
-      <Navbar />
-      <VideoDescription/>
+  <div class="overflow-y-auto overflow-x-hidden bg-[#f0f3f6] scrollbar">
+    <div class="grid grid-cols-[20%,80%] grid-rows-[90%,90%] p-8 gap-8">
+      <Navbar :units="units"/>
+      <Video :videoID="lesson.link_video"/>
+      <VideoDescription :lessonID="lesson.id_lesson" :lessonName="lesson.name" :lessonQuiz="lesson.quiz"/>
     </div>
   </div>
 </template>
 
 <script>
 import Navbar from '../components/UnitsNavbar.vue'
-// import Video from '../components/Video.vue'
+import Video from '../components/Video.vue'
 import VideoDescription from '../components/VideoDescription.vue'
-// import { lessonService as ls } from '../servises/lesson.service'
-import { unitsService as us } from '../servises/units.service'
+import { lessonService as ls } from '../servises/lesson.service'
+// import { unitsService as us } from '../servises/units.service'
 
 export default {
   name: 'course',
   data: function () {
     return {
       units: [],
-      lessons: []
+      lesson: {}
     }
   },
   components: {
     Navbar,
-    // Video,
+    Video,
     VideoDescription
   },
   mounted () {
-    this.units = this.fetchUnits(`?id_course=[${1}]`)
-    // this.fetchLesson(`?id_lesson=[${1}]`)
+    // this.units = this.fetchUnits(`?id_course=[${1}]`)
+    this.fetchLesson(`?id_lesson=[${1}]`)
   },
   methods: {
-    // fetch units by filter
+    /* fetch units by filter
     fetchUnits (filter) {
       us.getUnitsByFilter(filter)
         .then((response) => {
@@ -55,8 +56,8 @@ export default {
           })
         })
         .catch(() => {})
-    }
-    /* fetch lessons by filter
+    } */
+    // fetch lessons by filter
     fetchLesson (filter) {
       ls.getLessonsByFilter(filter)
         .then((response) => {
@@ -65,20 +66,10 @@ export default {
           } else { }
         })
         .then((lessonsList) => {
-          console.log(lessonsList)
-          this.lessons = []
-          lessonsList.forEach(lesson => {
-            this.lessons.push({
-              lessonID: lesson.id_unit,
-              unitID: lesson.id_unit,
-              lessonName: lesson.name,
-              lessonVideo: lesson.link_video,
-              lessonQuiz: lesson.quiz
-            })
-          })
+          this.lesson = lessonsList[0]
         })
         .catch(() => {})
-    } */
+    }
   }
 }
 </script>
