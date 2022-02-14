@@ -5,6 +5,7 @@ import MyClasses from '../views/prof/MyClasses.vue'
 import Settings from '../views/Settings.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
+import Course from '../views/Course.vue'
 import store from '../store/index'
 
 const routes = [
@@ -36,6 +37,11 @@ const routes = [
     path: '/myclasses',
     name: 'myclasses',
     component: MyClasses
+  },
+  {
+    path: '/course',
+    name: 'course',
+    component: Course
   },
   {
     path: '/settings',
