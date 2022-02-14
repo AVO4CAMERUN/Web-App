@@ -71,6 +71,9 @@ export default {
           // Remove saved refreshToken and accessToken
           localStorage.removeItem('refreshToken')
           localStorage.removeItem('accessToken')
+          localStorage.removeItem('username')
+          localStorage.removeItem('email')
+          localStorage.removeItem('role')
           // Kicking out from web app
           this.$router.push('/login')
           store.commit('changeLogin')

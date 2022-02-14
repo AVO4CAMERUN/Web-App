@@ -82,7 +82,7 @@
             <h3 class="text-lg leading-6 font-medium text-gray-900">Warning!</h3>
             <div class="mt-2 px-7 py-3">
                 <p class="text-sm text-gray-500">
-                    Tuo padre ciclo a motore
+                    Error login
                 </p>
             </div>
             <div class="items-center px-4 py-3">
@@ -137,12 +137,19 @@ export default {
           localStorage.setItem('refreshToken', refreshToken)
           localStorage.setItem('accessToken', accessToken)
           // Extract data on jwt
-          // const data = atob(accessToken) da a fare
-          // console.log(data)
-          this.$router.push('/search')
+          console.log(atob(accessToken.split('.')[1]))
+          const { email, role, username } = JSON.parse(atob(accessToken.split('.')[1]))
+          // Save data user on local storage
+          localStorage.setItem('email', email)
+          localStorage.setItem('role', role)
+          localStorage.setItem('username', username)
+          // Change router
           store.commit('changeLogin')
+          this.$router.push('/search')
         })
-        .catch(() => {})
+        .catch((err) => {
+          console.log(err)
+        })
     }
   },
   components: {

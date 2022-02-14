@@ -24,6 +24,7 @@
       :courseDescription="card.courseDescription"
       :courseCover="card.courseCover"
       :creatorName="card.creatorName"
+      :creationDate="card.creationDate"
     ></SearchCard>
   </div>
 </template>
@@ -64,15 +65,19 @@ export default {
           }
         })
         .then((courses) => {
+          console.log(courses)
           // Refresh data model
           this.cards = []
           for (const course of courses) {
+            const date = new Date(course.creation_date)
+
             this.cards.push({
               courseID: course.id_course,
               courseName: course.name,
               courseDescription: course.description,
               creatorName: course.email_creator,
-              courseCover: course.img_cover
+              courseCover: course.img_cover,
+              creationDate: `${date.getUTCDate()}/${date.getUTCMonth() + 1}/${date.getUTCFullYear()}`
             })
           }
         })

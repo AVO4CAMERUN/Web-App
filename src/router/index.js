@@ -5,11 +5,12 @@ import MyClasses from '../views/prof/MyClasses.vue'
 import Settings from '../views/Settings.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
+import store from '../store/index'
 
 const routes = [
   {
     path: '/',
-    component: Login
+    component: MyCourses
   },
   {
     path: '/login',
@@ -54,9 +55,9 @@ router.beforeEach((to, from, next) => {
   const authRequired = !publicPages.includes(to.path)
   const loggedIn = localStorage.getItem('refreshToken') // non vuex per f5
 
-  if (authRequired && !loggedIn) {
-    return next('/login')
-  }
+  if (!authRequired && store.state.isLogged && loggedIn) return next('/mycourses')
+  if (authRequired && !loggedIn) return next('/login')
   next()
 })
+
 export default router
