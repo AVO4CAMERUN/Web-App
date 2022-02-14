@@ -65,7 +65,6 @@ export default {
           }
         })
         .then((courses) => {
-          console.log(courses)
           // Refresh data model
           this.cards = []
           for (const course of courses) {

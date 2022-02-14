@@ -5,7 +5,7 @@ async function createUnits (name, email, description, imgCover, subject) {
   // name, email, description, img_cover, subject
   // const token = localStorage.getItem('refreshToken')
 
-  const response = await service.genericRequest('courses', 'POST', { name, email, description, imgCover, subject })
+  const response = await service.genericRequest('lessons', 'POST', { name, email, description, imgCover, subject })
   return response
 }
 
