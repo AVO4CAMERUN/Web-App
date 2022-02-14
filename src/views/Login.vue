@@ -137,7 +137,6 @@ export default {
           localStorage.setItem('refreshToken', refreshToken)
           localStorage.setItem('accessToken', accessToken)
           // Extract data on jwt
-          console.log(atob(accessToken.split('.')[1]))
           const { email, role, username } = JSON.parse(atob(accessToken.split('.')[1]))
           // Save data user on local storage
           localStorage.setItem('email', email)

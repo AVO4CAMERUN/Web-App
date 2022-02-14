@@ -15,7 +15,9 @@
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
     "vue3-youtube": "^0.1.9",
-    "vuex": "^4.0.0-0"
+    "vuex": "^4.0.0-0",
+    "youtube-player": "^5.5.2",
+    "youtube-vue3": "^0.1.10"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
