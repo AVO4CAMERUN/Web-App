@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{name: 'course', query: { id: '1' }}">
+  <router-link :to="{name: 'course', query: { id: courseID }}">
     <div class="flex flex-wrap" >
       <article class="h-[300px] w-[400px] overflow-hidden rounded-lg shadow-lg">
         <div class="h-[120px] w-[400px]">
@@ -25,7 +25,7 @@
             <p class="text-sm">{{creatorName}}</p>
           </div>
           <div class="cursor-pointer">
-            <svg class="hover:scale-90 rounded-full" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" style="fill: rgba(253, 5, 5, 1);transform: ;msFilter:;">
+            <svg class="hover:scale-90 rounded-full" @click.prevent="removeCourse" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" style="fill: rgba(253, 5, 5, 1);transform: ;msFilter:;">
               <path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm5 11H7v-2h10v2z"></path>
             </svg>
           </div>
@@ -47,16 +47,16 @@ export default {
     }
   },
   methods: {
-    addCourses () {
-      sub.subscribe(this.id)
+    removeCourse () {
+      sub.deleteSubscribtion(this.id)
         .then((response) => {
           if (response.status === 200) {
-            this.$router.push('/mycourses')
+            location.reload()
+            this.$emit('courseID', this.courseID)
           } else { /* err */ }
         })
     }
   },
-  computed: {},
   props: {
     progress: Number,
     courseID: Number,

@@ -8,7 +8,12 @@ async function subscribe (idCourse) {
 
 // Function for subscribe
 async function getSubscriptionByFilter (filter) {
-  return await await service.genericRequest(`subscribe${filter}`, 'GET')
+  return await service.genericRequest(`subscribe${filter}`, 'GET')
+}
+
+async function deleteSubscribtion (idCourse) {
+  const accessToken = localStorage.getItem('accessToken')
+  return await service.genericRequestWithAuth('subscribe', 'DELETE', { id_course: idCourse }, accessToken)
 }
 
 // get iscrizioni
@@ -16,5 +21,6 @@ async function getSubscriptionByFilter (filter) {
 
 export const subscribeService = {
   subscribe,
-  getSubscriptionByFilter
+  getSubscriptionByFilter,
+  deleteSubscribtion
 }

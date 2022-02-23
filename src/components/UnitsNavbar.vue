@@ -17,7 +17,7 @@
         >
           {{unit.unitName}}
         </h4>
-        <div class="border py-4 px-2">
+        <div v-class="" class="border py-4 px-2">
           <div v-for="lesson in unit.unitLessons"
           class="cursor-pointer rounded-md bg-emerald-400 m-2 p-2 select-none hover:opacity-75"
           :key="lesson" @click="changeLesson(lesson.id)">{{lesson.name}}</div>
@@ -31,12 +31,20 @@
 export default {
   data: function () {
     return {
+      selected: 0,
+      positions: []
     }
   },
-  mounted () {},
+  mounted () {
+    this.units.forEach(() => {
+      this.positions.push(false)
+    })
+  },
   methods: {
     changeLesson (lessonID) {
       this.$emit('lessonID', lessonID)
+    },
+    changeUnit () {
     }
   },
   props: {

@@ -2,14 +2,15 @@
   <div class="m-8 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(300px,_1fr))]">
     <MyCourseCard
       v-for="card in cards"
-      :key="card"
+      :key="card.id"
       :courseID="card.courseID"
       :courseName="card.courseName"
       :courseDescription="card.courseDescription"
       :courseCover="card.courseCover"
       :creatorName="card.creatorName"
       :creationDate="card.creationDate"
-    ></MyCourseCard>
+      @courseID="metodino"
+    />
   </div>
 </template>
 <script>
@@ -59,6 +60,10 @@ export default {
         })
         .catch(() => {})
     }
+  },
+  metodino (id) {
+    console.log('2')
+    console.log(this.cards.filter(card => card.course.id_course !== id))
   }
 }
 </script>
