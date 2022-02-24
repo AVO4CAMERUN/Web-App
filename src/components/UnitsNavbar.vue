@@ -8,6 +8,7 @@
           :unitID="unit.id_unit"
           :courseID="unit.id_course"
           :unitName="unit.name"
+          :unitPosition="unit.units_order"
           :unitDescription="unit.description"
           :unitLessons="unit.lesson"
         >
@@ -17,7 +18,7 @@
         >
           {{unit.unitName}}
         </h4>
-        <div v-class="" class="border py-4 px-2">
+        <div class="border py-4 px-2">
           <div v-for="lesson in unit.unitLessons"
           class="cursor-pointer rounded-md bg-emerald-400 m-2 p-2 select-none hover:opacity-75"
           :key="lesson" @click="changeLesson(lesson.id)">{{lesson.name}}</div>
@@ -35,13 +36,10 @@ export default {
       positions: []
     }
   },
-  mounted () {
-    this.units.forEach(() => {
-      this.positions.push(false)
-    })
-  },
+  mounted () {},
   methods: {
     changeLesson (lessonID) {
+      console.log(lessonID)
       this.$emit('lessonID', lessonID)
     },
     changeUnit () {
@@ -55,3 +53,4 @@ export default {
 
 <style>
 </style>
+
