@@ -31,8 +31,7 @@ export default {
     VideoDescription
   },
   mounted () {
-    this.units = this.fetchUnits(`?id_course=[${this.courseID}]`)
-    this.fetchLesson(`?id_lesson=[${this.lessonID}]`)
+    this.fetchUnits(`?id_course=[${this.courseID}]`)
   },
   methods: {
     // fetch units by filter
@@ -51,10 +50,14 @@ export default {
               unitID: unit.id_unit,
               courseID: unit.id_course,
               unitName: unit.name,
+              unitPosition: unit.units_order,
               unitDescription: unit.description,
               unitLessons: unit.lessons
             })
           })
+          // cambiare in ordine lezioni dinamico
+          this.lessonID = this.units[0].unitLessons[0].id
+          this.fetchLesson(`?id_lesson=[${this.lessonID}]`)
         })
         .catch(() => {})
     },
