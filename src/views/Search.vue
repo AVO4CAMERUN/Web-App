@@ -30,8 +30,8 @@
 </template>
 
 <script>
-import SearchCard from '../components/cards/SearchCard.vue'
-import { coursesService as cs } from '../servises/course.service'
+import SearchCard from '../components/Search/SearchCard.vue'
+import { coursesService as cs } from '../servises/course.services'
 // import store from '../store/index'
 
 export default {

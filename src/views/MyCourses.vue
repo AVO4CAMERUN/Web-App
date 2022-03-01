@@ -11,15 +11,15 @@
       :creationDate="card.creationDate"
     />
   </div>
-  <div v-else class="bg-green-100 border-t border-b border-green-500 text-green-700 px-4 py-3 mx-5 my-5" role="alert">
+  <div v-else class="bg-green-100 border-t border-b border-l border-r border-green-500 text-green-700 px-4 py-3 mx-5 my-5" role="alert">
     <p class="font-bold">Nessun corso aggiunto</p>
     <p class="text-sm">Vai nella sezione Esplora per inserire il tuo primo corso.</p>
   </div>
 </template>
 <script>
-import MyCourseCard from '../components/cards/MyCourseCard.vue'
+import MyCourseCard from '../components/Course/MyCourseCard.vue'
 import { subscribeService as ss } from '../servises/subscribe.service'
-import { coursesService as cs } from '../servises/course.service'
+import { coursesService as cs } from '../servises/course.services'
 
 export default {
   name: 'mycourses',

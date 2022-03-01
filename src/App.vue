@@ -7,7 +7,7 @@
     <!-- Main -> Header + content -->
     <section class="home">
       <Header></Header>
-      <router-view />
+      <router-view/>
     </section>
   </template>
 
@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import Sidebar from '@/components/Sidebar.vue'
-import Header from '@/components/Header.vue'
+import Sidebar from '@/components/DashBoard/Sidebar.vue'
+import Header from '@/components/DashBoard/Header.vue'
 import store from './store/index'
 
 export default {

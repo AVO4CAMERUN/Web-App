@@ -3,17 +3,19 @@
     <div class="grid grid-cols-[20%,_80%] grid-rows-2 p-8 gap-8">
       <Navbar :units="units" @lessonID="getLessonID"/>
       <Video :videoID="lesson.link_video"/>
-      <VideoDescription :lessonID="lesson.id_lesson" :lessonName="lesson.name" :lessonQuiz="lesson.quiz"/>
+      <Quiz :lessonID="lesson.id_lesson" :quiz="lesson.quiz"/>
+      <VideoDescription :lessonID="lesson.id_lesson" :lessonName="lesson.name"/>
     </div>
   </div>
 </template>
 
 <script>
-import Navbar from '../components/UnitsNavbar.vue'
-import Video from '../components/Video.vue'
-import VideoDescription from '../components/VideoDescription.vue'
-import { lessonService as ls } from '../servises/lesson.service'
-import { unitsService as us } from '../servises/units.service'
+import Navbar from '../components/Course/UnitsNavbar.vue'
+import Video from '../components/Course/Video.vue'
+import VideoDescription from '../components/Course/VideoDescription.vue'
+import Quiz from '../components/Course/Quiz.vue'
+import { lessonService as ls } from '../servises/lesson.services'
+import { unitsService as us } from '../servises/units.services'
 
 export default {
   name: 'course',
@@ -28,6 +30,7 @@ export default {
   components: {
     Navbar,
     Video,
+    Quiz,
     VideoDescription
   },
   mounted () {
@@ -71,6 +74,7 @@ export default {
         })
         .then((lessonsList) => {
           this.lesson = lessonsList[0]
+          this.lesson.quiz = JSON.parse(this.lesson.quiz)
         })
         .catch(() => {})
     },

@@ -99,9 +99,9 @@
 </template>
 
 <script>
-import { loginService as ls } from '../servises/login.service'
+import { loginService as ls } from '../servises/login.services'
 import store from '../store/index'
-import BaseInputText from '@/components/BaseInputText.vue'
+import BaseInputText from '@/components/Base/BaseInputText.vue'
 
 export default {
   name: 'login',

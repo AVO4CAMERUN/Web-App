@@ -99,10 +99,10 @@
 </template>
 
 <script>
-import { accountService as as } from '../servises/account.service'
+import { accountService as as } from '../servises/account.services'
 // import store from '../store/index'
 
-import BaseInputText from '@/components/BaseInputText.vue'
+import BaseInputText from '@/components/Base/BaseInputText.vue'
 
 export default {
   name: 'register',

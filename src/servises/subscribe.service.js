@@ -1,4 +1,4 @@
-import service from './service'
+import service from './base.services'
 
 // Function for subscribe
 async function subscribe (idCourse) {
