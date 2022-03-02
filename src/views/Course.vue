@@ -5,6 +5,7 @@
       <Video :videoID="lesson.link_video"/>
       <Quiz :lessonID="lesson.id_lesson" :quiz="lesson.quiz"/>
       <VideoDescription :lessonID="lesson.id_lesson" :lessonName="lesson.name"/>
+      <!-- qui le props volano tantissimo -->
     </div>
   </div>
 </template>

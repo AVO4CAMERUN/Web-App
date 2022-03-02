@@ -1,12 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import MyCourses from '../views/MyCourses.vue'
-import Search from '../views/Search.vue'
-import MyClasses from '../views/prof/MyClasses.vue'
-import Settings from '../views/Settings.vue'
-import Login from '../views/Login.vue'
-import Register from '../views/Register.vue'
-import Course from '../views/Course.vue'
-import store from '../store/index'
+import MyCourses from '@/views/MyCourses.vue'
+import Search from '@/views/Search.vue'
+import MyClasses from '@/views/teachers/MyClasses'
+import Settings from '@/views/Settings.vue'
+import Login from '@/views/Login.vue'
+import Register from '@/views/Register.vue'
+import Course from '@/views/Course.vue'
+import store from '@/store/index'
 
 const routes = [
   {

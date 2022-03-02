@@ -18,7 +18,7 @@
 <script>
 import Sidebar from '@/components/DashBoard/Sidebar.vue'
 import Header from '@/components/DashBoard/Header.vue'
-import store from './store/index'
+import store from '@/store/index'
 
 export default {
   components: {
