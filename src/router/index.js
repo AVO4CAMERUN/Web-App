@@ -62,7 +62,7 @@ router.beforeEach((to, from, next) => {
   const authRequired = !publicPages.includes(to.path)
   const loggedIn = localStorage.getItem('refreshToken') // non vuex per f5
 
-  if (!authRequired && store.state.isLogged && loggedIn) return next('/mycourses')
+  if (!authRequired && store.state.login.isLogged && loggedIn) return next('/mycourses')
   if (authRequired && !loggedIn) return next('/login')
   next()
 })

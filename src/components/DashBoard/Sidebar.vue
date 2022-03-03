@@ -32,9 +32,7 @@
       <!-- Bottom button -->
       <div class="bottom-content">
         <li class="">
-          <router-link to="/"
-          @click="logout"
-          >
+          <router-link to="/" @click="logout">
             <i class="bx bx-log-out icon"></i>
             <span class="text nav-text">Logout</span>
           </router-link>

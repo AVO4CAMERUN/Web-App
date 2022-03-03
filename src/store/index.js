@@ -1,17 +1,11 @@
 import { createStore } from 'vuex'
+import VuexPersistence from 'vuex-persist'
+import * as login from '@/store/module/login.module'
 
 export default createStore({
-  state: {
-    isLogged: false
-  },
-  mutations: {
-    changeLogin (state) {
-      state.isLogged = !state.isLogged
-    },
-    changeLoginParameter (state, value) {
-      state.isLogged = value
-    }
-  },
-  actions: {},
-  modules: {}
+  modules: { ...login },
+  plugins: [new VuexPersistence().plugin],
+  state: {},
+  mutations: {},
+  actions: {}
 })

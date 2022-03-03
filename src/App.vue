@@ -1,5 +1,4 @@
 <template>
-
   <!-- Conditional rendering -->
   <template v-if="isLogged">
     <!-- Sidebar gestire role qui-->
@@ -10,7 +9,6 @@
       <router-view/>
     </section>
   </template>
-
   <!-- Conditional rendering if false -->
   <router-view v-else/>
 </template>
@@ -18,6 +16,7 @@
 <script>
 import Sidebar from '@/components/DashBoard/Sidebar.vue'
 import Header from '@/components/DashBoard/Header.vue'
+// import { mapState } from 'vuex'
 import store from '@/store/index'
 
 export default {
@@ -26,16 +25,25 @@ export default {
     Header
   },
   data () {
-    return {}
+    return {
+      username: 'ssss'
+    }
+  },
+  computed: {
+    isLogged () {
+      return store.state.login.isLogged
+    } // da fare con mapState
+    // ...mapState(['login/isLogged'])
+    // ...mapGetters(['username', 'password'])
   },
   created () {
     // Add event handler for frecciette del browser
     window.onpopstate = function (event) {
       // Inplicit Logout
       if (window.location.pathname === '/login') {
-        store.commit('changeLogin')
-        localStorage.removeItem('refreshToken')
-        localStorage.removeItem('accessToken')
+        store.commit('setLogin', { value: true })
+        // localStorage.removeItem('refreshToken')
+        // localStorage.removeItem('accessToken')
       }
       //  && !store.state.isLogged
       // console.log(window.location.pathname)
@@ -43,16 +51,8 @@ export default {
   },
   mounted () {
     //
-    if (
-      localStorage.getItem('refreshToken') &&
-      localStorage.getItem('accessToken')
-    ) {
-      store.commit('changeLoginParameter', true)
-    }
-  },
-  computed: {
-    isLogged () {
-      return store.state.isLogged
+    if (this.refreshToken && this.refreshToken) {
+      store.commit('setLogin', { value: true })
     }
   }
 }

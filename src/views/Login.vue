@@ -10,8 +10,8 @@
         </div>
         <div class="mt-8 space-y-6">
           <div class="rounded-md shadow-sm -space-y-px">
-            <BaseInputText name="Username" v-model="username" type="text" top />
-            <BaseInputText name="Password" v-model="password" :type="type" bottom />
+            <BaseInputText name="Username" v-model="usernameIN" type="text" top />
+            <BaseInputText name="Password" v-model="passwordIN" :type="type" bottom />
           </div>
           <div class="flex items-center justify-between">
             <div class="flex items-center">
@@ -72,82 +72,85 @@
     class="text-center p-5 border w-96 shadow-lg rounded-md bg-white fixed self-center drop-shadow-2xl"
     v-if="popupError"
     >
-        <div class="mt-3 text-center">
-            <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
-                <svg class="h-6 w-6 text-red-600" fill="currentColor" stroke="currentColor" viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path>
-                </svg>
-            </div>
-            <h3 class="text-lg leading-6 font-medium text-gray-900">Warning!</h3>
-            <div class="mt-2 px-7 py-3">
-                <p class="text-sm text-gray-500">
-                    Error login
-                </p>
-            </div>
-            <div class="items-center px-4 py-3">
-                <button
-                  class="px-4 py-2 bg-red-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300"
-                  @click="popupError = !popupError"
-                >
-                    OK
-                </button>
-            </div>
-        </div>
+      <div class="mt-3 text-center">
+          <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
+              <svg class="h-6 w-6 text-red-600" fill="currentColor" stroke="currentColor" viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path>
+              </svg>
+          </div>
+          <h3 class="text-lg leading-6 font-medium text-gray-900">Warning!</h3>
+          <div class="mt-2 px-7 py-3">
+              <p class="text-sm text-gray-500">
+                  Error login
+              </p>
+          </div>
+          <div class="items-center px-4 py-3">
+              <button
+                class="px-4 py-2 bg-red-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300"
+                @click="popupError = !popupError"
+              >
+                  OK
+              </button>
+          </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { loginService as ls } from '@/servises/login.services'
-import store from '@/store/index'
 import BaseInputText from '@/components/Base/BaseInputText.vue'
+import { mapGetters } from 'vuex'
+import store from '@/store/index'
 
 export default {
   name: 'login',
   data: function () {
     return {
-      username: '',
-      password: '',
+      usernameIN: '',
+      passwordIN: '',
       checked: false,
       type: 'password',
       popupError: false
     }
   },
-  computed: {},
+  computed: {
+    ...mapGetters(['username', 'password'])
+  },
   methods: {
     showPassword () {
-      if (this.checked) {
-        this.type = 'password'
-      } else {
-        this.type = 'text'
-      }
+      if (this.checked) this.type = 'password'
+      else this.type = 'text'
     },
     login () {
-      ls.login(this.username, this.password)
+      //
+      store.commit('login/setUsername', { username: this.usernameIN })
+      store.commit('login/setPassword', { password: this.passwordIN })
+      store.dispatch('login/login')
         .then((response) => {
           // Save a refreshToken and accessToken
-          if (response.status === 200) {
-            return response.json()
-          } else {
-            this.popupError = !this.popupError
-          }
+          if (response.status === 200) return response.json()
+          else this.popupError = !this.popupError // tirare un err
         }).then((obj) => {
+          // Extract data on body
           const { refreshToken, accessToken } = obj
-          localStorage.setItem('refreshToken', refreshToken)
-          localStorage.setItem('accessToken', accessToken)
+          store.commit('login/setRefreshToken', { refreshToken })
+          store.commit('login/setAccessToken', { accessToken })
+
           // Extract data on jwt
-          const { email, role, username } = JSON.parse(atob(accessToken.split('.')[1]))
+          const { email, role } = JSON.parse(atob(accessToken.split('.')[1]))
+
           // Save data user on local storage
-          localStorage.setItem('email', email)
-          localStorage.setItem('role', role)
-          localStorage.setItem('username', username)
+          store.commit('login/setEmail', { email })
+          store.commit('login/setRole', { role })
+          // store.commit('login/setUsername', { username })
+
           // Change router
-          store.commit('changeLogin')
+          store.commit('login/setLogin', { value: true })
           this.$router.push('/search')
         })
-        .catch((err) => {
-          console.log(err)
+        .catch(() => {
+          store.commit('login/setLogin', { value: false })
         })
     }
   },
@@ -155,5 +158,4 @@ export default {
     BaseInputText
   }
 }
-// @click=""
 </script>
