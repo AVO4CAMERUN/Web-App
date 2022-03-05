@@ -20,8 +20,6 @@
 
       <!-- Main button -->
       <div class="menu">
-
-        <!--  -->
         <li class="nav-link" v-for="button in buttons" :key="button">
           <router-link :to="button.path">
             <i :class="button.icon"></i>
@@ -43,7 +41,6 @@
 </template>
 
 <script>
-import { loginService as ls } from '@/servises/login.services'
 import store from '@/store/index'
 
 export default {
@@ -61,25 +58,22 @@ export default {
   },
   methods: {
     logout () {
-      ls.logout()
+      store.dispatch('login/logout')
         .then((response) => {
-          console.log(response.status)
-          //
-          // if (response.status === 403) {}
+          if (response.status !== 200) return Promise.reject(new Error('not 200'))
+
           // Remove saved refreshToken and accessToken
-          localStorage.removeItem('refreshToken')
-          localStorage.removeItem('accessToken')
-          localStorage.removeItem('username')
-          localStorage.removeItem('email')
-          localStorage.removeItem('role')
+          store.commit('login/setRefreshToken', { refreshToken: '' })
+          store.commit('login/setAccessToken', { accessToken: '' })
+          store.commit('login/setEmail', { email: '' })
+          store.commit('login/setRole', { role: '' })
+          store.commit('login/setUsername', { username: '' })
+
           // Kicking out from web app
           this.$router.push('/login')
-          store.commit('changeLogin')
-          // console.log(obj) */
+          store.commit('login/setLogin', { value: false })
         })
-        .catch(() => {
-          console.log('dddd')
-        })
+        .catch(() => {})
     }
   }
 }

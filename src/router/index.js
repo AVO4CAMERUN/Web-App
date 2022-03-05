@@ -58,12 +58,12 @@ const router = createRouter({
 
 // Methods to redirect to login page if not logged in and trying to access a restricted page
 router.beforeEach((to, from, next) => {
-  const publicPages = ['/login', '/register']
-  const authRequired = !publicPages.includes(to.path)
-  const loggedIn = localStorage.getItem('refreshToken') // non vuex per f5
-
-  if (!authRequired && store.state.login.isLogged && loggedIn) return next('/mycourses')
-  if (authRequired && !loggedIn) return next('/login')
+  // const publicPages = ['/login', '/register']
+  // const authRequired = !publicPages.includes(to.path)
+  // const loggedIn = localStorage.getItem('refreshToken') // non vuex per f5
+  console.log(store)
+  // if (!authRequired && store.state.login.isLogged && loggedIn) return next('/mycourses')
+  // if (authRequired && !loggedIn) return next('/login')
   next()
 })
 

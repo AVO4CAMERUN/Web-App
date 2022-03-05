@@ -32,8 +32,13 @@ const mutations = {
 const actions = {
   async login ({ state, commit }) {
     return await ls.login(state.username, state.password)
+  },
+  async refresh ({ state, commit }) {
+    return await ls.refresh(state.refreshToken)
+  },
+  async logout ({ state, commit }) {
+    return await ls.logout(state.refreshToken)
   }
-  // ,
   /* async actionB ({ dispatch, commit }) {
     await dispatch('actionA') // wait for `actionA` to finish
     commit('gotOtherData', await getOtherData())

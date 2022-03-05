@@ -20,9 +20,8 @@ async function refresh () {
 }
 
 // Function for logout avo4cum
-async function logout () {
-  const token = localStorage.getItem('refreshToken')
-  return await service.genericRequest('login', 'DELETE', { token })
+async function logout (refreshToken) {
+  return await service.genericRequest('login', 'DELETE', { refreshToken })
 }
 
 export const loginService = {
