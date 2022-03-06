@@ -1,58 +1,40 @@
 <template>
-  <!-- Header -->
-  <div class="navbar">
-    <img id="user-pic" src="../../assets/icon.png" draggable="false" />
-    <a href="#">
-      <i class="bx bx-bell nav-icon"></i>
-    </a>
-    <a href="#">
-      <i class="bx bx-chat nav-icon"></i>
-    </a>
-  </div>
+  <nav class="px-2 sm:px-4 py-2.5 bg-white">
+      <div class="container flex flex-row-reverse mx-auto">
+          <div class="flex flex-row-reverse">
+              <button type="button"
+                  class="flex mt-2 mr-2 bg-gray-800 rounded-full cursor-pointer focus:ring-4 focus:ring-gray-300">
+                  <img class="w-12 h-12 rounded-full object-cover" src="https://www.focus.it/images/2021/06/08/cane_1020x680.jpg"
+                      alt="user photo">
+              </button>
+
+              <svg class="rounded-full p-2 mt-3 mr-10 cursor-pointer duration-500 hover:bg-[#63b377]"
+                  xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 24 24"
+                  style="fill: rgba(70, 67, 67, 1);">
+                  <path
+                      d="M19 13.586V10c0-3.217-2.185-5.927-5.145-6.742C13.562 2.52 12.846 2 12 2s-1.562.52-1.855 1.258C7.185 4.074 5 6.783 5 10v3.586l-1.707 1.707A.996.996 0 0 0 3 16v2a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-2a.996.996 0 0 0-.293-.707L19 13.586zM19 17H5v-.586l1.707-1.707A.996.996 0 0 0 7 14v-4c0-2.757 2.243-5 5-5s5 2.243 5 5v4c0 .266.105.52.293.707L19 16.414V17zm-7 5a2.98 2.98 0 0 0 2.818-2H9.182A2.98 2.98 0 0 0 12 22z">
+                  </path>
+              </svg>
+
+              <svg class="rounded-full p-2 mt-3 mr-10 cursor-pointer duration-500 hover:bg-[#63b377]"
+                  xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 24 24"
+                  style="fill: rgba(70, 67, 67, 1);">
+                  <path
+                      d="M5 18v3.766l1.515-.909L11.277 18H16c1.103 0 2-.897 2-2V8c0-1.103-.897-2-2-2H4c-1.103 0-2 .897-2 2v8c0 1.103.897 2 2 2h1zM4 8h12v8h-5.277L7 18.234V16H4V8z">
+                  </path>
+                  <path
+                      d="M20 2H8c-1.103 0-2 .897-2 2h12c1.103 0 2 .897 2 2v8c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2z">
+                  </path>
+              </svg>
+          </div>
+      </div>
+  </nav>
 </template>
 
 <script>
 export default {}
+// ../../assets/icon.png
 </script>
 
 <style>
-.navbar {
-  position: sticky;
-  display: block;
-  width: 100%;
-  height: 73px;
-  background-color: #fff;
-}
-
-#user-pic {
-  float: right;
-  display: block;
-  width: 50px;
-  border-radius: 50%;
-  margin-top: 12px;
-  margin-right: 10px;
-}
-
-#user-pic:hover {
-  filter: brightness(75%);
-  cursor: pointer;
-  transition: var(--tran-03);
-}
-
-.nav-icon {
-  float: right;
-  display: block;
-  padding: 10px;
-  border-radius: 50%;
-  margin-top: 19px;
-  margin-right: 10px;
-  color: var(--text-color);
-  transition: var(--tran-03);
-  font-size: 20px;
-}
-
-.nav-icon:hover {
-  background-color: #3f87a6;
-  color: white;
-}
 </style>

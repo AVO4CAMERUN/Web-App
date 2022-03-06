@@ -25,7 +25,7 @@
       :courseCover="card.courseCover"
       :creatorName="card.creatorName"
       :creationDate="card.creationDate"
-    ></SearchCard>
+    />
   </div>
 </template>
 

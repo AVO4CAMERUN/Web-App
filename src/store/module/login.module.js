@@ -1,10 +1,16 @@
 // Login module for store
+// Modulo login dello store conserva le informazione inerenti al utente utilizzatore dell app
+
 // import { mapGetters } from 'vuex'
 import { loginService as ls } from '@/servises/login.services'
 
-/*
-  Do cumentare sul codice
-*/
+// Restore code on to login module in del localStorage
+let restore = {}
+if (localStorage.getItem('avo4cam')) {
+  restore = JSON.parse(localStorage.getItem('avo4cam')).login
+}
+
+// State of login module
 const state = {
   isLogged: false,
   refreshToken: null,
@@ -12,10 +18,9 @@ const state = {
   username: '',
   password: '',
   email: '',
-  role: ''
+  role: '',
+  ...restore
 }
-
-const getters = {}
 
 //
 const mutations = {
@@ -30,21 +35,24 @@ const mutations = {
 
 //
 const actions = {
-  async login ({ state, commit }) {
+  async login ({ state }) {
     return await ls.login(state.username, state.password)
   },
-  async refresh ({ state, commit }) {
+  async refresh ({ state }) {
     return await ls.refresh(state.refreshToken)
   },
-  async logout ({ state, commit }) {
+  async logout ({ state }) {
     return await ls.logout(state.refreshToken)
   }
-  /* async actionB ({ dispatch, commit }) {
+  /*
+  (piu avanti sposare le implementazioni qua meglio per il componeti e per refresh)
+  async actionB ({ dispatch, commit }) {
     await dispatch('actionA') // wait for `actionA` to finish
     commit('gotOtherData', await getOtherData())
   } */
 }
 
+const getters = {}
 export const login = {
   namespaced: true,
   state,

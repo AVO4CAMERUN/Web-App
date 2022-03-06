@@ -123,15 +123,18 @@ export default {
       else this.type = 'text'
     },
     login () {
-      //
+      // change username and password in store
       store.commit('login/setUsername', { username: this.usernameIN })
       store.commit('login/setPassword', { password: this.passwordIN })
+
+      // login request (tutto questo si potrebbe spopstare nello store)
       store.dispatch('login/login')
         .then((response) => {
           // Save a refreshToken and accessToken
           if (response.status === 200) return response.json()
           else this.popupError = !this.popupError // tirare un err
-        }).then((obj) => {
+        })
+        .then((obj) => {
           // Extract data on body
           const { refreshToken, accessToken } = obj
           store.commit('login/setRefreshToken', { refreshToken })

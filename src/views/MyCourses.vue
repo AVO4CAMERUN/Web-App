@@ -20,6 +20,7 @@
 import MyCourseCard from '../components/Course/MyCourseCard.vue'
 import { subscribeService as ss } from '../servises/subscribe.service'
 import { coursesService as cs } from '../servises/course.services'
+import store from '@/store/index'
 
 export default {
   name: 'mycourses',
@@ -32,7 +33,7 @@ export default {
     MyCourseCard
   },
   mounted () {
-    this.fetchMyCourses(`?email=[${localStorage.getItem('email')}]`)
+    this.fetchMyCourses(`?email=[${store.state.login.email}]`)
   },
   methods: {
     fetchMyCourses (filter) {

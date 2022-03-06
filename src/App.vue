@@ -1,15 +1,11 @@
 <template>
-  <!-- Conditional rendering -->
   <template v-if="isLogged">
-    <!-- Sidebar gestire role qui-->
     <Sidebar></Sidebar>
-    <!-- Main -> Header + content -->
     <section class="home">
       <Header></Header>
       <router-view/>
     </section>
   </template>
-  <!-- Conditional rendering if false -->
   <router-view v-else/>
 </template>
 

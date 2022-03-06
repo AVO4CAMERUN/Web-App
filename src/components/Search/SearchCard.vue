@@ -33,7 +33,8 @@
 
 <script>
 import { subscribeService as sub } from '@/servises/subscribe.service'
-// import store from '../store/index' <i class="fa-solid fa-circle-plus text-2xl hover:shadow-lg  rounded-full border-2 border-solid border-black" @click="addCourses"></i>
+import store from '@/store/index'
+// <i class="fa-solid fa-circle-plus text-2xl hover:shadow-lg  rounded-full border-2 border-solid border-black" @click="addCourses"></i>
 
 export default {
   name: 'SearchCard',
@@ -54,7 +55,8 @@ export default {
   methods: {
     addCourses () {
       // Request to subscribe
-      sub.subscribe(this.id)
+      console.log(store.state.login.refreshToken)
+      sub.subscribe(this.id, store.state.login.refreshToken)
         .then((response) => {
           if (response.status === 200) {
             this.$router.push('/mycourses')
