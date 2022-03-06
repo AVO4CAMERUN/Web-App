@@ -1,9 +1,9 @@
 <template>
   <div class="overflow-y-auto overflow-x-hidden bg-[#f0f3f6] scrollbar">
     <div class="grid grid-cols-[20%,_80%] grid-rows-2 p-8 gap-8">
-      <Navbar :units="units" @lessonID="getLessonID"/>
+      <UnitsNavbar :units="units" @lessonID="getLessonID"/>
       <Video :videoID="lesson.link_video"/>
-      <Quiz :lessonID="lesson.id_lesson" :quiz="quiz"/>
+      <Quiz :quiz="lesson.quiz" :key="lesson.quiz"/>
       <VideoDescription :lessonID="lesson.id_lesson" :lessonName="lesson.name"/>
       <!-- qui le props volano tantissimo -->
     </div>
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import Navbar from '../components/Course/UnitsNavbar.vue'
+import UnitsNavbar from '../components/Course/UnitsNavbar.vue'
 import Video from '../components/Course/Video.vue'
 import VideoDescription from '../components/Course/VideoDescription.vue'
 import Quiz from '../components/Course/Quiz.vue'
@@ -23,17 +23,25 @@ export default {
   data: function () {
     return {
       units: [],
-      lesson: {},
-      lessonID: 1,
       courseID: this.$route.query.id,
-      quiz: {
-        title: '',
-        quizlist: []
+      lessonID: null,
+      lesson: {
+        name: '',
+        creation_date: '',
+        quiz: {
+          title: '',
+          quiz: []
+        }
       }
     }
   },
+  computed: {
+    aquiz () {
+      return this.quiz
+    }
+  },
   components: {
-    Navbar,
+    UnitsNavbar,
     Video,
     Quiz,
     VideoDescription
@@ -73,19 +81,27 @@ export default {
     fetchLesson (filter) {
       ls.getLessonsByFilter(filter)
         .then((response) => {
-          if (response.status === 200) {
-            return response.json()
-          } else { }
+          if (response.status === 200) return response.json()
+          else { }
         })
         .then((lessonsList) => {
-          this.lesson = lessonsList[0]
-          this.quiz = JSON.parse(this.lesson.quiz)
+          this.lesson.name = lessonsList[0].name
+          JSON.parse(lessonsList[0].quiz) // errore nel JSON nel db il db aggiounge un sacco di cose
+
+          // this.lesson.quiz = JSON.parse(lessonsList[0].quiz) // questa da err
+          /* console.log(this.lesson.name)
+          console.log(this.lesson.quiz)
+        */
         })
-        .catch(() => {})
+        .catch((ee) => {
+          console.log(ee)
+        })
     },
     getLessonID (id) {
       this.lessonID = id
-      this.fetchLesson(`?id_lesson=[${this.lessonID}]`)
+      this.fetchLesson(`?id_lesson=[${id}]`)
+      // console.log(id)
+      // console.log(`?id_lesson=[${this.lessonID}]`)
     }
   }
 }
