@@ -15,7 +15,7 @@
       </div>
     </div>
   </div>
-  <div class="m-8 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(300px,_1fr))]">
+  <div class="ml-[100px] m-8 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(300px,_1fr))]">
     <SearchCard
       v-for="card in cards"
       :key="card"

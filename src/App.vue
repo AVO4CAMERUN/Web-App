@@ -1,9 +1,9 @@
 <template>
   <template v-if="isLogged">
     <Sidebar></Sidebar>
-    <section class="home">
+    <section class="">
       <Header></Header>
-      <router-view/>
+      <router-view/> <!-- main -->
     </section>
   </template>
   <router-view v-else/>
@@ -22,7 +22,6 @@ export default {
   },
   data () {
     return {
-      username: 'ssss'
     }
   },
   computed: {
@@ -57,21 +56,6 @@ export default {
 <style>
 /* Google Font Import - Poppins */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
-:root {
-  /* Colors */
-  --body-color: #f0f3f6;
-  --sidebar-color: #fff;
-  --primary-color: #63b377;
-  --primary-color-light: #f6f5ff;
-  --toggle-color: #ddd;
-  --text-color: #707070;
-
-  /* Transition */
-  --tran-03: all 0.2s ease;
-  --tran-03: all 0.2s ease;
-  --tran-04: all 0.2s ease;
-  --tran-05: all 0.2s ease;
-}
 
 * {
   margin: 0;
@@ -80,14 +64,25 @@ export default {
   font-family: "Poppins", sans-serif;
 }
 
-body {
-  min-height: 100vh;
+.home {
+  position: absolute;
+  top: 0;
+  top: 0;
+  left: 250px;
+  height: 100vh;
+  width: calc(100% - 250px);
   background-color: var(--body-color);
   transition: var(--tran-05);
 }
-
-::selection {
-  background-color: var(--primary-color);
-  color: #fff;
+.home .text {
+  font-size: 30px;
+  font-weight: 500;
+  color: var(--text-color);
+  padding: 12px 60px;
+}
+.sidebar.close ~ .home {
+  left: 78px;
+  height: 100vh;
+  width: calc(100% - 78px);
 }
 </style>

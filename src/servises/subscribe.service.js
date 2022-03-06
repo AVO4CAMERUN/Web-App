@@ -2,7 +2,6 @@ import service from './base.services'
 
 // Function for subscribe
 async function subscribe (idCourse, accessToken) {
-  console.log(accessToken)
   return await service.genericRequestWithAuth('subscribe', 'POST', { id_course: idCourse }, accessToken)
 }
 

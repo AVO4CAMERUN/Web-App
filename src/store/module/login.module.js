@@ -19,6 +19,7 @@ const state = {
   password: '',
   email: '',
   role: '',
+  imgProfile: null,
   ...restore
 }
 

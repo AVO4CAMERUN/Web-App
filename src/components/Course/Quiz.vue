@@ -5,7 +5,7 @@
 
       <div>
         <!-- Prima domanda -->
-        <p class="text-lg font-bold border-b-2 border-slate-300">Una domanda a caso (?)</p>
+        <p class="text-lg font-bold border-b-2 border-slate-300">{{quiz.title}}</p>
         <p class="text-sm text-gray-500">(Risposta multipla)</p>
 
         <div class="">

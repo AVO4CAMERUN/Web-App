@@ -16,15 +16,7 @@ const state = {
 }
 
 //
-const mutations = {
-  setLogin: (state, payload) => { state.isLogged = payload.value },
-  setRefreshToken: (state, payload) => { state.refreshToken = payload.refreshToken },
-  setAccessToken: (state, payload) => { state.accessToken = payload.accessToken },
-  setEmail: (state, payload) => { state.email = payload.email },
-  setRole: (state, payload) => { state.role = payload.role },
-  setUsername: (state, payload) => { state.username = payload.username },
-  setPassword: (state, payload) => { state.password = payload.password }
-}
+const mutations = {}
 
 //
 const actions = {

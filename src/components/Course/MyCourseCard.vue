@@ -36,8 +36,8 @@
 </template>
 
 <script>
+import store from '@/store/index'
 import { subscribeService as sub } from '@/servises/subscribe.service'
-// import store from '../store/index'
 
 export default {
   name: 'MyCoursesCard',
@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     removeCourse () {
-      sub.deleteSubscribtion(this.id)
+      sub.deleteSubscribtion(this.id, store.state.login.accessToken)
         .then((response) => {
           if (response.status === 200) {
             location.reload()

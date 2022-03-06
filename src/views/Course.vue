@@ -3,7 +3,7 @@
     <div class="grid grid-cols-[20%,_80%] grid-rows-2 p-8 gap-8">
       <Navbar :units="units" @lessonID="getLessonID"/>
       <Video :videoID="lesson.link_video"/>
-      <Quiz :lessonID="lesson.id_lesson" :quiz="lesson.quiz"/>
+      <Quiz :lessonID="lesson.id_lesson" :quiz="quiz"/>
       <VideoDescription :lessonID="lesson.id_lesson" :lessonName="lesson.name"/>
       <!-- qui le props volano tantissimo -->
     </div>
@@ -25,7 +25,11 @@ export default {
       units: [],
       lesson: {},
       lessonID: 1,
-      courseID: this.$route.query.id
+      courseID: this.$route.query.id,
+      quiz: {
+        title: '',
+        quizlist: []
+      }
     }
   },
   components: {
@@ -75,7 +79,7 @@ export default {
         })
         .then((lessonsList) => {
           this.lesson = lessonsList[0]
-          this.lesson.quiz = JSON.parse(this.lesson.quiz)
+          this.quiz = JSON.parse(this.lesson.quiz)
         })
         .catch(() => {})
     },

@@ -55,8 +55,7 @@ export default {
   methods: {
     addCourses () {
       // Request to subscribe
-      console.log(store.state.login.refreshToken)
-      sub.subscribe(this.id, store.state.login.refreshToken)
+      sub.subscribe(this.id, store.state.login.accessToken)
         .then((response) => {
           if (response.status === 200) {
             this.$router.push('/mycourses')
