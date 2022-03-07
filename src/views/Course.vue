@@ -1,22 +1,22 @@
 <template>
   <div class="overflow-y-auto overflow-x-hidden bg-[#f0f3f6] scrollbar">
     <div class="grid grid-cols-[20%,_80%] grid-rows-2 p-8 gap-8">
-      <UnitsNavbar :units="units" @lessonID="getLessonID"/>
+      <UnitsSidebar :units="units" @lessonID="getLessonID"/>
       <Video :videoID="lesson.link_video"/>
       <Quiz :quiz="lesson.quiz" :key="lesson.quiz"/>
       <VideoDescription :lessonID="lesson.id_lesson" :lessonName="lesson.name"/>
-      <!-- qui le props volano tantissimo -->
+      <!-- Forse le props non volano anche se secondo me adrebbero fatte volare perche manca saclabilita -->
     </div>
   </div>
 </template>
 
 <script>
-import UnitsNavbar from '../components/Course/UnitsNavbar.vue'
-import Video from '../components/Course/Video.vue'
-import VideoDescription from '../components/Course/VideoDescription.vue'
-import Quiz from '../components/Course/Quiz.vue'
-import { lessonService as ls } from '../servises/lesson.services'
-import { unitsService as us } from '../servises/units.services'
+import UnitsSidebar from '@/components/Course/UnitsSidebar.vue'
+import Video from '@/components/Course/Video.vue'
+import VideoDescription from '@/components/Course/VideoDescription.vue'
+import Quiz from '@/components/Course/Quiz.vue'
+import { lessonService as ls } from '@/servises/lesson.services'
+import { unitsService as us } from '@/servises/units.services'
 
 export default {
   name: 'course',
@@ -28,6 +28,7 @@ export default {
       lesson: {
         name: '',
         creation_date: '',
+        link_video: '',
         quiz: {
           title: '',
           quiz: []
@@ -35,22 +36,7 @@ export default {
       }
     }
   },
-  computed: {
-    aquiz () {
-      return this.quiz
-    }
-  },
-  components: {
-    UnitsNavbar,
-    Video,
-    Quiz,
-    VideoDescription
-  },
-  mounted () {
-    this.fetchUnits(`?id_course=[${this.courseID}]`)
-  },
   methods: {
-    // fetch units by filter
     fetchUnits (filter) {
       us.getUnitsByFilter(filter)
         .then((response) => {
@@ -77,7 +63,6 @@ export default {
         })
         .catch(() => {})
     },
-    // fetch lessons by filter
     fetchLesson (filter) {
       ls.getLessonsByFilter(filter)
         .then((response) => {
@@ -85,24 +70,30 @@ export default {
           else { }
         })
         .then((lessonsList) => {
-          this.lesson.name = lessonsList[0].name
-          JSON.parse(lessonsList[0].quiz) // errore nel JSON nel db il db aggiounge un sacco di cose
+          // Update lesson
+          this.lesson = lessonsList[0]
 
-          // this.lesson.quiz = JSON.parse(lessonsList[0].quiz) // questa da err
-          /* console.log(this.lesson.name)
-          console.log(this.lesson.quiz)
-        */
+          // if it's not defined assign empty obj
+          if (lessonsList[0].quiz !== '') this.lesson.quiz = JSON.parse(lessonsList[0].quiz)
+          else this.lesson.quiz = null
         })
         .catch((ee) => {
-          console.log(ee)
+          console.log(ee) // fare popup errore
         })
     },
     getLessonID (id) {
       this.lessonID = id
       this.fetchLesson(`?id_lesson=[${id}]`)
-      // console.log(id)
-      // console.log(`?id_lesson=[${this.lessonID}]`)
     }
+  },
+  mounted () {
+    this.fetchUnits(`?id_course=[${this.courseID}]`)
+  },
+  components: {
+    UnitsSidebar,
+    Video,
+    Quiz,
+    VideoDescription
   }
 }
 </script>

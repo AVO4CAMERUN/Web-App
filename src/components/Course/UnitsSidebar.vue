@@ -39,16 +39,11 @@ export default {
   props: {
     units: Array
   },
-  created () {
-    console.log(this.positions)
-  },
   methods: {
-    changeLesson (lessonID) {
-      this.$emit('lessonID', lessonID)
-    },
-    changeUnit () {
-    }
-  }
+    changeLesson (lessonID) { this.$emit('lessonID', lessonID) },
+    changeUnit () {}
+  },
+  created () { console.log(this.positions) }
 }
 </script>
 

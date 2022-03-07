@@ -3,6 +3,7 @@
 
 // import { mapGetters } from 'vuex'
 import { loginService as ls } from '@/servises/login.services'
+// import { accountService as as } from '@/servises/account.services'
 
 // Restore code on to login module in del localStorage
 let restore = {}
@@ -32,6 +33,7 @@ const mutations = {
   setRole: (state, payload) => { state.role = payload.role },
   setUsername: (state, payload) => { state.username = payload.username },
   setPassword: (state, payload) => { state.password = payload.password }
+  // setImgProfile: (state, payload) => { state.password = payload.password }
 }
 
 //
