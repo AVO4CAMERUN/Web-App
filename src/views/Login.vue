@@ -127,33 +127,11 @@ export default {
       store.commit('login/setUsername', { username: this.usernameIN })
       store.commit('login/setPassword', { password: this.passwordIN })
 
-      // login request (tutto questo si potrebbe spopstare nello store)
+      // login request on store
       store.dispatch('login/login')
         .then((response) => {
-          // Save a refreshToken and accessToken
-          if (response.status === 200) return response.json()
-          else this.popupError = !this.popupError // tirare un err
-        })
-        .then((obj) => {
-          // Extract data on body
-          const { refreshToken, accessToken } = obj
-          store.commit('login/setRefreshToken', { refreshToken })
-          store.commit('login/setAccessToken', { accessToken })
-
-          // Extract data on jwt
-          const { email, role } = JSON.parse(atob(accessToken.split('.')[1]))
-
-          // Save data user on local storage
-          store.commit('login/setEmail', { email })
-          store.commit('login/setRole', { role })
-          // store.commit('login/setUsername', { username })
-
-          // Change router
-          store.commit('login/setLogin', { value: true })
           this.$router.push('/search')
-        })
-        .catch(() => {
-          store.commit('login/setLogin', { value: false })
+          if (response) this.popupError = !this.popupError
         })
     }
   },

@@ -5,7 +5,7 @@
         <button type="button"
           class="flex mt-2 mr-2 bg-gray-800 rounded-full cursor-pointer focus:ring-4 focus:ring-gray-300">
           <img
-            v-if="courseCover !== ''"
+            v-if="imgProfile !== null"
             class="w-12 h-12 rounded-full object-cover"
             :src="`data:image/png;base64,${imgProfile}`"
           >
@@ -32,33 +32,17 @@
 
 <script>
 import store from '@/store/index'
-import { accountService as as } from '@/servises/account.services'
 
 export default {
   name: 'Header',
   data: function () {
     return {
-      imgProfile: ''
+      imgProfile: store.state.login.imgProfile
     }
   },
-  created () { this.getImage() },
-  methods: {
-    getImage () {
-      // Request to subscribe
-      console.log(store.state.login.email)
-      as.getFilterdAccount(`email=[${store.state.login.email}]`)
-        .then((response) => {
-          if (response.status === 200) return response.json()
-          else console.log('')
-        })
-        .then((obj) => {
-          this.imgProfile = obj[0].img_profile
-          // console.log(`data:image/png;base64,${img}`)
-        })
-    }
-  }
+  computed: {},
+  methods: {}
 }
-// ../../assets/icon.png
 </script>
 
 <style>

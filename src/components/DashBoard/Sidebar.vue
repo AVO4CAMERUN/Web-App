@@ -55,24 +55,13 @@ export default {
     logout () {
       store.dispatch('login/logout')
         .then((response) => {
-          if (response.status !== 200) return Promise.reject(new Error('not 200'))
-
-          // Remove saved refreshToken and accessToken
-          store.commit('login/setRefreshToken', { refreshToken: '' })
-          store.commit('login/setAccessToken', { accessToken: '' })
-          store.commit('login/setEmail', { email: '' })
-          store.commit('login/setRole', { role: '' })
-          store.commit('login/setUsername', { username: '' })
-
           // Kicking out from web app
           this.$router.push('/login')
           store.commit('login/setLogin', { value: false })
         })
-        .catch((ee) => console.log(ee))
     }
   }
 }
-
 </script>
 
 <style>

@@ -5,7 +5,7 @@
         <input
           type="text"
           v-model="searchName"
-          @change="searchCourses"
+          @input="searchCourses"
           class="h-14 w-96 pr-8 pl-5 rounded-lg z-0 focus:shadow focus:outline-none"
           placeholder="Search anything..."
         >

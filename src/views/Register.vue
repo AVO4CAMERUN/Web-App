@@ -83,26 +83,22 @@
       </div>
       <h3 class="text-lg leading-6 font-medium text-gray-900">Activate your account</h3>
       <div class="mt-2 px-7 py-3">
-        <p class="text-sm text-gray-500">
-          Check your email to confirm your account
-        </p>
+        <p class="text-sm text-gray-500">Check your email to confirm your account</p>
       </div>
       <div class="items-center px-4 py-3">
         <button
-        class="px-4 py-2 bg-green-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300"
-        @click="this.$router.push('/login')">
-        OK
-        </button>
+          class="px-4 py-2 bg-green-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300"
+          @click="this.$router.push('/login')"
+        >OK</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { accountService as as } from '../servises/account.services'
-// import store from '../store/index'
-
 import BaseInputText from '@/components/Base/BaseInputText.vue'
+import { accountService as as } from '@/servises/account.services'
+// import store from '../store/index'
 
 export default {
   name: 'register',
@@ -123,16 +119,14 @@ export default {
   computed: {},
   methods: {
     showPassword () {
-      if (this.checked) {
-        this.type = 'password'
-      } else {
-        this.type = 'text'
-      }
+      if (this.checked) this.type = 'password'
+      else this.type = 'text'
     },
     // Match text with regex and return true or false
     generalChecker (text, pattern) {
-      const regex = new RegExp(pattern)
-      return regex.test(text)
+      return new RegExp(pattern).test(text)
+      /* const regex = new RegExp(pattern)
+      return regex.test(text) */
     },
     // Methods for checker user input
     checker () {
@@ -141,25 +135,24 @@ export default {
       this.popups[1] = this.generalChecker(this.surname, '^[a-zA-Z]+$')
       this.popups[2] = this.generalChecker(this.username, '^[a-z0-9_.-]{3,20}$')
       this.popups[3] = this.generalChecker(this.email, '^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')
+
       if (this.password === this.confirmPassword) {
         this.popups[4] = this.generalChecker(this.password, '^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$')
       }
     },
     // Methods on submit
     register () {
-      this.checker()
-      // sum for check
-      let sum = 0; this.popups.forEach(popup => { sum += popup })
-      console.log(this.popups)
+      this.checker() // call input checker
+      let sum = 0; this.popups.forEach(popup => { sum += popup }) // sum for check
+
       // Check all user input
       console.log(sum)
       if (sum === 5) {
         as.createAccount(this.name, this.surname, this.email, this.username, this.password)
-          .then((response) => {
-            this.popupEmailConfirm = !this.popupEmailConfirm
-          })
+          .then((response) => { this.popupEmailConfirm = !this.popupEmailConfirm })
       } else {
-        console.log('tou padre ciclo a motore')
+        // fare pop up err
+        // this.popupEmailConfirm = !this.popupEmailConfirm
       }
     }
   },

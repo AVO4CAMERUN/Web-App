@@ -43,7 +43,7 @@ export default {
     changeLesson (lessonID) { this.$emit('lessonID', lessonID) },
     changeUnit () {}
   },
-  created () { console.log(this.positions) }
+  created () { }
 }
 </script>
 
