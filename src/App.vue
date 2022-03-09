@@ -1,10 +1,12 @@
 <template>
   <template v-if="isLogged">
-    <Sidebar></Sidebar>
-    <section class="">
-      <Header></Header>
-      <router-view/> <!-- main -->
-    </section>
+    <div class="flex">
+      <Sidebar></Sidebar>
+      <section class="grow bg-[#f0f3f6]">
+        <Header></Header>
+        <router-view/> <!-- main -->
+      </section>
+    </div>
   </template>
   <router-view v-else/>
 </template>

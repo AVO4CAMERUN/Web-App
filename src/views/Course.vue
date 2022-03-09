@@ -1,6 +1,6 @@
 <template>
-  <div class="overflow-y-auto overflow-x-hidden bg-[#f0f3f6] scrollbar">
-    <div class="grid grid-cols-[20%,_80%] grid-rows-2 p-8 gap-8">
+  <div class="overflow-y-auto overflow-x-hidden bg-[#f0f3f6] scrollbar max-h-[calc(100vh_-_76px)]">
+    <div class="grid grid-cols-[20%,_80%] p-8 gap-8">
       <UnitsSidebar :units="units" @lessonID="getLessonID"/>
       <Video :videoID="lesson.link_video"/>
       <Quiz :quiz="lesson.quiz" :key="lesson.quiz"/>
