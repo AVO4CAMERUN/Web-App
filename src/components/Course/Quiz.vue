@@ -9,7 +9,7 @@
         <p v-else class="text-sm text-gray-500">(Risposta singola)</p>
 
         <div v-for="answer in question.answers" :key="answer">
-          <input :type="typeInput(question.type)" class="accent-input" />
+          <input :type="typeInput(question.type)" class="accent-input" :name="question.question"/>
           <label>{{` ${answer}`}}</label>
         </div>
       </div>

@@ -7,6 +7,7 @@
         width="100%"
         height="100%"
         ref="youtube"
+        :vars="vars"
       />
   </div>
 </template>
@@ -17,7 +18,10 @@ import YouTube from 'vue3-youtube'
 export default {
   data: function () {
     return {
-      render: false
+      render: false,
+      vars: {
+        rel: '0'
+      }
     }
   },
   components: {
@@ -32,12 +36,9 @@ export default {
   methods: {
     timeout () {
       this.render = true
-    },
-    onReady () {
-      this.$refs.youtube.playVideo()
     }
   }
-}
+} // if (e == 0) e = 2
 </script>
 
 <style>

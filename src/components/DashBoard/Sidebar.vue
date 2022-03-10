@@ -12,11 +12,11 @@
         <div class="text-lg font-bold mt-[4px] transition-[transform,_opacity] duration-300 origin-left" :class="{'scale-x-0 opacity-0': isClose}">Avo4Camerun</div> <!-- text -->
       </div>
 
-      <i class="absolute top-[20%] -right-[1.75rem] w-6 aspect-square bg-[#63b377] text-white
+      <button class="absolute top-[20%] -right-[1.75rem] w-6 aspect-square bg-[#63b377] text-white
       flex justify-center items-center text-[22px] pt-[2px] rounded-full bx bx-chevron-right"
-      @click="isClose = !isClose"
-      :class="{'rotate-180': !isClose}"
-      ></i>
+        @click="isClose = !isClose"
+        :class="{'rotate-180': !isClose}"
+      />
     </header>
 
     <!-- div elenco button -->
