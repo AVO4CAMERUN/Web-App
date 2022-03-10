@@ -1,9 +1,9 @@
 <template>
-  <nav class="px-2 sm:px-4 py-2.5 bg-white">
-    <div class="container flex flex-row-reverse mx-auto">
+  <nav class="py-2.5 bg-white">
+    <div class="flex flex-row-reverse w-full px-6">
       <div class="flex flex-row-reverse">
         <button type="button"
-          class="flex mt-2 mr-2 bg-gray-800 rounded-full cursor-pointer focus:ring-4 focus:ring-gray-300">
+          class="flex mt-2 bg-gray-800 rounded-full cursor-pointer focus:ring-4 focus:ring-gray-300">
           <img
             v-if="imgProfile !== null"
             class="w-12 h-12 rounded-full object-cover"

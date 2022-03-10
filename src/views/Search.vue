@@ -1,6 +1,6 @@
 <template v-on>
   <div class="p-3">
-    <div class="container flex justify-center items-center px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-center items-center px-4 sm:px-6 lg:px-8">
       <div class="relative">
         <input
           type="text"

@@ -35,7 +35,7 @@ export default {
     raccoltaRisposte () {},
     typeInput (type) {
       if (type === 'multiple') return 'checkbox'
-      else return 'radio'
+      else if (type === 'single') return 'radio'
     }
   },
   watch: {},

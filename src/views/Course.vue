@@ -1,8 +1,8 @@
 <template>
   <div class="overflow-y-auto overflow-x-hidden bg-[#f0f3f6] scrollbar max-h-[calc(100vh_-_76px)]">
-    <div class="grid grid-cols-[20%,_80%] p-8 gap-8">
-      <UnitsSidebar :units="units" @lessonID="getLessonID"/>
+    <div class="grid lg:grid-cols-[80%,_20%] p-8 gap-4">
       <Video :videoID="lesson.link_video"/>
+      <UnitsSidebar v-if="units.length !== 0" :units="units" :ulength="units.length" @lessonID="getLessonID"/>
       <Quiz :quiz="lesson.quiz" :key="lesson.quiz"/>
       <VideoDescription :lessonID="lesson.id_lesson" :lessonName="lesson.name"/>
       <!-- Forse le props non volano anche se secondo me adrebbero fatte volare perche manca saclabilita -->
