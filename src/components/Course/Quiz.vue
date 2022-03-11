@@ -1,6 +1,6 @@
 <template>
-  <div class="p-3 bg-white rounded-md relative col-span-full">
-    <template v-if="quiz !== null">
+  <template v-if="quiz !== null">
+    <div class="p-3 bg-white rounded-md relative col-span-full shadow-lg">
       <p class="px-3 border-b-2 border-[#e5e7eb] bg-white select-none text-3xl font-semibold mb-5">Quiz: {{quiz.title}}</p>
       <div v-for="question in quiz.quiz" :key="question">
         <p class="text-lg font-bold border-slate-300">{{question.question}}</p> <!-- border-b-2 -->
@@ -17,8 +17,8 @@
         type="submit"
         class="bg-input py-2 px-3 text-white text-sm font-semibold rounded-md hover:bg-[#0E6655] bg-[#16A085]"
       >Submit</button>
-    </template>
-  </div>
+    </div>
+  </template>
 </template>
 
 <script>

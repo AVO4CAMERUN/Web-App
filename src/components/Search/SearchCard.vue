@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-wrap">
-    <article class="h-[300px] w-[400px] overflow-hidden rounded-lg shadow-lg">
+    <article class="h-[300px] w-[400px] overflow-hidden rounded-lg shadow-xl">
       <div class="h-[120px] w-[400px]">
         <img
         v-if="courseCover !== ''"
@@ -17,7 +17,7 @@
         <div class="text-sm">{{creationDate}}</div>
       </header>
 
-      <div class="h-[62px] w-[300px] break-all overflow-hidden p-2 pl-4">{{courseDescription}}</div>
+      <div class="h-[62px] w-[300px] break-all overflow-hidden p-2 pl-4 text-sm">{{courseDescription}}</div>
 
       <footer class="flex items-center justify-between leading-none p-4">
         <div class="flex items-center">

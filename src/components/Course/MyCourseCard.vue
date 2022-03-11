@@ -1,7 +1,7 @@
 <template>
   <router-link :to="{name: 'course', query: { id: courseID }}">
     <div class="flex flex-wrap" >
-      <article class="h-[300px] w-[400px] overflow-hidden rounded-lg shadow-lg">
+      <article class="h-[300px] w-[400px] overflow-hidden rounded-lg shadow-xl">
         <div class="h-[120px] w-[400px]">
           <img
           v-if="courseCover !== ''"

@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col bg-white rounded-md w-full h-full lg:aspect-[9/16] overflow-y-auto" >
+    <div class="flex flex-col bg-white rounded-md w-full h-full lg:aspect-[9/16] overflow-y-auto shadow-md">
       <p class="border-b-[1px] border-slate-400 p-2 text-2xl font-semibold text-center">Nome Corso</p>
       <ul class="w-full overflow-y-auto scrollbar px-3 pt-2">
         <li class="mb-4 flex align-center flex-col"
@@ -47,8 +47,7 @@ export default {
     changeLesson (lessonID) { this.$emit('lessonID', lessonID) },
     changeUnit () {}
   },
-  created () {
-    console.log(this.ulength)
+  mounted () {
     for (let i = 0; i < this.ulength; i++) {
       this.display.push(true)
     }

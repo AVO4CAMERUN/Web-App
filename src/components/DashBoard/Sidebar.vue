@@ -1,4 +1,5 @@
 <template>
+  <!-- farla dinamica in base al role-->
   <nav
     class="bg-white w-[250px] h-screen py-[10px] px-[14px] transition-[width] duration-300 v-nome outiline outline-[1px] outline-gray-300"
     :class="{'w-[88px]': isClose}"
@@ -9,13 +10,19 @@
           <img class="w-[40px] rounded-[6px]" src="@/assets/logo.png"
           alt="logo AVO4CAM" draggable="false">
         </span>
-        <div class="text-lg font-bold mt-[4px] transition-[transform,_opacity] duration-300 origin-left" :class="{'scale-x-0 opacity-0': isClose}">Avo4Camerun</div> <!-- text -->
+        <div
+          class="text-lg font-bold mt-[4px] transition-[transform,_opacity] duration-300 origin-left"
+          :class="{'scale-x-0 opacity-0': isClose}"
+        >
+        Avo4Camerun
+        </div>
       </div>
 
-      <button class="absolute top-[20%] -right-[1.75rem] w-6 aspect-square bg-[#63b377] text-white
-      flex justify-center items-center text-[22px] pt-[2px] rounded-full bx bx-chevron-right"
-        @click="isClose = !isClose"
+      <button
+        class="absolute top-[20%] -right-[1.75rem] w-6 aspect-square bg-[#63b377] text-white
+        flex justify-center items-center text-[22px] pt-[2px] rounded-full bx bx-chevron-right"
         :class="{'rotate-180': !isClose}"
+        @click="isClose = !isClose"
       />
     </header>
 

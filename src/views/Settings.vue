@@ -1,10 +1,6 @@
 <template>
   <div>
-    <!-- INIZIO -->
-    <div class="flex flex-col p-8 items-center h-[92%]">
-      <div
-        class="w-full h-full flex flex-col items-center p-8 rounded-lg bg-white"
-      >
+      <div class="flex flex-col items-center p-8 m-8 rounded-lg bg-white shadow-lg">
         <img
             v-if="imgProfile !== null"
             :src="`data:image/png;base64,${imgProfile}`"
@@ -14,24 +10,11 @@
             src="@/assets/user_placeholder.png"
             class="rounded-full w-[100px] h-[100px] object-cover cursor-pointer sm:w-[220px] sm:h-[220px] hover:ring-4 hover:ring-offset-2 hover:ring-[#63b377]"
           >
-
         <h1 class="mt-6 mb-12 text-2xl">Nome Utente</h1>
-
         <div class="w-[80%] mt-4 flex flex-col">
           <div class="w-full flex flex-col bg-white sm:flex-row">
-            <button
-              class="
-                w-full
-                h-16
-                text-gray-800
-                font-bold
-                inline-flex
-                justify-center
-                items-center
-                border-b-2 border-gray-100
-                focus:border-b-[#63b377]
-                hover:border-b-gray-300
-              "
+            <button class="w-full h-16 text-gray-800 font-bold inline-flex justify-center items-center border-b-2 border-gray-100
+              focus:border-b-[#63b377] hover:border-b-gray-300"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -40,25 +23,13 @@
                 viewBox="0 0 24 24"
                 class="mr-2"
               >
-                <path
-                  d="M7.5 6.5C7.5 8.981 9.519 11 12 11s4.5-2.019 4.5-4.5S14.481 2 12 2 7.5 4.019 7.5 6.5zM20 21h1v-1c0-3.859-3.141-7-7-7h-4c-3.86 0-7 3.141-7 7v1h17z"
+                <path d="M7.5 6.5C7.5 8.981 9.519 11 12 11s4.5-2.019 4.5-4.5S14.481 2 12 2 7.5 4.019 7.5 6.5zM20 21h1v-1c0-3.859-3.141-7-7-7h-4c-3.86 0-7 3.141-7 7v1h17z"
                 ></path>
               </svg>
               <span>Change Nickname</span>
             </button>
-            <button
-              class="
-                w-full
-                h-16
-                text-gray-800
-                font-bold
-                inline-flex
-                justify-center
-                items-center
-                border-b-2 border-gray-100
-                focus:border-b-[#63b377]
-                hover:border-b-gray-300
-              "
+            <button class="w-full h-16 text-gray-800 font-bold inline-flex justify-center items-center border-b-2 border-gray-100
+              focus:border-b-[#63b377] hover:border-b-gray-300"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -67,52 +38,29 @@
                 viewBox="0 0 24 24"
                 class="mr-2"
               >
-                <path
-                  d="M20 12c0-1.103-.897-2-2-2h-1V7c0-2.757-2.243-5-5-5S7 4.243 7 7v3H6c-1.103 0-2 .897-2 2v8c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2v-8zM9 7c0-1.654 1.346-3 3-3s3 1.346 3 3v3H9V7z"
-                ></path>
+                <path d="M20 12c0-1.103-.897-2-2-2h-1V7c0-2.757-2.243-5-5-5S7 4.243 7 7v3H6c-1.103 0-2 .897-2 2v8c0
+                1.103.897 2 2 2h12c1.103 0 2-.897 2-2v-8zM9 7c0-1.654 1.346-3 3-3s3 1.346 3 3v3H9V7z"
+                />
               </svg>
               <span>Change Password</span>
             </button>
-            <button
-              class="
-                w-full
-                h-16
-                text-gray-800
-                font-bold
-                inline-flex
-                justify-center
-                items-center
-                border-b-2 border-gray-100
-                focus:border-b-[#63b377]
-                hover:border-b-gray-300
-              "
+            <button class="w-full h-16 text-gray-800 font-bold inline-flex justify-center items-center
+              border-b-2 border-gray-100 focus:border-b-[#63b377] hover:border-b-gray-300"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
+                width="32" height="32" viewBox="0 0 24 24"
                 class="mr-2"
               >
-                <path
-                  d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zM4 12c0-1.846.634-3.542 1.688-4.897l11.209 11.209A7.946 7.946 0 0 1 12 20c-4.411 0-8-3.589-8-8zm14.312 4.897L7.103 5.688A7.948 7.948 0 0 1 12 4c4.411 0 8 3.589 8 8a7.954 7.954 0 0 1-1.688 4.897z"
-                ></path>
+                <path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zM4 12c0-1.846.634-3.542 1.688-4.897l11.209
+                11.209A7.946 7.946 0 0 1 12 20c-4.411 0-8-3.589-8-8zm14.312 4.897L7.103 5.688A7.948 7.948 0 0 1 12 4c4.411 0 8 3.589 8 8a7.954
+                7.954 0 0 1-1.688 4.897z"/>
               </svg>
               <span>Block users & report</span>
             </button>
-            <button
-              class="
-                w-full
-                h-16
-                text-gray-800
-                font-bold
-                inline-flex
-                justify-center
-                items-center
-                border-b-2 border-gray-100
-                focus:border-b-[#63b377]
-                hover:border-b-gray-300
-              "
+            <button class="w-full h-16 text-gray-800 font-bold inline-flex
+                justify-center items-center border-b-2 border-gray-100
+                focus:border-b-[#63b377] hover:border-b-gray-300"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -147,8 +95,6 @@
         </div>
       </div>
     </div>
-    <!-- FINE -->
-  </div>
 </template>
 
 <script>

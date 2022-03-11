@@ -1,13 +1,13 @@
 <template>
-  <div class="bg-white p-5 rounded-lg aspect-video items-center w-full">
+  <div class="bg-white p-5 rounded-lg aspect-video items-center w-full shadow-xl">
       <YouTube
         v-if="render"
-        class="h-full"
         :src="`${videoID}`"
+        :vars="vars"
         width="100%"
         height="100%"
         ref="youtube"
-        :vars="vars"
+        class="h-full"
       />
   </div>
 </template>
