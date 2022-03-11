@@ -13,6 +13,10 @@
       </div>
     </div>
   </div>
+  <div v-if="error == 500" class="bg-yellow-100 border-t border-b border-l border-r border-yellow-500 text-yellow-700 px-4 py-3 mx-5 my-5">
+    <p class="font-bold">Hai già aggiunto questo corso</p>
+    <p class="text-sm">Vai nella sezione I Miei Corsi per iniziare a seguirlo.</p>
+  </div>
   <div class="m-8 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(300px,_1fr))]">
     <SearchCard
       v-for="card in cards"
@@ -23,6 +27,7 @@
       :courseCover="card.courseCover"
       :creatorName="card.creatorName"
       :creationDate="card.creationDate"
+      @error="statusHandler"
     />
   </div>
 </template>
@@ -37,8 +42,8 @@ export default {
   data: function () {
     return {
       searchName: '',
-      cards: []
-      // progress: 20
+      cards: [],
+      error: 200
     }
   },
   components: {
@@ -79,6 +84,9 @@ export default {
           }
         })
         .catch(() => {})
+    },
+    statusHandler (status) {
+      this.error = status
     }
   },
   computed: {}

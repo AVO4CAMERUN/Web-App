@@ -59,7 +59,8 @@ export default {
         .then((response) => {
           if (response.status === 200) {
             this.$router.push('/mycourses')
-          } else { /* err */ }
+          } else {}
+          this.$emit('error', response.status)
         })
     }
   }

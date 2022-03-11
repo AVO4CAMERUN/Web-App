@@ -20,7 +20,7 @@
 
       <button
         class="absolute top-[20%] -right-[1.75rem] w-6 aspect-square bg-[#63b377] text-white
-        flex justify-center items-center text-[22px] pt-[2px] rounded-full bx bx-chevron-right"
+        flex justify-center items-center text-[22px] rounded-full bx bx-chevron-right"
         :class="{'rotate-180': !isClose}"
         @click="isClose = !isClose"
       />
@@ -31,7 +31,7 @@
       <router-link :to="button.path"
         v-for="button in buttons" :key="button.message"
         class="flex items-center h-[50px] mt-[25px] align-middle rounded-md hover:bg-[#63b377] hover:text-white transition-colors duration-300 "
-        :class="button.message == 'Logout'?`absolute w-full bottom-0 mt-[10px]`:''"
+        :class="[button.message == 'Logout'?`absolute w-full bottom-0 mt-[10px]`:'', button.path == this.$route.path ? 'bg-[#63b377] text-white' : '']"
         @click="button.event"
       >
       <i class="min-w-[60px] text-[20px] text-center" :class="button.icon" />
