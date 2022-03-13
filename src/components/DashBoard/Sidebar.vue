@@ -52,7 +52,7 @@ export default {
       buttons: [
         { icon: 'bx bx-search icon', message: 'Search', path: '/search', event: this.empty },
         { icon: 'bx bx-book-bookmark icon', message: 'My Courses', path: '/mycourses', event: this.empty },
-        { icon: 'bx bx-chalkboard icon', message: 'My Classes', path: '/myclasses', event: this.empty },
+        { icon: 'bx bx-chalkboard icon', message: 'My Class', path: '/myclasses', event: this.empty },
         { icon: 'bx bx-cog icon', message: 'Settings', path: '/settings', event: this.empty },
         { icon: 'bx bx-log-out', message: 'Logout', path: '', event: this.logout }
       ]
@@ -67,6 +67,12 @@ export default {
           this.$router.push('/login')
           store.commit('login/setLogin', { value: false })
         })
+    }
+  },
+  created () {
+    // if user is a prof
+    if (store.state.login.role === '02') {
+      // this.buttons
     }
   }
 }
