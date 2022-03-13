@@ -19,11 +19,7 @@ const state = {
 const mutations = {}
 
 //
-const actions = {
-  async login ({ state }) {
-    return await ls.login(state.username, state.password)
-  }
-}
+const actions = {}
 
 const getters = {}
 export const course = {

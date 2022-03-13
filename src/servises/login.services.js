@@ -6,17 +6,9 @@ async function login (username, password) {
 }
 
 // Function for login avo4cum da aggiustare
-async function refresh () {
-  const token = localStorage.getItem('refreshToken')
-
-  const response = await service.genericRequest('login', 'PUT', { token })
-  const newToken = response.token
-
-  // Save a new accessToken
-  localStorage.setItem('accessToken', newToken)
-
-  return newToken
-} // (importantissimo da fare richieta in automatico e se fallisce sloggare)
+async function refresh (refreshToken) {
+  return await service.genericRequest('login', 'PUT', { token: refreshToken })
+}
 
 // Function for logout avo4cum
 async function logout (refreshToken) {

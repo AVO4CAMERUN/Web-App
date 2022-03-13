@@ -29,7 +29,10 @@ const state = {
 const mutations = {
   setLogin: (state, payload) => { state.isLogged = payload.value },
   setRefreshToken: (state, payload) => { state.refreshToken = payload?.refreshToken },
-  setAccessToken: (state, payload) => { state.accessToken = payload?.accessToken },
+  setAccessToken: (state, payload) => {
+    console.log('set access')
+    state.accessToken = payload?.accessToken
+  },
   setEmail: (state, payload) => { state.email = payload?.email },
   setRole: (state, payload) => { state.role = payload?.role },
   setUsername: (state, payload) => { state.username = payload?.username },
@@ -41,7 +44,7 @@ const mutations = {
 
 //
 const actions = {
-  async login ({ state, dispatch, commit }) {
+  async login ({ dispatch, commit }) {
     // Save data user
     const user = (await dispatch('fetchUser'))[0]
     commit('setEmail', user)
@@ -61,8 +64,10 @@ const actions = {
     if (login?.accessToken) commit('setLogin', { value: true })
     else return new Error('!200')
   },
-  async refresh ({ state }) {
-    return await ls.refresh(state.refreshToken)
+  async refresh ({ dispatch, commit }) {
+    console.log('ref')
+    const response = await dispatch('fetchRefresh')
+    commit('setAccessToken', response)
   },
   async logout ({ state, commit }) {
     const response = await ls.logout(state.refreshToken)
@@ -88,6 +93,13 @@ const actions = {
   },
   async fetchLogin ({ state }) {
     return await ls.login(state.username, state.password)
+      .then((response) => {
+        if (response.status === 200) return response.json()
+      })
+  },
+  async fetchRefresh ({ state }) {
+    console.log(state.refreshToken)
+    return await ls.refresh(state.refreshToken)
       .then((response) => {
         if (response.status === 200) return response.json()
       })

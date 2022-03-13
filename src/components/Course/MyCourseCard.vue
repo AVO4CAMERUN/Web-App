@@ -25,7 +25,11 @@
             <p class="text-sm">{{creatorName}}</p>
           </div>
           <div class="cursor-pointer">
-            <svg class="hover:scale-90 rounded-full" @click.prevent="removeCourse" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" style="fill: rgba(253, 5, 5, 1);transform: ;msFilter:;">
+            <svg
+              xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" style="fill: rgba(253, 5, 5, 1);transform: ;msFilter:;"
+              class="hover:scale-90 rounded-full"
+              @click.prevent="removeCourse"
+            >
               <path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm5 11H7v-2h10v2z"></path>
             </svg>
           </div>
@@ -42,18 +46,16 @@ import { subscribeService as sub } from '@/servises/subscribe.service'
 export default {
   name: 'MyCoursesCard',
   data: function () {
-    return {
-      id: this.courseID
-    }
+    return {}
   },
   methods: {
     removeCourse () {
-      sub.deleteSubscribtion(this.id, store.state.login.accessToken)
+      sub.deleteSubscribtion(this.courseID, store.state.login.accessToken)
         .then((response) => {
-          if (response.status === 200) {
-            location.reload()
+          if (response?.status === 200) {
             this.$emit('courseID', this.courseID)
-          } else { /* err */ }
+            // location.reload()
+          } else { }
         })
     }
   },
