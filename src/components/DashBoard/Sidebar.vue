@@ -72,7 +72,8 @@ export default {
   created () {
     // if user is a prof
     if (store.state.login.role === '02') {
-      // this.buttons
+      const index = this.buttons.findIndex(element => element.message === 'My Class')
+      this.buttons[index].message = 'My Classes'
     }
   }
 }
