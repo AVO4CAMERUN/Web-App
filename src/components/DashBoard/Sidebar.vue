@@ -12,14 +12,14 @@
         </span>
         <div
           class="text-lg font-bold mt-[4px] transition-[transform,_opacity] duration-300 origin-left"
-          :class="{'scale-x-0 opacity-0': isClose}"
+          :class="{'scale-x-0  scale-y-0 opacity-0': isClose}"
         >
         Avo4Camerun
         </div>
       </div>
 
       <button
-        class="absolute top-[20%] -right-[1.75rem] w-6 aspect-square bg-[#63b377] text-white
+        class="absolute top-[20%] -right-[1.75rem] w-6 aspect-square bg-[#4c9a5f] text-white
         flex justify-center items-center text-[22px] rounded-full bx bx-chevron-right"
         :class="{'rotate-180': !isClose}"
         @click="isClose = !isClose"
@@ -28,15 +28,19 @@
 
     <!-- div elenco button -->
     <section class="relative h-[90%] text-[#707070] text-[17px] font-semibold">
-      <router-link :to="button.path"
-        v-for="button in buttons" :key="button.message"
-        class="flex items-center h-[50px] mt-[25px] align-middle rounded-md hover:bg-[#63b377] hover:text-white transition-colors duration-300 "
-        :class="[button.message == 'Logout'?`absolute w-full bottom-0 mt-[10px]`:'', button.path == this.$route.path ? 'bg-[#63b377] text-white' : '']"
-        @click="button.event"
-      >
-      <i class="min-w-[60px] text-[20px] text-center" :class="button.icon" />
-      <span :class="{'scale-x-0 opacity-0': isClose}" class="transition-[transform,_opacity] duration-300 origin-left whitespace-nowrap">{{ button.message }}</span>
-      </router-link>
+      <ul>
+        <li v-for="button in buttons" :key="button.message">
+          <router-link
+            :to="button.path"
+            class="flex items-center h-[50px] mt-[25px] align-middle rounded-md hover:bg-[#63b377] hover:text-white transition-colors duration-300 "
+            :class="[button.message == 'Logout'?`absolute w-full bottom-0 mt-[10px]`:'', button.path == this.$route.path ? 'bg-[#4c9a5f] text-white' : '']"
+            @click="button.event"
+          >
+          <i class="min-w-[60px] text-[20px] text-center" :class="button.icon" />
+          <span :class="{'scale-x-0  scale-y-0 opacity-0': isClose}" class="transition-[transform,_opacity] duration-300 origin-left whitespace-nowrap">{{ button.message }}</span>
+          </router-link>
+        </li>
+      </ul>
     </section>
   </nav>
 </template>
@@ -52,7 +56,7 @@ export default {
       buttons: [
         { icon: 'bx bx-search icon', message: 'Search', path: '/search', event: this.empty },
         { icon: 'bx bx-book-bookmark icon', message: 'My Courses', path: '/mycourses', event: this.empty },
-        { icon: 'bx bx-chalkboard icon', message: 'My Class', path: '/myclasses', event: this.empty },
+        { icon: 'bx bx-chalkboard icon', message: 'My Class', path: '/myclass', event: this.empty },
         { icon: 'bx bx-cog icon', message: 'Settings', path: '/settings', event: this.empty },
         { icon: 'bx bx-log-out', message: 'Logout', path: '', event: this.logout }
       ]
@@ -74,6 +78,7 @@ export default {
     if (store.state.login.role === '02') {
       const index = this.buttons.findIndex(element => element.message === 'My Class')
       this.buttons[index].message = 'My Classes'
+      this.buttons[index].path = '/myclasses'
     }
   }
 }

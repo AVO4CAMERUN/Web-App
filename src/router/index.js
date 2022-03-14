@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import MyCourses from '@/views/MyCourses.vue'
 import Search from '@/views/Search.vue'
 import MyClasses from '@/views/teachers/MyClasses'
+import MyClass from '@/views/students/MyClass'
 import Settings from '@/views/Settings.vue'
 import Login from '@/views/Login.vue'
 import Register from '@/views/Register.vue'
@@ -37,6 +38,11 @@ const routes = [
     path: '/myclasses',
     name: 'myclasses',
     component: MyClasses
+  },
+  {
+    path: '/myclass',
+    name: 'myclass',
+    component: MyClass
   },
   {
     path: '/course',

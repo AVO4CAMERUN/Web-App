@@ -12,7 +12,7 @@
       @courseID="removeCourseCard"
     />
   </div>
-  <div v-show="false" class="bg-yellow-100 border-t border-b border-l border-r border-yellow-500 text-yellow-700 px-4 py-3 mx-5 my-5">
+  <div v-if="cempty" class="bg-yellow-100 border-t border-b border-l border-r border-yellow-500 text-yellow-700 px-4 py-3 mx-5 my-5">
     <p class="font-bold">Nessun corso aggiunto</p>
     <p class="text-sm">Vai nella sezione Esplora per inserire il tuo primo corso.</p>
   </div>
@@ -28,11 +28,14 @@ export default {
   data: function () {
     return {
       cards: [],
-      empty: true
+      empty: false
     }
   },
   components: {
     MyCourseCard
+  },
+  beforeCreate () {
+    console.log(this.cempty)
   },
   mounted () {
     this.fetchMyCourses(`?email=[${store.state.login.email}]`)
@@ -63,8 +66,8 @@ export default {
               creationDate: `${date.getUTCDate()}/${date.getUTCMonth() + 1}/${date.getUTCFullYear()}`
             })
           })
-          if (this.cards.length <= 0) this.empty = true
-          else this.empty = false
+          // if (this.cards.length <= 0) this.empty = true
+          // else this.empty = false
         })
         .catch(() => {})
     },
@@ -74,6 +77,10 @@ export default {
     }
   },
   computed: {
+    cempty () {
+      if (this.cards.length <= 0) return true
+      else return false
+    }
   }
 }
 </script>

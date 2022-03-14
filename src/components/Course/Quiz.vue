@@ -2,14 +2,19 @@
   <template v-if="quiz !== null">
     <div class="p-3 bg-white rounded-md relative col-span-full shadow-lg">
       <p class="px-3 border-b-2 border-[#e5e7eb] bg-white select-none text-3xl font-semibold mb-5">Quiz: {{quiz.title}}</p>
-      <div v-for="(question, qindex) in quiz.quiz" :key="question">
+      <div v-for="question in quiz.quiz" :key="question">
         <p class="text-lg font-bold border-slate-300">{{question.question}}</p> <!-- border-b-2 -->
 
         <p v-if="question.type == 'multiple'" class="text-sm text-gray-500">(Risposta multipla)</p>
         <p v-else class="text-sm text-gray-500">(Risposta singola)</p>
-
         <div v-for="(answer, aindex) in question.answers" :key="answer">
-          <input :type="typeInput(question.type)" class="accent-input" :value="aindex" :name="question.question" v-model="quizAnswers[qindex]" :checked="aindex == 0"/>
+           <!-- :checked="aindex == 0" v-model="quizAnswers[qindex]" -->
+          <input
+            :type="typeInput(question.type)"
+            :value="aindex"
+            :name="question.question"
+            class="accent-input"
+          />
           <label>{{answer}}</label>
         </div>
       </div>
