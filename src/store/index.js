@@ -1,6 +1,7 @@
 import { createStore } from 'vuex'
 import VuexPersist from 'vuex-persist'
 import * as login from '@/store/module/login.module'
+import * as classes from '@/store/module/classes.module'
 
 /*
 ******* Introduzione *******
@@ -24,11 +25,11 @@ const vuexLocalStorage = new VuexPersist({
   key: 'avo4cam',
   storage: window.localStorage,
   // restoreState: (key, storage) => JSON.parse(JSON.stringify(storage.getItem(key))),
-  modules: ['login']
+  modules: ['login', 'classes']
 })
 
 export default createStore({
-  modules: { ...login },
+  modules: { ...login, ...classes },
   plugins: [vuexLocalStorage.plugin]
 })
 

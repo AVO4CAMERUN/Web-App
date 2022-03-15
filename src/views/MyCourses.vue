@@ -34,9 +34,6 @@ export default {
   components: {
     MyCourseCard
   },
-  beforeCreate () {
-    console.log(this.cempty)
-  },
   mounted () {
     this.fetchMyCourses(`?email=[${store.state.login.email}]`)
   },

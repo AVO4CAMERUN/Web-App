@@ -3,6 +3,7 @@ import MyCourses from '@/views/MyCourses.vue'
 import Search from '@/views/Search.vue'
 import MyClasses from '@/views/teachers/MyClasses'
 import MyClass from '@/views/students/MyClass'
+import Class from '@/views/Class'
 import Settings from '@/views/Settings.vue'
 import Login from '@/views/Login.vue'
 import Register from '@/views/Register.vue'
@@ -43,6 +44,12 @@ const routes = [
     path: '/myclass',
     name: 'myclass',
     component: MyClass
+  },
+  {
+    path: '/class',
+    name: 'class',
+    component: Class,
+    props: true
   },
   {
     path: '/course',
