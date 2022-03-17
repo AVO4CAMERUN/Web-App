@@ -1,7 +1,7 @@
 <template>
   <div class="m-8 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(300px,_1fr))]">
     <MyCourseCard
-      v-for="card in cards"
+      v-for="(card) in cards"
       :key="card.id"
       :courseID="card.courseID"
       :courseName="card.courseName"
@@ -10,6 +10,7 @@
       :creatorName="card.creatorName"
       :creationDate="card.creationDate"
       @courseID="removeCourseCard"
+      @click="setCurrentCourse(card.courseID)"
     />
   </div>
   <div v-if="cempty" class="bg-yellow-100 border-t border-b border-l border-r border-yellow-500 text-yellow-700 px-4 py-3 mx-5 my-5">
@@ -20,7 +21,7 @@
 <script>
 import MyCourseCard from '@/components/Course/MyCourseCard.vue'
 import { subscribeService as ss } from '@/servises/subscribe.service'
-import { coursesService as cs } from '@/servises/course.services'
+// import { coursesService as cs } from '@/servises/course.services'
 import store from '@/store/index'
 
 export default {
@@ -47,9 +48,10 @@ export default {
         })
         .then((coursesList) => {
           let ids = ''; coursesList.forEach(c => { ids += c.id_course + ',' })
-          return cs.getCoursesByFilter(`?id_course=[${ids}]`)
+          ids = ids.substring(0, ids.length - 1)
+          // return cs.getCoursesByFilter(`?id_course=[${ids}]`)
+          return store.dispatch('course/fetchCourses', `?id_course=[${ids}]`)
         })
-        .then((response) => response.json())
         .then((courses) => {
           this.cards = []
           courses.forEach(course => {
@@ -71,6 +73,9 @@ export default {
     removeCourseCard (courseID) {
       const index = this.cards.findIndex((course) => course.courseID === courseID)
       this.cards.splice(index, 1)
+    },
+    setCurrentCourse (id) {
+      store.dispatch('course/setCurrentCourse', id)
     }
   },
   computed: {

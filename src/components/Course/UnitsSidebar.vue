@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col bg-white rounded-md w-full h-full lg:aspect-[9/16] overflow-y-auto shadow-md">
-      <p class="border-b-[1px] border-slate-400 p-2 text-2xl font-semibold text-center">Nome Corso</p>
+      <p class="border-b-[1px] border-slate-400 p-2 text-2xl font-semibold text-center">Unità</p>
       <ul class="w-full overflow-y-auto scrollbar px-3 pt-2">
         <li class="mb-4 flex align-center flex-col"
           v-for="(unit, index) in units"

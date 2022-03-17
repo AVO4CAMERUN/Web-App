@@ -1,7 +1,7 @@
 <template>
   <div class="flex justify-center items-center place-items-center bg-gradient-to-r from-[#3f87a6] to-[#63b377] h-[100vh]">
     <div class="flex items-center justify-center w-[110] h-[600px] p-8 rounded-[18px] bg-slate-100 shadow-lg shadow-gray-700 "
-    :class="{'opacity-[.15]': popupEmailConfirm}"
+    :class="{'opacity-[.15]': popupEmailConfirm || popupError}"
     >
       <div class="max-w-md w-full">
         <div>
@@ -92,12 +92,14 @@
         >OK</button>
       </div>
     </div>
+    <PopUpError v-if="popupError" @removeError="this.popupError = !this.popupError" :errorText="'inserire messaggio personalizzato'"/>
   </div>
 </template>
 
 <script>
 import BaseInputText from '@/components/Base/BaseInputText.vue'
 import { accountService as as } from '@/servises/account.services'
+import PopUpError from '@/components/Base/PopUpError.vue'
 // import store from '../store/index'
 
 export default {
@@ -113,7 +115,8 @@ export default {
       checked: false,
       type: 'password',
       popupEmailConfirm: false,
-      popups: [false, false, false, false, false]
+      popupError: false,
+      popups: [true, true, true, true, true]
     }
   },
   computed: {},
@@ -131,8 +134,8 @@ export default {
     // Methods for checker user input
     checker () {
       // name surname username email password generalpopup
-      this.popups[0] = this.generalChecker(this.name, '^[a-zA-Z]+$')
-      this.popups[1] = this.generalChecker(this.surname, '^[a-zA-Z]+$')
+      this.popups[0] = this.generalChecker(this.name, '^[a-zA-Z ]+$')
+      this.popups[1] = this.generalChecker(this.surname, '^[a-zA-Z ]+$')
       this.popups[2] = this.generalChecker(this.username, '^[a-z0-9_.-]{3,20}$')
       this.popups[3] = this.generalChecker(this.email, '^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')
 
@@ -143,21 +146,25 @@ export default {
     // Methods on submit
     register () {
       this.checker() // call input checker
-      let sum = 0; this.popups.forEach(popup => { sum += popup }) // sum for check
-
+      let sum = 0
+      this.popups.forEach((popup, index) => {
+        sum += popup // sum for check
+        if (!popup) {
+          console.log('Errore nel ' + (index + 1) + ' campo di input') // da sistemare con veri popup
+        }
+      })
       // Check all user input
-      console.log(sum)
       if (sum === 5) {
         as.createAccount(this.name, this.surname, this.email, this.username, this.password)
           .then((response) => { this.popupEmailConfirm = !this.popupEmailConfirm })
       } else {
-        // fare pop up err
-        // this.popupEmailConfirm = !this.popupEmailConfirm
+        this.popupError = !this.popupError
       }
     }
   },
   components: {
-    BaseInputText
+    BaseInputText,
+    PopUpError
   }
 }
 // @click=""

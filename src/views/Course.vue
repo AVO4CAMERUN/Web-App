@@ -21,7 +21,6 @@ export default {
   data: function () {
     return {
       units: [],
-      courseID: this.$route.query.id,
       lessonID: null,
       lesson: {
         name: '',
@@ -84,8 +83,20 @@ export default {
       this.fetchLesson(`?id_lesson=[${id}]`)
     }
   },
+  computed: {
+    id: {
+      get () { return this.$store.state.course.id }
+    },
+    img: {
+      get () { return this.$store.state.course.img }
+    },
+    name: {
+      get () { return this.$store.state.course.name }
+    }
+  },
   mounted () {
-    this.fetchUnits(`?id_course=[${this.courseID}]`)
+    // store asincrono quindi quando esegue mounted, l'id nello store non è ancora stato cambiato
+    this.fetchUnits(`?id_course=[${this.id}]`)
   },
   components: {
     UnitsSidebar,

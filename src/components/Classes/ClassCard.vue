@@ -18,7 +18,7 @@
 
     <div class="h-20">
       <router-link
-        :to="{name: 'class', query: { id: classId }}"
+        :to="{name: 'class'}"
         class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-4 rounded text-sm px-5 py-2 text-center mt-12 mr-2 mb-12 text-base"
       >
       Go to class
