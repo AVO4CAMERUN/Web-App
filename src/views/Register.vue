@@ -9,12 +9,12 @@
         </div>
         <div class="mt-8 space-y-6">
           <div class="rounded-md shadow-sm -space-y-px">
-            <BaseInputText name="Name" v-model="name" type="text" :disabled="popupEmailConfirm" top />
-            <BaseInputText name="Surname" v-model="surname" type="text" :disabled="popupEmailConfirm" />
-            <BaseInputText name="Username" v-model="username" type="text" :disabled="popupEmailConfirm" />
-            <BaseInputText name="Email" v-model="email" type="text" :disabled="popupEmailConfirm" />
-            <BaseInputText name="Password" v-model="password" :type="type" :disabled="popupEmailConfirm" />
-            <BaseInputText name="Password" v-model="confirmPassword" :type="type" :disabled="popupEmailConfirm" bottom />
+            <BaseInputText name="Name" v-model="this.inputs[0].value" :type="this.inputs[0].type" :disabled="popupEmailConfirm || popupError" top />
+            <BaseInputText name="Surname" v-model="this.inputs[1].value" :type="this.inputs[1].type" :disabled="popupEmailConfirm || popupError" />
+            <BaseInputText name="Username" v-model="this.inputs[2].value" :type="this.inputs[2].type" :disabled="popupEmailConfirm || popupError" />
+            <BaseInputText name="Email" v-model="this.inputs[3].value" :type="this.inputs[3].type" :disabled="popupEmailConfirm || popupError" />
+            <BaseInputText name="Password" v-model="this.inputs[4].value" :type="this.inputs[4].type" :disabled="popupEmailConfirm || popupError" />
+            <BaseInputText name="Password" v-model="this.inputs[5].value" :type="this.inputs[5].type" :disabled="popupEmailConfirm || popupError" bottom />
           </div>
 
           <div class="flex items-center justify-between">
@@ -92,7 +92,7 @@
         >OK</button>
       </div>
     </div>
-    <PopUpError v-if="popupError" @removeError="this.popupError = !this.popupError" :errorText="'inserire messaggio personalizzato'"/>
+    <PopUpError v-if="popupError" @removeError="this.popupError = !this.popupError" :errorText="errorMessage"/>
   </div>
 </template>
 
@@ -106,57 +106,65 @@ export default {
   name: 'register',
   data: function () {
     return {
-      name: '',
-      surname: '',
-      username: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
       checked: false,
-      type: 'password',
       popupEmailConfirm: false,
       popupError: false,
-      popups: [true, true, true, true, true]
+      errorMessage: '',
+      inputs: [
+        { name: 'name', value: '', placeholder: 'Name', type: 'text', disabled: false, error: true },
+        { name: 'surname', value: '', placeholder: 'Surname', type: 'text', disabled: false, error: true },
+        { name: 'username', value: '', placeholder: 'Username', type: 'text', disabled: false, error: true },
+        { name: 'email', value: '', placeholder: 'Email', type: 'text', disabled: false, error: true },
+        { name: 'password', value: '', placeholder: 'Password', type: 'password', disabled: false, error: true },
+        { name: 'confirm_password', value: '', placeholder: 'Password', type: 'password', disabled: false, error: true }
+      ]
     }
   },
-  computed: {},
+  computed: {
+  },
   methods: {
     showPassword () {
-      if (this.checked) this.type = 'password'
-      else this.type = 'text'
+      if (this.checked) {
+        this.inputs[4].type = 'password'
+        this.inputs[5].type = 'password'
+      } else {
+        this.inputs[4].type = 'text'
+        this.inputs[5].type = 'text'
+      }
     },
     // Match text with regex and return true or false
     generalChecker (text, pattern) {
       return new RegExp(pattern).test(text)
-      /* const regex = new RegExp(pattern)
-      return regex.test(text) */
     },
     // Methods for checker user input
     checker () {
-      // name surname username email password generalpopup
-      this.popups[0] = this.generalChecker(this.name, '^[a-zA-Z ]+$')
-      this.popups[1] = this.generalChecker(this.surname, '^[a-zA-Z ]+$')
-      this.popups[2] = this.generalChecker(this.username, '^[a-z0-9_.-]{3,20}$')
-      this.popups[3] = this.generalChecker(this.email, '^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')
+      this.inputs[0].error = this.generalChecker(this.inputs[0].value, '^[a-zA-Z ]+$')
+      this.inputs[1].error = this.generalChecker(this.inputs[1].value, '^[a-zA-Z ]+$')
+      this.inputs[2].error = this.generalChecker(this.inputs[2].value, '^[a-z0-9_.-]{3,20}$')
+      this.inputs[3].error = this.generalChecker(this.inputs[3].value, '^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')
 
-      if (this.password === this.confirmPassword) {
-        this.popups[4] = this.generalChecker(this.password, '^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$')
+      if (this.inputs[4].value === this.inputs[5].value) {
+        this.inputs[4].error = this.generalChecker(this.inputs[4].value, '^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$')
+      } else {
+        this.inputs[4].error = false
       }
     },
     // Methods on submit
     register () {
       this.checker() // call input checker
       let sum = 0
-      this.popups.forEach((popup, index) => {
-        sum += popup // sum for check
-        if (!popup) {
-          console.log('Errore nel ' + (index + 1) + ' campo di input') // da sistemare con veri popup
+      this.errorMessage = 'Invalid '
+      this.inputs.forEach(input => {
+        sum += input.error // sum for check
+        if (!input.error) {
+          this.errorMessage += `${input.name}, `
         }
       })
+      this.errorMessage = this.errorMessage.substring(0, this.errorMessage.length - 2)
       // Check all user input
       if (sum === 5) {
         as.createAccount(this.name, this.surname, this.email, this.username, this.password)
-          .then((response) => { this.popupEmailConfirm = !this.popupEmailConfirm })
+          .then(() => { this.popupEmailConfirm = !this.popupEmailConfirm })
       } else {
         this.popupError = !this.popupError
       }

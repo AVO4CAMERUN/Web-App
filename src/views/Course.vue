@@ -1,6 +1,6 @@
 <template>
   <div class="grid lg:grid-cols-[80%,_20%] p-8 gap-4">
-    <Video :videoID="lesson.link_video"/>
+    <Video :videoID="lesson.link_video" :courseName="name"/>
     <UnitsSidebar v-if="units.length !== 0" :units="units" :ulength="units.length" @lessonID="getLessonID"/>
     <Quiz :quiz="lesson.quiz" :key="lesson.quiz"/>
     <VideoDescription :lessonID="lesson.id_lesson" :lessonName="lesson.name"/>
@@ -15,6 +15,7 @@ import VideoDescription from '@/components/Course/VideoDescription.vue'
 import Quiz from '@/components/Course/Quiz.vue'
 import { lessonService as ls } from '@/servises/lesson.services'
 import { unitsService as us } from '@/servises/units.services'
+import store from '@/store/index'
 
 export default {
   name: 'course',
@@ -85,18 +86,18 @@ export default {
   },
   computed: {
     id: {
-      get () { return this.$store.state.course.id }
+      get () { return store.state.course.id }
     },
     img: {
-      get () { return this.$store.state.course.img }
+      get () { return store.state.course.img }
     },
     name: {
-      get () { return this.$store.state.course.name }
+      get () { return store.state.course.name }
     }
   },
   mounted () {
     // store asincrono quindi quando esegue mounted, l'id nello store non è ancora stato cambiato
-    this.fetchUnits(`?id_course=[${this.id}]`)
+    this.fetchUnits(`?id_course=[${store.state.course.id}]`)
   },
   components: {
     UnitsSidebar,
