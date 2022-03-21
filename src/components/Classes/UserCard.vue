@@ -10,9 +10,9 @@
       </div>
     </td>
     <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">Professor</td>
-    <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">01/01/1970</td>
-    <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">Handcart</td>
-    <td class="p-4 whitespace-nowrap text-base font-normal text-gray-900">
+    <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900 hidden lg:[display:_table-cell]">01/01/1970</td>
+    <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900 hidden lg:[display:_table-cell]">Handcart</td>
+    <td class="p-4 whitespace-nowrap text-base font-normal text-gray-900 hidden lg:[display:_table-cell]">
       <div class="flex items-center">
         <div class="h-2.5 w-2.5 rounded-full bg-green-400 mr-2"></div> Active
       </div>
