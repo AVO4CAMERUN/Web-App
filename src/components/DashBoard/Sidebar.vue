@@ -75,7 +75,7 @@ export default {
   },
   created () {
     // if user is a prof
-    if (store.state.login.role === '02') {
+    if (store.state.login.role === 'TEACHER') {
       const index = this.buttons.findIndex(element => element.message === 'My Class')
       this.buttons[index].message = 'My Classes'
       this.buttons[index].path = '/myclasses'

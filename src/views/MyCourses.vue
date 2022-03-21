@@ -1,5 +1,5 @@
 <template>
-  <div class="m-8 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(300px,_1fr))]">
+  <div v-if="!empty" class="m-8 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(300px,_1fr))]">
     <MyCourseCard
       v-for="(card) in cards"
       :key="card.id"
@@ -13,7 +13,7 @@
       @click="setCurrentCourse(card.courseID)"
     />
   </div>
-  <div v-if="cempty" class="bg-yellow-100 border-t border-b border-l border-r border-yellow-500 text-yellow-700 px-4 py-3 mx-5 my-5">
+  <div v-else class="bg-yellow-100 border-t border-b border-l border-r border-yellow-500 text-yellow-700 px-4 py-3 mx-5 my-5">
     <p class="font-bold">Nessun corso aggiunto</p>
     <p class="text-sm">Vai nella sezione Esplora per inserire il tuo primo corso.</p>
   </div>
@@ -44,6 +44,9 @@ export default {
         .then((response) => {
           if (response.status === 200) {
             return response.json()
+          } else if (response.status === 404) {
+            this.empty = true
+            return 1
           }
         })
         .then((coursesList) => {
@@ -65,24 +68,21 @@ export default {
               creationDate: `${date.getUTCDate()}/${date.getUTCMonth() + 1}/${date.getUTCFullYear()}`
             })
           })
-          // if (this.cards.length <= 0) this.empty = true
-          // else this.empty = false
+          if (this.cards.length <= 0) this.empty = true
+          else this.empty = false
         })
         .catch(() => {})
     },
     removeCourseCard (courseID) {
       const index = this.cards.findIndex((course) => course.courseID === courseID)
       this.cards.splice(index, 1)
+      if (this.cards.length <= 0) this.empty = true
+      else this.empty = false
     },
     setCurrentCourse (id) {
       store.dispatch('course/setCurrentCourse', id)
     }
   },
-  computed: {
-    cempty () {
-      if (this.cards.length <= 0) return true
-      else return false
-    }
-  }
+  computed: {}
 }
 </script>

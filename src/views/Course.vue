@@ -43,7 +43,6 @@ export default {
           }
         })
         .then((fetchUnit) => {
-          //
           this.units = []
           fetchUnit.forEach(unit => {
             this.units.push({
@@ -56,7 +55,7 @@ export default {
             })
           })
           // cambiare in ordine lezioni dinamico
-          this.lessonID = this.units[0].unitLessons[0].id
+          this.lessonID = this.units[0].unitLessons[0].id_lesson
           this.fetchLesson(`?id_lesson=[${this.lessonID}]`)
         })
         .catch(() => {})
@@ -85,19 +84,19 @@ export default {
     }
   },
   computed: {
-    id: {
-      get () { return store.state.course.id }
+    id () { return store.state.course.id },
+    img () { return store.state.course.img },
+    name () { return store.state.course.name }
+  },
+  watch: {
+    id (newValue, oldValue) {
+      this.fetchUnits(`?id_course=[${newValue}]`)
     },
-    img: {
-      get () { return store.state.course.img }
-    },
-    name: {
-      get () { return store.state.course.name }
-    }
+    img (newValue, oldValue) {},
+    name (newValue, oldValue) {}
   },
   mounted () {
-    // store asincrono quindi quando esegue mounted, l'id nello store non è ancora stato cambiato
-    this.fetchUnits(`?id_course=[${store.state.course.id}]`)
+    this.fetchUnits(`?id_course=[${this.id}]`)
   },
   components: {
     UnitsSidebar,

@@ -25,7 +25,7 @@
         >
           <div v-for="lesson in unit.unitLessons"
           class="cursor-pointer rounded-md bg-emerald-400 m-2 p-2 select-none hover:bg-emerald-300 hover:underline hover:decoration-black hover:decoration-2"
-          :key="lesson" @click="changeLesson(lesson.id)">{{lesson.name}}</div>
+          :key="lesson" @click="changeLesson(lesson.id_lesson)">{{lesson.name}}</div>
         </div>
         </li>
       </ul>
@@ -47,6 +47,7 @@ export default {
     changeLesson (lessonID) { this.$emit('lessonID', lessonID) },
     changeUnit () {}
   },
+  watch: {},
   mounted () {
     for (let i = 0; i < this.ulength; i++) {
       this.display.push(true)
