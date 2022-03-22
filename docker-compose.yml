@@ -1,0 +1,14 @@
+version: '3'
+services:
+    web-app:
+        restart: always
+        build: 
+          dockerfile: Dockerfile
+          context: ./
+        ports: 
+          - '8001:80'
+networks:
+  default:
+    external:
+      name: avo4camerun-network
+      
