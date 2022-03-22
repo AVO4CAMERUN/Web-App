@@ -105,7 +105,7 @@ export default {
   },
   watch: {
     id (newValue, oldValue) {
-      this.fetchUsers(`?id=[${newValue}]`)
+      this.fetchUsers(`id=[${newValue}]`)
     },
     img (newValue, oldValue) {},
     name (newValue, oldValue) {}

@@ -11,8 +11,8 @@ async function getFilterdAccount (query) {
 }
 
 // Function for update personal account avo4cum
-async function putAccount (putObj) {
-  return await service.genericRequest('account', 'PUT', putObj)
+async function putAccount (putObj, accessToken) {
+  return await service.genericRequestWithAuth('account', 'PUT', putObj, accessToken)
 }
 
 // Function for delete personal account avo4cum
