@@ -10,8 +10,8 @@ async function createCourse (name, email, description, imgCover, subject) {
 }
 
 // Function for get course by filter (GET)
-async function getCoursesByFilter (filter = '') {
-  return await service.genericRequest(`courses${filter}`, 'GET')
+async function getCoursesByFilter (filter = '', token) {
+  return await service.genericRequestWithAuth(`courses${filter}`, 'GET', {}, token)
 }
 
 // Function for update course by id (PUT)

@@ -32,8 +32,8 @@ const actions = {
     commit('setName', response[0])
     commit('setImg', response[0])
   },
-  async fetchCourses ({ state }, filter) {
-    return await cs.getCoursesByFilter(filter)
+  async fetchCourses ({ rootState }, filter) {
+    return await cs.getCoursesByFilter(filter, rootState.login.accessToken)
       .then((response) => {
         if (response.status === 200) return response.json()
       })

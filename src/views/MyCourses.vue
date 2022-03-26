@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     fetchMyCourses (filter) {
-      ss.getSubscriptionByFilter(filter)
+      ss.getSubscriptionByFilter(filter, store.state.login.accessToken)
         .then((response) => {
           if (response.status === 200) {
             return response.json()

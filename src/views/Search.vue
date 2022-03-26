@@ -33,9 +33,8 @@
 </template>
 
 <script>
-import SearchCard from '../components/Search/SearchCard.vue'
-import { coursesService as cs } from '../servises/course.services'
-// import store from '../store/index'
+import SearchCard from '@/components/Search/SearchCard.vue'
+import store from '@/store/index'
 
 export default {
   name: 'search',
@@ -55,18 +54,10 @@ export default {
   methods: {
     searchCourses () {
       let filter
-      if (this.searchName) {
-        filter = `?name=[${this.searchName}]`
-      }
-      cs.getCoursesByFilter(filter)
-        .then((response) => {
-          // Save a refreshToken and accessToken
-          if (response.status === 200) {
-            return response.json()
-          } else {
-            // err
-          }
-        })
+      if (this.searchName) filter = `?name=[${this.searchName}]`
+
+      // Get global courses
+      store.dispatch('course/fetchCourses', filter)
         .then((courses) => {
           // Refresh data model
           this.cards = []

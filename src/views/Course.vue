@@ -4,7 +4,6 @@
     <UnitsSidebar v-if="units.length !== 0" :units="units" :ulength="units.length" @lessonID="getLessonID"/>
     <Quiz :quiz="lesson.quiz" :key="lesson.quiz"/>
     <VideoDescription :lessonID="lesson.id_lesson" :lessonName="lesson.name"/>
-    <!-- Forse le props non volano anche se secondo me adrebbero fatte volare perche manca saclabilita -->
   </div>
 </template>
 
@@ -36,11 +35,9 @@ export default {
   },
   methods: {
     fetchUnits (filter) {
-      us.getUnitsByFilter(filter)
+      us.getUnitsByFilter(filter, store.state.login.accessToken)
         .then((response) => {
-          if (response.status === 200) {
-            return response.json()
-          }
+          if (response.status === 200) return response.json()
         })
         .then((fetchUnit) => {
           this.units = []
@@ -61,7 +58,7 @@ export default {
         .catch(() => {})
     },
     fetchLesson (filter) {
-      ls.getLessonsByFilter(filter)
+      ls.getLessonsByFilter(filter, store.state.login.accessToken)
         .then((response) => {
           if (response.status === 200) return response.json()
           else { }
@@ -106,6 +103,3 @@ export default {
   }
 }
 </script>
-
-<style>
-</style>

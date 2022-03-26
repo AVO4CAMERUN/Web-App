@@ -1,6 +1,6 @@
 import service from './base.services'
 
-// Function for create course (POST) // -----------------da fare
+// Function for create course (POST)
 async function createUnits (name, email, description, imgCover, subject) {
   // name, email, description, img_cover, subject
   // const token = localStorage.getItem('refreshToken')
@@ -10,8 +10,8 @@ async function createUnits (name, email, description, imgCover, subject) {
 }
 
 // Function for get units by filter (GET)
-async function getUnitsByFilter (filter = '') {
-  return await service.genericRequest(`units${filter}`, 'GET')
+async function getUnitsByFilter (filter = '', token) {
+  return await service.genericRequestWithAuth(`units${filter}`, 'GET', {}, token)
 }
 
 // Function for update course by id (PUT)
