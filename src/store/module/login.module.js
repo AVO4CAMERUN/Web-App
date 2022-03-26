@@ -42,15 +42,6 @@ const mutations = {
 //
 const actions = {
   async login ({ dispatch, commit }) {
-    // Save data user
-    const user = (await dispatch('fetchUser'))[0]
-    commit('setEmail', user)
-    commit('setRole', user)
-    commit('setUsername', user)
-    commit('setFirstname', user)
-    commit('setLastname', user)
-    commit('setImgProfile', user)
-
     // Extract data on body and delete password
     const login = await dispatch('fetchLogin')
     commit('setPassword', { password: null })
@@ -60,6 +51,15 @@ const actions = {
     // Change layout
     if (login?.accessToken) commit('setLogin', { value: true })
     else return new Error('!200')
+
+    // Save data user
+    const user = (await dispatch('fetchUser'))[0]
+    commit('setEmail', user)
+    commit('setRole', user)
+    commit('setUsername', user)
+    commit('setFirstname', user)
+    commit('setLastname', user)
+    commit('setImgProfile', user)
   },
   async refresh ({ dispatch, commit }) {
     console.log('ref')
@@ -83,7 +83,7 @@ const actions = {
     if (response.status !== 200) return new Error('!200')
   },
   async fetchUser ({ state }) {
-    return await as.getFilterdAccount(`username=[${state.username}]`)
+    return await as.getFilterdAccount(`username=[${state.username}]`, state.accessToken)
       .then((response) => {
         if (response.status === 200) return response.json()
       })

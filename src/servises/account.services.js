@@ -6,8 +6,8 @@ async function createAccount (name, surname, email, username, password) {
 }
 
 // Function for get account by filter avo4cum
-async function getFilterdAccount (query) {
-  return await service.genericRequest(`account?${query}`, 'GET') // cambiare con query string
+async function getFilterdAccount (query, token) {
+  return await service.genericRequestWithAuth(`account?${query}`, 'GET', {}, token) // cambiare con query string
 }
 
 // Function for update personal account avo4cum
