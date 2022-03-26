@@ -6,8 +6,8 @@ async function createClass (name, img, students, profs) {
 }
 
 // Function for get class by filter
-async function getClassesByFilter (filter) {
-  return await service.genericRequest(`classes?${filter}`, 'GET') // cambiare con query string
+async function getClassesByFilter (filter, token) {
+  return await service.genericRequestWithAuth(`classes?${filter}`, 'GET', {}, token) // cambiare con query string
 }
 
 // Function for update class
