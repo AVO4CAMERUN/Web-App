@@ -61,6 +61,14 @@ export default {
 /* Google Font Import - Poppins */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
+:root {
+  --body-color: #18191a;
+  --sidebar-color: #242526;
+  --primary-color: #63b377;
+  --text-color: #ccc;
+  
+}
+
 * {
   margin: 0;
   padding: 0;

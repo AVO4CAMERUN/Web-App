@@ -68,6 +68,7 @@
 <script>
 import store from '@/store/index'
 import { accountService as as } from '@/servises/account.services'
+import { checkers } from '@/Utils/input_checker.util'
 
 export default {
   name: 'settings',
@@ -89,13 +90,16 @@ export default {
   methods: {
     setNew () {
       // fare i controlli sull'input
+      console.log(checkers)
       const filter = { firstname: 'Pablo', lastname: 'Escobar' }
       // inserire key-value come option.name-option.newValue
       as.putAccount(filter, store.state.login.accessToken)
         .then((response) => {
-          if (response.status === 200) { // add response json and update store
-            return response.json()
-          }
+          if (response.status === 200) return response.json()
+          // add response json and update store
+        })
+        .then((newData) => {
+          console.log(newData)
         })
     }
   },
