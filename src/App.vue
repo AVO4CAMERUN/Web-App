@@ -66,7 +66,6 @@ export default {
   --sidebar-color: #242526;
   --primary-color: #63b377;
   --text-color: #ccc;
-  
 }
 
 * {

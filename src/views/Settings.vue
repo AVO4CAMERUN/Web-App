@@ -6,7 +6,7 @@
 
         <!-- Img -->
         <img :src="`data:image/png;base64,${imgProfile}`" class="rounded-full w-[150px] h-[150px] cursor-pointer object-cover
-                        hover:ring-4 hover:ring-[#63b377] hover:scale-105 duration-500">
+                        hover:ring-4 hover:ring-primary-light hover:scale-105 duration-500">
 
         <!-- Name and username -->
         <div class="flex flex-col justify-left ml-10 gap-2">
