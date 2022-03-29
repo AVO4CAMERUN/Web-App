@@ -1,5 +1,5 @@
 <template>
-  <div class="grid place-items-center bg-gradient-to-r from-[#3f87a6] to-[#63b377] h-[100vh]">
+  <div class="grid place-items-center bg-gradient-to-r from-[#3f87a6] to-[#63b377] h-screen">
     <div
     class="flex items-center justify-center w-[110] h-[450px] p-8 rounded-[18px] bg-slate-100 shadow-lg shadow-gray-700"
     :class="{'opacity-[.15]': popupError}"

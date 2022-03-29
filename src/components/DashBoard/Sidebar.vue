@@ -2,17 +2,17 @@
   <div class="">
     <!-- farla dinamica in base al role-->
     <nav
-      class="bg-white dark:bg-dark-sidebar w-[250px] h-screen py-[10px] px-[14px] transition-[width] duration-300 v-nome outiline outline-[1px] outline-gray-300"
+      class="bg-white dark:bg-dark-sidebar focus:bg-red-500 w-[250px] h-screen py-[10px] px-[14px] transition-[width] duration-300 v-nome outiline outline-[1px] outline-gray-300"
       :class="{'w-[88px]': isClose}"
     >
       <header class="relative">
         <div class="mt-[10px] flex align-middle min-h-[32px]"> <!-- image-text -->
           <span class="flex align-middle justify-center min-w-[60px]"> <!-- image -->
-            <img class="w-[40px] rounded-[6px]" src="@/assets/logo.png"
+            <img class="w-[40px] rounded-[6px] dark:invert" src="@/assets/logo.png"
             alt="logo AVO4CAM" draggable="false">
           </span>
           <div
-            class="text-lg font-bold mt-[4px] transition-[transform,_opacity] duration-300 origin-left"
+            class="text-lg font-bold mt-[4px] transition-[transform,_opacity] duration-300 origin-left dark:text-white"
             :class="{'scale-x-0  scale-y-0 opacity-0': isClose}"
           >
           Avo4Camerun
@@ -21,14 +21,14 @@
 
         <button
           class="absolute top-[20%] -right-[1.75rem] w-6 aspect-square bg-primary text-white
-          flex justify-center items-center text-[22px] rounded-full bx bx-chevron-right"
+          flex justify-center items-center text-[22px] rounded-full bx bx-chevron-right transition-transform"
           :class="{'rotate-180': !isClose}"
           @click="isClose = !isClose"
         />
       </header>
 
       <!-- div elenco button -->
-      <section class="relative h-[90%] text-[#707070] text-[17px] font-semibold">
+      <section class="relative h-[90%] text-[#707070] text-[17px] font-semibold dark:text-white">
         <ul>
           <li v-for="button in buttons" :key="button.message">
             <router-link
@@ -59,7 +59,7 @@ export default {
       buttons: [
         { icon: 'bx bx-search icon', message: 'Search', path: '/search', event: this.empty },
         { icon: 'bx bx-book-bookmark icon', message: 'My Courses', path: '/mycourses', event: this.empty },
-        { icon: 'bx bx-chalkboard icon', message: 'My Class', path: '/myclass', event: this.empty },
+        { icon: 'bx bx-chalkboard icon', message: 'My Class', path: '/myclasses', event: this.empty },
         { icon: 'bx bx-cog icon', message: 'Settings', path: '/settings', event: this.empty },
         { icon: 'bx bx-log-out', message: 'Logout', path: '', event: this.logout }
       ]

@@ -1,16 +1,18 @@
 <template>
-  <template v-if="isLogged">
-    <div class="flex">
-      <Sidebar></Sidebar>
-      <section class="grow bg-[#f0f3f6]">
-        <Header></Header>
-          <div class="overflow-y-auto overflow-x-hidden bg-[#f0f3f6] scrollbar max-h-[calc(100vh_-_76px)]">
-            <router-view/> <!-- main -->
-          </div>
-      </section>
-    </div>
-  </template>
-  <router-view v-else/>
+  <div class="dar"> <!-- Da cambiare con 'dark' per usare la dark mode -->
+    <template v-if="isLogged">
+      <div class="flex">
+        <Sidebar></Sidebar>
+        <section class="grow bg-primary-bg dark:bg-dark-bg">
+          <Header></Header>
+            <div class="overflow-y-auto overflow-x-hidden scrollbar max-h-[calc(100vh_-_76px)]">
+              <router-view/> <!-- main -->
+            </div>
+        </section>
+      </div>
+    </template>
+    <router-view v-else/>
+  </div>
 </template>
 
 <script>

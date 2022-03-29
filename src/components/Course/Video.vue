@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white p-5 rounded-lg aspect-video items-center w-full shadow-xl">
+  <div class="bg-white p-5 rounded-lg aspect-video items-center w-full shadow-xl dark:bg-dark-sidebar">
       <YouTube
         v-if="render"
         :src="`${videoID}`"
