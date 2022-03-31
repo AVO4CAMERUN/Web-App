@@ -569,6 +569,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-right: auto;
 }
 
+.mx-4 {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
 .mt-1 {
   margin-top: 0.25rem;
 }
@@ -761,6 +766,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 50px;
 }
 
+.h-\[9ex\] {
+  height: 9ex;
+}
+
 .max-h-\[calc\(100vh_-_76px\)\] {
   max-height: calc(100vh - 76px);
 }
@@ -855,6 +864,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .w-\[40px\] {
   width: 40px;
+}
+
+.w-\[calc\(100\%_-_2rem\)\] {
+  width: calc(100% - 2rem);
 }
 
 .min-w-full {
@@ -1036,10 +1049,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .break-words {
   overflow-wrap: break-word;
-}
-
-.break-all {
-  word-break: break-all;
 }
 
 .rounded-full {
@@ -1258,9 +1267,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(16 185 129 / var(--tw-bg-opacity));
 }
 
-.bg-\[\#16A085\] {
+.bg-emerald-600 {
   --tw-bg-opacity: 1;
-  background-color: rgb(22 160 133 / var(--tw-bg-opacity));
+  background-color: rgb(5 150 105 / var(--tw-bg-opacity));
 }
 
 .bg-slate-700 {
@@ -1283,16 +1292,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(76 154 95 / var(--tw-bg-opacity));
 }
 
-.bg-blue-600 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(37 99 235 / var(--tw-bg-opacity));
-}
-
-.bg-emerald-600 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(5 150 105 / var(--tw-bg-opacity));
-}
-
 .bg-gradient-to-r {
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
 }
@@ -1304,10 +1303,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .to-\[\#63b377\] {
   --tw-gradient-to: #63b377;
-}
-
-.fill-white {
-  fill: #fff;
 }
 
 .object-cover {
@@ -1509,6 +1504,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   font-size: 20px;
 }
 
+.text-\[32px\] {
+  font-size: 32px;
+}
+
 .font-medium {
   font-weight: 500;
 }
@@ -1610,6 +1609,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(112 112 112 / var(--tw-text-opacity));
 }
 
+.text-emerald-500 {
+  --tw-text-opacity: 1;
+  color: rgb(16 185 129 / var(--tw-text-opacity));
+}
+
+.text-rose-600 {
+  --tw-text-opacity: 1;
+  color: rgb(225 29 72 / var(--tw-text-opacity));
+}
+
 .placeholder-gray-500::-moz-placeholder {
   --tw-placeholder-opacity: 1;
   color: rgb(107 114 128 / var(--tw-placeholder-opacity));
@@ -1668,12 +1677,20 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-shadow: var(--tw-shadow-colored);
 }
 
+.outline {
+  outline-style: solid;
+}
+
 .outline-\[1px\] {
   outline-width: 1px;
 }
 
 .outline-gray-300 {
   outline-color: #d1d5db;
+}
+
+.outline-gray-200 {
+  outline-color: #e5e7eb;
 }
 
 .drop-shadow-2xl {
@@ -1779,9 +1796,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
 }
 
-.hover\:bg-\[\#0E6655\]:hover {
+.hover\:bg-emerald-500:hover {
   --tw-bg-opacity: 1;
-  background-color: rgb(14 102 85 / var(--tw-bg-opacity));
+  background-color: rgb(16 185 129 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-slate-500:hover {
@@ -1797,16 +1814,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .hover\:bg-primary-light:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(99 179 119 / var(--tw-bg-opacity));
-}
-
-.hover\:bg-blue-500:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(59 130 246 / var(--tw-bg-opacity));
-}
-
-.hover\:bg-emerald-500:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(16 185 129 / var(--tw-bg-opacity));
 }
 
 .hover\:text-green-500:hover {
@@ -1943,11 +1950,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-color: rgb(100 116 139 / var(--tw-border-opacity));
 }
 
-.dark .dark\:border-slate-600 {
-  --tw-border-opacity: 1;
-  border-color: rgb(71 85 105 / var(--tw-border-opacity));
-}
-
 .dark .dark\:bg-dark-bg {
   --tw-bg-opacity: 1;
   background-color: rgb(34 40 49 / var(--tw-bg-opacity));
@@ -1961,6 +1963,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .dark .dark\:bg-dark-sidebar {
   --tw-bg-opacity: 1;
   background-color: rgb(57 62 70 / var(--tw-bg-opacity));
+}
+
+.dark .dark\:bg-slate-900 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(15 23 42 / var(--tw-bg-opacity));
 }
 
 .dark .dark\:fill-white {
@@ -1977,19 +1984,24 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(221 221 221 / var(--tw-text-opacity));
 }
 
-.dark .dark\:text-white {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
 .dark .dark\:text-gray-300 {
   --tw-text-opacity: 1;
   color: rgb(209 213 219 / var(--tw-text-opacity));
 }
 
-.dark .dark\:text-gray-400 {
+.dark .dark\:text-white {
   --tw-text-opacity: 1;
-  color: rgb(156 163 175 / var(--tw-text-opacity));
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.dark .dark\:text-slate-400 {
+  --tw-text-opacity: 1;
+  color: rgb(148 163 184 / var(--tw-text-opacity));
+}
+
+.dark .dark\:text-slate-200 {
+  --tw-text-opacity: 1;
+  color: rgb(226 232 240 / var(--tw-text-opacity));
 }
 
 .dark .dark\:caret-white {
@@ -1999,6 +2011,40 @@ Ensure the default browser behavior of the `hidden` attribute.
 .dark .dark\:shadow-gray-700 {
   --tw-shadow-color: #374151;
   --tw-shadow: var(--tw-shadow-colored);
+}
+
+.dark .dark\:shadow-slate-600 {
+  --tw-shadow-color: #475569;
+  --tw-shadow: var(--tw-shadow-colored);
+}
+
+.dark .dark\:shadow-slate-300 {
+  --tw-shadow-color: #cbd5e1;
+  --tw-shadow: var(--tw-shadow-colored);
+}
+
+.dark .dark\:shadow-slate-100 {
+  --tw-shadow-color: #f1f5f9;
+  --tw-shadow: var(--tw-shadow-colored);
+}
+
+.dark .dark\:shadow-slate-900 {
+  --tw-shadow-color: #0f172a;
+  --tw-shadow: var(--tw-shadow-colored);
+}
+
+.dark .dark\:shadow-slate-800 {
+  --tw-shadow-color: #1e293b;
+  --tw-shadow: var(--tw-shadow-colored);
+}
+
+.dark .dark\:shadow-slate-700 {
+  --tw-shadow-color: #334155;
+  --tw-shadow: var(--tw-shadow-colored);
+}
+
+.dark .dark\:outline-gray-700 {
+  outline-color: #374151;
 }
 
 .dark .dark\:invert {

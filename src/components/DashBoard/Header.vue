@@ -8,8 +8,9 @@
             v-if="imgProfile !== null"
             class="w-12 h-12 rounded-full object-cover"
             :src="`data:image/png;base64,${imgProfile}`"
+            draggable="false"
           >
-          <img v-else class="w-12 h-12 rounded-full object-cover" src="@/assets/user_placeholder.png">
+          <img v-else class="w-12 h-12 rounded-full object-cover" src="@/assets/user_placeholder.png" draggable="false">
         </button>
 
         <svg class="rounded-full p-2 mt-3 mr-10 cursor-pointer duration-500 dark:fill-white hover:bg-primary-light"

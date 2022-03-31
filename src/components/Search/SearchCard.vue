@@ -1,14 +1,14 @@
 <template>
   <div class="flex flex-wrap">
-    <article class="h-[300px] w-[400px] bg-gray-100 overflow-hidden outline outline-[1px] outline-gray-200 rounded-lg shadow-xl dark:shadow-slate-600 dark:outline-gray-700 dark:bg-slate-900">
+    <article class="h-[300px] w-[400px] bg-gray-100 overflow-hidden outline outline-[1px] outline-gray-200 rounded-lg shadow-xl dark:shadow-slate-900 dark:outline-gray-700 dark:bg-slate-900">
       <div class="h-[120px] w-[400px]">
         <img
           v-if="courseCover !== ''"
           :src="`data:image/png;base64,${courseCover}`"
           class="block w-full h-full object-cover"
-          alt="img"
+          alt="img" draggable="false"
         >
-      <img v-else class="block w-full h-full object-cover" src="https://picsum.photos/400/300">
+      <img v-else class="block w-full h-full object-cover" src="https://picsum.photos/400/300" draggable="false">
       </div>
       <header class="flex items-center justify-between leading-tight p-4">
         <h1>
@@ -26,9 +26,8 @@
           <p class="text-sm dark:text-white">{{creatorName}}</p>
         </div>
         <div class="cursor-pointer">
-          <!-- <i class="bx bxs-check-circle text-emerald-500 text-[32px]"></i> --> <!-- Added -->
-          <i class="bx bxs-plus-circle text-black text-[32px]"></i> <!-- + -->
-          <!-- Per il - <i class="bx bxs-minus-circle text-rose-600 text-[32px]"></i> --> <!-- - -->
+          <i v-if="true" @click="addCourses" class="bx bxs-plus-circle text-black text-[32px] dark:invert"></i>
+          <i v-else class="bx bxs-check-circle text-emerald-500 text-[32px]"></i>
         </div>
       </footer>
     </article>

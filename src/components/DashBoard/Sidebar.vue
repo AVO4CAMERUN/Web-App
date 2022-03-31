@@ -36,6 +36,7 @@
               class="flex items-center h-[50px] mt-[25px] align-middle rounded-md hover:bg-primary-light hover:text-white transition-colors duration-300 "
               :class="[button.message == 'Logout'?`absolute w-full bottom-0 mt-[10px]`:'', button.path == this.$route.path ? 'bg-primary text-white' : '']"
               @click="button.event"
+              draggable="false"
             >
             <i class="min-w-[60px] text-[20px] text-center" :class="button.icon" />
             <span :class="{'scale-x-0  scale-y-0 opacity-0': isClose}" class="transition-[transform,_opacity] duration-300 origin-left whitespace-nowrap">{{ button.message }}</span>

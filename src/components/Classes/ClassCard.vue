@@ -4,9 +4,9 @@
       v-if="classImg !== ''"
       :src="`data:image/png;base64,${classImg}`"
       class="w-full h-60 object-cover object-center rounded-lg"
-      alt="img"
+      alt="img" draggable="false"
     />
-    <img v-else class="w-full h-60 object-cover object-center" src="https://picsum.photos/400/300">
+    <img v-else class="w-full h-60 object-cover object-center" src="https://picsum.photos/400/300" draggable="false">
     <h4 class="text-black text-2xl font-bold capitalize text-center">{{name}}</h4>
     <!-- <p class="absolute top-2 text-black inline-flex items-center text-xs">
       0 Online {{}}
@@ -16,6 +16,7 @@
         class="w-30 px-4 py-2 text-white font-bold text-sm text-center bg-emerald-500 rounded hover:bg-emerald-600">
       <router-link
         :to="{name: 'class'}"
+        draggable="false"
       >
       Go to class
       </router-link>

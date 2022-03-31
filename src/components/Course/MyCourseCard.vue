@@ -1,37 +1,33 @@
 <template>
-  <router-link :to="{name: 'course'}">
+  <router-link :to="{name: 'course'}" draggable="false">
     <div class="flex flex-wrap">
-      <article class="h-[300px] w-[400px] overflow-hidden rounded-lg shadow-xl">
+      <article class="h-[300px] w-[400px] bg-gray-100 overflow-hidden outline outline-[1px] outline-gray-200 rounded-lg shadow-xl dark:shadow-slate-900 dark:outline-gray-700 dark:bg-slate-900">
         <div class="h-[120px] w-[400px]">
           <img
-          v-if="courseCover !== ''"
-          :src="`data:image/png;base64,${courseCover}`"
-          class="block w-full h-full object-cover"
-          alt="img"
+            v-if="courseCover !== ''"
+            :src="`data:image/png;base64,${courseCover}`"
+            class="block w-full h-full object-cover"
+            alt="img" draggable="false"
           >
-          <img v-else class="block w-full h-full object-cover" src="https://picsum.photos/400/300">
+        <img v-else class="block w-full h-full object-cover" src="https://picsum.photos/400/300" draggable="false">
         </div>
         <header class="flex items-center justify-between leading-tight p-4">
           <h1>
-            <span class="text-lg lg:whitespace-nowrap">{{courseName}}</span>
+            <span class="text-lg lg:whitespace-nowrap font-semibold dark:text-white">{{courseName}}</span>
           </h1>
-          <div class="text-sm">{{creationDate}}</div>
+          <div class="text-sm dark:text-white">{{creationDate}}</div>
         </header>
 
-        <div class="h-[62px] w-[300px] break-normal overflow-hidden p-2 pl-4 text-sm">{{courseDescription}}</div>
+        <p class="h-[9ex] w-[calc(100%_-_2rem)] break-normal overflow-hidden m-2 mx-4 text-sm dark:text-white">
+          {{courseDescription}}
+        </p>
 
-        <footer class="flex items-center justify-between leading-none p-4">
+        <footer class="flex items-center justify-between leading-none px-4">
           <div class="flex items-center">
-            <p class="text-sm">{{creatorName}}</p>
+            <p class="text-sm dark:text-white">{{creatorName}}</p>
           </div>
           <div class="cursor-pointer">
-            <svg
-              xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" style="fill: rgba(253, 5, 5, 1);transform: ;msFilter:;"
-              class="hover:scale-90 rounded-full"
-              @click.prevent="removeCourse"
-            >
-              <path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm5 11H7v-2h10v2z"></path>
-            </svg>
+            <i @click.prevent="removeCourse" class="bx bxs-minus-circle text-rose-600 text-[32px]" />
           </div>
         </footer>
       </article>

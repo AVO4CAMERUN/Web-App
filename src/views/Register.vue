@@ -100,7 +100,12 @@
 import BaseInputText from '@/components/Base/BaseInputText.vue'
 import PopUpError from '@/components/Base/PopUpError.vue'
 import { accountService as as } from '@/servises/account.services'
-import { checkers } from '@/Utils/input_checker.util'
+import {
+  nameChecker,
+  usernameChecker,
+  emailChecker,
+  passwordChecker
+} from '@/Utils/input_checker.util'
 // import store from '../store/index'
 
 export default {
@@ -135,13 +140,12 @@ export default {
     },
     // Methods for checker user input
     checker () {
-      checkers.nameChecker(this.inputs[0].value)
-      this.inputs[0].error = checkers.nameChecker(this.inputs[0].value)
-      this.inputs[1].error = checkers.nameChecker(this.inputs[1].value)
-      this.inputs[2].error = checkers.usernameChecker(this.inputs[2].value)
-      this.inputs[3].error = checkers.emailChecker(this.inputs[3].value)
+      this.inputs[0].error = nameChecker(this.inputs[0].value)
+      this.inputs[1].error = nameChecker(this.inputs[1].value)
+      this.inputs[2].error = usernameChecker(this.inputs[2].value)
+      this.inputs[3].error = emailChecker(this.inputs[3].value)
       if (this.inputs[4].value === this.inputs[5].value) {
-        this.inputs[4].error = checkers.passwordChecker(this.inputs[4].value)
+        this.inputs[4].error = passwordChecker(this.inputs[4].value)
       } else {
         this.inputs[4].error = false
       }
