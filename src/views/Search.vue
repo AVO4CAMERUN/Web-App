@@ -1,5 +1,5 @@
 <template v-on>
-  <BaseSearchBar v-model="searchName" @input="searchCourse"/>
+  <BaseSearchBar @inputSearch="searchCourses"/>
   <div v-if="error == 400" class="bg-yellow-100 border-t border-b border-l border-r border-yellow-500 text-yellow-700 px-4 py-3 mx-5 my-5">
     <p class="font-bold">Hai già aggiunto questo corso</p>
     <p class="text-sm">Vai nella sezione I Miei Corsi per iniziare a seguirlo.</p>
@@ -28,7 +28,6 @@ export default {
   name: 'search',
   data: function () {
     return {
-      searchName: '',
       cards: [],
       error: 200
     }
@@ -41,9 +40,9 @@ export default {
     this.searchCourses()
   },
   methods: {
-    searchCourses () {
+    searchCourses (inputSearch) {
       let filter
-      if (this.searchName) filter = `?name=[${this.searchName}]`
+      if (inputSearch) filter = `?name=[${inputSearch}]`
 
       // Get global courses
       store.dispatch('course/fetchCourses', filter)

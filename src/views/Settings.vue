@@ -5,8 +5,7 @@
       <div class="flex flex-row justify-center p-4 w-[75%] h-[75%] items-center">
 
         <!-- Img -->
-        <img :src="`data:image/png;base64,${imgProfile}`" class="rounded-full w-[150px] h-[150px] cursor-pointer object-cover
-                        hover:ring-4 hover:ring-primary-light hover:scale-105 duration-500">
+        <img :src="`data:image/png;base64,${imgProfile}`" class="rounded-full w-[150px] h-[150px] cursor-pointer object-cover hover:ring-4 hover:ring-primary-light hover:scale-105 duration-500">
 
         <!-- Name and username -->
         <div class="flex flex-col justify-left ml-10 gap-2">

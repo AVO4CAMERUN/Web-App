@@ -4,7 +4,7 @@
       <div class="relative">
         <input
           type="text"
-          v-model="searchName"
+          v-model="inputSearch"
           class="h-14 w-96 pr-8 pl-5 rounded-lg z-0 focus:shadow focus:outline-none dark:bg-gray-700 dark:caret-white dark:shadow-gray-700"
           placeholder="Search anything..."
         >
@@ -16,6 +16,16 @@
 
 <script>
 export default {
-
+  name: 'BaseSearchBar',
+  data: function () {
+    return {
+      inputSearch: ''
+    }
+  },
+  watch: {
+    inputSearch (newValue) {
+      this.$emit('inputSearch', newValue)
+    }
+  }
 }
 </script>

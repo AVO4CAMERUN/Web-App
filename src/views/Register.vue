@@ -98,8 +98,9 @@
 
 <script>
 import BaseInputText from '@/components/Base/BaseInputText.vue'
-import { accountService as as } from '@/servises/account.services'
 import PopUpError from '@/components/Base/PopUpError.vue'
+import { accountService as as } from '@/servises/account.services'
+import { checkers } from '@/Utils/input_checker.util'
 // import store from '../store/index'
 
 export default {
@@ -132,37 +133,31 @@ export default {
         this.inputs[5].type = 'text'
       }
     },
-    // Match text with regex and return true or false
-    generalChecker (text, pattern) {
-      return new RegExp(pattern).test(text)
-    },
     // Methods for checker user input
     checker () {
-      this.inputs[0].error = this.generalChecker(this.inputs[0].value, '^[a-zA-Z ]+$')
-      this.inputs[1].error = this.generalChecker(this.inputs[1].value, '^[a-zA-Z ]+$')
-      this.inputs[2].error = this.generalChecker(this.inputs[2].value, '^[a-z0-9_.-]{3,20}$')
-      this.inputs[3].error = this.generalChecker(this.inputs[3].value, '^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')
-
+      checkers.nameChecker(this.inputs[0].value)
+      this.inputs[0].error = checkers.nameChecker(this.inputs[0].value)
+      this.inputs[1].error = checkers.nameChecker(this.inputs[1].value)
+      this.inputs[2].error = checkers.usernameChecker(this.inputs[2].value)
+      this.inputs[3].error = checkers.emailChecker(this.inputs[3].value)
       if (this.inputs[4].value === this.inputs[5].value) {
-        this.inputs[4].error = this.generalChecker(this.inputs[4].value, '^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$')
+        this.inputs[4].error = checkers.passwordChecker(this.inputs[4].value)
       } else {
         this.inputs[4].error = false
       }
     },
     // Methods on submit
     register () {
-      this.checker() // call input checker
+      this.checker() // Checking inputs
       let sum = 0
       this.errorMessage = 'Invalid '
       this.inputs.forEach(input => {
         sum += input.error // sum for check
-        if (!input.error) {
-          this.errorMessage += `${input.name}, `
-        }
+        if (!input.error) this.errorMessage += `${input.name}, `
       })
-      this.errorMessage = this.errorMessage.substring(0, this.errorMessage.length - 2)
+      this.errorMessage = this.errorMessage.substring(0, this.errorMessage.length - 2) // change to better messages
       // Check all user input
-      if (sum === 5) {
+      if (sum === 6) {
         as.createAccount(this.name, this.surname, this.email, this.username, this.password)
           .then(() => { this.popupEmailConfirm = !this.popupEmailConfirm })
       } else {
