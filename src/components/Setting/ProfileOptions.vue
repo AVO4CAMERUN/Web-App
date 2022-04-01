@@ -1,27 +1,29 @@
 <template>
   <div class="flex flex-col w-[60%] p-8 gap-4 rounded-xl shadow-xl border border-green-700 bg-white">
 
-        <div class="flex flex-col items-center gap-4">
+        <div class="flex flex-col items-left gap-4">
 
-          <div v-for="(option, index) in options" :key="option.name">
-            <fieldset class="py-2 px-4 rounded-lg w-[50%] border border-emerald-800">
-              <legend>{{option.label}}</legend>
-              <span v-if="!editable" class="text-xl">{{option.actualValue}}</span>
-              <input v-else type="text" class="w-full h-full text-lg focus:outline-none" :placeholder="option.actualValue" v-model="option.newValue">
+          <div v-for="(option, index) in options" :key="option.name" class="flex flex-row justify-between">
+            <fieldset class="py-5 px-4 rounded-lg w-[50%] border border-emerald-800">
+              <legend class="font-semibold">{{option.label}}</legend>
+              <span v-if="!editable" class="w-full h-full text-lg">{{option.actualValue}}</span>
+              <input v-else type="text" class="w-full h-full text-lg pb-[1px] focus:outline-none" :placeholder="option.actualValue" v-model="option.newValue">
             </fieldset>
-            <button
-                class="py-4 px-8 rounded-lg bg-green-800 text-white w-[25%] hover:bg-green-900"
+            <div class="flex flex-row items-end gap-2 w-[45%] justify-end">
+              <button
+                class="py-4 px-4 rounded-lg bg-green-800 text-white w-[50%] h-[90%] hover:bg-green-900"
                 @click="!editable ? editable = !editable : setNew(index)"
               >
-              {{!editable ? 'Edit' : 'Save Changes'}}
+                {{!editable ? 'Edit' : 'Save Changes'}}
               </button>
               <button
                 v-if="editable"
-                class="py-4 px-8 rounded-lg bg-red-800 text-white w-[25%] hover:bg-red-900"
+                class="py-4 px-4 rounded-lg bg-red-800 text-white w-[50%] h-[90%] hover:bg-red-900"
                 @click="editable = !editable"
               >
-              Discard Changes
+                Discard Changes
               </button>
+            </div>
           </div>
         </div>
       </div>

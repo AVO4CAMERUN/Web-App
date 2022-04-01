@@ -1,5 +1,9 @@
 <template>
-  <div v-if="!empty" class="m-8 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(300px,_1fr))]">
+  <div v-if="empty" class="bg-yellow-100 border-t border-b border-l border-r border-yellow-500 text-yellow-700 px-4 py-3 mx-5 my-5">
+    <p class="font-bold">Nessun corso aggiunto</p>
+    <p class="text-sm">Vai nella sezione Esplora per inserire il tuo primo corso.</p>
+  </div>
+  <div class="m-8 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(360px,_1fr))]">
     <MyCourseCard
       v-for="(card) in cards"
       :key="card.id"
@@ -12,14 +16,12 @@
       @courseID="removeCourseCard"
       @click="setCurrentCourse(card.courseID)"
     />
-  </div>
-  <div v-else class="bg-yellow-100 border-t border-b border-l border-r border-yellow-500 text-yellow-700 px-4 py-3 mx-5 my-5">
-    <p class="font-bold">Nessun corso aggiunto</p>
-    <p class="text-sm">Vai nella sezione Esplora per inserire il tuo primo corso.</p>
+    <CreateCourseCard v-if="role == 'TEACHER'"/>
   </div>
 </template>
 <script>
 import MyCourseCard from '@/components/Course/MyCourseCard.vue'
+import CreateCourseCard from '@/components/Course/CreateCourseCard.vue'
 import { subscribeService as ss } from '@/servises/subscribe.service'
 // import { coursesService as cs } from '@/servises/course.services'
 import store from '@/store/index'
@@ -33,7 +35,8 @@ export default {
     }
   },
   components: {
-    MyCourseCard
+    MyCourseCard,
+    CreateCourseCard
   },
   mounted () {
     this.fetchMyCourses(`?email=[${store.state.login.email}]`)
@@ -83,6 +86,8 @@ export default {
       store.dispatch('course/setCurrentCourse', id)
     }
   },
-  computed: {}
+  computed: {
+    role () { return store.state.login.role }
+  }
 }
 </script>

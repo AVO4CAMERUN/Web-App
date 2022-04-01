@@ -1,5 +1,5 @@
 <template>
-  <div class="m-8 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(370px,_1fr))]">
+  <div class="m-8 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(360px,_1fr))]">
     <ClassCard
       v-for="userClass in classes" :key="userClass"
       :classId="userClass.id"

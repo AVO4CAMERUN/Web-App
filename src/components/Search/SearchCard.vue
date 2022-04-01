@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-wrap">
-    <article class="h-[300px] w-[400px] bg-gray-100 overflow-hidden outline outline-[1px] outline-gray-200 rounded-lg shadow-xl dark:shadow-slate-900 dark:outline-gray-700 dark:bg-slate-900">
-      <div class="h-[120px] w-[400px]">
+    <article class="h-[400px] w-[480px] bg-gray-100 overflow-hidden outline outline-[1px] outline-gray-200 rounded-lg shadow-xl dark:shadow-slate-900 dark:outline-gray-700 dark:bg-slate-900">
+      <div class="h-[200px] relative">
         <img
           v-if="courseCover !== ''"
           :src="`data:image/png;base64,${courseCover}`"

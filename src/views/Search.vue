@@ -4,7 +4,7 @@
     <p class="font-bold">Hai già aggiunto questo corso</p>
     <p class="text-sm">Vai nella sezione I Miei Corsi per iniziare a seguirlo.</p>
   </div>
-  <div class="m-8 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(300px,_1fr))]">
+  <div class="m-8 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(360px,_1fr))]">
     <SearchCard
       v-for="card in cards"
       :key="card"
