@@ -3,7 +3,7 @@
     <div class="h-[350px] w-[480px] bg-gray-100 overflow-hidden outline outline-[1px] outline-gray-200 rounded-lg shadow-xl dark:shadow-slate-900 dark:outline-gray-700 dark:bg-slate-900">
       <div class="h-[200px] relative">
         <img
-          v-if="false"
+          v-if="classImg !== ''"
           :src="`data:image/png;base64,${classImg}`"
           class="block w-full h-full object-cover rounded-lg"
           alt="img" draggable="false"

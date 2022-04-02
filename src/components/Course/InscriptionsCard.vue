@@ -40,7 +40,7 @@ import store from '@/store/index'
 import { subscribeService as sub } from '@/servises/subscribe.service'
 
 export default {
-  name: 'MyCoursesCard',
+  name: 'InscriptionsCard',
   data: function () {
     return {}
   },

@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import MyCourses from '@/views/MyCourses.vue'
+import Inscriptions from '@/views/Inscriptions.vue'
 import Search from '@/views/Search.vue'
 import MyClasses from '@/views/teachers/MyClasses'
+import MyCreations from '@/views/MyCreations'
 import MyClass from '@/views/students/MyClass'
 import Class from '@/views/Class'
 import Settings from '@/views/Settings.vue'
@@ -13,7 +14,7 @@ import store from '@/store/index'
 const routes = [
   {
     path: '/',
-    component: MyCourses
+    component: Inscriptions
   },
   {
     path: '/login',
@@ -31,14 +32,19 @@ const routes = [
     component: Search
   },
   {
-    path: '/mycourses',
-    name: 'mycourses',
-    component: MyCourses
+    path: '/inscriptions',
+    name: 'inscriptions',
+    component: Inscriptions
   },
   {
     path: '/myclasses',
     name: 'myclasses',
     component: MyClasses
+  },
+  {
+    path: '/mycreations',
+    name: 'mycreations',
+    component: MyCreations
   },
   {
     path: '/myclass',
@@ -74,7 +80,7 @@ router.beforeEach((to, from, next) => {
   const authRequired = !['/login', '/register'].includes(to.path)
   const loggedIn = store.state.login.isLogged
 
-  if (loggedIn && !authRequired) return next('/mycourses')
+  if (loggedIn && !authRequired) return next('/inscriptions')
   if (!loggedIn && authRequired) return next('/login')
   next()
 })

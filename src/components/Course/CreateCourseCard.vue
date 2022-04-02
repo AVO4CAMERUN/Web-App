@@ -14,21 +14,35 @@
       <header class="flex items-center justify-between leading-tight p-4">
         <h1>
           <!-- inserimento nome del corso -->
-          <input class="text-lg bg-gray-100 border-b-2 border-gray-300 lg:whitespace-nowrap font-semibold focus:outline-none dark:bg-slate-900 dark:text-white" placeholder="inserisci nome del corso">
+          <input
+            class="text-lg bg-gray-100 border-b-2 border-gray-300 lg:whitespace-nowrap font-semibold focus:outline-none dark:bg-slate-900 dark:text-white"
+            placeholder="inserisci nome del corso"
+            v-model="name"
+          >
         </h1>
         <!-- data di creazione del corso -->
         <div class="text-sm">{{todayDate}}</div>
       </header>
 
       <!-- descrizione del corso -->
-      <textarea class="text-sm h-[9ex] resize-none w-[calc(100%_-_2rem)] break-words overflow-hidden m-2 mx-4 bg-gray-100 focus:outline-none dark:bg-slate-900 dark:text-white" placeholder="inserisci descrizione"></textarea>
+      <textarea
+        class="text-sm h-[9ex] resize-none w-[calc(100%_-_2rem)] break-words overflow-hidden m-2 mx-4 bg-gray-100 focus:outline-none dark:bg-slate-900 dark:text-white"
+        placeholder="inserisci descrizione"
+        v-model="description"
+      />
 
       <footer class="flex items-center justify-between leading-none px-4">
         <div class="flex items-center">
           <p class="text-sm dark:text-white">{{creatorName}}</p>
         </div>
-        <!-- toggolare 'cursor-not-allowed' / 'disabled' quando non sono stati inseriti tutti i parametri di registrazione del corso -->
-        <input type="submit" value="crea corso" class="text-sm px-5 py-1.5 mr-2 mb-2 text-white bg-green-700 font-medium rounded-lg cursor-pointer hover:bg-green-800 focus:ring-4 focus:ring-green-300 focus:outline-none">
+        <input
+          class="text-sm px-5 py-1.5 mr-2 mb-2 text-white bg-green-700 font-medium rounded-lg hover:bg-green-800 focus:ring-4 focus:ring-green-300 focus:outline-none"
+          :class="name === '' ? 'cursor-not-allowed' : 'cursor-pointer'"
+          :disabled="name === '' ? 'true' : 'false'"
+          type="submit"
+          value="crea corso"
+          @click="createCourse()"
+        >
       </footer>
     </article>
   </div>
@@ -40,9 +54,18 @@ import store from '@/store/index'
 export default {
   name: 'CreateCourseCard',
   data: function () {
-    return {}
+    return {
+      name: '',
+      description: '',
+      img_cover: '',
+      subject: ''
+    }
   },
-  methods: {},
+  methods: {
+    createCourse () {
+
+    }
+  },
   computed: {
     creatorName () { return store.state.login.email },
     todayDate () { const date = new Date(); return date.toLocaleDateString() }

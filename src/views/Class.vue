@@ -96,6 +96,7 @@ export default {
     UserCard
   },
   mounted () {
+    console.log(this.id)
     this.fetchUsers(`id=[${this.id}]`)
   },
   computed: {
@@ -105,6 +106,7 @@ export default {
   },
   watch: {
     id (newValue, oldValue) {
+      console.log(newValue)
       this.fetchUsers(`id=[${newValue}]`)
     },
     img (newValue, oldValue) {},

@@ -1,4 +1,5 @@
 <template>
+  <!-- <div id="google_translate_element"></div> -->
   <div class="drk"> <!-- Da cambiare con 'dark' per usare la dark mode -->
     <template v-if="isLogged">
       <div class="flex">

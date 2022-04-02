@@ -7,7 +7,6 @@
         <input type="checkbox" class="" v-model="option.newValue">
       </div>
     </div>
-
   </div>
 </template>
 

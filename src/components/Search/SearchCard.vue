@@ -61,7 +61,7 @@ export default {
       sub.subscribe(this.id, store.state.login.accessToken)
         .then((response) => {
           if (response.status === 200) {
-            this.$router.push('/mycourses')
+            this.$router.push('/inscriptions')
           } else {}
           this.$emit('error', response.status)
         })
