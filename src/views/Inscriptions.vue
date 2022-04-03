@@ -4,7 +4,7 @@
     <p class="text-sm">Vai nella sezione Esplora per inserire il tuo primo corso.</p>
   </div>
   <div class="m-8 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(360px,_1fr))]">
-    <InscriptionsCard
+    <CourseCard
       v-for="(card) in cards"
       :key="card.id"
       :courseID="card.courseID"
@@ -13,15 +13,16 @@
       :courseCover="card.courseCover"
       :creatorName="card.creatorName"
       :creationDate="card.creationDate"
+      :courseSubject="card.courseSubject"
+      :parent="'inscriptions'"
       @courseID="removeCourseCard"
       @click="setCurrentCourse(card.courseID)"
     />
   </div>
 </template>
 <script>
-import InscriptionsCard from '@/components/Course/InscriptionsCard.vue'
+import CourseCard from '@/components/Course/CourseCard.vue'
 import { subscribeService as ss } from '@/servises/subscribe.service'
-// import { coursesService as cs } from '@/servises/course.services'
 import store from '@/store/index'
 
 export default {
@@ -33,7 +34,7 @@ export default {
     }
   },
   components: {
-    InscriptionsCard
+    CourseCard
   },
   mounted () {
     this.fetchInscriptions(`?email=[${store.state.login.email}]`)
@@ -64,6 +65,7 @@ export default {
               courseName: course.name,
               courseDescription: course.description,
               creatorName: course.email_creator,
+              courseSubject: course.subject,
               courseCover: course.img_cover,
               creationDate: `${date.getUTCDate()}/${date.getUTCMonth() + 1}/${date.getUTCFullYear()}`
             })

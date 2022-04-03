@@ -5,7 +5,7 @@
     <p class="text-sm">Vai nella sezione I Miei Corsi per iniziare a seguirlo.</p>
   </div>
   <div class="m-8 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(360px,_1fr))]">
-    <SearchCard
+    <CourseCard
       v-for="card in cards"
       :key="card"
       :courseID="card.courseID"
@@ -14,13 +14,17 @@
       :courseCover="card.courseCover"
       :creatorName="card.creatorName"
       :creationDate="card.creationDate"
+      :courseSubject="card.courseSubject"
+      :subscribed="card.subscribed"
+      :parent="'search'"
       @error="statusHandler"
     />
   </div>
 </template>
 
 <script>
-import SearchCard from '@/components/Search/SearchCard.vue'
+import CourseCard from '@/components/Course/CourseCard.vue'
+import { subscribeService as ss } from '@/servises/subscribe.service'
 import BaseSearchBar from '@/components/Base/BaseSearchBar.vue'
 import store from '@/store/index'
 
@@ -33,7 +37,7 @@ export default {
     }
   },
   components: {
-    SearchCard,
+    CourseCard,
     BaseSearchBar
   },
   mounted () {
@@ -56,16 +60,41 @@ export default {
               courseID: course.id_course,
               courseName: course.name,
               courseDescription: course.description,
+              courseSubject: course.subject,
               creatorName: course.email_creator,
               courseCover: course.img_cover,
               creationDate: `${date.getUTCDate()}/${date.getUTCMonth() + 1}/${date.getUTCFullYear()}`
             })
           }
+          this.fetchInscriptions(`?email=[${store.state.login.email}]`)
         })
         .catch(() => {})
     },
     statusHandler (status) {
       this.error = status
+    },
+    fetchInscriptions (filter) {
+      ss.getSubscriptionByFilter(filter, store.state.login.accessToken)
+        .then((response) => {
+          if (response.status === 200) {
+            return response.json()
+          } else if (response.status === 404) {
+            this.empty = true
+            return 1
+          }
+        })
+        .then((coursesList) => {
+          let ids = ''; coursesList.forEach(c => { ids += c.id_course + ',' })
+          ids = ids.substring(0, ids.length - 1)
+          return store.dispatch('course/fetchCourses', `?id_course=[${ids}]`)
+        })
+        .then((courses) => {
+          courses.forEach(course => {
+            const i = this.cards.findIndex(card => card.courseID === course.id_course)
+            this.cards[i].subscribed = true
+          })
+        })
+        .catch(() => {})
     }
   },
   computed: {}

@@ -11,10 +11,10 @@
             </fieldset>
             <div class="flex flex-row items-end gap-2 w-[45%] justify-end">
               <button
-                class="py-4 px-4 rounded-lg bg-green-800 text-white w-[50%] h-[90%] hover:bg-green-900" :class="option.name === 'email' ? 'cursor-not-allowed': ''" :disabled="option.name === 'email' ? 'true': 'false'"
+                class="py-4 px-4 rounded-lg bg-green-800 text-white w-[50%] h-[90%] hover:bg-green-900" :class="option.name === 'email' ? 'cursor-not-allowed': ''" :disabled="option.name === 'email' ? true : false"
                 @click="!option.editable ? option.editable = !option.editable : setNew(index)"
               >
-                {{!option.editable ? 'Edit' : 'Save Changes'}}
+                {{!option.editable ? 'Edit' : 'Save Changes'}} {{}}
               </button>
               <button
                 v-if="option.editable"

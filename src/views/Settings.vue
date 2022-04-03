@@ -6,10 +6,12 @@
 
         <!-- Img -->
         <img
+          v-if="imgProfile !== null"
           :src="`data:image/png;base64,${imgProfile}`"
           class="rounded-full w-[150px] h-[150px] cursor-pointer object-cover hover:ring-4 hover:ring-primary-light hover:scale-105 duration-500"
           alt="profile image" draggable="false"
         >
+        <img v-else class="w-12 h-12 rounded-full object-cover" src="@/assets/user_placeholder.png" draggable="false">
 
         <!-- Name and username -->
         <div class="flex flex-col justify-left ml-10 gap-2">
@@ -38,6 +40,7 @@
       <WebsiteOptions v-if="selected === 1"/>
 
     </div>
+    <div id="google_translate_element"></div>
   </div>
 </template>
 

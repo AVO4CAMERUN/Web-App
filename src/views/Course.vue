@@ -48,7 +48,7 @@ export default {
               unitName: unit.name,
               unitPosition: unit.units_order,
               unitDescription: unit.description,
-              unitLessons: unit.lessons
+              unitLessons: unit.lesson
             })
           })
           // cambiare in ordine lezioni dinamico

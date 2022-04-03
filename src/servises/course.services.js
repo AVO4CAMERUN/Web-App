@@ -1,11 +1,12 @@
 import service from './base.services'
+import store from '@/store/index'
 
 // Function for create course (POST) // -----------------da fare
-async function createCourse (name, email, description, imgCover, subject) {
-  // name, email, description, img_cover, subject
-  // const token = localStorage.getItem('refreshToken')
+async function createCourse (courseObj) {
+  // const { name, description, img_cover: imgCover, subject } = courseObj
+  const token = store.state.login.accessToken
 
-  const response = await service.genericRequest('courses', 'POST', { name, email, description, imgCover, subject })
+  const response = await service.genericRequestWithAuth('courses', 'POST', courseObj, token)
   return response
 }
 
