@@ -15,8 +15,8 @@
 
         <!-- Name and username -->
         <div class="flex flex-col justify-left ml-10 gap-2">
-          <span class="text-4xl"> {{firstname}} {{lastname}} </span>
-          <span class="text-lg"> {{username}} </span>
+          <span class="text-4xl dark:text-white"> {{firstname}} {{lastname}} </span>
+          <span class="text-lg dark:text-white"> {{username}} </span>
         </div>
 
       </div>

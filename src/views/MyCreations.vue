@@ -34,7 +34,7 @@ export default {
     CourseCard
   },
   mounted () {
-    this.fetchMyCreations(`?email_creator=[${store.state.login.email}]`)
+    this.fetchMyCreations(`?email_creator=["${store.state.login.email}"]`)
   },
   methods: {
     fetchMyCreations (filter) {
@@ -46,7 +46,7 @@ export default {
           }
           let ids = ''; response.forEach(c => { ids += c.id_course + ',' })
           ids = ids.substring(0, ids.length - 1)
-          return store.dispatch('course/fetchCourses', `?id_course=[${ids}]`)
+          return store.dispatch('course/fetchCourses', `?id_course=["${ids}"]`)
         })
         .then((courses) => {
           this.cards = []

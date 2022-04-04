@@ -25,7 +25,7 @@
           </select>
         </h1>
         <!-- data di creazione del corso -->
-        <div class="text-sm">{{todayDate}}</div>
+        <div class="text-sm dark:text-white">{{todayDate}}</div>
       </header>
 
       <!-- descrizione del corso -->

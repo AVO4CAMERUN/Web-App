@@ -17,9 +17,9 @@
         <header class="flex items-center justify-between leading-tight p-4">
           <h1>
             <span class="text-lg lg:whitespace-nowrap font-semibold dark:text-white">{{courseName}}</span>
-            <div class="text-sm dark:text-white">
+            <!-- <div class="text-sm dark:text-white">
               {{courseSubject}}
-            </div>
+            </div> -->
           </h1>
           <div class="text-sm dark:text-white">{{creationDate}}</div>
         </header>

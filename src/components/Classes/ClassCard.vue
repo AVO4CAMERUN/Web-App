@@ -5,15 +5,15 @@
         <img
           v-if="classImg !== ''"
           :src="`data:image/png;base64,${classImg}`"
-          class="block w-full h-full object-cover rounded-lg"
+          class="block w-full h-full object-cover"
           alt="img" draggable="false"
         />
         <img v-else class="block w-full h-full object-cover" src="https://picsum.photos/400/300" draggable="false">
       </div>
 
       <header class="flex flex-col items-center p-4">
-        <h4 class="text-black text-2xl font-bold capitalize">{{name}}</h4>
-        <p class="text-black inline-flex items-center text-xs">
+        <h4 class="text-black text-2xl font-bold capitalize dark:text-white">{{name}}</h4>
+        <p class="text-black inline-flex items-center text-xs dark:text-white">
            Mitch Scimmione {{}}
           <span class="ml-2 w-2 h-2 block bg-red-400 rounded-full animate-pulse"></span>
         </p>

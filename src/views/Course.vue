@@ -53,7 +53,7 @@ export default {
           })
           // cambiare in ordine lezioni dinamico
           this.lessonID = this.units[0].unitLessons[0].id_lesson
-          this.fetchLesson(`?id_lesson=[${this.lessonID}]`)
+          this.fetchLesson(`?id_lesson=["${this.lessonID}"]`)
         })
         .catch(() => {})
     },
@@ -77,7 +77,7 @@ export default {
     },
     getLessonID (id) {
       this.lessonID = id
-      this.fetchLesson(`?id_lesson=[${id}]`)
+      this.fetchLesson(`?id_lesson=["${id}"]`)
     }
   },
   computed: {
@@ -87,13 +87,13 @@ export default {
   },
   watch: {
     id (newValue, oldValue) {
-      this.fetchUnits(`?id_course=[${newValue}]`)
+      this.fetchUnits(`?id_course=["${newValue}"]`)
     },
     img (newValue, oldValue) {},
     name (newValue, oldValue) {}
   },
   mounted () {
-    this.fetchUnits(`?id_course=[${this.id}]`)
+    this.fetchUnits(`?id_course=["${this.id}"]`)
   },
   components: {
     UnitsSidebar,

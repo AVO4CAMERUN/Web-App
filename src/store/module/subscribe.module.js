@@ -24,7 +24,7 @@ const mutations = {
 //
 const actions = {
   async setSubscriptions ({ commit, dispatch }, filter) {
-    const response = await dispatch('fetchCourses', `?id_course=[${filter}]`)
+    const response = await dispatch('fetchCourses', `?id_course=["${filter}"]`)
     commit('setId', response[0])
     commit('setName', response[0])
     commit('setImg', response[0])

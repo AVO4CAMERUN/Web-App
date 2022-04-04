@@ -46,7 +46,7 @@ export default {
   methods: {
     searchCourses (inputSearch) {
       let filter
-      if (inputSearch) filter = `?name=[${inputSearch}]`
+      if (inputSearch) filter = `?name=["${inputSearch}"]`
 
       // Get global courses
       store.dispatch('course/fetchCourses', filter)
@@ -66,7 +66,7 @@ export default {
               creationDate: `${date.getUTCDate()}/${date.getUTCMonth() + 1}/${date.getUTCFullYear()}`
             })
           }
-          this.fetchInscriptions(`?email=[${store.state.login.email}]`)
+          this.fetchInscriptions(`?email=["${store.state.login.email}"]`)
         })
         .catch(() => {})
     },

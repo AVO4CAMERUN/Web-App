@@ -1,5 +1,5 @@
 <template>
-  <div class="drk"> <!-- Da cambiare con 'dark' per usare la dark mode -->
+  <div class="dark"> <!-- Da cambiare con 'dark' per usare la dark mode -->
     <template v-if="isLogged">
       <div class="flex">
         <Sidebar></Sidebar>

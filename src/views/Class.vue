@@ -63,7 +63,7 @@
 
 <script>
 import UserCard from '@/components/Classes/UserCard.vue'
-import { classesService as cs } from '@/servises/classes.services'
+// import { classesService as cs } from '@/servises/classes.services'
 import store from '@/store/index'
 // Partecipants: {{currentClass.students.length + currentClass.teachers.length}
 export default {
@@ -78,12 +78,7 @@ export default {
   props: {},
   methods: {
     fetchUsers (filter) {
-      cs.getClassesByFilter(filter)
-        .then((response) => {
-          if (response.status === 200) {
-            return response.json()
-          }
-        })
+      store.dispatch('classes/fetchClasses', `${filter}`)
         .then((response) => {
           this.currentClass = response[0]
           this.studentsLength = this.currentClass.students.length

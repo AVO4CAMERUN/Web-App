@@ -37,7 +37,7 @@ export default {
     CourseCard
   },
   mounted () {
-    this.fetchInscriptions(`?email=[${store.state.login.email}]`)
+    this.fetchInscriptions(`?email=["${store.state.login.email}"]`)
   },
   methods: {
     fetchInscriptions (filter) {

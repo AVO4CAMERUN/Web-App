@@ -83,7 +83,7 @@ const actions = {
     if (response.status !== 200) return new Error('!200')
   },
   async fetchUser ({ state }) {
-    return await as.getFilterdAccount(`username=[${state.username}]`, state.accessToken)
+    return await as.getFilterdAccount(`username=["${state.username}"]`, state.accessToken)
       .then((response) => {
         if (response.status === 200) return response.json()
       })

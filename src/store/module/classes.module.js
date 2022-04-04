@@ -32,6 +32,7 @@ const mutations = {
 const actions = {
   async setCurrentClass ({ commit, dispatch }, filter) {
     const response = await dispatch('fetchClasses', filter)
+    console.log(response)
     commit('setId', response[0])
     commit('setName', response[0])
     commit('setImg', response[0])
