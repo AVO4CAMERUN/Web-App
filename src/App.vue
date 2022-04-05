@@ -1,5 +1,5 @@
 <template>
-  <div class="dark"> <!-- Da cambiare con 'dark' per usare la dark mode -->
+  <div :class="dark ? 'dark' : ''"> <!-- Da cambiare con 'dark' per usare la dark mode -->
     <template v-if="isLogged">
       <div class="flex">
         <Sidebar></Sidebar>
@@ -27,10 +27,12 @@ export default {
     Header
   },
   data () {
-    return {
-    }
+    return {}
   },
   computed: {
+    dark () {
+      return store.state.darkTheme
+    },
     isLogged () {
       return store.state.login.isLogged
     } // da fare con mapState
@@ -54,6 +56,11 @@ export default {
     //
     if (this.refreshToken && this.refreshToken) {
       store.commit('setLogin', { value: true })
+    }
+  },
+  watch: {
+    dark (newValue, oldValue) {
+      this.dark = store.state.darkTheme
     }
   }
 }

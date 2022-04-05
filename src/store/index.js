@@ -30,12 +30,13 @@ const vuexLocalStorage = new VuexPersist({
 })
 
 export default createStore({
+  state: {
+    darkTheme: false
+  },
+  mutations: {
+    setDarkTheme: (state, payload) => { state.darkTheme = payload?.darkTheme }
+  },
+  actions: {},
   modules: { ...login, ...classes, ...course },
   plugins: [vuexLocalStorage.plugin]
 })
-
-/*
-state: {},
-mutations: {},
-actions: {},
-*/

@@ -1,9 +1,10 @@
 <template v-on>
   <BaseSearchBar @inputSearch="searchCourses"/>
+  <!-- Error message when course already added
   <div v-if="error == 400" class="bg-yellow-100 border-t border-b border-l border-r border-yellow-500 text-yellow-700 px-4 py-3 mx-5 my-5">
     <p class="font-bold">Hai già aggiunto questo corso</p>
     <p class="text-sm">Vai nella sezione I Miei Corsi per iniziare a seguirlo.</p>
-  </div>
+  </div> -->
   <div class="m-8 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(360px,_1fr))]">
     <CourseCard
       v-for="card in cards"

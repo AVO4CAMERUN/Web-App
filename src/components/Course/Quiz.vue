@@ -15,7 +15,7 @@
             :name="question.question"
             class="accent-input"
           />
-          <label>{{answer}}</label>
+          <label class="pl-1">{{answer}}</label>
         </div>
       </div>
       <button

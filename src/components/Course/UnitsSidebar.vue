@@ -23,7 +23,7 @@
           :class="{'hidden': display[index]}"
           class="py-4 px-2 rounded-md border-[1px] border-slate-400 dark:border-gray-100"
         >
-          <div v-for="lesson in unit.unitLessons"
+          <div v-for="(lesson) in unit.unitLessons"
           class="cursor-pointer rounded-md m-2 p-2 text-center underline transition-colors select-none dark:text-light-text hover:bg-primary-light dark:hover:text-black hover:decoration-black hover:decoration-2"
           :key="lesson" @click="changeLesson(lesson.id_lesson)">{{lesson.name}}</div>
         </div>
@@ -36,6 +36,7 @@
 export default {
   data: function () {
     return {
+      currentLesson: 0,
       display: []
     }
   },
