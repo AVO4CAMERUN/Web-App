@@ -4,7 +4,7 @@
       draggable="false"
     >
     <div class="flex flex-wrap">
-      <article class="h-[400px] w-[480px] bg-gray-100 overflow-hidden outline outline-[1px] outline-gray-200 rounded-lg shadow-xl dark:shadow-slate-900 dark:outline-gray-700 dark:bg-slate-900">
+      <article class="w-[480px] bg-white overflow-hidden outline outline-[1px] outline-gray-200 rounded-lg hover:shadow-lg transition-shadow dark:shadow-slate-700 dark:outline-gray-700 dark:bg-slate-900">
         <div class="h-[200px] relative">
           <img
             v-if="courseCover !== ''"
@@ -28,7 +28,7 @@
           {{courseDescription === null ? 'no description provided' : courseDescription}}
         </p>
 
-        <footer class="flex items-center justify-between leading-none px-4">
+        <footer class="flex items-center justify-between leading-none px-4 pb-2">
           <div class="flex items-center">
             <p class="text-sm dark:text-white">{{creatorName}}</p>
           </div>

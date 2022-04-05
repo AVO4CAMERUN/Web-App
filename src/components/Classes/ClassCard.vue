@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-wrap">
-    <div class="h-[350px] w-[480px] bg-gray-100 overflow-hidden outline outline-[1px] outline-gray-200 rounded-lg shadow-xl dark:shadow-slate-900 dark:outline-gray-700 dark:bg-slate-900">
+    <div class=" w-[480px] bg-white overflow-hidden outline outline-[1px] outline-gray-200 rounded-lg hover:shadow-lg transition-shadow dark:shadow-slate-700 dark:outline-gray-700 dark:bg-slate-900">
       <div class="h-[200px] relative">
         <img
           v-if="classImg !== ''"
@@ -21,7 +21,7 @@
 
       <footer class="flex justify-center leading-none px-4">
         <router-link
-          class="text-sm px-5 py-2.5 mr-2 mb-2 text-white bg-green-700 font-medium rounded-lg cursor-pointer hover:bg-green-800 focus:ring-4 focus:ring-green-300 focus:outline-none"
+          class="text-sm px-5 py-2.5 mr-2 mb-8 text-white bg-green-700 font-medium rounded-lg cursor-pointer hover:bg-green-800 focus:ring-4 focus:ring-green-300 focus:outline-none"
           :to="{name: 'class'}"
           draggable="false"
         >

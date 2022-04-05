@@ -1,8 +1,8 @@
 <template>
     <div class="flex flex-col bg-white rounded-md w-full h-full lg:aspect-[9/16] overflow-y-auto shadow-md dark:bg-dark-sidebar">
       <p class="border-b-[1px] border-slate-400 p-2 text-2xl font-semibold text-center dark:text-light-text">Unità</p>
-      <ul class="w-full overflow-y-auto scrollbar px-3 pt-2">
-        <li class="mb-4 flex align-center flex-col"
+      <ul class="w-full overflow-y-auto scrollbar px-2 divide-y divide-slate-400 dark:divide-gray-100">
+        <li class="flex align-center flex-col mb-2"
           v-for="(unit, index) in units"
           :key="unit"
           :unitID="unit.id_unit"
@@ -14,17 +14,17 @@
         >
         <h4
           @click="display[index] = !display[index]"
-          :class="{'rounded-lg': display[index]}"
-          class="cursor-pointer px-5 py-3 bg-slate-700 text-white text-center inline-block hover:bg-slate-500 rounded-t-lg select-none dark:bg-dark-bg dark:hover:bg-dark-hover"
+          :class="{'': display[index]}"
+          class="cursor-pointer px-5 pb-3 pt-5 text-black text-center inline-block hover:font-semibold rounded-t-lg select-none dark:text-light-text"
         >
           {{unit.unitName}}
         </h4>
         <div
           :class="{'hidden': display[index]}"
-          class="py-4 px-2 border-[1px] border-slate-300 rounded-b-md dark:border-slate-500"
+          class="py-4 px-2 rounded-md border-[1px] border-slate-400 dark:border-gray-100"
         >
           <div v-for="lesson in unit.unitLessons"
-          class="cursor-pointer rounded-md bg-emerald-400 m-2 p-2 select-none hover:bg-emerald-300 hover:underline hover:decoration-black hover:decoration-2"
+          class="cursor-pointer rounded-md m-2 p-2 text-center underline transition-colors select-none dark:text-light-text hover:bg-primary-light dark:hover:text-black hover:decoration-black hover:decoration-2"
           :key="lesson" @click="changeLesson(lesson.id_lesson)">{{lesson.name}}</div>
         </div>
         </li>

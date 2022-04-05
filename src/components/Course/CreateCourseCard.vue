@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-wrap">
-    <article class="h-[400px] w-[480px] bg-gray-100 overflow-hidden outline outline-[1px] outline-gray-200 rounded-lg shadow-xl dark:shadow-slate-900 dark:outline-gray-700 dark:bg-slate-900">
+    <article class="w-[480px] bg-white overflow-hidden outline outline-[1px] outline-gray-200 rounded-lg hover:shadow-lg transition-shadow dark:shadow-slate-700 dark:outline-gray-700 dark:bg-slate-900">
       <!-- contenitore dell'immagine -->
       <div class="h-[200px] group cursor-pointer relative">
         <!-- testo che appare on hover  -->
@@ -15,11 +15,12 @@
         <h1>
           <!-- inserimento nome del corso -->
           <input
-            class="text-lg bg-gray-100 border-b-2 border-gray-300 lg:whitespace-nowrap font-semibold focus:outline-none dark:bg-slate-900 dark:text-white"
+            class="text-lg border-b-2 border-gray-300 lg:whitespace-nowrap font-semibold focus:outline-none dark:bg-slate-900 dark:text-white"
             placeholder="inserisci nome del corso"
+            maxlength="15"
             v-model="course.name"
           >
-          <select name="" class="select select-bordered select-xs w-[50%] max-w-xs text-sm bg-gray-100 text-black dark:bg-slate-900 dark:text-white hover:border-none focus:border-none">
+          <select name="" class="select select-bordered select-xs w-[50%] max-w-xs text-sm text-black dark:bg-slate-900 dark:text-white hover:border-none focus:border-none">
             <option disabled selected>Select a subject</option>
             <option value="">options</option>
           </select>
@@ -30,12 +31,13 @@
 
       <!-- descrizione del corso -->
       <textarea
-        class="text-sm h-[7ex] resize-none w-[calc(100%_-_2rem)] break-words overflow-hidden m-2 mx-4 bg-gray-100 focus:outline-none dark:bg-slate-900 dark:text-white"
+        class="text-sm h-[7ex] resize-none w-[calc(100%_-_2rem)] break-words overflow-hidden m-2 mx-4 focus:outline-none dark:bg-slate-900 dark:text-white"
         placeholder="inserisci descrizione"
+        maxlength="156"
         v-model="course.description"
       />
 
-      <footer class="flex items-center justify-between leading-none px-4">
+      <footer class="flex items-center justify-between leading-none px-4 pb-2">
         <div class="flex items-center">
           <p class="text-sm dark:text-white">{{creatorName}}</p>
         </div>
