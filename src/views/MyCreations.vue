@@ -13,7 +13,10 @@
       :parent="'mycreations'"
       @courseID="removeCourseCard"
     />
-    <CreateCourseCard v-if="role == 'TEACHER'"/>
+    <CreateCourseCard
+      v-if="role == 'TEACHER'"
+      @newCourse="addCourseCard"
+    />
   </div>
 </template>
 <script>
@@ -71,6 +74,9 @@ export default {
       this.cards.splice(index, 1)
       if (this.cards.length <= 0) this.empty = true
       else this.empty = false
+    },
+    addCourseCard (courseID) {
+      this.fetchMyCreations(`?email_creator=["${store.state.login.email}"]`)
     }
   },
   computed: {

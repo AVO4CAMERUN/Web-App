@@ -4,7 +4,7 @@
     <div class="flex flex-col items-center gap-4">
       <div v-for="(option) in options" :key="option.name">
         <legend>{{option.label}}</legend>
-        <input type="checkbox" class="" v-model="option.newValue" @click="changeTheme">
+        <input type="checkbox" class="" v-model="option.newValue" @click="changeTheme" :checked="darkTheme == true ? true : false">
       </div>
     </div>
   </div>
@@ -19,7 +19,7 @@ export default {
     return {
       editable: false,
       options: [
-        { name: 'theme', label: 'Change Theme', actualValue: 'light', newValue: '' }
+        { name: 'theme', label: 'Dark Mode', actualValue: 'false', newValue: '' }
       ]
     }
   },
@@ -27,11 +27,12 @@ export default {
   mounted () {},
   methods: {
     async changeTheme () {
-      if (this.options[0].newValue) await store.commit('setDarkTheme', true)
-      else await store.commit('setDarkTheme', false)
-      console.log(store.state.darkTheme)
+      if (this.options[0].newValue) await store.commit('setDarkTheme', { darkTheme: false })
+      else await store.commit('setDarkTheme', { darkTheme: true })
     }
   },
-  computed: {}
+  computed: {
+    darkTheme () { return store.state.darkTheme }
+  }
 }
 </script>

@@ -9,7 +9,7 @@
           <p class="font-semibold text-xl dark:text-white">change cover</p>
         </div>
 
-        <img v-if="course.img_cover" :src="course.img_cover" class="block w-full h-full object-cover" draggable="false">
+        <img v-if="course.img_cover" :src="`data:image/png;base64,${course.img_cover}`" class="block w-full h-full object-cover" draggable="false">
 
         <img v-else
           class="block w-full h-full object-cover group-hover:opacity-40 duration-200"
@@ -18,7 +18,6 @@
         >
         <input type="file" @change="setImage" class="absolute inset-0 cursor-pointer opacity-0">
       </div>
-
       <header class="flex items-center justify-between leading-tight px-4 py-2">
         <h1>
           <!-- inserimento nome del corso -->
@@ -80,20 +79,24 @@ export default {
     createCourse () {
       cs.createCourse(this.course)
         .then((response) => {
+          if (response?.status === 200) {
+            this.$emit('newCourse', this.courseID)
+          }
+          // reset course data
+          Object.keys(this.course).forEach((i) => { this.course[i] = '' })
         })
     },
     setImage (e) {
       const files = e.target.files || e.dataTransfer.files
       if (!files.length) return
-      this.createImage(files[0])
-    },
-    createImage (file) {
+
       const reader = new FileReader()
 
       reader.onload = (e) => {
-        this.course.img_cover = e.target.result
+        const tmp = e.target.result.split(',')
+        this.course.img_cover = tmp[1]
       }
-      reader.readAsDataURL(file)
+      reader.readAsDataURL(files[0])
     }
   },
   computed: {
