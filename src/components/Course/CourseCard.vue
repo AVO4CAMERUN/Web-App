@@ -14,14 +14,14 @@
           >
           <img v-else class="block w-full h-full object-cover" src="https://picsum.photos/400/300" draggable="false">
         </div>
-        <header class="flex items-center justify-between leading-tight p-4">
+        <header class="flex items-center justify-between px-4 py-2">
           <h1>
             <span class="text-lg lg:whitespace-nowrap font-semibold dark:text-white">{{courseName}}</span>
-            <!-- <div class="text-sm dark:text-white">
-              {{courseSubject}}
-            </div> -->
+            <div class="text-sm dark:text-white">
+              <i>{{courseSubject}}</i>
+            </div>
           </h1>
-          <div class="text-sm dark:text-white">{{creationDate}}</div>
+          <div class="text-sm self-start dark:text-white">{{creationDate}}</div>
         </header>
 
         <p class="h-[9ex] w-[calc(100%_-_2rem)] break-normal overflow-hidden m-2 mx-4 text-sm dark:text-white" :class="courseDescription === null ? 'text-slate-700' : ''">

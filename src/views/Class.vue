@@ -26,10 +26,10 @@
             <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
               Role
             </th>
-            <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase hidden lg:[display:_table-cell]">
+            <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
               Registration Date
             </th>
-            <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase hidden lg:[display:_table-cell]">
+            <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
               Status
             </th>
           </tr>
