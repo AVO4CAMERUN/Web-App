@@ -35,9 +35,13 @@
           <div v-if="parent === 'inscriptions'" class="cursor-pointer">
             <i @click.prevent="removeCourse" class="bx bxs-minus-circle text-rose-600 text-[32px]" />
           </div>
-          <div v-if="parent === 'search'" class="cursor-pointer">
+          <div v-else-if="parent === 'search'" class="cursor-pointer">
             <i v-if="!subscribed" @click="addCourses" class="bx bxs-plus-circle text-black text-[32px] dark:invert" />
             <i v-else class="bx bxs-check-circle text-emerald-600 text-[32px]"/>
+          </div>
+          <div v-else-if="parent === 'mycreations'" class="cursor-pointer">
+            <i @click.prevent="deleteCourse" class="bx bx-trash text-rose-600 text-[32px]" />
+            <i class='bx bx-edit text-black text-[32px] dark:invert' />
           </div>
         </footer>
       </article>
@@ -47,6 +51,7 @@
 
 <script>
 import store from '@/store/index'
+import { coursesService as cs } from '@/servises/course.services'
 import { subscribeService as sub } from '@/servises/subscribe.service'
 
 export default {
@@ -72,6 +77,14 @@ export default {
             this.$router.push('/inscriptions')
           } else {}
           this.$emit('error', response.status)
+        })
+    },
+    deleteCourse () {
+      cs.deleteCourseByID(this.courseID)
+        .then((response) => {
+          if (response?.status === 200) {
+            this.$emit('courseID', this.courseID)
+          } else { }
         })
     }
   },

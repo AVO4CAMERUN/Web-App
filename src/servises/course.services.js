@@ -19,7 +19,10 @@ async function getCoursesByFilter (filter = '', token) {
 async function updateCourseByID () {}
 
 // Function for delete course by id (DELETE)
-async function deleteCourseByID () {}
+async function deleteCourseByID (idCourse) {
+  const token = store.state.login.accessToken
+  return await service.genericRequestWithAuth(`courses/${idCourse}`, 'DELETE', {}, token)
+}
 
 export const coursesService = {
   createCourse,

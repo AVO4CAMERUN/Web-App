@@ -12,7 +12,6 @@
       :courseSubject="card.courseSubject"
       :parent="'mycreations'"
       @courseID="removeCourseCard"
-      @click="setCurrentCourse(card.courseID)"
     />
     <CreateCourseCard v-if="role == 'TEACHER'"/>
   </div>
@@ -44,9 +43,9 @@ export default {
             this.empty = true
             return
           }
-          let ids = ''; response.forEach(c => { ids += c.id_course + ',' })
+          let ids = ''; response.forEach(c => { ids += `"${c.id_course}",` })
           ids = ids.substring(0, ids.length - 1)
-          return store.dispatch('course/fetchCourses', `?id_course=["${ids}"]`)
+          return store.dispatch('course/fetchCourses', `?id_course=[${ids}]`)
         })
         .then((courses) => {
           this.cards = []
@@ -72,9 +71,6 @@ export default {
       this.cards.splice(index, 1)
       if (this.cards.length <= 0) this.empty = true
       else this.empty = false
-    },
-    setCurrentCourse (id) {
-      store.dispatch('course/setCurrentCourse', id)
     }
   },
   computed: {
