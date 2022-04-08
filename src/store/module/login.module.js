@@ -9,6 +9,12 @@ if (localStorage.getItem('avo4cam')) {
   restore = JSON.parse(localStorage.getItem('avo4cam')).login
 }
 
+/*
+  Il refresh dell'accessToken avviene tramite eventi, quando si riceve in una HTTP requet 401 si riaggiorna, accessToken;
+  https://stackoverflow.com/questions/3297048/403-forbidden-vs-401-unauthorized-http-responses,
+  https://www.digitalocean.com/community/tutorials/vuejs-global-event-bus
+*/
+
 // State of login module
 const state = {
   isLogged: false,
