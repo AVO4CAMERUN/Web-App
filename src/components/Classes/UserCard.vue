@@ -9,8 +9,6 @@
         <div class="text-sm font-normal text-gray-500">{{email}}</div>
       </div>
     </td>
-    <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">{{role}}</td>
-    <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">{{registrationDate}}</td>
     <td class="p-4 whitespace-nowrap text-base font-normal text-gray-900">
       <div class="flex items-center">
         <div class="h-2.5 w-2.5 rounded-full bg-green-400 mr-2"></div> Active

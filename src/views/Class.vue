@@ -24,12 +24,6 @@
               Name
             </th>
             <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
-              Role
-            </th>
-            <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
-              Registration Date
-            </th>
-            <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
               Status
             </th>
           </tr>
@@ -45,6 +39,20 @@
             :registrationDate="teacher.registration_date"
             :img="teacher.img"
           />
+        </tbody>
+      </table>
+      <table class="table-fixed min-w-full border-[1px] border-black divide-y divide-gray-200 mt-4">
+        <thead class="bg-gray-100">
+          <tr>
+            <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
+              Name
+            </th>
+            <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
+              Status
+            </th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
           <UserCard
             v-for="student in currentClass.students"
             :key="student.email"

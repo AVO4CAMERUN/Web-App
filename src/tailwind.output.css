@@ -577,6 +577,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-right: 1rem;
 }
 
+.mx-\[10px\] {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
 .mt-1 {
   margin-top: 0.25rem;
 }
@@ -643,6 +648,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .mt-\[25px\] {
   margin-top: 25px;
+}
+
+.mt-4 {
+  margin-top: 1rem;
 }
 
 .block {
@@ -769,6 +778,62 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 50px;
 }
 
+.h-\[91\%\] {
+  height: 91%;
+}
+
+.h-\[95\%\] {
+  height: 95%;
+}
+
+.h-\[93\%\] {
+  height: 93%;
+}
+
+.h-\[92\%\] {
+  height: 92%;
+}
+
+.h-\[9\%\] {
+  height: 9%;
+}
+
+.h-\[\] {
+  height: ;
+}
+
+.h-\[calc\(\)\] {
+  height: calc();
+}
+
+.h-\[calc\(100\%_-_32px\)\] {
+  height: calc(100% - 32px);
+}
+
+.h-\[calc\(100\%_-_52px\)\] {
+  height: calc(100% - 52px);
+}
+
+.h-\[calc\(100\%_-_53px\)\] {
+  height: calc(100% - 53px);
+}
+
+.h-\[calc\(100\%_-_54px\)\] {
+  height: calc(100% - 54px);
+}
+
+.h-\[calc\(100\%_-_55px\)\] {
+  height: calc(100% - 55px);
+}
+
+.h-\[calc\(100\%_-_60px\)\] {
+  height: calc(100% - 60px);
+}
+
+.h-\[calc\(100\%_-_88px\)\] {
+  height: calc(100% - 88px);
+}
+
 .max-h-\[calc\(100vh_-_76px\)\] {
   max-height: calc(100vh - 76px);
 }
@@ -877,6 +942,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   min-width: 60px;
 }
 
+.min-w-\[40px\] {
+  min-width: 40px;
+}
+
 .max-w-md {
   max-width: 28rem;
 }
@@ -900,6 +969,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .rotate-180 {
   --tw-rotate: 180deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.scale-0 {
+  --tw-scale-x: 0;
+  --tw-scale-y: 0;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
@@ -1208,6 +1283,16 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border-emerald-800 {
   --tw-border-opacity: 1;
   border-color: rgb(6 95 70 / var(--tw-border-opacity));
+}
+
+.border-gray-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(107 114 128 / var(--tw-border-opacity));
+}
+
+.border-black {
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 
 .bg-primary-bg {
@@ -1726,6 +1811,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .outline-gray-300 {
   outline-color: #d1d5db;
+}
+
+.outline-black {
+  outline-color: #000;
 }
 
 .drop-shadow-2xl {

@@ -2,25 +2,25 @@
   <div class="">
     <!-- farla dinamica in base al role-->
     <nav
-      class="bg-white dark:bg-dark-sidebar focus:bg-red-500 w-[250px] h-screen py-[10px] px-[14px] transition-[width] duration-300 v-nome outiline outline-[1px] outline-gray-300"
+      class="bg-white dark:bg-dark-sidebar w-[250px] h-screen py-[10px] px-[14px] transition-[width] duration-300"
       :class="{'w-[88px]': isClose}"
     >
       <header class="relative">
-        <div class="mt-[10px] flex align-middle min-h-[32px]"> <!-- image-text -->
+        <div class="mt-[10px] flex align-middle"> <!-- image-text -->
           <span class="flex align-middle justify-center min-w-[60px]"> <!-- image -->
             <img class="w-[40px] rounded-[6px] dark:invert" src="@/assets/logo.png"
             alt="logo AVO4CAM" draggable="false">
           </span>
           <div
             class="text-lg font-bold mt-[4px] transition-[transform,_opacity] duration-300 origin-left dark:text-white"
-            :class="{'scale-x-0  scale-y-0 opacity-0': isClose}"
+            :class="{'scale-0 opacity-0': isClose}"
           >
           Avo4Camerun
           </div>
         </div>
 
         <button
-          class="absolute top-[20%] -right-[1.75rem] pt-[1px] w-6 aspect-square bg-primary text-white
+          class="absolute top-[20%] -right-[1.75rem] w-6 aspect-square bg-primary text-white
           flex justify-center items-center text-[22px] rounded-full bx bx-chevron-right transition-transform"
           :class="{'rotate-180': !isClose}"
           @click="isClose = !isClose"
@@ -39,7 +39,7 @@
               draggable="false"
             >
             <i class="min-w-[60px] text-[20px] text-center" :class="button.icon" />
-            <span :class="{'scale-x-0  scale-y-0 opacity-0': isClose}" class="transition-[transform,_opacity] duration-300 origin-left whitespace-nowrap">{{ button.message }}</span>
+            <span :class="{'scale-0 opacity-0': isClose}" class="transition-[transform,_opacity] duration-300 origin-left whitespace-nowrap">{{ button.message }}</span>
             </router-link>
           </li>
         </ul>
