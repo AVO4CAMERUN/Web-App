@@ -13,6 +13,8 @@ async function genericRequest (uri, method, bodyObj) {
     },
     body: JSON.stringify(bodyObj) // Body
   }
+  if (method === 'GET') delete optionRequest.body
+
   // Return a parse JSON response in native JavaScript objects .json()
   return await fetch(`http://localhost/api/v1/${uri}`, optionRequest)
   // return await fetch(`http://api.avo4camerun.kirinsecurity.com:8081/${uri}`, optionRequest)

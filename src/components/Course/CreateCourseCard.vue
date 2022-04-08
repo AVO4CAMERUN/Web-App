@@ -32,8 +32,8 @@
         <div class="text-sm self-start dark:text-white">{{todayDate}}</div>
       </header>
 
-      <select name="" class="text-sm mx-4">
-        <option value="">subject</option>
+      <select v-model="course.subject" class="text-sm mx-4">
+        <option v-for="subject in subjects" :key="subject">{{subject}}</option>
       </select>
 
       <!-- descrizione del corso -->
@@ -71,9 +71,13 @@ export default {
         name: '',
         description: '',
         img_cover: '',
-        subject: 'English' // change to enum
-      }
+        subject: 'Mathematics'
+      },
+      subjects: []
     }
+  },
+  mounted () {
+    this.fetchSubject()
   },
   methods: {
     createCourse () {
@@ -82,8 +86,14 @@ export default {
           if (response?.status === 200) {
             this.$emit('newCourse', this.courseID)
           }
+
           // reset course data
-          Object.keys(this.course).forEach((i) => { this.course[i] = '' })
+          this.course = {
+            name: '',
+            description: '',
+            img_cover: '',
+            subject: 'Mathematics'
+          }
         })
     },
     setImage (e) {
@@ -97,6 +107,11 @@ export default {
         this.course.img_cover = tmp[1]
       }
       reader.readAsDataURL(files[0])
+    },
+    fetchSubject () {
+      cs.getCoursesSubject()
+        .then((response) => response.json())
+        .then((subjects) => { this.subjects = subjects })
     }
   },
   computed: {
