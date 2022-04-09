@@ -1,4 +1,4 @@
-// import store from '../store/index'
+import store from '@/store/index'
 
 // Function for generic http requets => return a obj or err
 async function genericRequest (uri, method, bodyObj) {
@@ -30,7 +30,7 @@ async function genericRequestWithAuth (uri, method, bodyObj, token) {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Credentials': true,
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${store.state.login.accessToken}`
     },
     body: JSON.stringify(bodyObj) // Body
   }
@@ -39,7 +39,14 @@ async function genericRequestWithAuth (uri, method, bodyObj, token) {
 
   // Return a parse JSON response in native JavaScript objects .json()
   // return await fetch(`http://api.avo4camerun.kirinsecurity.com:8081/api/v1/${uri}`, optionRequest)
-  return await fetch(`http://localhost/api/v1/${uri}`, optionRequest)
+  let res = await fetch(`http://localhost/api/v1/${uri}`, optionRequest)
+
+  if (res.status === 401) {
+    await store.dispatch('login/refresh')
+    res = await fetch(`http://localhost/api/v1/${uri}`, optionRequest)
+  }
+  console.log(res)
+  return res
 }
 
 export default {

@@ -68,8 +68,8 @@ const actions = {
     commit('setImgProfile', user)
   },
   async refresh ({ dispatch, commit }) {
-    console.log('ref')
     const response = await dispatch('fetchRefresh')
+    console.log('fatto refresh')
     commit('setAccessToken', response)
   },
   async logout ({ state, commit }) {

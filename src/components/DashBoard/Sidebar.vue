@@ -20,7 +20,7 @@
         </div>
 
         <button
-          class="absolute top-[20%] -right-[1.75rem] w-6 aspect-square bg-primary text-white
+          class="absolute top-[20%] -right-[1.75rem] w-6 aspect-square bg-primary text-white pt-[1px]
           flex justify-center items-center text-[22px] rounded-full bx bx-chevron-right transition-transform"
           :class="{'rotate-180': !isClose}"
           @click="isClose = !isClose"

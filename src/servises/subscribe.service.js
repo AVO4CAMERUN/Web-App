@@ -6,8 +6,8 @@ async function subscribe (idCourse, accessToken) {
 }
 
 // Function for subscribe
-async function getSubscriptionByFilter (filter, token) {
-  return await service.genericRequestWithAuth(`subscribe${filter}`, 'GET', {}, token)
+async function getSubscriptionByFilter (filter, accessToken) {
+  return await service.genericRequestWithAuth(`subscribe${filter}`, 'GET', {}, accessToken)
 }
 
 async function deleteSubscribtion (idCourse, accessToken) {
