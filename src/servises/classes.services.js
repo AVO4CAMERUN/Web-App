@@ -1,23 +1,23 @@
 import service from './base.services'
 
-// Function for create class
+// Function for create class (POST)
 async function createClass (name, img, students, profs) {
   return await service.genericRequest('classes', 'POST', { name, img_cover: img, students, profs })
 }
 
-// Function for get class by filter
+// Function for get class by filter (GET)
 async function getClassesByFilter (filter, token) {
   return await service.genericRequestWithAuth(`classes?${filter}`, 'GET', {}, token) // cambiare con query string
 }
 
-// Function for update class
+// Function for update class (PUT)
 async function updateClassByID (putObj) {
   return await service.genericRequest('classes', 'PUT', putObj)
 }
 
-// Function for delete class
+// Function for delete class (DELETE)
 async function deleteClassByID () {
-  // return await service.genericRequestWithAuth('classes', 'DELETE', {}, 'token')
+  return await service.genericRequestWithAuth('classes', 'DELETE', {}, 'token')
 }
 
 export const classesService = {

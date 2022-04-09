@@ -1,10 +1,10 @@
 <template>
   <div class="flex flex-wrap">
     <article class="w-[480px] bg-white overflow-hidden outline outline-[1px] outline-gray-200 rounded-lg hover:shadow-lg transition-shadow dark:shadow-slate-700 dark:outline-gray-700 dark:bg-slate-900">
-      <!-- contenitore dell'immagine -->
+      <!-- image container -->
       <div class="h-[200px] group cursor-pointer relative">
 
-        <!-- testo che appare on hover  -->
+        <!-- on hover text  -->
         <div class="h-full w-full opacity-0 absolute flex justify-center items-center group-hover:opacity-100 duration-300">
           <p class="font-semibold text-xl dark:text-white">change cover</p>
         </div>
@@ -20,7 +20,7 @@
       </div>
       <header class="flex items-center justify-between leading-tight px-4 py-2">
         <h1>
-          <!-- inserimento nome del corso -->
+          <!-- name course -->
           <input
             class="text-lg border-b-2 border-gray-300 lg:whitespace-nowrap font-semibold focus:outline-none dark:bg-slate-900 dark:text-white"
             placeholder="inserisci nome del corso"
@@ -28,7 +28,7 @@
             v-model="course.name"
           >
         </h1>
-        <!-- data di creazione del corso -->
+        <!-- creation date -->
         <div class="text-sm self-start dark:text-white">{{todayDate}}</div>
       </header>
 
@@ -36,7 +36,7 @@
         <option v-for="subject in subjects" :key="subject">{{subject}}</option>
       </select>
 
-      <!-- descrizione del corso -->
+      <!-- description course -->
       <textarea
         class="text-sm h-[7ex] resize-none w-[calc(100%_-_2rem)] break-words overflow-hidden m-2 mx-4 focus:outline-none dark:bg-slate-900 dark:text-white"
         placeholder="inserisci descrizione"
