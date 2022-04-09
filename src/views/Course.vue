@@ -1,6 +1,6 @@
 <template>
   <div class="grid lg:grid-cols-[80%,_20%] p-8 gap-4">
-    <p class="py-4 bg-primary text-white text-center text-3xl rounded-md col-span-full">{{ name }}</p>
+    <!-- <p class="py-4 bg-primary text-white text-center text-3xl rounded-md col-span-full">{{ name }}</p> -->
     <Video :videoID="lesson.link_video" :courseName="name"/>
     <UnitsSidebar v-if="units.length !== 0" :units="units" :ulength="units.length" @lessonID="getLessonID"/>
     <Quiz :quiz="lesson.quiz" :key="lesson.quiz"/>
