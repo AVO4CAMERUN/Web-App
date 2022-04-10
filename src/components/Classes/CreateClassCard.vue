@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-wrap">
-    <div class="w-[450px] bg-white overflow-hidden outline outline-[1px] outline-gray-200 rounded-lg hover:shadow-lg transition-shadow dark:shadow-slate-700 dark:outline-gray-700 dark:bg-slate-900">
+    <div class="h-full w-full bg-white overflow-hidden outline outline-[1px] outline-gray-200 rounded-lg hover:shadow-lg transition-shadow dark:shadow-slate-700 dark:outline-gray-700 dark:bg-slate-900">
       <!-- image container -->
       <div class="h-[200px] group cursor-pointer relative">
 
@@ -19,27 +19,24 @@
         <input type="file" @change="setImage" class="absolute inset-0 cursor-pointer opacity-0">
       </div>
 
-      <header class="flex flex-row p-8">
+      <header class="flex flex-row items-center justify-center leading-tight p-4">
         <!-- name class  -->
-        <input
-          type="text"
-          class="text-black text-2xl font-bold capitalize border-b-2 border-gray-300 lg:whitespace-nowrap focus:outline-none dark:bg-slate-900 dark:text-white" placeholder="Class Name"
-          maxlength="15"
-          v-model="newClass.name"
-        >
-        <div class="text-sm self-start pt-[4px] dark:text-white">
+        <h1>
+          <input
+            type="text"
+            class="center text-black text-2xl font-bold capitalize border-b-2 border-gray-300 lg:whitespace-nowrap focus:outline-none dark:bg-slate-900 dark:text-white" placeholder="Class Name"
+            maxlength="15"
+            v-model="newClass.name"
+          >
+        </h1>
+        <!-- <div class="text-sm self-start pt-[4px] dark:text-white">
           {{todayDate}}
-        </div>
-        <!-- Online
-        <p class="text-black inline-flex items-center text-xs dark:text-white">
-          Online {{}}
-          <span class="ml-2 w-2 h-2 block bg-red-400 rounded-full animate-pulse"/>
-        </p> -->
+        </div> -->
       </header>
 
-      <footer class="flex justify-center items-center gap-8 p-2">
+      <footer class="flex flex-row justify-center items-center gap-8 p-4">
         <button
-          class="text-sm px-5 py-2.5 text-white bg-green-700 font-medium rounded-lg hover:bg-green-800 focus:ring-4 focus:ring-green-300 focus:outline-none"
+          class="text-sm px-5 py-2.5 text-white bg-green-700 font-medium rounded-lg cursor-pointer hover:bg-green-800 focus:ring-4 focus:ring-green-300 focus:outline-none"
           :class="newClass.name === '' ? 'cursor-not-allowed' : 'cursor-pointer'"
           :disabled="newClass.name === '' ? true : false"
           @click="createClass"

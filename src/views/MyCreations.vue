@@ -1,7 +1,8 @@
 <template>
   <div class="flex flex-col justify-center">
+
     <!-- Courses Grid -->
-    <div class="m-8 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(360px,_1fr))]">
+    <div class="m-8 mb-2 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(360px,_1fr))]">
       <CourseCard
         v-for="(card) in coursesCards"
         :key="card.id"
@@ -23,8 +24,7 @@
     </div>
 
     <!-- Class Grid -->
-    <div class="m-8 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(360px,_1fr))]">
-
+    <div class="m-8 mt-2 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(360px,_1fr))]">
       <!-- Class Creation Card -->
       <CreateClassCard
         @newClass="addClassCard"
@@ -42,6 +42,7 @@
         :content="'Are you sure you want to delete this course?'"
       />
     </div>
+
   </div>
 </template>
 <script>
