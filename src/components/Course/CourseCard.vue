@@ -70,7 +70,6 @@
 
 <script>
 import store from '@/store/index'
-import { coursesService as cs } from '@/servises/course.services'
 import { subscribeService as sub } from '@/servises/subscribe.service'
 
 export default {
@@ -98,12 +97,7 @@ export default {
         })
     },
     deleteCourse () {
-      cs.deleteCourseByID(this.courseID)
-        .then((response) => {
-          if (response?.status === 200) {
-            this.$emit('course-to-removeID', this.courseID)
-          }
-        })
+      this.$emit('course-to-removeID', this.courseID)
     }
   },
   props: {

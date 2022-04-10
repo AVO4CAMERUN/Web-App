@@ -11,7 +11,7 @@
       :creationDate="card.creationDate"
       :courseSubject="card.courseSubject"
       :parent="'mycreations'"
-      @course-to-removeID="showConfirm = true"
+      @course-to-removeID="showPopUp"
     />
     <CreateCourseCard
       @newCourse="addCourseCard"
@@ -20,7 +20,7 @@
       @newClass="addClassCard"
     />
   </div>
-  <div class="grid place-items-center">
+  <div class="">
     <PopUp
       v-if="showConfirm"
       @noAction="showConfirm = false"
@@ -43,6 +43,7 @@ export default {
   name: 'MyCreations',
   data: function () {
     return {
+      tempCourseID: null,
       showConfirm: false,
       coursesCards: [],
       classesCards: []
@@ -89,17 +90,18 @@ export default {
         .catch(() => {})
     },
     // Delete Course
-    deleteCourse (courseID) {
+    deleteCourse () {
       this.showConfirm = false
-      cs.deleteCourseByID(courseID)
+      cs.deleteCourseByID(this.tempCourseID)
         .then((response) => {
           if (response?.status === 200) {
             console.log('das')
-            const index = this.coursesCards.findIndex((course) => course.courseID === courseID)
+            const index = this.coursesCards.findIndex((course) => course.courseID === this.tempCourseID)
             this.coursesCards.splice(index, 1)
             if (this.coursesCards.length <= 0) this.empty = true
             else this.empty = false
           }
+          this.tempCourseID = null
         })
     },
     addCourseCard (courseID) {
@@ -137,6 +139,10 @@ export default {
     // },
     addClassCard (classID) {
       // this.fetchMyClassesCreations(`?email_creator=["${store.state.login.email}"]`)
+    },
+    showPopUp (courseID) {
+      this.tempCourseID = courseID
+      this.showConfirm = true
     }
   },
   computed: {

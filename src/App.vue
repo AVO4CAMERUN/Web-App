@@ -5,9 +5,9 @@
         <Sidebar></Sidebar>
         <section class="grow bg-primary-bg dark:bg-dark-bg">
           <Header></Header>
-            <div class="overflow-y-auto overflow-x-hidden scrollbar max-h-[calc(100vh_-_76px)]">
-              <router-view/> <!-- main -->
-            </div>
+          <div class="overflow-y-auto overflow-x-hidden scrollbar max-h-[calc(100vh_-_76px)]">
+            <router-view/> <!-- main -->
+          </div>
         </section>
       </div>
     </template>
