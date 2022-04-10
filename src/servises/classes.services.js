@@ -19,8 +19,9 @@ async function updateClassByID (putObj) {
 }
 
 // Function for delete class (DELETE)
-async function deleteClassByID () {
-  return await service.genericRequestWithAuth('classes', 'DELETE', {}, 'token')
+async function deleteClassByID (idClass) {
+  const token = store.state.login.accessToken
+  return await service.genericRequestWithAuth(`classes/${idClass}`, 'DELETE', {}, token)
 }
 
 export const classesService = {

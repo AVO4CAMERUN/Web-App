@@ -36,7 +36,7 @@
           <div class="flex flex-row gap-2">
             <i class="cursor-pointer fa-solid fa-pen-to-square text-orange-900 text-[24px] dark:invert"></i>
             <i class="cursor-pointer fa-solid fa-box-archive text-green-900 text-[24px] dark:invert"></i>
-            <i class="cursor-pointer fa-solid fa-trash-can text-rose-600 text-[24px] dark:invert"></i>
+            <i @click.prevent="deleteClass" class="cursor-pointer fa-solid fa-trash-can text-rose-600 text-[24px] dark:invert"></i> <!-- Delete -->
           </div>
         </footer>
       </div>
@@ -45,6 +45,8 @@
 </template>
 
 <script>
+import { classesService as cs } from '@/servises/classes.services'
+
 export default {
   name: 'ClassCard',
   data: function () {
@@ -56,7 +58,12 @@ export default {
     creationDate: String,
     classImg: String
   },
-  methods: {},
+  methods: {
+    deleteClass () {
+      this.showConfirm = false
+      cs.deleteClassByID(this.classId)
+    }
+  },
   components: {},
   mounted () {}
 }
