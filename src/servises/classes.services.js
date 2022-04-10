@@ -1,8 +1,11 @@
+import store from '@/store/index'
 import service from './base.services'
 
 // Function for create class (POST)
-async function createClass (name, img, students, profs) {
-  return await service.genericRequest('classes', 'POST', { name, img_cover: img, students, profs })
+async function createClass (classObj) {
+  // const { name, img, students, profs } = classObj
+  const token = store.state.login.accessToken
+  return await service.genericRequestWithAuth('classes', 'POST', classObj, token)
 }
 
 // Function for get class by filter (GET)

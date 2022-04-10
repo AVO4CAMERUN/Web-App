@@ -69,7 +69,7 @@ const actions = {
   },
   async refresh ({ dispatch, commit }) {
     const response = await dispatch('fetchRefresh')
-    console.log('fatto refresh')
+    // console.log('fatto refresh')
     commit('setAccessToken', response)
   },
   async logout ({ state, commit }) {
@@ -101,7 +101,7 @@ const actions = {
       })
   },
   async fetchRefresh ({ state }) {
-    console.log(state.refreshToken)
+    // console.log(state.refreshToken)
     return await ls.refresh(state.refreshToken)
       .then((response) => {
         if (response.status === 200) return response.json()

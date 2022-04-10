@@ -45,7 +45,7 @@ async function genericRequestWithAuth (uri, method, bodyObj, token) {
     await store.dispatch('login/refresh')
     res = await fetch(`http://localhost/api/v1/${uri}`, optionRequest)
   }
-  console.log(res)
+  // console.log(res)
   return res
 }
 

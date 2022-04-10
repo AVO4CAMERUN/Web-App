@@ -1,7 +1,8 @@
 <template>
   <div class="flex justify-center items-center place-items-center bg-gradient-to-r from-[#3f87a6] to-[#63b377] h-screen">
-    <div class="flex items-center justify-center w-[110] h-[600px] p-8 rounded-[18px] bg-slate-100 shadow-lg shadow-gray-700"
-    :class="{'opacity-[.15]': popupEmailConfirm || popupError}"
+    <div
+      class="flex items-center justify-center w-[110] h-[600px] p-8 rounded-[18px] bg-slate-100 shadow-lg shadow-gray-700"
+      :class="{'opacity-[.15]': popupEmailConfirm || popupError}"
     >
       <div class="max-w-md w-full">
         <div>
@@ -72,33 +73,26 @@
         </div>
       </div>
     </div>
-    <div
-    class="text-center p-5 border w-96 shadow-lg rounded-md bg-white fixed self-center drop-shadow-2xl"
-    v-if="popupEmailConfirm"
-    >
-      <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
-        <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-        </svg>
-      </div>
-      <h3 class="text-lg leading-6 font-medium text-gray-900">Activate your account</h3>
-      <div class="mt-2 px-7 py-3">
-        <p class="text-sm text-gray-500">Check your email to confirm your account</p>
-      </div>
-      <div class="items-center px-4 py-3">
-        <button
-          class="px-4 py-2 bg-green-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300"
-          @click="this.$router.push('/login')"
-        >OK</button>
-      </div>
-    </div>
-    <PopUpError v-if="popupError" @removeError="this.popupError = !this.popupError" :errorText="errorMessage"/>
+    <PopUp
+      v-if="popupEmailConfirm"
+      :type="'success'"
+      :message="'Activate your account'"
+      :content="'Check your email to confirm your account'"
+      @doAction="this.$router.push('/login')"
+    />
+    <PopUp
+      v-if="popupError"
+      :type="'error'"
+      :message="'Error'"
+      :content="errorMessage"
+      @noAction="this.popupError = !this.popupError"
+    />
   </div>
 </template>
 
 <script>
 import BaseInputText from '@/components/Base/BaseInputText.vue'
-import PopUpError from '@/components/Base/PopUpError.vue'
+import PopUp from '@/components/Base/PopUp.vue'
 import { accountService as as } from '@/servises/account.services'
 import {
   nameChecker,
@@ -171,7 +165,7 @@ export default {
   },
   components: {
     BaseInputText,
-    PopUpError
+    PopUp
   }
 }
 // @click=""

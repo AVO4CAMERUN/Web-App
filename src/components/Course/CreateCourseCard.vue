@@ -1,16 +1,19 @@
 <template>
+  <!-- Main -->
   <div class="flex flex-wrap">
     <article class="w-[480px] bg-white overflow-hidden outline outline-[1px] outline-gray-200 rounded-lg hover:shadow-lg transition-shadow dark:shadow-slate-700 dark:outline-gray-700 dark:bg-slate-900">
-      <!-- image container -->
-      <div class="h-[200px] group cursor-pointer relative">
 
-        <!-- on hover text  -->
+      <!-- Image -->
+      <div class="h-[200px] group cursor-pointer relative">
         <div class="h-full w-full opacity-0 absolute flex justify-center items-center group-hover:opacity-100 duration-300">
           <p class="font-semibold text-xl dark:text-white">change cover</p>
         </div>
-
-        <img v-if="course.img_cover" :src="`data:image/png;base64,${course.img_cover}`" class="block w-full h-full object-cover" draggable="false">
-
+        <img
+          v-if="course.img_cover"
+          :src="`data:image/png;base64,${course.img_cover}`"
+          class="block w-full h-full object-cover"
+          draggable="false"
+        >
         <img v-else
           class="block w-full h-full object-cover group-hover:opacity-40 duration-200"
           src="https://picsum.photos/400/300"
@@ -18,32 +21,36 @@
         >
         <input type="file" @change="setImage" class="absolute inset-0 cursor-pointer opacity-0">
       </div>
+
+      <!-- Course Header (Name, Creation Date)-->
       <header class="flex items-center justify-between leading-tight px-4 py-2">
         <h1>
-          <!-- name course -->
           <input
             class="text-lg border-b-2 border-gray-300 lg:whitespace-nowrap font-semibold focus:outline-none dark:bg-slate-900 dark:text-white"
-            placeholder="inserisci nome del corso"
+            placeholder="insert course name"
             maxlength="15"
             v-model="course.name"
           >
         </h1>
-        <!-- creation date -->
-        <div class="text-sm self-start dark:text-white">{{todayDate}}</div>
+        <div class="text-sm self-start dark:text-white pt-[4px]">
+          {{todayDate}}
+        </div>
       </header>
 
+      <!-- Subject -->
       <select v-model="course.subject" class="text-sm mx-4">
         <option v-for="subject in subjects" :key="subject">{{subject}}</option>
       </select>
 
-      <!-- description course -->
+      <!-- Description (max length 102 characters to fit card dimensions) -->
       <textarea
         class="text-sm h-[7ex] resize-none w-[calc(100%_-_2rem)] break-words overflow-hidden m-2 mx-4 focus:outline-none dark:bg-slate-900 dark:text-white"
-        placeholder="inserisci descrizione"
-        maxlength="156"
+        placeholder="insert description"
+        maxlength="102"
         v-model="course.description"
       />
 
+      <!-- Footer (Creator, Buttons) -->
       <footer class="flex items-center justify-between leading-none px-4 pb-2">
         <div class="flex items-center">
           <p class="text-sm dark:text-white">{{creatorName}}</p>
@@ -53,7 +60,9 @@
           :class="course.name === '' ? 'cursor-not-allowed' : 'cursor-pointer'"
           :disabled="course.name === '' ? true : false"
           @click="createCourse"
-        > create course </button>
+        >
+        Create Course
+        </button>
       </footer>
     </article>
   </div>
@@ -80,6 +89,7 @@ export default {
     this.fetchSubject()
   },
   methods: {
+    // Course Creation Method (Services)
     createCourse () {
       cs.createCourse(this.course)
         .then((response) => {
@@ -96,6 +106,7 @@ export default {
           }
         })
     },
+    // Convert image cover to Base64 and set preview
     setImage (e) {
       const files = e.target.files || e.dataTransfer.files
       if (!files.length) return
@@ -108,6 +119,7 @@ export default {
       }
       reader.readAsDataURL(files[0])
     },
+    // Fetch course subjects for the select options (Services)
     fetchSubject () {
       cs.getCoursesSubject()
         .then((response) => response.json())

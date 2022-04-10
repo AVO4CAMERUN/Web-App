@@ -68,7 +68,13 @@
         </div>
       </div>
     </div>
-    <PopUpError v-if="popupError" @removeError="this.popupError = !this.popupError" :errorText="'Incorrect username or password'"/>
+    <PopUp
+      v-if="popupError"
+      @noAction="this.popupError = !this.popupError"
+      :type="'error'"
+      :message="'Error'"
+      :content="'Incorrect username or password'"
+    />
   </div>
 </template>
 
@@ -76,7 +82,7 @@
 import BaseInputText from '@/components/Base/BaseInputText.vue'
 import { mapGetters } from 'vuex'
 import store from '@/store/index'
-import PopUpError from '@/components/Base/PopUpError.vue'
+import PopUp from '@/components/Base/PopUp.vue'
 
 export default {
   name: 'login',
@@ -112,7 +118,7 @@ export default {
   },
   components: {
     BaseInputText,
-    PopUpError
+    PopUp
   }
 }
 </script>
