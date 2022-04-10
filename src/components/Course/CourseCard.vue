@@ -1,10 +1,10 @@
 <template>
   <!-- Set Dynamic Clickable Card-->
-  <component
+  <!-- <component
     :is="parent === 'inscriptions' ? 'router-link' : 'div'"
     :to="parent === 'inscriptions' ? {name: 'course'} : ''"
     draggable="false"
-  >
+  > -->
     <!-- Main -->
     <div class="flex flex-wrap">
       <article class="w-[470px] bg-white overflow-hidden outline outline-[1px] outline-gray-200 rounded-lg hover:shadow-lg transition-shadow dark:shadow-slate-700 dark:outline-gray-700 dark:bg-slate-900">
@@ -67,7 +67,7 @@
         </footer>
       </article>
     </div>
-  </component>
+  <!-- </component> -->
 </template>
 
 <script>

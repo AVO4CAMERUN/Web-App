@@ -24,6 +24,7 @@
 import CourseCard from '@/components/Course/CourseCard.vue'
 import { subscribeService as ss } from '@/servises/subscribe.service'
 import store from '@/store/index'
+import router from '@/router/index'
 
 export default {
   name: 'Inscriptions',
@@ -83,6 +84,9 @@ export default {
     },
     setCurrentCourse (id) {
       store.dispatch('course/setCurrentCourse', id)
+        .then(() => {
+          router.push({ name: 'course' })
+        })
     }
   },
   computed: {
