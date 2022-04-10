@@ -14,6 +14,7 @@ const state = {
   id: 0,
   name: '',
   img: '',
+  creator: '',
   ...restore
 }
 
@@ -21,6 +22,7 @@ const state = {
 const mutations = {
   setId: (state, payload) => { state.id = payload?.id_course },
   setName: (state, payload) => { state.name = payload?.name },
+  setCreator: (state, payload) => { state.creator = payload?.email_creator },
   setImg: (state, payload) => { state.img = payload?.img_cover }
 }
 
@@ -31,6 +33,7 @@ const actions = {
     commit('setId', response[0])
     commit('setName', response[0])
     commit('setImg', response[0])
+    commit('setCreator', response[0])
   },
   async fetchCourses ({ rootState }, filter) {
     return await cs.getCoursesByFilter(filter, rootState.login.accessToken)

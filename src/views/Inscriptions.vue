@@ -7,16 +7,15 @@
     <CourseCard
       v-for="(card) in cards"
       :key="card.id"
-      :courseID="card.courseID"
-      :courseName="card.courseName"
-      :courseDescription="card.courseDescription"
-      :courseCover="card.courseCover"
-      :creatorName="card.creatorName"
-      :creationDate="card.creationDate"
-      :courseSubject="card.courseSubject"
+      :courseID="card.id_course"
+      :courseName="card.name"
+      :courseDescription="card.description"
+      :courseCover="card.img_cover"
+      :creatorName="card.email_creator"
+      :creationDate="card.creation_date"
+      :courseSubject="card.subject"
       :parent="'inscriptions'"
       @courseID="removeCourseCard"
-      @click="setCurrentCourse(card.courseID)"
     />
   </div>
 </template>
@@ -24,7 +23,6 @@
 import CourseCard from '@/components/Course/CourseCard.vue'
 import { subscribeService as ss } from '@/servises/subscribe.service'
 import store from '@/store/index'
-import router from '@/router/index'
 
 export default {
   name: 'Inscriptions',
@@ -58,18 +56,10 @@ export default {
           return store.dispatch('course/fetchCourses', `?id_course=[${ids}]`)
         })
         .then((courses) => {
-          this.cards = []
-          courses.forEach(course => {
-            const date = new Date(course.creation_date)
-            this.cards.push({
-              courseID: course.id_course,
-              courseName: course.name,
-              courseDescription: course.description,
-              creatorName: course.email_creator,
-              courseSubject: course.subject,
-              courseCover: course.img_cover,
-              creationDate: `${date.getUTCDate()}/${date.getUTCMonth() + 1}/${date.getUTCFullYear()}`
-            })
+          this.cards = courses
+          this.cards.forEach(card => {
+            const date = new Date(card.creation_date)
+            card.creation_date = `${date.getUTCDate()}/${date.getUTCMonth() + 1}/${date.getUTCFullYear()}`
           })
           if (this.cards.length <= 0) this.empty = true
           else this.empty = false
@@ -77,16 +67,10 @@ export default {
         .catch(() => {})
     },
     removeCourseCard (courseID) {
-      const index = this.cards.findIndex((course) => course.courseID === courseID)
+      const index = this.cards.findIndex((card) => card.id_course === courseID)
       this.cards.splice(index, 1)
       if (this.cards.length <= 0) this.empty = true
       else this.empty = false
-    },
-    setCurrentCourse (id) {
-      store.dispatch('course/setCurrentCourse', id)
-        .then(() => {
-          router.push({ name: 'course' })
-        })
     }
   },
   computed: {

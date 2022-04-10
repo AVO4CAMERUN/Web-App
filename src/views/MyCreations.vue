@@ -31,7 +31,7 @@
       />
     </div>
 
-    <!-- Confirm Elimination Pop Up -->
+    <!-- Confirm Elimination Pop Up (non funziona. designer fate qualcosa)-->
     <div class="flex flex-col absolute self-center">
       <PopUp
         v-if="showConfirm"

@@ -1,11 +1,35 @@
 <template>
-  <div class="grid lg:grid-cols-[80%,_20%] p-8 gap-4">
+  <div v-if="units.length !== 0 || edit" class="grid lg:grid-cols-[80%,_20%] p-8 gap-4">
     <!-- <p class="py-4 bg-primary text-white text-center text-3xl rounded-md col-span-full">{{ name }}</p> -->
-    <Video :videoID="lesson.link_video" :courseName="name"/>
-    <UnitsSidebar v-if="units.length !== 0" :units="units" :ulength="units.length" @lessonID="getLessonID"/>
-    <Quiz :quiz="lesson.quiz" :key="lesson.quiz"/>
-    <VideoDescription :lessonID="lesson.id_lesson" :lessonName="lesson.name"/>
+
+    <!-- Video Component -->
+    <Video
+      :videoID="lesson.link_video"
+      :courseName="name"
+    />
+
+    <!-- Units Sidebar Component -->
+    <UnitsSidebar
+      :edit="edit"
+      :units="units"
+      :ulength="units.length"
+      @lessonID="getLessonID"
+      @newUnit="addNewUnit"
+    />
+
+    <!-- Quiz Component -->
+    <Quiz
+      :quiz="lesson.quiz"
+      :key="lesson.quiz"
+    />
+
+    <!-- Descriptio Component -->
+    <VideoDescription
+      :lessonID="lesson.id_lesson"
+      :lessonName="lesson.name"
+    />
   </div>
+  <div v-else>oh no douma ha sfasciato tutto 🤡</div>
 </template>
 
 <script>
@@ -21,6 +45,7 @@ export default {
   name: 'course',
   data: function () {
     return {
+      edit: false,
       units: [],
       lessonID: null,
       lesson: {
@@ -36,27 +61,18 @@ export default {
   },
   methods: {
     fetchUnits (filter) {
-      us.getUnitsByFilter(filter, store.state.login.accessToken)
+      us.getUnitsByFilter(filter)
         .then((response) => {
           if (response.status === 200) return response.json()
         })
         .then((fetchUnit) => {
-          this.units = []
-          fetchUnit.forEach(unit => {
-            this.units.push({
-              unitID: unit.id_unit,
-              courseID: unit.id_course,
-              unitName: unit.name,
-              unitPosition: unit.units_order,
-              unitDescription: unit.description,
-              unitLessons: unit.lesson
-            })
-          })
+          this.units = fetchUnit
           // cambiare in ordine lezioni dinamico
-          this.lessonID = this.units[0].unitLessons[0].id_lesson
-          this.fetchLesson(`?id_lesson=["${this.lessonID}"]`)
+          if (this.units[0].lesson[0] !== undefined) {
+            this.lessonID = this.units[0].lesson[0].id_lesson
+            this.fetchLesson(`?id_lesson=["${this.lessonID}"]`)
+          }
         })
-        .catch(() => {})
     },
     fetchLesson (filter) {
       ls.getLessonsByFilter(filter, store.state.login.accessToken)
@@ -79,22 +95,21 @@ export default {
     getLessonID (id) {
       this.lessonID = id
       this.fetchLesson(`?id_lesson=["${id}"]`)
+    },
+    addNewUnit (unit) {
+      this.units.push(unit)
     }
   },
   computed: {
     id () { return store.state.course.id },
     img () { return store.state.course.img },
-    name () { return store.state.course.name }
-  },
-  watch: {
-    id (newValue, oldValue) {
-      this.fetchUnits(`?id_course=["${newValue}"]`)
-    },
-    img (newValue, oldValue) {},
-    name (newValue, oldValue) {}
+    name () { return store.state.course.name },
+    emailCreator () { return store.state.course.creator }
   },
   mounted () {
-    this.fetchUnits(`?id_course=["${this.id}"]`)
+    // check query string and if you are the course's creator to enable editing
+    if (this.$route.query.edit === 'on' && this.emailCreator === store.state.login.email) this.edit = true
+    this.fetchUnits(`id_course=["${this.id}"]`)
   },
   components: {
     UnitsSidebar,

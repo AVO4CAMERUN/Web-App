@@ -12,12 +12,9 @@
 </template>
 
 <script>
-// import InscriptionsCard from '../components/Course/InscriptionsCard.vue'
-/* import { subscribeService as ss } from '../servises/subscribe.service'
-import { coursesService as cs } from '../servises/course.services' */
 import store from '@/store/index'
+import router from '@/router/index'
 import ClassCard from '@/components/Classes/ClassCard.vue'
-// import { classesService as cls } from '@/servises/classes.services'
 
 export default {
   name: 'myclasses',
@@ -35,21 +32,19 @@ export default {
   methods: {
     setCurrentClass (id) {
       store.dispatch('classes/setCurrentClass', `id=[${id}]`)
+        .then(() => {
+          router.push({ name: 'class' })
+        })
     },
     fetchClasses () {
       store.dispatch('classes/fetchClasses', '')
         .then((response) => {
-          response.forEach(c => {
+          this.classes = response
+          this.classes.forEach(c => {
             const date = new Date(c.creation_date)
-            this.classes.push({
-              id: c.id,
-              name: c.name,
-              img_cover: c.img_cover,
-              creation_date: `${date.getUTCDate()}/${date.getUTCMonth() + 1}/${date.getUTCFullYear()}`
-            })
+            c.creation_date = `${date.getUTCDate()}/${date.getUTCMonth() + 1}/${date.getUTCFullYear()}`
           })
         })
-      // store.dispatch('classes/setCurrentClass')
     }
   }
 }

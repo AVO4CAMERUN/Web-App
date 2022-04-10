@@ -1,17 +1,17 @@
+import store from '@/store/index'
 import service from './base.services'
 
 // Function for create course (POST)
-async function createUnits (name, email, description, imgCover, subject) {
-  // name, email, description, img_cover, subject
-  // const token = localStorage.getItem('refreshToken')
-
-  const response = await service.genericRequest('lessons', 'POST', { name, email, description, imgCover, subject })
+async function createUnits (unitObj) {
+  const token = store.state.login.accessToken
+  const response = await service.genericRequestWithAuth('units', 'POST', unitObj, token)
   return response
 }
 
 // Function for get units by filter (GET)
-async function getUnitsByFilter (filter = '', token) {
-  return await service.genericRequestWithAuth(`units${filter}`, 'GET', {}, token)
+async function getUnitsByFilter (filter = '') {
+  const token = store.state.login.accessToken
+  return await service.genericRequestWithAuth(`units?${filter}`, 'GET', {}, token)
 }
 
 // Function for update course by id (PUT)

@@ -1712,6 +1712,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(107 114 128 / var(--tw-placeholder-opacity));
 }
 
+.caret-pink-500 {
+  caret-color: #ec4899;
+}
+
+.accent-pink-500 {
+  accent-color: #ec4899;
+}
+
 .opacity-\[\.15\] {
   opacity: .15;
 }
@@ -2085,6 +2093,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .dark .dark\:invert {
   --tw-invert: invert(100%);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+.dark .hover\:dark\:bg-slate-200:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(226 232 240 / var(--tw-bg-opacity));
 }
 
 .dark .dark\:hover\:text-black:hover {
