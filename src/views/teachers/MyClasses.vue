@@ -5,6 +5,7 @@
       :classId="userClass.id"
       :name="userClass.name"
       :classImg="userClass.img_cover"
+      :creationDate="userClass.creation_date"
       @click="setCurrentClass(userClass.id)"
     />
   </div>
@@ -38,7 +39,15 @@ export default {
     fetchClasses () {
       store.dispatch('classes/fetchClasses', '')
         .then((response) => {
-          this.classes = response
+          response.forEach(c => {
+            const date = new Date(c.creation_date)
+            this.classes.push({
+              id: c.id,
+              name: c.name,
+              img_cover: c.img_cover,
+              creation_date: `${date.getUTCDate()}/${date.getUTCMonth() + 1}/${date.getUTCFullYear()}`
+            })
+          })
         })
       // store.dispatch('classes/setCurrentClass')
     }
