@@ -1,41 +1,54 @@
 <template>
-  <div class="m-8 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(360px,_1fr))]">
-    <CourseCard
-      v-for="(card) in coursesCards"
-      :key="card.id"
-      :courseID="card.courseID"
-      :courseName="card.courseName"
-      :courseDescription="card.courseDescription"
-      :courseCover="card.courseCover"
-      :creatorName="card.creatorName"
-      :creationDate="card.creationDate"
-      :courseSubject="card.courseSubject"
-      :parent="'mycreations'"
-      @course-to-removeID="showPopUp"
-    />
-    <CreateCourseCard
-      @newCourse="addCourseCard"
-    />
-    <CreateClassCard
-      @newClass="addClassCard"
-    />
-  </div>
-  <div class="">
-    <PopUp
-      v-if="showConfirm"
-      @noAction="showConfirm = false"
-      @doAction="deleteCourse"
-      :type="'confirm'"
-      :message="'Warning'"
-      :content="'Are you sure you want to delete this course?'"
-    />
+  <div class="flex flex-col justify-center">
+    <!-- Courses Grid -->
+    <div class="m-8 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(360px,_1fr))]">
+      <CourseCard
+        v-for="(card) in coursesCards"
+        :key="card.id"
+        :courseID="card.courseID"
+        :courseName="card.courseName"
+        :courseDescription="card.courseDescription"
+        :courseCover="card.courseCover"
+        :creatorName="card.creatorName"
+        :creationDate="card.creationDate"
+        :courseSubject="card.courseSubject"
+        :parent="'mycreations'"
+        @course-to-removeID="showPopUp"
+      />
+
+      <!-- Course Creation Card -->
+      <CreateCourseCard
+        @newCourse="addCourseCard"
+      />
+    </div>
+
+    <!-- Class Grid -->
+    <div class="m-8 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(360px,_1fr))]">
+
+      <!-- Class Creation Card -->
+      <CreateClassCard
+        @newClass="addClassCard"
+      />
+    </div>
+
+    <!-- Confirm Elimination Pop Up -->
+    <div class="flex flex-col absolute self-center">
+      <PopUp
+        v-if="showConfirm"
+        @noAction="showConfirm = false"
+        @doAction="deleteCourse"
+        :type="'confirm'"
+        :message="'Warning'"
+        :content="'Are you sure you want to delete this course?'"
+      />
+    </div>
   </div>
 </template>
 <script>
 import CourseCard from '@/components/Course/CourseCard.vue'
 import CreateClassCard from '@/components/Classes/CreateClassCard.vue'
-import PopUp from '@/components/Base/PopUp.vue'
 import CreateCourseCard from '@/components/Course/CreateCourseCard.vue'
+import PopUp from '@/components/Base/PopUp.vue'
 import { coursesService as cs } from '@/servises/course.services'
 import store from '@/store/index'
 
@@ -140,6 +153,7 @@ export default {
     addClassCard (classID) {
       // this.fetchMyClassesCreations(`?email_creator=["${store.state.login.email}"]`)
     },
+    // Show Delete Course PopUp
     showPopUp (courseID) {
       this.tempCourseID = courseID
       this.showConfirm = true

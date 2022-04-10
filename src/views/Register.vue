@@ -73,6 +73,7 @@
         </div>
       </div>
     </div>
+    <!-- Email Confirm PopUp -->
     <PopUp
       v-if="popupEmailConfirm"
       :type="'success'"
@@ -80,6 +81,7 @@
       :content="'Check your email to confirm your account'"
       @doAction="this.$router.push('/login')"
     />
+    <!-- Error PopUp -->
     <PopUp
       v-if="popupError"
       :type="'error'"

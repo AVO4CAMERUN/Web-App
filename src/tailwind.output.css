@@ -691,6 +691,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: 25px;
 }
 
+.mr-\[20px\] {
+  margin-right: 20px;
+}
+
 .block {
   display: block;
 }
@@ -915,6 +919,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 45%;
 }
 
+.w-\[481px\] {
+  width: 481px;
+}
+
+.w-\[470px\] {
+  width: 470px;
+}
+
 .min-w-full {
   min-width: 100%;
 }
@@ -1017,6 +1029,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   flex-wrap: wrap;
 }
 
+.place-content-center {
+  place-content: center;
+}
+
 .place-items-center {
   place-items: center;
 }
@@ -1097,6 +1113,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .self-center {
   align-self: center;
+}
+
+.justify-self-center {
+  justify-self: center;
 }
 
 .overflow-hidden {

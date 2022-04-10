@@ -39,7 +39,7 @@
 
       <!-- Subject -->
       <select v-model="course.subject" class="text-sm mx-4">
-        <option v-for="subject in subjects" :key="subject">{{subject}}</option>
+        <option v-for="subject in subjects" :key="subject" :disabled="subject === 'Select subject' ? true : false">{{subject}}</option>
       </select>
 
       <!-- Description (max length 102 characters to fit card dimensions) -->
@@ -57,8 +57,8 @@
         </div>
         <button
           class="text-sm px-5 py-1.5 mr-2 mb-2 text-white bg-green-700 font-medium rounded-lg hover:bg-green-800 focus:ring-4 focus:ring-green-300 focus:outline-none"
-          :class="course.name === '' ? 'cursor-not-allowed' : 'cursor-pointer'"
-          :disabled="course.name === '' ? true : false"
+          :class="course.name === '' || course.subject === 'Select subject' ? 'cursor-not-allowed' : 'cursor-pointer'"
+          :disabled="course.name === '' || course.subject === 'Select subject' ? true : false"
           @click="createCourse"
         >
         Create Course
@@ -80,9 +80,9 @@ export default {
         name: '',
         description: '',
         img_cover: '',
-        subject: 'Mathematics'
+        subject: 'Select subject'
       },
-      subjects: []
+      subjects: ['Select subject']
     }
   },
   mounted () {
@@ -102,7 +102,7 @@ export default {
             name: '',
             description: '',
             img_cover: '',
-            subject: 'Mathematics'
+            subject: 'Select subject'
           }
         })
     },
@@ -123,7 +123,7 @@ export default {
     fetchSubject () {
       cs.getCoursesSubject()
         .then((response) => response.json())
-        .then((subjects) => { this.subjects = subjects })
+        .then((subjects) => { this.subjects.push(...subjects) })
     }
   },
   computed: {

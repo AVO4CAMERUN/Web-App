@@ -7,7 +7,7 @@
   >
     <!-- Main -->
     <div class="flex flex-wrap">
-      <article class="w-[480px] bg-white overflow-hidden outline outline-[1px] outline-gray-200 rounded-lg hover:shadow-lg transition-shadow dark:shadow-slate-700 dark:outline-gray-700 dark:bg-slate-900">
+      <article class="w-[470px] bg-white overflow-hidden outline outline-[1px] outline-gray-200 rounded-lg hover:shadow-lg transition-shadow dark:shadow-slate-700 dark:outline-gray-700 dark:bg-slate-900">
 
         <!-- Image -->
         <div class="h-[200px] relative">
@@ -59,7 +59,9 @@
             <i v-else class="bx bxs-check-circle text-emerald-600 text-[32px]"/> <!-- Already Added Course -->
           </div>
           <div v-else-if="parent === 'mycreations'" class="cursor-pointer">
-            <i @click="editCourse" class='bx bx-edit text-black text-[32px] dark:invert' /> <!-- Edit Course -->
+            <router-link to="course">
+              <i @click="setCurrentCourse" class='bx bx-edit text-black text-[32px] dark:invert' /> <!-- Edit Course -->
+            </router-link>
             <i @click="deleteCourse" class="bx bx-trash text-rose-600 text-[32px]" /> <!-- Delete Course -->
           </div>
         </footer>
@@ -98,6 +100,9 @@ export default {
     },
     deleteCourse () {
       this.$emit('course-to-removeID', this.courseID)
+    },
+    setCurrentCourse () {
+      store.dispatch('course/setCurrentCourse', this.courseID)
     }
   },
   props: {
