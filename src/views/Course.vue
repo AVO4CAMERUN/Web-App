@@ -10,11 +10,13 @@
 
     <!-- Units Sidebar Component -->
     <UnitsSidebar
+      v-if="units.length !== 0"
       :edit="edit"
       :units="units"
-      :ulength="units.length"
       @lessonID="getLessonID"
       @newUnit="addNewUnit"
+      @deletedUnit="removeUnit"
+      @updatedUnit="updateUnit"
     />
 
     <!-- Quiz Component -->
@@ -28,6 +30,7 @@
       :lessonID="lesson.id_lesson"
       :lessonName="lesson.name"
     />
+
   </div>
   <div v-else>oh no douma ha sfasciato tutto 🤡</div>
 </template>
@@ -98,6 +101,14 @@ export default {
     },
     addNewUnit (unit) {
       this.units.push(unit)
+    },
+    removeUnit (id) {
+      const i = this.units.findIndex(unit => unit.id_unit === id)
+      this.units.splice(i, 1)
+    },
+    updateUnit (newUnit) {
+      const i = this.units.findIndex(oldUnit => oldUnit.id_unit === newUnit.id_unit)
+      this.units[i] = newUnit
     }
   },
   computed: {

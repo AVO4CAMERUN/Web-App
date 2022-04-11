@@ -15,10 +15,16 @@ async function getUnitsByFilter (filter = '') {
 }
 
 // Function for update course by id (PUT)
-async function updateUnitsByID () {}
+async function updateUnitsByID (id, unitObj) {
+  const token = store.state.login.accessToken
+  return await service.genericRequestWithAuth(`units/${id}`, 'PUT', unitObj, token)
+}
 
 // Function for delete course by id (DELETE)
-async function deleteUnitsByID () {}
+async function deleteUnitsByID (id, courseID) {
+  const token = store.state.login.accessToken
+  return await service.genericRequestWithAuth(`units/${id}`, 'DELETE', { id_course: courseID }, token)
+}
 
 export const unitsService = {
   createUnits,

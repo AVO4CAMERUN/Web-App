@@ -3,6 +3,7 @@ import VuexPersist from 'vuex-persist'
 import * as login from '@/store/module/login.module'
 import * as classes from '@/store/module/classes.module'
 import * as course from '@/store/module/course.module'
+import * as generic from '@/store/module/generic.module'
 
 /*
 ******* Introduzione *******
@@ -26,17 +27,11 @@ const vuexLocalStorage = new VuexPersist({
   key: 'avo4cam',
   storage: window.localStorage,
   // restoreState: (key, storage) => JSON.parse(JSON.stringify(storage.getItem(key))),
-  modules: ['login', 'classes', 'course']
+  modules: ['login', 'classes', 'course', 'generic']
 })
 
 export default createStore({
-  state: {
-    darkTheme: false
-  },
-  mutations: {
-    setDarkTheme: (state, payload) => { state.darkTheme = payload?.darkTheme }
-  },
   actions: {},
-  modules: { ...login, ...classes, ...course },
+  modules: { ...login, ...classes, ...course, ...generic },
   plugins: [vuexLocalStorage.plugin]
 })

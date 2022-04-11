@@ -30,7 +30,7 @@ export default {
   },
   computed: {
     dark () {
-      return store.state.darkTheme
+      return store.state.generic.darkTheme
     },
     isLogged () {
       return store.state.login.isLogged
@@ -55,11 +55,6 @@ export default {
     //
     if (this.refreshToken && this.refreshToken) {
       store.commit('setLogin', { value: true })
-    }
-  },
-  watch: {
-    dark (newValue, oldValue) {
-      this.dark = store.state.darkTheme
     }
   }
 }

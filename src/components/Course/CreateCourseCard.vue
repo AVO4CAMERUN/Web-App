@@ -39,7 +39,9 @@
 
       <!-- Subject -->
       <select v-model="course.subject" class="text-sm mx-4 dark:bg-slate-900 dark:text-white focus:outline-none">
-        <option v-for="subject in subjects" :key="subject" :disabled="subject === 'Select subject' ? true : false">{{subject}}</option>
+        <option v-for="subject in subjects" :key="subject" :disabled="subject === 'Select subject' ? true : false">
+          {{subject}}
+        </option>
       </select>
 
       <!-- Description (max length 102 characters to fit card dimensions) -->

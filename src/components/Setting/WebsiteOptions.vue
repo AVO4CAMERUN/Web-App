@@ -4,10 +4,10 @@
     <div class="flex flex-col items-center gap-4">
       <div v-for="(option) in options" :key="option.name">
         <legend>{{option.label}}</legend>
-        <input type="checkbox" class="" v-model="option.newValue" @click="changeTheme" :checked="darkTheme == true ? true : false">
+        <input type="checkbox" class="" v-model="option.value" @click="changeTheme" >
       </div>
     </div>
-  </div>
+  </div>{{options[0].value}}
 </template>
 
 <script>
@@ -19,20 +19,20 @@ export default {
     return {
       editable: false,
       options: [
-        { name: 'theme', label: 'Dark Mode', actualValue: 'false', newValue: '' }
+        { name: 'theme', label: 'Dark Mode', value: store.state.generic.darkTheme }
       ]
     }
   },
   components: {},
   mounted () {},
   methods: {
-    async changeTheme () {
-      if (this.options[0].newValue) await store.commit('setDarkTheme', { darkTheme: false })
-      else await store.commit('setDarkTheme', { darkTheme: true })
+    changeTheme () {
+      if (this.options[0].value) store.commit('generic/setDarkTheme', { darkTheme: false })
+      else store.commit('generic/setDarkTheme', { darkTheme: true })
     }
   },
   computed: {
-    darkTheme () { return store.state.darkTheme }
+    darkTheme () { return store.state.generic.darkTheme }
   }
 }
 </script>
