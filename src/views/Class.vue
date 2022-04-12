@@ -12,59 +12,37 @@
       </div>
     </div>
     <div class="place-items-center w-full mb-6 mx-3 gap-4 grid lg:grid-cols-3 sm:grid-cols-1">
-      <div class="p-2 h-96 grid-col-1 lg:w-full md:w-[75%] sm:w-[50%] bg-green-400"><p>Grafico Statistiche</p></div>
-      <div class="p-2 h-96 grid-col-1 hidden lg:w-full md:block md:w-[75%] bg-green-400"><p>Grafico Statistiche</p></div>
-      <div class="p-2 h-96 grid-col-1 hidden lg:w-full md:block md:w-[75%] bg-green-400"><p>Grafico Statistiche</p></div>
+      <div class="p-2 h-96 grid-col-1 lg:w-full md:w-[75%] sm:w-[50%] bg-white border-gray-200 border-2 rounded-lg"><p>Grafico Statistiche</p></div>
+      <div class="p-2 h-96 grid-col-1 hidden lg:w-full md:block md:w-[75%] bg-white border-gray-200 border-2 rounded-lg"><p>Grafico Statistiche</p></div>
+      <div class="p-2 h-96 grid-col-1 hidden lg:w-full md:block md:w-[75%] bg-white border-gray-200 border-2 rounded-lg"><p>Grafico Statistiche</p></div>
     </div>
     <div class="shadow overflow-hidden">
-      <table class="table-fixed min-w-full divide-y divide-gray-200">
-        <thead class="bg-gray-100">
-          <tr>
-            <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
-              Name
-            </th>
-            <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
-              Status
-            </th>
-          </tr>
-        </thead>
-        <tbody class="bg-white divide-y divide-gray-200">
-          <UserCard
-            v-for="teacher in currentClass.teachers"
-            :key="teacher.email"
-            :email="teacher.email"
-            :firstname="teacher.firstname"
-            :lastname="teacher.lastname"
-            :role="teacher.role"
-            :registrationDate="teacher.registration_date"
-            :img="teacher.img"
-          />
-        </tbody>
-      </table>
-      <table class="table-fixed min-w-full border-[1px] border-black divide-y divide-gray-200 mt-4">
-        <thead class="bg-gray-100">
-          <tr>
-            <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
-              Name
-            </th>
-            <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
-              Status
-            </th>
-          </tr>
-        </thead>
-        <tbody class="bg-white divide-y divide-gray-200">
-          <UserCard
-            v-for="student in currentClass.students"
-            :key="student.email"
-            :email="student.email"
-            :firstname="student.firstname"
-            :lastname="student.lastname"
-            :role="student.role"
-            :registrationDate="student.registration_date"
-            :img="student.img"
-          />
-        </tbody>
-      </table>
+      <h2 class="mx-4 px-2 py-4 text-2xl font-bold border-b-gray-400 border-b-[1px]">Teachers</h2>
+      <div class="mx-4 py-4 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(415px,_1fr))]">
+      <UserCard
+        v-for="teacher in currentClass.teachers"
+        :key="teacher.email"
+        :email="teacher.email"
+        :firstname="teacher.firstname"
+        :lastname="teacher.lastname"
+        :role="teacher.role"
+        :registrationDate="teacher.registration_date"
+        :img="teacher.img"
+      />
+      </div>
+      <h2 class="mx-4 px-2 py-4 text-2xl font-bold border-b-gray-400 border-b-[1px]">Students</h2>
+      <div class="mx-4 py-4 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(415px,_1fr))]">
+      <UserCard
+        v-for="student in currentClass.students"
+        :key="student.email"
+        :email="student.email"
+        :firstname="student.firstname"
+        :lastname="student.lastname"
+        :role="student.role"
+        :registrationDate="student.registration_date"
+        :img="student.img"
+      />
+      </div>
     </div>
   </div>
 </template>

@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-nowrap">
     <div class="cursor-pointer h-full w-full bg-white overflow-hidden outline outline-[1px] outline-gray-200 rounded-lg hover:shadow-lg transition-shadow dark:shadow-slate-700 dark:outline-gray-700 dark:bg-slate-900">
-      <div class="border border-black h-[200px] relative">
+      <div class="border h-[200px] relative">
         <img
           v-if="classImg !== ''"
           :src="`data:image/png;base64,${classImg}`"
