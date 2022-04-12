@@ -19,7 +19,7 @@
           src="https://picsum.photos/400/300"
           draggable="false"
         >
-        <input type="file" @change="setImage" class="absolute inset-0 cursor-pointer opacity-0">
+        <input type="file" @change="setImage" class="absolute inset-0 cursor-pointer opacity-0" />
       </div>
 
       <!-- Course Header (Name, Creation Date)-->
@@ -87,6 +87,10 @@ export default {
       subjects: ['Select subject']
     }
   },
+  props: [
+    'progress', 'courseID', 'courseName', 'courseDescription',
+    'courseCover', 'creationDate',
+    'courseSubject', 'parent', 'subscribed'],
   mounted () {
     this.fetchSubject()
   },

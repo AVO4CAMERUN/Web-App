@@ -56,7 +56,7 @@
           <i v-else class="bx bxs-check-circle text-emerald-600 text-[32px]"/> <!-- Already Added Course -->
         </div>
         <div v-else-if="parent === 'mycreations'" class="cursor-pointer">
-          <i @click.stop="setCurrentCourse" class='bx bx-edit text-black text-[32px] dark:invert' /> <!-- Edit Course -->
+          <i @click.stop="this.$emit('setEdit', courseID)" class='bx bx-edit text-black text-[32px] dark:invert' /> <!-- Edit Course -->
           <i @click.stop="deleteCourse" class="bx bx-trash text-rose-600 text-[32px]" /> <!-- Delete Course -->
         </div>
       </footer>
@@ -104,17 +104,10 @@ export default {
         })
     }
   },
-  props: {
-    progress: Number,
-    courseID: Number,
-    courseName: String,
-    courseDescription: String,
-    courseCover: String,
-    creatorName: String,
-    creationDate: String,
-    courseSubject: String,
-    parent: String,
-    subscribed: Boolean
-  }
+  props: [
+    'progress', 'courseID', 'courseName', 'courseDescription',
+    'courseCover', 'creatorName', 'creationDate',
+    'courseSubject', 'parent', 'subscribed'
+  ]
 }
 </script>

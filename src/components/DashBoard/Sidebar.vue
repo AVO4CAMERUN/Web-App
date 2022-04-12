@@ -19,12 +19,13 @@
           </div>
         </div>
 
-        <button
-          class="absolute top-[20%] -right-[1.75rem] w-6 aspect-square bg-primary text-white pt-[1px]
-          flex justify-center items-center text-[22px] rounded-full bx bx-chevron-right transition-transform"
-          :class="{'rotate-180': !isClose}"
+        <button class="absolute top-[20%] -right-[1.75rem] w-6 aspect-square bg-primary text-white rounded-full"
           @click="isClose = !isClose"
-        />
+        >
+          <i class="flex justify-center items-center text-[22px] transition-transform bx bx-chevron-right"
+            :class="{'rotate-180': !isClose}"
+          />
+        </button>
       </header>
 
       <!-- div elenco button -->

@@ -3,7 +3,8 @@
 
     <!-- Courses Grid -->
     <div class="m-8 mb-2 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(360px,_1fr))]">
-      <CourseCard
+      <component
+        :is="card.courseID === courseToEdit ? 'CreateCourseCard' : 'CourseCard'"
         v-for="(card) in coursesCards"
         :key="card.id"
         :courseID="card.courseID"
@@ -15,6 +16,7 @@
         :courseSubject="card.courseSubject"
         :parent="'mycreations'"
         @course-to-removeID="showPopUp"
+        @setEdit="setEdit"
       />
 
       <!-- Course Creation Card -->
@@ -57,6 +59,7 @@ export default {
   name: 'MyCreations',
   data: function () {
     return {
+      courseToEdit: null,
       tempCourseID: null,
       showConfirm: false,
       coursesCards: [],
@@ -121,36 +124,36 @@ export default {
     addCourseCard (courseID) {
       this.fetchMyCoursesCreations(`?email_creator=["${store.state.login.email}"]`)
     },
-    // fetchMyClassesCreations (filter) {
-    //   store.dispatch('course/fetchClasses', filter)
-    //     .then((response) => {
-    //       if (response.status === 404) {
-    //         this.empty = true
-    //         return
-    //       }
-    //       let ids = ''; response.forEach(c => { ids += `"${c.id_course}",` })
-    //       ids = ids.substring(0, ids.length - 1)
-    //       return store.dispatch('course/fetchClasses', `?id_course=[${ids}]`)
-    //     })
-    //     .then((courses) => {
-    //       this.coursesCards = []
-    //       courses.forEach(course => {
-    //         const date = new Date(course.creation_date)
-    //         this.coursesCards.push({
-    //           courseID: course.id_course,
-    //           courseName: course.name,
-    //           courseDescription: course.description,
-    //           creatorName: course.email_creator,
-    //           courseSubject: course.subject,
-    //           courseCover: course.img_cover,
-    //           creationDate: `${date.getUTCDate()}/${date.getUTCMonth() + 1}/${date.getUTCFullYear()}`
-    //         })
-    //       })
-    //       if (this.coursesCards.length <= 0) this.empty = true
-    //       else this.empty = false
-    //     })
-    //     .catch(() => {})
-    // },
+    /* fetchMyClassesCreations (filter) {
+      store.dispatch('course/fetchClasses', filter)
+        .then((response) => {
+          if (response.status === 404) {
+            this.empty = true
+            return
+          }
+          let ids = ''; response.forEach(c => { ids += `"${c.id_course}",` })
+          ids = ids.substring(0, ids.length - 1)
+          return store.dispatch('course/fetchClasses', `?id_course=[${ids}]`)
+        })
+        .then((courses) => {
+          this.coursesCards = []
+          courses.forEach(course => {
+            const date = new Date(course.creation_date)
+            this.coursesCards.push({
+              courseID: course.id_course,
+              courseName: course.name,
+              courseDescription: course.description,
+              creatorName: course.email_creator,
+              courseSubject: course.subject,
+              courseCover: course.img_cover,
+              creationDate: `${date.getUTCDate()}/${date.getUTCMonth() + 1}/${date.getUTCFullYear()}`
+            })
+          })
+          if (this.coursesCards.length <= 0) this.empty = true
+          else this.empty = false
+        })
+        .catch(() => {})
+    }, */
     addClassCard (classID) {
       // this.fetchMyClassesCreations(`?email_creator=["${store.state.login.email}"]`)
     },
@@ -158,6 +161,9 @@ export default {
     showPopUp (courseID) {
       this.tempCourseID = courseID
       this.showConfirm = true
+    },
+    setEdit (id) {
+      this.courseToEdit = id
     }
   },
   computed: {
