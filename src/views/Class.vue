@@ -16,7 +16,7 @@
       <div class="p-2 h-96 grid-col-1 hidden lg:w-full md:block md:w-[75%] bg-white border-gray-200 border-2 rounded-lg"><p>Grafico Statistiche</p></div>
       <div class="p-2 h-96 grid-col-1 hidden lg:w-full md:block md:w-[75%] bg-white border-gray-200 border-2 rounded-lg"><p>Grafico Statistiche</p></div>
     </div>
-    <div class="shadow overflow-hidden">
+    <div class="overflow-hidden">
       <h2 class="mx-4 px-2 py-4 text-2xl font-bold border-b-gray-400 border-b-[1px]">Teachers</h2>
       <div class="mx-4 py-4 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(415px,_1fr))]">
       <UserCard

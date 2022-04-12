@@ -22,8 +22,8 @@
         <button class="absolute top-[20%] -right-[1.75rem] w-6 aspect-square bg-primary text-white rounded-full"
           @click="isClose = !isClose"
         >
-          <i class="flex justify-center items-center text-[22px] transition-transform bx bx-chevron-right"
-            :class="{'rotate-180': !isClose}"
+          <i class="flex justify-center items-center text-[22px] translate-y-[1px] transition-transform bx bx-chevron-right"
+            :class="{'rotate-180 translate-y-[-1px]': !isClose}"
           />
         </button>
       </header>
