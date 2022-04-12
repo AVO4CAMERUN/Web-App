@@ -38,7 +38,7 @@ const actions = {
     commit('setImg', response[0])
   },
   async fetchClasses ({ state, rootState }, filter) {
-    return await cs.getClassesByFilter(filter, rootState.login.accessToken)
+    return await cs.getClassesByFilter(filter)
       .then((response) => {
         if (response.status === 200) return response.json()
       })

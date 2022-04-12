@@ -83,7 +83,7 @@ export default {
         })
     },
     fetchLesson (filter) {
-      ls.getLessonsByFilter(filter, store.state.login.accessToken)
+      ls.getLessonsByFilter(filter)
         .then((response) => {
           if (response.status === 200) return response.json()
           else { }

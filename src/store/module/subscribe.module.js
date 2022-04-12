@@ -30,7 +30,7 @@ const actions = {
     commit('setImg', response[0])
   },
   async fetchSubscriptions({ rootState }, filter) {
-    return await ss.getSubscriptionByFilter(filter, rootState.login.accessToken)
+    return await ss.getSubscriptionByFilter(filter)
       .then((response) => {
         if (response.status === 200) return response.json()
       })

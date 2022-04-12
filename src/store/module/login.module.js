@@ -69,7 +69,6 @@ const actions = {
   },
   async refresh ({ dispatch, commit }) {
     const response = await dispatch('fetchRefresh')
-    // console.log('fatto refresh')
     commit('setAccessToken', response)
   },
   async logout ({ state, commit }) {
@@ -89,7 +88,7 @@ const actions = {
     if (response.status !== 200) return new Error('!200')
   },
   async fetchUser ({ state }) {
-    return await as.getFilterdAccount(`username=["${state.username}"]`, state.accessToken)
+    return await as.getFilterdAccount(`username=["${state.username}"]`)
       .then((response) => {
         if (response.status === 200) return response.json()
       })
@@ -101,7 +100,6 @@ const actions = {
       })
   },
   async fetchRefresh ({ state }) {
-    // console.log(state.refreshToken)
     return await ls.refresh(state.refreshToken)
       .then((response) => {
         if (response.status === 200) return response.json()

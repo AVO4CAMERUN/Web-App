@@ -21,7 +21,7 @@ async function genericRequest (uri, method, bodyObj) {
 }
 
 // Function for generic http requets with Authorization header
-async function genericRequestWithAuth (uri, method, bodyObj, token) {
+async function genericRequestWithAuth (uri, method, bodyObj) {
   // Option for http request
   const optionRequest = {
     method, // GET, POST, PUT, DELETE, etc.
@@ -38,14 +38,14 @@ async function genericRequestWithAuth (uri, method, bodyObj, token) {
   if (method === 'GET') delete optionRequest.body
 
   // Return a parse JSON response in native JavaScript objects .json()
-  // return await fetch(`http://api.avo4camerun.kirinsecurity.com:8081/api/v1/${uri}`, optionRequest)
   let res = await fetch(`http://localhost/api/v1/${uri}`, optionRequest)
 
+  // refreshToken expired refresh
   if (res.status === 401) {
     await store.dispatch('login/refresh')
+    optionRequest.headers.Authorization = `Bearer ${store.state.login.accessToken}`
     res = await fetch(`http://localhost/api/v1/${uri}`, optionRequest)
   }
-  // console.log(res)
   return res
 }
 

@@ -75,7 +75,7 @@ export default {
       this.error = status
     },
     fetchInscriptions (filter) {
-      ss.getSubscriptionByFilter(filter, store.state.login.accessToken)
+      ss.getSubscriptionByFilter(filter)
         .then((response) => {
           if (response.status === 200) {
             return response.json()

@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     fetchInscriptions (filter) {
-      ss.getSubscriptionByFilter(filter, store.state.login.accessToken)
+      ss.getSubscriptionByFilter(filter)
         .then((response) => {
           if (response.status === 200) {
             return response.json()
@@ -52,7 +52,6 @@ export default {
         .then((coursesList) => {
           let ids = ''; coursesList.forEach(c => { ids += c.id_course + ',' })
           ids = ids.substring(0, ids.length - 1)
-          // return cs.getCoursesByFilter(`?id_course=[${ids}]`)
           return store.dispatch('course/fetchCourses', `?id_course=[${ids}]`)
         })
         .then((courses) => {

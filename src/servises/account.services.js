@@ -6,18 +6,18 @@ async function createAccount (name, surname, email, username, password) {
 }
 
 // Function for get account by filter avo4cum
-async function getFilterdAccount (query, token) {
-  return await service.genericRequestWithAuth(`account?${query}`, 'GET', {}, token) // cambiare con query string
+async function getFilterdAccount (query) {
+  return await service.genericRequestWithAuth(`account?${query}`, 'GET', {}) // cambiare con query string
 }
 
 // Function for update personal account avo4cum
-async function putAccount (putObj, accessToken) {
-  return await service.genericRequestWithAuth('account', 'PUT', putObj, accessToken)
+async function putAccount (putObj) {
+  return await service.genericRequestWithAuth('account', 'PUT', putObj)
 }
 
 // Function for delete personal account avo4cum
 async function deleteAccount () { // Authorization Bearer
-  return await service.genericRequestWithAuth('account', 'DELETE', {}, 'token')
+  return await service.genericRequestWithAuth('account', 'DELETE', {})
 }
 
 export const accountService = {

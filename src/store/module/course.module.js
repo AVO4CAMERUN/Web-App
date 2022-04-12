@@ -36,7 +36,7 @@ const actions = {
     commit('setCreator', response[0])
   },
   async fetchCourses ({ rootState }, filter) {
-    return await cs.getCoursesByFilter(filter, rootState.login.accessToken)
+    return await cs.getCoursesByFilter(filter)
       .then((response) => {
         if (response.status === 200) return response.json()
       })

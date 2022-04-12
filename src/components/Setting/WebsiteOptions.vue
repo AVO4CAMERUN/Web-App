@@ -7,7 +7,7 @@
         <input type="checkbox" class="" v-model="option.value" @click="changeTheme" >
       </div>
     </div>
-  </div>{{options[0].value}}
+  </div>
 </template>
 
 <script>

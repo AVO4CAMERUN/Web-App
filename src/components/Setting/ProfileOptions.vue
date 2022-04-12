@@ -63,7 +63,7 @@ export default {
       const newData = {}
       newData[option.name] = option.newValue
 
-      as.putAccount(newData, store.state.login.accessToken)
+      as.putAccount(newData)
         .then((response) => {
           if (response.status === 200) return response.json()
         })

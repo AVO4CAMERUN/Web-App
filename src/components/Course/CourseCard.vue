@@ -56,10 +56,8 @@
           <i v-else class="bx bxs-check-circle text-emerald-600 text-[32px]"/> <!-- Already Added Course -->
         </div>
         <div v-else-if="parent === 'mycreations'" class="cursor-pointer">
-          <router-link to="course">
-            <i @click="setCurrentCourse" class='bx bx-edit text-black text-[32px] dark:invert' /> <!-- Edit Course -->
-          </router-link>
-          <i @click="deleteCourse" class="bx bx-trash text-rose-600 text-[32px]" /> <!-- Delete Course -->
+          <i @click.stop="setCurrentCourse" class='bx bx-edit text-black text-[32px] dark:invert' /> <!-- Edit Course -->
+          <i @click.stop="deleteCourse" class="bx bx-trash text-rose-600 text-[32px]" /> <!-- Delete Course -->
         </div>
       </footer>
     </article>
@@ -78,7 +76,7 @@ export default {
   },
   methods: {
     removeCourse () {
-      sub.deleteSubscribtion(this.courseID, store.state.login.accessToken)
+      sub.deleteSubscribtion(this.courseID)
         .then((response) => {
           if (response?.status === 200) {
             this.$emit('courseID', this.courseID)
@@ -87,7 +85,7 @@ export default {
     },
     addCourses () {
       // Request to subscribe
-      sub.subscribe(this.courseID, store.state.login.accessToken)
+      sub.postSubscription(this.courseID)
         .then((response) => {
           if (response.status === 200) {
             this.$router.push('/inscriptions')

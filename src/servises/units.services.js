@@ -1,29 +1,23 @@
-import store from '@/store/index'
 import service from './base.services'
 
 // Function for create course (POST)
 async function createUnits (unitObj) {
-  const token = store.state.login.accessToken
-  const response = await service.genericRequestWithAuth('units', 'POST', unitObj, token)
-  return response
+  return await service.genericRequestWithAuth('units', 'POST', unitObj)
 }
 
 // Function for get units by filter (GET)
 async function getUnitsByFilter (filter = '') {
-  const token = store.state.login.accessToken
-  return await service.genericRequestWithAuth(`units?${filter}`, 'GET', {}, token)
+  return await service.genericRequestWithAuth(`units?${filter}`, 'GET', {})
 }
 
 // Function for update course by id (PUT)
 async function updateUnitsByID (id, unitObj) {
-  const token = store.state.login.accessToken
-  return await service.genericRequestWithAuth(`units/${id}`, 'PUT', unitObj, token)
+  return await service.genericRequestWithAuth(`units/${id}`, 'PUT', unitObj)
 }
 
 // Function for delete course by id (DELETE)
 async function deleteUnitsByID (id, courseID) {
-  const token = store.state.login.accessToken
-  return await service.genericRequestWithAuth(`units/${id}`, 'DELETE', { id_course: courseID }, token)
+  return await service.genericRequestWithAuth(`units/${id}`, 'DELETE', { id_course: courseID })
 }
 
 export const unitsService = {
