@@ -10,7 +10,7 @@
 
     <!-- Units Sidebar Component -->
     <UnitsSidebar
-      v-if="units.length !== 0"
+      v-if="fetched"
       :edit="edit"
       :units="units"
       @lessonID="getLessonID"
@@ -59,7 +59,8 @@ export default {
           title: '',
           quiz: []
         }
-      }
+      },
+      fetched: false // flag to render units component only when finished fetching
     }
   },
   methods: {
@@ -70,8 +71,12 @@ export default {
         })
         .then((fetchUnit) => {
           this.units = fetchUnit
+          // sort units by sequence number
+          this.units.sort((a, b) => a.seqNumber - b.seqNumber)
+          this.fetched = true
+
           // cambiare in ordine lezioni dinamico
-          if (this.units[0].lesson[0] !== undefined) {
+          if (this.units[0]?.lesson[0] !== undefined) {
             this.lessonID = this.units[0].lesson[0].id_lesson
             this.fetchLesson(`?id_lesson=["${this.lessonID}"]`)
           }
@@ -109,6 +114,7 @@ export default {
     updateUnit (newUnit) {
       const i = this.units.findIndex(oldUnit => oldUnit.id_unit === newUnit.id_unit)
       this.units[i] = newUnit
+      this.units.sort((a, b) => a.seqNumber - b.seqNumber)
     }
   },
   computed: {
