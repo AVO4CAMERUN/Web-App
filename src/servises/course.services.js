@@ -16,11 +16,13 @@ async function getCoursesByFilter (filter = '') {
 }
 
 // Function for update course by id (PUT)
-async function updateCourseByID () {}
+async function updateCourseByID (id, courseObj) {
+  return await service.genericRequestWithAuth(`courses/${id}`, 'PUT', courseObj)
+}
 
 // Function for delete course by id (DELETE)
-async function deleteCourseByID (idCourse) {
-  return await service.genericRequestWithAuth(`courses/${idCourse}`, 'DELETE', {})
+async function deleteCourseByID (id) {
+  return await service.genericRequestWithAuth(`courses/${id}`, 'DELETE', {})
 }
 
 export const coursesService = {

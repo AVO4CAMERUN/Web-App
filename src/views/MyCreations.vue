@@ -17,6 +17,7 @@
         :parent="'mycreations'"
         @course-to-removeID="showPopUp"
         @setEdit="setEdit"
+        @newCourse="addCourseCard"
       />
 
       <!-- Course Creation Card -->
@@ -122,6 +123,7 @@ export default {
         })
     },
     addCourseCard (courseID) {
+      this.courseToEdit = null
       this.fetchMyCoursesCreations(`?email_creator=["${store.state.login.email}"]`)
     },
     /* fetchMyClassesCreations (filter) {
@@ -163,7 +165,7 @@ export default {
       this.showConfirm = true
     },
     setEdit (id) {
-      this.courseToEdit = id
+      if (this.courseToEdit === null || id === null) this.courseToEdit = id
     }
   },
   computed: {

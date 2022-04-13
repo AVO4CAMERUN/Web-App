@@ -16,7 +16,7 @@
         >
         <img v-else
           class="block w-full h-full object-cover group-hover:opacity-40 duration-200"
-          src="https://picsum.photos/400/300"
+          src="@/assets/img_default.png"
           draggable="false"
         >
         <input type="file" @change="setImage" class="absolute inset-0 cursor-pointer opacity-0" />
@@ -33,7 +33,7 @@
           >
         </h1>
         <div class="text-sm self-start dark:text-white pt-[4px]">
-          {{todayDate}}
+          {{creationDate === undefined ? todayDate : creationDate}}
         </div>
       </header>
 
@@ -57,14 +57,32 @@
         <div class="flex items-center">
           <p class="text-sm dark:text-white">{{creatorName}}</p>
         </div>
-        <button
+
+        <!-- Creation Button -->
+        <button v-if="courseName === undefined"
           class="text-sm px-5 py-1.5 mr-2 mb-2 text-white bg-green-700 font-medium rounded-lg hover:bg-green-800 focus:ring-4 focus:ring-green-300 focus:outline-none"
           :class="course.name === '' || course.subject === 'Select subject' ? 'cursor-not-allowed' : 'cursor-pointer'"
           :disabled="course.name === '' || course.subject === 'Select subject' ? true : false"
           @click="createCourse"
         >
-        Create Course
+          Create Course
         </button>
+
+        <!-- Editing Buttons -->
+        <template v-else>
+          <button class="text-sm px-5 py-1.5 mr-2 mb-2 text-white bg-green-700 font-medium rounded-lg hover:bg-green-800 focus:ring-4 focus:ring-green-300 focus:outline-none"
+            :class="course.name === '' || course.subject === 'Select subject' ? 'cursor-not-allowed' : 'cursor-pointer'"
+            :disabled="course.name === '' || course.subject === 'Select subject' ? true : false"
+            @click="updateCourse"
+          >
+            Save
+          </button>
+          <button class="text-sm px-5 py-1.5 mr-2 mb-2 text-white bg-red-700 font-medium rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 focus:outline-none"
+            @click="this.$emit('setEdit', null)"
+          >
+            Discard
+          </button>
+        </template>
       </footer>
     </article>
   </div>
@@ -88,10 +106,16 @@ export default {
     }
   },
   props: [
-    'progress', 'courseID', 'courseName', 'courseDescription',
-    'courseCover', 'creationDate',
-    'courseSubject', 'parent', 'subscribed'],
+    'courseID', 'courseName', 'courseDescription',
+    'courseCover', 'creationDate', 'courseSubject'
+  ],
   mounted () {
+    if (this.courseName) {
+      this.course.name = this.courseName
+      this.course.description = this.courseDescription
+      this.course.img_cover = this.courseCover
+      this.course.subject = this.courseSubject
+    }
     this.fetchSubject()
   },
   methods: {
@@ -109,6 +133,15 @@ export default {
             description: '',
             img_cover: '',
             subject: 'Select subject'
+          }
+        })
+    },
+    // Course Update
+    updateCourse () {
+      cs.updateCourseByID(this.courseID, this.course)
+        .then((response) => {
+          if (response?.status === 200) {
+            this.$emit('newCourse', this.courseID)
           }
         })
     },

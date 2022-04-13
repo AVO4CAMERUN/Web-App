@@ -9,7 +9,7 @@
       <!-- Image -->
       <div class="h-[200px] relative">
         <img
-          v-if="courseCover !== ''"
+          v-if="courseCover !== '' && courseCover != null"
           :src="`data:image/png;base64,${courseCover}`"
           class="block w-full h-full object-cover"
           alt="img" draggable="false"
@@ -17,7 +17,7 @@
         <img
           v-else
           class="block w-full h-full object-cover"
-          src="https://picsum.photos/400/300"
+          src="@/assets/img_default.png"
           draggable="false"
         >
       </div>
@@ -39,7 +39,7 @@
 
       <!-- Description -->
       <p class="h-[9ex] w-[calc(100%_-_2rem)] break-words overflow-hidden m-2 mx-4 text-sm dark:text-white" :class="courseDescription === null ? 'text-slate-700' : ''">
-        {{courseDescription === null ? 'no description provided' : courseDescription}}
+        {{courseDescription === null || courseDescription === '' ? 'no description provided' : courseDescription}}
       </p>
 
       <!-- Footer (Creator, Buttons) -->

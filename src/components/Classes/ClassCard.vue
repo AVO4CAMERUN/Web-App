@@ -1,14 +1,14 @@
 <template>
   <div class="flex flex-nowrap">
     <div class="cursor-pointer h-full w-full bg-white overflow-hidden outline outline-[1px] outline-gray-200 rounded-lg hover:shadow-lg transition-shadow dark:shadow-slate-700 dark:outline-gray-700 dark:bg-slate-900">
-      <div class="border h-[200px] relative">
+      <div class="border border-black h-[200px] relative">
         <img
-          v-if="classImg !== ''"
+          v-if="classImg !== '' && classImg != null"
           :src="`data:image/png;base64,${classImg}`"
           class="block w-full h-full object-cover"
           alt="img" draggable="false"
         />
-        <img v-else class="block w-full h-full object-cover" src="https://picsum.photos/400/300" draggable="false">
+        <img v-else class="block w-full h-full object-cover" src="@/assets/img_default.png" draggable="false">
       </div>
 
       <!-- toggle class 'justify-center' on edit mode (sostituisce justify-between) -->
