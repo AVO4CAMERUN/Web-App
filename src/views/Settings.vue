@@ -12,7 +12,7 @@
             </p>
           </div>
           <img
-            v-if="imgCover !== 'null'"
+            v-if="imgCover !== null && imgCover !== ''"
             :src="`data:image/png;base64,${imgStore}`"
             class="rounded-full w-[150px] h-[150px] cursor-pointer object-cover group-hover:ring-4 group-hover:ring-primary-light duration-500"
             alt="profile image"

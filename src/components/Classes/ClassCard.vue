@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-nowrap">
-    <div class="cursor-pointer h-full w-full bg-white overflow-hidden outline outline-[1px] outline-gray-200 rounded-lg hover:shadow-lg transition-shadow dark:shadow-slate-700 dark:outline-gray-700 dark:bg-slate-900">
+    <article class="w-[480px] cursor-pointer bg-white overflow-hidden outline outline-[1px] outline-gray-200 rounded-lg hover:shadow-lg transition-shadow dark:shadow-slate-700 dark:outline-gray-700 dark:bg-slate-900">
       <div class="border border-black h-[200px] relative">
         <img
           v-if="classImg !== '' && classImg != null"
@@ -30,12 +30,12 @@
 
       <footer class="flex flex-row justify-center items-center gap-8 p-4">
         <div class="flex flex-row gap-2">
-          <i class="cursor-pointer fa-solid fa-pen-to-square text-orange-900 text-[24px] dark:invert"></i>
-          <i class="cursor-pointer fa-solid fa-box-archive text-green-900 text-[24px] dark:invert"></i>
-          <i @click.prevent="deleteClass" class="cursor-pointer fa-solid fa-trash-can text-rose-600 text-[24px] dark:invert"></i> <!-- Delete -->
+          <i class="cursor-pointer fa-solid fa-pen-to-square text-orange-900 text-[24px] dark:invert"></i> <!-- Edit -->
+          <i @click.stop="updateClass(true)" class="cursor-pointer fa-solid fa-box-archive text-green-900 text-[24px] dark:invert"></i> <!-- Archive -->
+          <i @click.stop="deleteClass" class="cursor-pointer fa-solid fa-trash-can text-rose-600 text-[24px] dark:invert"></i> <!-- Delete -->
         </div>
       </footer>
-    </div>
+    </article>
   </div>
 </template>
 
@@ -45,7 +45,12 @@ import { classesService as cs } from '@/servises/classes.services'
 export default {
   name: 'ClassCard',
   data: function () {
-    return {}
+    return {
+      class: {
+        name: '',
+        img: ''
+      }
+    }
   },
   props: {
     classId: Number,
@@ -57,6 +62,19 @@ export default {
     deleteClass () {
       this.showConfirm = false
       cs.deleteClassByID(this.classId)
+    },
+    updateClass (archive) {
+      let obj = {}
+      if (archive) {
+        obj = { archived: true }
+      } else {
+        obj = {}
+      }
+      cs.updateClassByID(this.classId, obj)
+        .then((response) => {
+          if (response.code === 200) return response.json()
+        })
+        .then((json) => console.log(json))
     }
   },
   components: {},

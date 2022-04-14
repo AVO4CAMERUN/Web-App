@@ -52,7 +52,7 @@
           <i @click.stop="removeCourse" class="bx bxs-minus-circle text-rose-600 text-[32px]" /> <!-- Remove Course -->
         </div>
         <div v-else-if="parent === 'search'" class="cursor-pointer">
-          <i v-if="!subscribed" @click="addCourses" class="bx bxs-plus-circle text-black text-[32px] dark:invert" /> <!-- Add Course -->
+          <i v-if="!subscribed" @click.stop="addCourses" class="bx bxs-plus-circle text-black text-[32px] dark:invert" /> <!-- Add Course -->
           <i v-else class="bx bxs-check-circle text-emerald-600 text-[32px]"/> <!-- Already Added Course -->
         </div>
         <div v-else-if="parent === 'mycreations'" class="cursor-pointer">
