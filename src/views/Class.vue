@@ -12,9 +12,11 @@
       </div>
     </div>
     <div class="place-items-center w-full mb-6 mx-3 gap-4 grid lg:grid-cols-3 sm:grid-cols-1">
-      <div class="p-2 h-96 grid-col-1 lg:w-full md:w-[75%] sm:w-[50%] bg-white border-gray-200 border-2 rounded-lg"><p>Grafico Statistiche</p></div>
-      <div class="p-2 h-96 grid-col-1 hidden lg:w-full md:block md:w-[75%] bg-white border-gray-200 border-2 rounded-lg"><p>Grafico Statistiche</p></div>
-      <div class="p-2 h-96 grid-col-1 hidden lg:w-full md:block md:w-[75%] bg-white border-gray-200 border-2 rounded-lg"><p>Grafico Statistiche</p></div>
+      <div class="p-2 h-96 grid-col-1 lg:w-full md:w-[75%] sm:w-[50%] bg-white border-gray-200 border-2 rounded-lg"><Statistics
+      nomeCorso="D"
+      /></div>
+      <div class="p-2 h-96 grid-col-1 hidden lg:w-full md:block md:w-[75%] bg-white border-gray-200 border-2 rounded-lg"><Statistics /></div>
+      <div class="p-2 h-96 grid-col-1 hidden lg:w-full md:block md:w-[75%] bg-white border-gray-200 border-2 rounded-lg"><Statistics /></div>
     </div>
     <div class="overflow-hidden">
       <h2 class="mx-4 px-2 py-4 text-2xl font-bold border-b-gray-400 border-b-[1px]">Teachers</h2>
@@ -49,6 +51,7 @@
 
 <script>
 import UserCard from '@/components/Classes/UserCard.vue'
+import Statistics from '@/components/Classes/Statistics.vue'
 // import { classesService as cs } from '@/servises/classes.services'
 import store from '@/store/index'
 // Partecipants: {{currentClass.students.length + currentClass.teachers.length}
@@ -74,7 +77,8 @@ export default {
     }
   },
   components: {
-    UserCard
+    UserCard,
+    Statistics
   },
   mounted () {
     this.fetchUsers(`id=[${this.id}]`)

@@ -11,7 +11,7 @@
         <img
           v-if="course.img_cover"
           :src="`data:image/png;base64,${course.img_cover}`"
-          class="block w-full h-full object-cover"
+          class="block w-full h-full object-cover group-hover:opacity-40 duration-200"
           draggable="false"
         >
         <img v-else
@@ -19,7 +19,7 @@
           src="@/assets/img_default.png"
           draggable="false"
         >
-        <input type="file" @change="setImage" class="absolute inset-0 cursor-pointer opacity-0" />
+        <input type="file" accept="image/*" @change="setImage" class="absolute inset-0 cursor-pointer opacity-0" />
       </div>
 
       <!-- Course Header (Name, Creation Date)-->
