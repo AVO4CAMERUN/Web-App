@@ -27,7 +27,7 @@
         <h1>
           <input
             class="text-lg border-b-2 border-gray-300 lg:whitespace-nowrap font-semibold focus:outline-none dark:bg-slate-900 dark:text-white"
-            placeholder="insert course name"
+            placeholder="Course Name"
             maxlength="15"
             v-model="course.name"
           >
@@ -47,7 +47,7 @@
       <!-- Description (max length 102 characters to fit card dimensions) -->
       <textarea
         class="text-sm h-[7ex] resize-none w-[calc(100%_-_2rem)] break-words overflow-hidden m-2 mx-4 focus:outline-none dark:bg-slate-900 dark:text-white"
-        placeholder="insert description"
+        placeholder="Course Description"
         maxlength="102"
         v-model="course.description"
       />
@@ -70,18 +70,20 @@
 
         <!-- Editing Buttons -->
         <template v-else>
-          <button class="text-sm px-5 py-1.5 mr-2 mb-2 text-white bg-green-700 font-medium rounded-lg hover:bg-green-800 focus:ring-4 focus:ring-green-300 focus:outline-none"
+          <div class="flex flex-row gap-2">
+            <button class="text-sm px-5 py-1.5 mb-2 text-white bg-green-700 font-medium rounded-lg hover:bg-green-800 focus:ring-4 focus:ring-green-300 focus:outline-none"
             :class="course.name === '' || course.subject === 'Select subject' ? 'cursor-not-allowed' : 'cursor-pointer'"
             :disabled="course.name === '' || course.subject === 'Select subject' ? true : false"
             @click="updateCourse"
-          >
-            Save
-          </button>
-          <button class="text-sm px-5 py-1.5 mr-2 mb-2 text-white bg-red-700 font-medium rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 focus:outline-none"
-            @click="this.$emit('setEdit', null)"
-          >
-            Discard
-          </button>
+            >
+              Save
+            </button>
+            <button class="text-sm px-5 py-1.5 mb-2 text-white bg-red-700 font-medium rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 focus:outline-none"
+              @click="this.$emit('setEdit', null)"
+            >
+              Discard
+            </button>
+          </div>
         </template>
       </footer>
     </article>

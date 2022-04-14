@@ -27,22 +27,29 @@
       </div>
 
       <!-- Header -->
-      <header class="flex flex-row items-center justify-center leading-tight p-4">
+      <header class="flex justify-between leading-tight p-4">
         <!-- Class Name -->
         <h1>
           <input
             type="text"
-            class="center text-black text-2xl font-bold capitalize border-b-2 border-gray-300 lg:whitespace-nowrap focus:outline-none dark:bg-slate-900 dark:text-white"
+            class="w-[90%] text-black text-xl font-bold border-b-2 border-gray-300 lg:whitespace-nowrap focus:outline-none dark:bg-slate-900 dark:text-white"
             placeholder="Class Name"
-            maxlength="15"
+            maxlength="20"
             v-model="newClass.name"
           >
         </h1>
         <!-- Date -->
-        <!-- <div class="text-sm self-start pt-[4px] dark:text-white">
+        <div class="text-sm self-start pt-[4px] dark:text-white">
           {{todayDate}}
-        </div> -->
+        </div>
       </header>
+
+      <!-- Description -->
+      <textarea
+        class="text-sm h-[8ex] mx-4 resize-none w-[calc(100%_-_2rem)] break-words overflow-hidden focus:outline-none dark:bg-slate-900 dark:text-white"
+        placeholder="Class Description"
+        maxlength="102"
+      />
 
       <!-- Footer -->
       <footer class="flex flex-row justify-center items-center gap-8 p-4">
