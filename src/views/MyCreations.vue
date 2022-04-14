@@ -10,18 +10,12 @@
     <!-- Courses Grid -->
     <div class="m-8 mb-2 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(360px,_1fr))]">
       <component
-        :is="card.courseID === courseToEdit ? 'CreateCourseCard' : 'CourseCard'"
-        v-for="(card) in coursesCards"
-        :key="card.id"
-        :courseID="card.courseID"
-        :courseName="card.courseName"
-        :courseDescription="card.courseDescription"
-        :courseCover="card.courseCover"
-        :creatorName="card.creatorName"
-        :creationDate="card.creationDate"
-        :courseSubject="card.courseSubject"
+        :is="course.courseID === courseToEdit ? 'CreateCourseCard' : 'CourseCard'"
+        v-for="(course) in coursesCards"
+        :key="course.id"
+        :course="course"
         :parent="'mycreations'"
-        @course-to-removeID="showPopUp"
+        @removeCard="showPopUp"
         @setEdit="setCourseEdit"
         @newCourse="addCourseCard"
       />
@@ -44,14 +38,10 @@
         :is="userClass.id === classToEdit ? 'CreateClassCard' : 'ClassCard'"
         v-for="(userClass, index) in classesCards"
         :key="userClass.id"
-        :classId="userClass.id"
-        :name="userClass.name"
-        :classImg="userClass.img_cover"
-        :creationDate="userClass.creation_date"
-        :description="null"
-        :archived="userClass.archived"
+        :groupClass="userClass"
         :parent="'mycreations'"
         :participants="participants[index]"
+        @removeCard="showPopUp"
         @setEdit="setClassEdit"
         @newClass="addClassCard"
       />
@@ -67,7 +57,7 @@
       <PopUp
         v-if="showConfirm"
         @noAction="showConfirm = false"
-        @doAction="deleteCourse"
+        @doAction="doAction"
         :type="'confirm'"
         :message="'Warning'"
         :content="'Are you sure you want to delete this course?'"
@@ -83,6 +73,7 @@ import CreateClassCard from '@/components/Classes/CreateClassCard.vue'
 import CreateCourseCard from '@/components/Course/CreateCourseCard.vue'
 import PopUp from '@/components/Base/PopUp.vue'
 import { coursesService as cs } from '@/servises/course.services'
+import { classesService as cls } from '@/servises/classes.services'
 import store from '@/store/index'
 
 export default {
@@ -91,7 +82,7 @@ export default {
     return {
       courseToEdit: null,
       classToEdit: null,
-      tempCourseID: null,
+      cardToRemove: {},
       showConfirm: false,
       coursesCards: [],
       classesCards: []
@@ -105,11 +96,45 @@ export default {
     PopUp
   },
   mounted () {
+    // Fetch my courses and my classes
     this.fetchMyCoursesCreations(`?email_creator=["${store.state.login.email}"]`)
     this.fetchClasses()
   },
   methods: {
-    fetchMyCoursesCreations (filter) {
+    // Classes Actions
+    fetchClasses () { // Fetch
+      store.dispatch('classes/fetchClasses', '')
+        .then((response) => {
+          this.classesCards = response
+          this.classesCards.forEach(c => {
+            const date = new Date(c.creation_date)
+            c.creation_date = `${date.getUTCDate()}/${date.getUTCMonth() + 1}/${date.getUTCFullYear()}`
+          })
+        })
+    },
+    setClassEdit (id) { // Set Edit Mode
+      if (this.classToEdit === null || id === null) this.classToEdit = id
+    },
+    deleteClass () { // Delete
+      this.showConfirm = false
+      cls.deleteClassByID(this.cardToRemove.id)
+        .then((response) => {
+          if (response?.status === 200) {
+            const index = this.classesCards.findIndex((grouoClass) => grouoClass.id === this.cardToRemove.id)
+            this.classesCards.splice(index, 1)
+            if (this.classesCards.length <= 0) this.empty = true
+            else this.empty = false
+          }
+          this.cardToRemove = {}
+        })
+    },
+    addClassCard (classID) { // Add Card
+      this.classToEdit = null
+      this.fetchClasses()
+    },
+
+    // Courses Actions
+    fetchMyCoursesCreations (filter) { // Fetch
       store.dispatch('course/fetchCourses', filter)
         .then((response) => {
           if (response.status === 404) {
@@ -121,41 +146,24 @@ export default {
           return store.dispatch('course/fetchCourses', `?id_course=[${ids}]`)
         })
         .then((courses) => {
-          this.coursesCards = []
-          courses.forEach(course => {
-            const date = new Date(course.creation_date)
-            this.coursesCards.push({
-              courseID: course.id_course,
-              courseName: course.name,
-              courseDescription: course.description,
-              creatorName: course.email_creator,
-              courseSubject: course.subject,
-              courseCover: course.img_cover,
-              creationDate: `${date.getUTCDate()}/${date.getUTCMonth() + 1}/${date.getUTCFullYear()}`
-            })
+          this.coursesCards = courses
+          this.coursesCards.forEach(card => {
+            const date = new Date(card.creation_date)
+            card.creation_date = `${date.getUTCDate()}/${date.getUTCMonth() + 1}/${date.getUTCFullYear()}`
           })
           if (this.coursesCards.length <= 0) this.empty = true
           else this.empty = false
         })
         .catch(() => {})
     },
-    fetchClasses () {
-      store.dispatch('classes/fetchClasses', '')
-        .then((response) => {
-          this.classesCards = response
-          this.classesCards.forEach(c => {
-            const date = new Date(c.creation_date)
-            c.creation_date = `${date.getUTCDate()}/${date.getUTCMonth() + 1}/${date.getUTCFullYear()}`
-          })
-        })
+    setCourseEdit (id) { // Set Edit Mode
+      if (this.courseToEdit === null || id === null) this.courseToEdit = id
     },
-    // Delete Course
-    deleteCourse () {
+    deleteCourse () { // Delete
       this.showConfirm = false
-      cs.deleteCourseByID(this.tempCourseID)
+      cs.deleteCourseByID(this.cardToRemove.id)
         .then((response) => {
           if (response?.status === 200) {
-            console.log('das')
             const index = this.coursesCards.findIndex((course) => course.courseID === this.tempCourseID)
             this.coursesCards.splice(index, 1)
             if (this.coursesCards.length <= 0) this.empty = true
@@ -164,24 +172,18 @@ export default {
           this.tempCourseID = null
         })
     },
-    addCourseCard (courseID) {
+    addCourseCard (courseID) { // Add Card
       this.courseToEdit = null
       this.fetchMyCoursesCreations(`?email_creator=["${store.state.login.email}"]`)
     },
-    addClassCard (classID) {
-      this.classToEdit = null
-      this.fetchClasses()
-    },
-    // Show Delete Course PopUp
-    showPopUp (courseID) {
-      this.tempCourseID = courseID
+
+    // Pop UP Actions
+    showPopUp (obj) { // Show
+      this.cardToRemove = obj
       this.showConfirm = true
     },
-    setCourseEdit (id) {
-      if (this.courseToEdit === null || id === null) this.courseToEdit = id
-    },
-    setClassEdit (id) {
-      if (this.classToEdit === null || id === null) this.classToEdit = id
+    doAction () { // Action
+      this.cardToRemove.type === 'course' ? this.deleteCourse() : this.deleteClass()
     }
   },
   computed: {

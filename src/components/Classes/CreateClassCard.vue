@@ -41,7 +41,7 @@
 
         <!-- Date -->
         <div class="text-sm self-start pt-[4px] dark:text-white">
-          {{creationDate === undefined ? todayDate : creationDate}}
+          {{groupClass?.creation_date === undefined ? todayDate : groupClass.creation_date}}
         </div>
       </header>
 
@@ -56,7 +56,7 @@
       <!-- Footer -->
       <footer class="flex flex-row justify-center items-center gap-8 p-4">
         <!-- Create Class Button -->
-        <button v-if="name === undefined"
+        <button v-if="!groupClass?.name"
           class="text-sm px-5 py-2.5 text-white bg-green-700 font-medium rounded-lg cursor-pointer hover:bg-green-800 focus:ring-4 focus:ring-green-300 focus:outline-none"
           :class="newClass.name === '' ? 'cursor-not-allowed' : 'cursor-pointer'"
           :disabled="newClass.name === '' ? true : false"
@@ -101,12 +101,12 @@ export default {
       }
     }
   },
-  props: ['classId', 'name', 'creationDate', 'classImg', 'description', 'parent'],
+  props: ['groupClass', 'parent'],
   mounted () {
-    if (this.name) {
-      this.newClass.name = this.name
-      this.newClass.description = this.description
-      this.newClass.img_cover = this.classImg
+    if (this.groupClass) {
+      this.newClass.name = this.groupClass.name
+      this.newClass.description = this.groupClass.description
+      this.newClass.img_cover = this.groupClass.img_cover
     }
   },
   methods: {
@@ -115,22 +115,23 @@ export default {
       cs.createClass(this.newClass)
         .then((response) => {
           if (response?.status === 200) {
-            this.$emit('newClass', this.classID)
+            this.$emit('newClass')
           }
 
           // reset class data
           this.newClass = {
             name: '',
-            img_cover: ''
+            img_cover: '',
+            description: ''
           }
         })
     },
     // Update Class data
     updateClass () {
       const obj = { name: this.newClass.name, img_cover: this.newClass.img_cover }
-      cs.updateClassByID(this.classId, obj)
+      cs.updateClassByID(this.groupClass.id, obj)
         .then((response) => {
-          if (response?.status === 200) this.$emit('newClass', this.classId)
+          if (response?.status === 200) this.$emit('newClass', this.groupClass.id)
         })
     },
     // Convert image cover to Base64 and set preview

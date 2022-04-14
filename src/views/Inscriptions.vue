@@ -5,15 +5,9 @@
   </div>
   <div class="m-8 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(360px,_1fr))]">
     <CourseCard
-      v-for="(card) in cards"
-      :key="card.id"
-      :courseID="card.id_course"
-      :courseName="card.name"
-      :courseDescription="card.description"
-      :courseCover="card.img_cover"
-      :creatorName="card.email_creator"
-      :creationDate="card.creation_date"
-      :courseSubject="card.subject"
+      v-for="(course) in cards"
+      :key="course.id_course"
+      :course="course"
       :parent="'inscriptions'"
       @courseID="removeCourseCard"
     />
@@ -46,7 +40,6 @@ export default {
             return response.json()
           } else if (response.status === 404) {
             this.empty = true
-            return 1
           }
         })
         .then((coursesList) => {

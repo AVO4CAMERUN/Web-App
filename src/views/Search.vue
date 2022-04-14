@@ -7,16 +7,10 @@
   </div> -->
   <div class="m-8 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(360px,_1fr))]">
     <CourseCard
-      v-for="card in cards"
-      :key="card"
-      :courseID="card.courseID"
-      :courseName="card.courseName"
-      :courseDescription="card.courseDescription"
-      :courseCover="card.courseCover"
-      :creatorName="card.creatorName"
-      :creationDate="card.creationDate"
-      :courseSubject="card.courseSubject"
-      :subscribed="card.subscribed"
+      v-for="course in cards"
+      :key="course.id_course"
+      :course="course"
+      :subscribed="course.subscribed"
       :parent="'search'"
       @error="statusHandler"
     />
@@ -53,20 +47,11 @@ export default {
       store.dispatch('course/fetchCourses', filter)
         .then((courses) => {
           // Refresh data model
-          this.cards = []
-          for (const course of courses) {
-            const date = new Date(course.creation_date)
-
-            this.cards.push({
-              courseID: course.id_course,
-              courseName: course.name,
-              courseDescription: course.description,
-              courseSubject: course.subject,
-              creatorName: course.email_creator,
-              courseCover: course.img_cover,
-              creationDate: `${date.getUTCDate()}/${date.getUTCMonth() + 1}/${date.getUTCFullYear()}`
-            })
-          }
+          this.cards = courses
+          this.cards.forEach(card => {
+            const date = new Date(card.creation_date)
+            card.creation_date = `${date.getUTCDate()}/${date.getUTCMonth() + 1}/${date.getUTCFullYear()}`
+          })
           this.fetchInscriptions(`?email=["${store.state.login.email}"]`)
         })
         .catch(() => {})
@@ -91,7 +76,7 @@ export default {
         })
         .then((courses) => {
           courses.forEach(course => {
-            const i = this.cards.findIndex(card => card.courseID === course.id_course)
+            const i = this.cards.findIndex(card => card.id_course === course.id_course)
             this.cards[i].subscribed = true
           })
         })

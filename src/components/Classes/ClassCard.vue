@@ -6,8 +6,8 @@
       <!-- Image -->
       <div class="border h-[200px] relative">
         <img
-          v-if="classImg !== '' && classImg != null"
-          :src="`data:image/png;base64,${classImg}`"
+          v-if="groupClass.img_cover !== '' && groupClass.img_cover != null"
+          :src="`data:image/png;base64,${groupClass.img_cover}`"
           class="block w-full h-full object-cover"
           alt="img" draggable="false"
         />
@@ -19,18 +19,18 @@
 
         <!-- Name -->
         <h1 class="overflow-hidden text-black text-xl font-bold capitalize dark:text-white">
-          {{name}}
+          {{groupClass.name}}
         </h1>
 
         <!-- Creation Date -->
         <div class="text-sm self-start pt-[4px] dark:text-white">
-          {{creationDate}}
+          {{groupClass.creation_date}}
         </div>
       </header>
 
       <!-- Description -->
-      <p class="h-[9ex] w-[calc(100%_-_2rem)] m-2 mx-4 break-words overflow-hidden text-sm dark:text-white" :class="description === null ? 'text-slate-700' : ''">
-        {{description === null || description === '' ? 'no description provided' : description}}
+      <p class="h-[9ex] w-[calc(100%_-_2rem)] m-2 mx-4 break-words overflow-hidden text-sm dark:text-white" :class="groupClass.description === null ? 'text-slate-700' : ''">
+        {{groupClass.description === null || groupClass.description === '' || !groupClass.description ? 'no description provided' : groupClass.description}}
       </p>
 
       <!-- Footer -->
@@ -43,7 +43,7 @@
 
         <!-- Buttons -->
         <div v-if="parent === 'mycreations'" class="flex flex-row gap-2">
-          <i @click.stop="this.$emit('setEdit', classId)" class="cursor-pointer bx bx-edit text-black text-[32px] dark:invert"></i> <!-- Edit -->
+          <i @click.stop="this.$emit('setEdit', groupClass.id)" class="cursor-pointer bx bx-edit text-black text-[32px] dark:invert"></i> <!-- Edit -->
           <i @click.stop="updateClass()" class="cursor-pointer bx bx-box text-green-900 text-[32px] dark:invert"></i> <!-- Archive -->
           <i @click.stop="deleteClass" class="cursor-pointer bx bx-trash text-rose-600 text-[32px] dark:invert"></i> <!-- Delete -->
         </div>
@@ -60,15 +60,14 @@ export default {
   data: function () {
     return {}
   },
-  props: ['classId', 'name', 'creationDate', 'classImg', 'participants', 'description', 'archived', 'parent'],
+  props: ['groupClass', 'participants', 'parent'],
   methods: {
     deleteClass () {
-      this.showConfirm = false
-      cs.deleteClassByID(this.classId)
+      this.$emit('removeCard', { id: this.groupClass.id, type: 'class' })
     },
     updateClass () {
-      const obj = { archived: !this.archived }
-      cs.updateClassByID(this.classId, obj)
+      const obj = { archived: !this.groupClass.archived }
+      cs.updateClassByID(this.groupClass.id, obj)
         .then((response) => {
           if (response.code === 200) return response.json()
         })

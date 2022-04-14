@@ -1,14 +1,14 @@
 <template>
+ <div v-if="empty" class="bg-yellow-100 border-t border-b border-l border-r border-yellow-500 text-yellow-700 px-4 py-3 mx-5 my-5">
+    <p class="font-bold">Not Found</p>
+    <p class="text-sm">Inserire messaggio</p>
+  </div>
   <div class="m-8 grid gap-4 grid-cols-[repeat(auto-fill,_minmax(360px,_1fr))]">
     <ClassCard
       v-for="(userClass, index) in classes" :key="userClass"
       :classId="userClass.id"
-      :name="userClass.name"
-      :classImg="userClass.img_cover"
-      :creationDate="userClass.creation_date"
-      :archived="userClass.archived"
+      :groupClass="userClass"
       :participants="participants[index]"
-      :description="null"
       :parent="'myclasses'"
       @click="setCurrentClass(userClass.id)"
     />
@@ -24,7 +24,8 @@ export default {
   name: 'myclasses',
   data: function () {
     return {
-      classes: []
+      classes: [],
+      empty: false
     }
   },
   components: {
@@ -44,6 +45,10 @@ export default {
       store.dispatch('classes/fetchClasses', '')
         .then((response) => {
           this.classes = response
+          if (this.classes.length === 0) {
+            this.empty = true
+            return
+          }
           this.classes.forEach(c => {
             const date = new Date(c.creation_date)
             c.creation_date = `${date.getUTCDate()}/${date.getUTCMonth() + 1}/${date.getUTCFullYear()}`

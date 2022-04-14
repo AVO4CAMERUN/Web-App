@@ -9,8 +9,8 @@
           <p class="font-semibold text-xl dark:text-white">change cover</p>
         </div>
         <img
-          v-if="course.img_cover"
-          :src="`data:image/png;base64,${course.img_cover}`"
+          v-if="newCourse.img_cover"
+          :src="`data:image/png;base64,${newCourse.img_cover}`"
           class="block w-full h-full object-cover group-hover:opacity-40 duration-200"
           draggable="false"
         >
@@ -29,16 +29,16 @@
             class="text-lg border-b-2 border-gray-300 lg:whitespace-nowrap font-semibold focus:outline-none dark:bg-slate-900 dark:text-white"
             placeholder="Course Name"
             maxlength="15"
-            v-model="course.name"
+            v-model="newCourse.name"
           >
         </h1>
         <div class="text-sm self-start dark:text-white pt-[4px]">
-          {{creationDate === undefined ? todayDate : creationDate}}
+          {{course?.creation_date === undefined ? todayDate : course?.creation_date}}
         </div>
       </header>
 
       <!-- Subject -->
-      <select v-model="course.subject" class="text-sm mx-4 dark:bg-slate-900 dark:text-white focus:outline-none">
+      <select v-model="newCourse.subject" class="text-sm mx-4 dark:bg-slate-900 dark:text-white focus:outline-none">
         <option v-for="subject in subjects" :key="subject" :disabled="subject === 'Select subject' ? true : false">
           {{subject}}
         </option>
@@ -49,7 +49,7 @@
         class="text-sm h-[7ex] resize-none w-[calc(100%_-_2rem)] break-words overflow-hidden m-2 mx-4 focus:outline-none dark:bg-slate-900 dark:text-white"
         placeholder="Course Description"
         maxlength="102"
-        v-model="course.description"
+        v-model="newCourse.description"
       />
 
       <!-- Footer (Creator, Buttons) -->
@@ -59,10 +59,10 @@
         </div>
 
         <!-- Creation Button -->
-        <button v-if="courseName === undefined"
+        <button v-if="!course?.name"
           class="text-sm px-5 py-1.5 mr-2 mb-2 text-white bg-green-700 font-medium rounded-lg hover:bg-green-800 focus:ring-4 focus:ring-green-300 focus:outline-none"
-          :class="course.name === '' || course.subject === 'Select subject' ? 'cursor-not-allowed' : 'cursor-pointer'"
-          :disabled="course.name === '' || course.subject === 'Select subject' ? true : false"
+          :class="newCourse.name === '' || newCourse.subject === 'Select subject' ? 'cursor-not-allowed' : 'cursor-pointer'"
+          :disabled="newCourse.name === '' || newCourse.subject === 'Select subject' ? true : false"
           @click="createCourse"
         >
           Create Course
@@ -72,8 +72,8 @@
         <template v-else>
           <div class="flex flex-row gap-2">
             <button class="text-sm px-5 py-1.5 mb-2 text-white bg-green-700 font-medium rounded-lg hover:bg-green-800 focus:ring-4 focus:ring-green-300 focus:outline-none"
-            :class="course.name === '' || course.subject === 'Select subject' ? 'cursor-not-allowed' : 'cursor-pointer'"
-            :disabled="course.name === '' || course.subject === 'Select subject' ? true : false"
+            :class="newCourse.name === '' || newCourse.subject === 'Select subject' ? 'cursor-not-allowed' : 'cursor-pointer'"
+            :disabled="newCourse.name === '' || newCourse.subject === 'Select subject' ? true : false"
             @click="updateCourse"
             >
               Save
@@ -98,7 +98,7 @@ export default {
   name: 'CreateCourseCard',
   data: function () {
     return {
-      course: {
+      newCourse: {
         name: '',
         description: '',
         img_cover: '',
@@ -107,30 +107,28 @@ export default {
       subjects: ['Select subject']
     }
   },
-  props: [
-    'courseID', 'courseName', 'courseDescription',
-    'courseCover', 'creationDate', 'courseSubject'
-  ],
+  props: ['course'],
+  emits: ['newCourse', 'setEdit'],
   mounted () {
-    if (this.courseName) {
-      this.course.name = this.courseName
-      this.course.description = this.courseDescription
-      this.course.img_cover = this.courseCover
-      this.course.subject = this.courseSubject
+    if (this.course !== undefined) {
+      this.newCourse.name = this.course.name
+      this.newCourse.description = this.course.description
+      this.newCourse.img_cover = this.course.img_cover
+      this.newCourse.subject = this.course.subject
     }
     this.fetchSubject()
   },
   methods: {
     // Course Creation Method (Services)
     createCourse () {
-      cs.createCourse(this.course)
+      cs.createCourse(this.newCourse)
         .then((response) => {
           if (response?.status === 200) {
-            this.$emit('newCourse', this.courseID)
+            this.$emit('newCourse')
           }
 
           // reset course data
-          this.course = {
+          this.newCourse = {
             name: '',
             description: '',
             img_cover: '',
@@ -140,9 +138,9 @@ export default {
     },
     // Course Update
     updateCourse () {
-      cs.updateCourseByID(this.courseID, this.course)
+      cs.updateCourseByID(this.course.id_course, this.newCourse)
         .then((response) => {
-          if (response?.status === 200) this.$emit('newCourse', this.courseID)
+          if (response?.status === 200) this.$emit('newCourse', this.course.id_course)
         })
     },
     // Convert image cover to Base64 and set preview
@@ -154,7 +152,7 @@ export default {
 
       reader.onload = (e) => {
         const tmp = e.target.result.split(',')
-        this.course.img_cover = tmp[1]
+        this.newCourse.img_cover = tmp[1]
       }
       reader.readAsDataURL(files[0])
     },

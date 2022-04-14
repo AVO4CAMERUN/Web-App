@@ -9,8 +9,8 @@
       <!-- Image -->
       <div class="h-[200px] relative">
         <img
-          v-if="courseCover !== '' && courseCover != null"
-          :src="`data:image/png;base64,${courseCover}`"
+          v-if="course.img_cover !== '' && course.img_cover != null"
+          :src="`data:image/png;base64,${course.img_cover}`"
           class="block w-full h-full object-cover"
           alt="img" draggable="false"
         >
@@ -26,27 +26,27 @@
       <header class="flex items-center justify-between px-4 py-2">
         <h1>
           <span class="text-lg lg:whitespace-nowrap font-semibold dark:text-white">
-            {{courseName}}
+            {{course.name}}
           </span>
           <div class="text-sm dark:text-white">
-            <i>{{courseSubject}}</i>
+            <i>{{course.subject}}</i>
           </div>
         </h1>
         <div class="text-sm self-start pt-[4px] dark:text-white">
-          {{creationDate}}
+          {{course.creation_date}}
         </div>
       </header>
 
       <!-- Description -->
-      <p class="h-[9ex] w-[calc(100%_-_2rem)] break-words overflow-hidden m-2 mx-4 text-sm dark:text-white" :class="courseDescription === null ? 'text-slate-700' : ''">
-        {{courseDescription === null || courseDescription === '' ? 'no description provided' : courseDescription}}
+      <p class="h-[9ex] w-[calc(100%_-_2rem)] break-words overflow-hidden m-2 mx-4 text-sm dark:text-white" :class="course.description === null ? 'text-slate-700' : ''">
+        {{course.description === null || course.description === '' ? 'no description provided' : course.description}}
       </p>
 
       <!-- Footer (Creator, Buttons) -->
       <footer class="flex items-center justify-between leading-none px-4 pb-2">
         <div class="flex items-center">
           <p class="text-sm dark:text-white">
-            {{creatorName}}
+            {{course.email_creator}}
           </p>
         </div>
         <!-- Buttons Conditional Rendering -->
@@ -78,16 +78,16 @@ export default {
   },
   methods: {
     removeCourse () {
-      sub.deleteSubscribtion(this.courseID)
+      sub.deleteSubscribtion(this.course.id_course)
         .then((response) => {
           if (response?.status === 200) {
-            this.$emit('courseID', this.courseID)
+            this.$emit('courseID', this.course.id_course)
           }
         })
     },
     addCourses () {
       // Request to subscribe
-      sub.postSubscription(this.courseID)
+      sub.postSubscription(this.course.id_course)
         .then((response) => {
           if (response.status === 200) {
             this.$router.push('/inscriptions')
@@ -96,20 +96,17 @@ export default {
         })
     },
     deleteCourse () {
-      this.$emit('course-to-removeID', this.courseID)
+      this.$emit('removeCard', { id: this.course.id_course, type: 'course' })
     },
     setCurrentCourse (id) {
-      store.dispatch('course/setCurrentCourse', this.courseID)
+      store.dispatch('course/setCurrentCourse', this.course.id_course)
         .then(() => {
           if (this.parent !== 'mycreations') router.push({ name: 'course' })
           else router.push({ name: 'course', query: { edit: 'on' } })
         })
     }
   },
-  props: [
-    'progress', 'courseID', 'courseName', 'courseDescription',
-    'courseCover', 'creatorName', 'creationDate',
-    'courseSubject', 'parent', 'subscribed'
-  ]
+  props: ['course', 'progress', 'parent', 'subscribed'],
+  emits: ['setEdit', 'removeCard', 'error', 'courseID', 'newCourse']
 }
 </script>
