@@ -6,6 +6,7 @@
       :name="userClass.name"
       :classImg="userClass.img_cover"
       :creationDate="userClass.creation_date"
+      :archived="userClass.archived"
       @click="setCurrentClass(userClass.id)"
     />
   </div>

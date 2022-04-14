@@ -28,6 +28,16 @@
 
     <!-- Class Grid -->
     <div class="m-8 mt-2 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(360px,_1fr))]">
+      <component
+        :is="userClass.id === classToEdit ? 'CreateClassCard' : 'ClassCard'"
+        v-for="(userClass) in classesCards"
+        :key="userClass.id"
+        :classId="userClass.id"
+        :name="userClass.name"
+        :classImg="userClass.img_cover"
+        :creationDate="userClass.creation_date"
+        @click="setCurrentClass(userClass.id)"
+      />
       <!-- Class Creation Card -->
       <CreateClassCard
         @newClass="addClassCard"

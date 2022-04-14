@@ -12,8 +12,8 @@ async function getClassesByFilter (filter) {
 }
 
 // Function for update class (PUT)
-async function updateClassByID (putObj) {
-  return await service.genericRequest('classes', 'PUT', putObj)
+async function updateClassByID (id, putObj) {
+  return await service.genericRequestWithAuth(`classes/${id}`, 'PUT', putObj)
 }
 
 // Function for delete class (DELETE)

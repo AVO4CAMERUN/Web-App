@@ -61,7 +61,7 @@ export default {
       buttons: [
         { icon: 'bx bx-search icon', message: 'Search', path: '/search', event: this.empty },
         { icon: 'bx bx-book-bookmark icon', message: 'Inscriptions', path: '/inscriptions', event: this.empty },
-        { icon: 'bx bx-chalkboard icon', message: 'My Class', path: '/myclasses', event: this.empty },
+        { icon: 'bx bx-chalkboard icon', message: 'My Class', path: '/myclass', event: this.empty },
         { icon: 'bx bx-folder-plus', message: 'My Creations', path: '/mycreations', event: this.empty },
         { icon: 'bx bx-cog icon', message: 'Settings', path: '/settings', event: this.empty },
         { icon: 'bx bx-log-out', message: 'Logout', path: '', event: this.logout }
@@ -83,7 +83,7 @@ export default {
         const index = this.buttons.findIndex(element => element.message === 'My Class')
         this.buttons[index].message = 'My Classes'
         this.buttons[index].path = '/myclasses'
-      }
+      } else if (this.role === 'STUDENT') this.buttons.splice(3, 1)
     }
   },
   computed: {
