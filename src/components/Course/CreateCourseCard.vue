@@ -142,9 +142,7 @@ export default {
     updateCourse () {
       cs.updateCourseByID(this.courseID, this.course)
         .then((response) => {
-          if (response?.status === 200) {
-            this.$emit('newCourse', this.courseID)
-          }
+          if (response?.status === 200) this.$emit('newCourse', this.courseID)
         })
     },
     // Convert image cover to Base64 and set preview

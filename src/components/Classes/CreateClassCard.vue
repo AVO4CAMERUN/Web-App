@@ -20,7 +20,7 @@
         <img
           v-else
           class="block w-full h-full object-cover group-hover:opacity-40 duration-200"
-          src="https://picsum.photos/400/300"
+          src="@/assets/img_default.png"
           draggable="false"
         >
         <input type="file" @change="setImage" class="absolute inset-0 cursor-pointer opacity-0">
@@ -38,9 +38,10 @@
             v-model="newClass.name"
           >
         </h1>
+
         <!-- Date -->
         <div class="text-sm self-start pt-[4px] dark:text-white">
-          {{todayDate}}
+          {{creationDate === undefined ? todayDate : creationDate}}
         </div>
       </header>
 
@@ -49,12 +50,13 @@
         class="text-sm h-[8ex] mx-4 resize-none w-[calc(100%_-_2rem)] break-words overflow-hidden focus:outline-none dark:bg-slate-900 dark:text-white"
         placeholder="Class Description"
         maxlength="102"
+        v-model="newClass.description"
       />
 
       <!-- Footer -->
       <footer class="flex flex-row justify-center items-center gap-8 p-4">
         <!-- Create Class Button -->
-        <button
+        <button v-if="name === undefined"
           class="text-sm px-5 py-2.5 text-white bg-green-700 font-medium rounded-lg cursor-pointer hover:bg-green-800 focus:ring-4 focus:ring-green-300 focus:outline-none"
           :class="newClass.name === '' ? 'cursor-not-allowed' : 'cursor-pointer'"
           :disabled="newClass.name === '' ? true : false"
@@ -62,6 +64,24 @@
         >
           Create Class
         </button>
+
+        <!-- Editing Buttons -->
+        <template v-else>
+          <div class="flex flex-row gap-2">
+            <button class="text-sm px-5 py-1.5 mb-2 text-white bg-green-700 font-medium rounded-lg hover:bg-green-800 focus:ring-4 focus:ring-green-300 focus:outline-none"
+            :class="newClass.name === '' ? 'cursor-not-allowed' : 'cursor-pointer'"
+            :disabled="newClass.name === '' ? true : false"
+            @click="updateClass"
+            >
+              Save
+            </button>
+            <button class="text-sm px-5 py-1.5 mb-2 text-white bg-red-700 font-medium rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 focus:outline-none"
+              @click="this.$emit('setEdit', null)"
+            >
+              Discard
+            </button>
+          </div>
+        </template>
       </footer>
     </article>
   </div>
@@ -76,8 +96,17 @@ export default {
     return {
       newClass: {
         name: '',
-        img_cover: ''
+        img_cover: '',
+        description: ''
       }
+    }
+  },
+  props: ['classId', 'name', 'creationDate', 'classImg', 'description', 'parent'],
+  mounted () {
+    if (this.name) {
+      this.newClass.name = this.name
+      this.newClass.description = this.description
+      this.newClass.img_cover = this.classImg
     }
   },
   methods: {
@@ -94,6 +123,14 @@ export default {
             name: '',
             img_cover: ''
           }
+        })
+    },
+    // Update Class data
+    updateClass () {
+      const obj = { name: this.newClass.name, img_cover: this.newClass.img_cover }
+      cs.updateClassByID(this.classId, obj)
+        .then((response) => {
+          if (response?.status === 200) this.$emit('newClass', this.classId)
         })
     },
     // Convert image cover to Base64 and set preview

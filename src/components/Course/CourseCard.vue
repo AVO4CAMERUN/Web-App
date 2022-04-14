@@ -4,7 +4,7 @@
     class="flex flex-wrap"
     @click="setCurrentCourse"
   >
-    <article class="w-[470px] bg-white overflow-hidden outline outline-[1px] outline-gray-200 rounded-lg hover:shadow-lg transition-shadow dark:shadow-slate-700 dark:outline-gray-700 dark:bg-slate-900">
+    <article class="w-[480px] bg-white overflow-hidden outline outline-[1px] outline-gray-200 rounded-lg hover:shadow-lg transition-shadow dark:shadow-slate-700 dark:outline-gray-700 dark:bg-slate-900">
 
       <!-- Image -->
       <div class="h-[200px] relative">
@@ -45,7 +45,9 @@
       <!-- Footer (Creator, Buttons) -->
       <footer class="flex items-center justify-between leading-none px-4 pb-2">
         <div class="flex items-center">
-          <p class="text-sm dark:text-white">{{creatorName}}</p>
+          <p class="text-sm dark:text-white">
+            {{creatorName}}
+          </p>
         </div>
         <!-- Buttons Conditional Rendering -->
         <div v-if="parent === 'inscriptions'" class="cursor-pointer">

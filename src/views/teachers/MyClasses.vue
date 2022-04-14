@@ -1,12 +1,15 @@
 <template>
   <div class="m-8 grid gap-4 grid-cols-[repeat(auto-fill,_minmax(360px,_1fr))]">
     <ClassCard
-      v-for="(userClass) in classes" :key="userClass"
+      v-for="(userClass, index) in classes" :key="userClass"
       :classId="userClass.id"
       :name="userClass.name"
       :classImg="userClass.img_cover"
       :creationDate="userClass.creation_date"
       :archived="userClass.archived"
+      :participants="participants[index]"
+      :description="null"
+      :parent="'myclasses'"
       @click="setCurrentClass(userClass.id)"
     />
   </div>
@@ -46,6 +49,15 @@ export default {
             c.creation_date = `${date.getUTCDate()}/${date.getUTCMonth() + 1}/${date.getUTCFullYear()}`
           })
         })
+    }
+  },
+  computed: {
+    participants () {
+      const part = []
+      this.classes.forEach(e => {
+        part.push(e.teachers.length + e.students.length)
+      })
+      return part
     }
   }
 }
