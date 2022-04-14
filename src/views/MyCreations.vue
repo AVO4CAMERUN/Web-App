@@ -1,6 +1,12 @@
 <template>
   <div class="flex flex-col justify-center">
 
+    <div class="flex flex-row gap-2 m-8 mb-2 bg-none p-2">
+      <hr class="rounded border-[2px] border-green-700 self-center grow">
+      <p class="grow-0 text-green-800 text-xl font-semibold">Your own courses</p>
+      <hr class="rounded border-[2px] border-green-700 self-center grow">
+    </div>
+
     <!-- Courses Grid -->
     <div class="m-8 mb-2 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(360px,_1fr))]">
       <component
@@ -24,6 +30,12 @@
       <CreateCourseCard
         @newCourse="addCourseCard"
       />
+    </div>
+
+    <div class="flex flex-row gap-2 m-8 mb-2 bg-none p-2">
+      <hr class="rounded border-[2px] border-green-700 self-center grow">
+      <p class="grow-0 text-green-800 text-xl font-semibold">Your own classes</p>
+      <hr class="rounded border-[2px] border-green-700 self-center grow">
     </div>
 
     <!-- Class Grid -->

@@ -44,7 +44,7 @@
         <!-- Buttons -->
         <div v-if="parent === 'mycreations'" class="flex flex-row gap-2">
           <i @click.stop="this.$emit('setEdit', classId)" class="cursor-pointer bx bx-edit text-black text-[32px] dark:invert"></i> <!-- Edit -->
-          <i @click.stop="updateClass()" class="cursor-pointer fa-solid fa-box-archive text-green-900 text-[32px] dark:invert"></i> <!-- Archive -->
+          <i @click.stop="updateClass()" class="cursor-pointer bx bx-box text-green-900 text-[32px] dark:invert"></i> <!-- Archive -->
           <i @click.stop="deleteClass" class="cursor-pointer bx bx-trash text-rose-600 text-[32px] dark:invert"></i> <!-- Delete -->
         </div>
       </footer>
