@@ -5,21 +5,19 @@
         <img :src="`data:image/png;base64,${this.currentClass.img_cover}`" alt="" class="float-left w-10 sm:w-16 h-10 sm:h-16 object-cover rounded-full">
         <div class="flex flex-col leading-tight text-3xl h-16 pl-4">
           <div class="text-2xl mt-1 flex items-center">
-            <span class="text-gray-700 mr-3">{{currentClass.name}}</span>
+            <span class="text-gray-700 mr-3 dark:text-light-text">{{currentClass.name}}</span>
           </div>
-          <span class="text-lg text-gray-600">Partecipants: {{studentsLength + teachersLength}}</span>
+          <span class="text-lg text-gray-600 dark:text-light-text">Partecipants: {{studentsLength + teachersLength}}</span>
           </div>
       </div>
     </div>
-    <div class="place-items-center w-full mb-6 mx-3 gap-4 grid lg:grid-cols-3 sm:grid-cols-1">
-      <div class="p-2 h-96 grid-col-1 lg:w-full md:w-[75%] sm:w-[50%] bg-white border-gray-200 border-2 rounded-lg"><Statistics
-      nomeCorso="D"
-      /></div>
-      <div class="p-2 h-96 grid-col-1 hidden lg:w-full md:block md:w-[75%] bg-white border-gray-200 border-2 rounded-lg"><Statistics /></div>
-      <div class="p-2 h-96 grid-col-1 hidden lg:w-full md:block md:w-[75%] bg-white border-gray-200 border-2 rounded-lg"><Statistics /></div>
+    <div class="mb-6 mx-3 grid place-items-center gap-4 lg:grid-cols-3 sm:grid-cols-1">
+      <div class="p-2 h-96 w-[75%] grid-col-1 lg:w-full bg-white border-gray-200 border-2 rounded-lg dark:bg-slate-900"><Statistics /></div>
+      <div class="p-2 h-96 w-[75%] grid-col-1 hidden lg:w-full md:block bg-white border-gray-200 border-2 rounded-lg dark:bg-slate-900"><Statistics /></div>
+      <div class="p-2 h-96 w-[75%] grid-col-1 hidden lg:w-full md:block bg-white border-gray-200 border-2 rounded-lg dark:bg-slate-900"><Statistics /></div>
     </div>
     <div class="overflow-hidden">
-      <h2 class="mx-4 px-2 py-4 text-2xl font-bold border-b-gray-400 border-b-[1px]">Teachers</h2>
+      <h2 class="mx-4 px-2 py-4 text-2xl font-bold border-b-gray-400 border-b-[1px] dark:text-light-text">Teachers</h2>
       <div class="mx-4 py-4 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(415px,_1fr))]">
       <UserCard
         v-for="teacher in currentClass.teachers"
@@ -32,7 +30,7 @@
         :img="teacher.img"
       />
       </div>
-      <h2 class="mx-4 px-2 py-4 text-2xl font-bold border-b-gray-400 border-b-[1px]">Students</h2>
+      <h2 class="mx-4 px-2 py-4 text-2xl font-bold border-b-gray-400 border-b-[1px] dark:text-light-text">Students</h2>
       <div class="mx-4 py-4 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(415px,_1fr))]">
       <UserCard
         v-for="student in currentClass.students"
