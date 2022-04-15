@@ -53,7 +53,7 @@
     </div>
 
     <!-- Confirm Elimination Pop Up (non funziona. designer fate qualcosa)-->
-    <div class="flex flex-col absolute self-center">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
       <PopUp
         v-if="showConfirm"
         @noAction="showConfirm = false"

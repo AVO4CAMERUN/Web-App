@@ -1,6 +1,6 @@
 <template>
   <!-- Main -->
-  <div class="text-center p-5 border w-96 shadow-lg rounded-md bg-white fixed self-center drop-shadow-2xl mt-3 text-center">
+  <div class="text-center p-5 border w-96 shadow-lg rounded-md bg-white self-center drop-shadow-2xl">
       <!-- Header -->
       <span>
         <!-- Icon -->
