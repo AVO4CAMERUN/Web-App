@@ -1,6 +1,6 @@
 <template>
   <!-- Main -->
-  <div class="flex flex-nowrap">
+  <div class="flex flex-nowrap" @click="setCurrentClass">
     <article class="w-[480px] cursor-pointer bg-white overflow-hidden outline outline-[1px] outline-gray-200 rounded-lg hover:shadow-lg transition-shadow dark:shadow-slate-700 dark:outline-gray-700 dark:bg-slate-900">
 
       <!-- Image -->
@@ -53,6 +53,8 @@
 </template>
 
 <script>
+import router from '@/router/index'
+import store from '@/store/index'
 import { classesService as cs } from '@/servises/classes.services'
 
 export default {
@@ -70,6 +72,13 @@ export default {
       cs.updateClassByID(this.groupClass.id, obj)
         .then((response) => {
           if (response.code === 200) return response.json()
+        })
+    },
+    setCurrentClass (id) {
+      store.dispatch('classes/setCurrentClass', this.groupClass.id)
+        .then(() => {
+          if (this.parent !== 'mycreations') router.push({ name: 'class' })
+          else router.push({ name: 'class', query: { edit: 'on' } })
         })
     }
   },

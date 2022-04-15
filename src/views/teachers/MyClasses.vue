@@ -1,23 +1,22 @@
 <template>
- <div v-if="empty" class="bg-yellow-100 border-t border-b border-l border-r border-yellow-500 text-yellow-700 px-4 py-3 mx-5 my-5">
+ <div v-if="empty || archived > 0" class="bg-yellow-100 border-t border-b border-l border-r border-yellow-500 text-yellow-700 px-4 py-3 mx-5 my-5">
     <p class="font-bold">Not Found</p>
-    <p class="text-sm">Inserire messaggio</p>
+    <p class="text-sm">{{empty ? 'You are not in any class. Ask your teacher to invite you' : 'There are some classes archived, look into my creation to restore them'}}</p>
   </div>
   <div class="m-8 grid gap-4 grid-cols-[repeat(auto-fill,_minmax(360px,_1fr))]">
     <ClassCard
-      v-for="(userClass, index) in classes" :key="userClass"
-      :classId="userClass.id"
-      :groupClass="userClass"
+      v-show="!groupClass.archived"
+      v-for="(groupClass, index) in classes"
+      :key="groupClass.id"
+      :groupClass="groupClass"
       :participants="participants[index]"
       :parent="'myclasses'"
-      @click="setCurrentClass(userClass.id)"
     />
   </div>
 </template>
 
 <script>
 import store from '@/store/index'
-import router from '@/router/index'
 import ClassCard from '@/components/Classes/ClassCard.vue'
 
 export default {
@@ -25,7 +24,8 @@ export default {
   data: function () {
     return {
       classes: [],
-      empty: false
+      empty: false,
+      archived: false
     }
   },
   components: {
@@ -35,12 +35,6 @@ export default {
     this.fetchClasses()
   },
   methods: {
-    setCurrentClass (id) {
-      store.dispatch('classes/setCurrentClass', `id=[${id}]`)
-        .then(() => {
-          router.push({ name: 'class' })
-        })
-    },
     fetchClasses () {
       store.dispatch('classes/fetchClasses', '')
         .then((response) => {
@@ -52,6 +46,7 @@ export default {
           this.classes.forEach(c => {
             const date = new Date(c.creation_date)
             c.creation_date = `${date.getUTCDate()}/${date.getUTCMonth() + 1}/${date.getUTCFullYear()}`
+            this.archived += c.archived
           })
         })
     }

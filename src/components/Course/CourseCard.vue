@@ -1,9 +1,6 @@
 <template>
   <!-- Main -->
-  <div
-    class="flex flex-wrap"
-    @click="setCurrentCourse"
-  >
+  <div class="flex flex-wrap" @click="setCurrentCourse">
     <article class="w-[480px] bg-white overflow-hidden outline outline-[1px] outline-gray-200 rounded-lg hover:shadow-lg transition-shadow dark:shadow-slate-700 dark:outline-gray-700 dark:bg-slate-900">
 
       <!-- Image -->
@@ -91,7 +88,7 @@ export default {
         .then((response) => {
           if (response.status === 200) {
             this.$router.push('/inscriptions')
-          } else {}
+          }
           this.$emit('error', response.status)
         })
     },
