@@ -37,7 +37,7 @@
       <footer class="flex flex-row justify-between items-center gap-8 p-4">
 
         <!-- Participants -->
-        <div class="h-[3ex] text-sm">
+        <div class="text-sm">
           Participants {{participants}}
         </div>
 
@@ -45,6 +45,7 @@
         <div v-if="parent === 'mycreations'" class="flex flex-row gap-2">
           <i @click.stop="this.$emit('setEdit', groupClass.id)" class="cursor-pointer bx bx-edit text-black text-[32px] dark:invert"></i> <!-- Edit -->
           <i @click.stop="updateClass()" class="cursor-pointer bx bx-box text-green-900 text-[32px] dark:invert"></i> <!-- Archive -->
+          <!-- <i @click.stop="updateClass()" class="cursor-pointer bx bxs-box text-green-900 text-[32px] dark:invert"></i> -->
           <i @click.stop="deleteClass" class="cursor-pointer bx bx-trash text-rose-600 text-[32px] dark:invert"></i> <!-- Delete -->
         </div>
       </footer>
