@@ -1,10 +1,11 @@
 <template>
   <div class="flex flex-col w-[60%] p-8 gap-4 rounded-xl shadow-xl border border-green-700 bg-white">
-
-    <div class="flex flex-col items-center gap-4">
+    <div class="flex flex-row justify-center gap-4">
       <div v-for="(option) in options" :key="option.name">
-        <legend>{{option.label}}</legend>
-        <input type="checkbox" class="" v-model="option.value" @click="changeTheme" >
+        <div class="flex flex-row justify-center items-center gap-2">
+          <input type="checkbox" v-model="option.value" @click="changeTheme">
+          <label>{{option.label}}</label>
+        </div>
       </div>
     </div>
   </div>

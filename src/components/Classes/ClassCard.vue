@@ -4,7 +4,7 @@
     <article class="w-[480px] cursor-pointer bg-white overflow-hidden outline outline-[1px] outline-gray-200 rounded-lg hover:shadow-lg transition-shadow dark:shadow-slate-700 dark:outline-gray-700 dark:bg-slate-900">
 
       <!-- Image -->
-      <div class="border h-[200px] relative">
+      <div class="h-[200px] relative flex flex-row justify-end">
         <img
           v-if="groupClass.img_cover !== '' && groupClass.img_cover != null"
           :src="`data:image/png;base64,${groupClass.img_cover}`"
@@ -12,6 +12,8 @@
           alt="img" draggable="false"
         />
         <img v-else class="block w-full h-full object-cover" src="@/assets/img_default.png" draggable="false">
+        <!-- Remove Class Icon -->
+        <i class="fa-solid fa-circle-xmark text-[28px] rounded-full text-red-900 bg-white cursor-pointer m-2 absolute"></i>
       </div>
 
       <!-- Header -->
@@ -37,7 +39,7 @@
       <footer class="flex flex-row justify-between items-center gap-8 p-4">
 
         <!-- Participants -->
-        <div class="text-sm">
+        <div class="text-sm dark:invert">
           Participants {{participants}}
         </div>
 
