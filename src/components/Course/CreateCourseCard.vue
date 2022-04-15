@@ -61,8 +61,8 @@
         <!-- Creation Button -->
         <button v-if="!course?.name"
           class="text-sm px-5 py-1.5 mr-2 mb-2 text-white bg-green-700 font-medium rounded-lg hover:bg-green-800 focus:ring-4 focus:ring-green-300 focus:outline-none"
-          :class="newCourse.name === '' || newCourse.subject === 'Select subject' ? 'cursor-not-allowed' : 'cursor-pointer'"
-          :disabled="newCourse.name === '' || newCourse.subject === 'Select subject' ? true : false"
+          :class="newCourse.name.length < 3 || newCourse.subject === 'Select subject' ? 'cursor-not-allowed' : 'cursor-pointer'"
+          :disabled="newCourse.name.length < 3 || newCourse.subject === 'Select subject' ? true : false"
           @click="createCourse"
         >
           Create Course
@@ -72,8 +72,8 @@
         <template v-else>
           <div class="flex flex-row gap-2">
             <button class="text-sm px-5 py-1.5 mb-2 text-white bg-green-700 font-medium rounded-lg hover:bg-green-800 focus:ring-4 focus:ring-green-300 focus:outline-none"
-            :class="newCourse.name === '' || newCourse.subject === 'Select subject' ? 'cursor-not-allowed' : 'cursor-pointer'"
-            :disabled="newCourse.name === '' || newCourse.subject === 'Select subject' ? true : false"
+            :class="newCourse.name.length < 3 || newCourse.subject === 'Select subject' ? 'cursor-not-allowed' : 'cursor-pointer'"
+            :disabled="newCourse.name < 3 || newCourse.subject === 'Select subject' ? true : false"
             @click="updateCourse"
             >
               Save
@@ -147,7 +147,7 @@ export default {
     setImage (e) {
       const files = e.target.files || e.dataTransfer.files
       if (!files.length) return
-
+      if (files[0].size > 65535) console.log('too big') // inserire pop up errore
       const reader = new FileReader()
 
       reader.onload = (e) => {
