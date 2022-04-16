@@ -12,8 +12,6 @@
           alt="img" draggable="false"
         />
         <img v-else class="block w-full h-full object-cover" src="@/assets/img_default.png" draggable="false">
-        <!-- Remove Class Icon -->
-        <i class="fa-solid fa-circle-xmark text-[28px] rounded-full text-red-900 bg-white cursor-pointer m-2 absolute"></i>
       </div>
 
       <!-- Header -->

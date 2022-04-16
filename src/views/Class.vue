@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- Header -->
     <div class="flex flex-row justify-between px-8 py-4">
 
       <div class="flex flex-row justify-start">
@@ -13,19 +14,17 @@
         </div>
       </div>
 
-      <div class="flex flex-row gap-2 self-center">
-        <!-- Remove Students Button -->
-        <button class="cursor-pointer px-5 py-2.5 text-sm text-white font-medium rounded-lg bg-red-700
-                       hover:bg-red-800
-                       focus:ring-4 focus:ring-red-300 focus:outline-none">
-        Remove a Student
-        </button>
+      <div v-if="role === 'TEACHER'" class="flex flex-row gap-2 self-center">
+        <!-- Remove People Button -->
+        <!-- <button class="cursor-pointer px-5 py-2.5 text-sm text-white font-medium rounded-lg bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 focus:outline-none">
+          Remove People
+        </button> -->
 
-        <!-- Remove Students Button -->
-        <button class="cursor-pointer px-5 py-2.5 text-sm text-white font-medium rounded-lg bg-green-700
-                       hover:bg-green-800
-                       focus:ring-4 focus:ring-green-300 focus:outline-none">
-        Add a Student
+        <!-- Add People Button -->
+        <button class="cursor-pointer px-5 py-2.5 text-sm text-white font-medium rounded-lg bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 focus:outline-none"
+          @click="showPopUp = true"
+        >
+          Add People
         </button>
       </div>
     </div>
@@ -37,6 +36,7 @@
       <div class="h-96 w-[75%] p-2 border-2 border-gray-200 rounded-lg lg:w-full md:block bg-white dark:bg-slate-900"><Statistics /></div>
     </div>
 
+    <!-- Users Cards -->
     <div class="p-8 overflow-hidden">
       <!-- Teachers Cards -->
       <h1 class="py-4 px-3 text-2xl text-black font-semibold tracking-wide border-b-[2px] border-b-green-900 dark:text-light-text">Teachers</h1>
@@ -68,22 +68,30 @@
       />
       </div>
     </div>
+
+    <InvitePopUp
+      v-if="showPopUp"
+      :classId="id"
+      @hide="showPopUp = false"
+    />
   </div>
 </template>
 
 <script>
 import UserCard from '@/components/Classes/UserCard.vue'
 import Statistics from '@/components/Classes/Statistics.vue'
+import InvitePopUp from '@/components/Classes/InvitePopUp.vue'
 // import { classesService as cs } from '@/servises/classes.services'
 import store from '@/store/index'
-// Partecipants: {{currentClass.students.length + currentClass.teachers.length}
+
 export default {
   name: 'Class',
   data: function () {
     return {
       currentClass: {},
       studentsLength: null,
-      teachersLength: null
+      teachersLength: null,
+      showPopUp: false
     }
   },
   props: {},
@@ -100,7 +108,8 @@ export default {
   },
   components: {
     UserCard,
-    Statistics
+    Statistics,
+    InvitePopUp
   },
   mounted () {
     this.fetchUsers(`id=[${this.id}]`)
@@ -108,7 +117,8 @@ export default {
   computed: {
     id () { return store.state.classes.id },
     img () { return store.state.classes.img },
-    name () { return store.state.classes.name }
+    name () { return store.state.classes.name },
+    role () { return store.state.login.role }
   },
   watch: {
     id (newValue, oldValue) {

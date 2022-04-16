@@ -17,8 +17,6 @@
           src="@/assets/img_default.png"
           draggable="false"
         >
-        <!-- Remove Course Icon -->
-        <i class="fa-solid fa-circle-xmark text-[28px] rounded-full text-red-900 bg-transparent cursor-pointer m-2 absolute"></i>
       </div>
 
       <!-- Course Header (Name, Creation Date, Subject)-->

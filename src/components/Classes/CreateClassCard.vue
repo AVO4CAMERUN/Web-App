@@ -4,13 +4,17 @@
     <article class="w-[480px] bg-white overflow-hidden outline outline-[1px] outline-gray-200 rounded-lg hover:shadow-lg transition-shadow dark:shadow-slate-700 dark:outline-gray-700 dark:bg-slate-900">
 
       <!-- Image -->
-      <div class="h-[200px] group cursor-pointer relative">
+      <div class="h-[200px] relative flex flex-row justify-end">
 
-        <!--Hover Text  -->
+        <!-- Hover -->
         <div class="h-full w-full opacity-0 absolute flex justify-center items-center group-hover:opacity-100 duration-300">
           <p class="font-semibold text-xl dark:text-white">change cover</p>
         </div>
-
+        <!-- Remove Image -->
+        <i class="fa-solid fa-circle-xmark text-[28px] rounded-full text-red-900 bg-transparent cursor-pointer m-2 absolute"
+          v-if="newClass.img_cover"
+          @click.prevent="newClass.img_cover = ''"
+        />
         <img
           v-if="newClass.img_cover"
           :src="`data:image/png;base64,${newClass.img_cover}`"
