@@ -1,46 +1,70 @@
 <template>
-  <div class="align-middle min-w-full">
-    <div class="w-full px-4 pt-1 pb-3">
-      <div class="relative">
-        <img :src="`data:image/png;base64,${this.currentClass.img_cover}`" alt="" class="float-left w-10 sm:w-16 h-10 sm:h-16 object-cover rounded-full">
-        <div class="flex flex-col leading-tight text-3xl h-16 pl-4">
-          <div class="text-2xl mt-1 flex items-center">
-            <span class="text-gray-700 mr-3 dark:text-light-text">{{currentClass.name}}</span>
-          </div>
-          <span class="text-lg text-gray-600 dark:text-light-text">Partecipants: {{studentsLength + teachersLength}}</span>
-          </div>
+  <div>
+    <div class="flex flex-row justify-between px-8 py-4">
+
+      <div class="flex flex-row justify-start">
+        <!-- Class Image -->
+        <img :src="`data:image/png;base64,${this.currentClass.img_cover}`" alt="Class Image" class="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-full">
+
+        <!-- ClassName & Partecipats -->
+        <div class="flex flex-col justify-between p-2">
+          <span class="text-2xl text-gray-800 dark:text-light-text">{{currentClass.name}}</span>
+          <span class="text-md text-gray-800 dark:text-light-text">Partecipants: {{studentsLength + teachersLength}}</span>
+        </div>
+      </div>
+
+      <div class="flex flex-row gap-2 self-center">
+        <!-- Remove Students Button -->
+        <button class="cursor-pointer px-5 py-2.5 text-sm text-white font-medium rounded-lg bg-red-700
+                       hover:bg-red-800
+                       focus:ring-4 focus:ring-red-300 focus:outline-none">
+        Remove a Student
+        </button>
+
+        <!-- Remove Students Button -->
+        <button class="cursor-pointer px-5 py-2.5 text-sm text-white font-medium rounded-lg bg-green-700
+                       hover:bg-green-800
+                       focus:ring-4 focus:ring-green-300 focus:outline-none">
+        Add a Student
+        </button>
       </div>
     </div>
-    <div class="mb-6 mx-3 grid place-items-center gap-4 lg:grid-cols-3 sm:grid-cols-1">
-      <div class="p-2 h-96 w-[75%] grid-col-1 lg:w-full bg-white border-gray-200 border-2 rounded-lg dark:bg-slate-900"><Statistics /></div>
-      <div class="p-2 h-96 w-[75%] grid-col-1 hidden lg:w-full md:block bg-white border-gray-200 border-2 rounded-lg dark:bg-slate-900"><Statistics /></div>
-      <div class="p-2 h-96 w-[75%] grid-col-1 hidden lg:w-full md:block bg-white border-gray-200 border-2 rounded-lg dark:bg-slate-900"><Statistics /></div>
+
+    <!-- Statistics -->
+    <div class="px-8 py-2 grid place-items-center gap-4 lg:grid-cols-3 sm:grid-cols-1">
+      <div class="h-96 w-[75%] p-2 border-2 border-gray-200 rounded-lg lg:w-full md:block bg-white dark:bg-slate-900"><Statistics /></div>
+      <div class="h-96 w-[75%] p-2 border-2 border-gray-200 rounded-lg lg:w-full md:block bg-white dark:bg-slate-900"><Statistics /></div>
+      <div class="h-96 w-[75%] p-2 border-2 border-gray-200 rounded-lg lg:w-full md:block bg-white dark:bg-slate-900"><Statistics /></div>
     </div>
-    <div class="overflow-hidden">
-      <h2 class="mx-4 px-2 py-4 text-2xl font-bold border-b-gray-400 border-b-[1px] dark:text-light-text">Teachers</h2>
-      <div class="mx-4 py-4 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(415px,_1fr))]">
-      <UserCard
-        v-for="teacher in currentClass.teachers"
-        :key="teacher.email"
-        :email="teacher.email"
-        :firstname="teacher.firstname"
-        :lastname="teacher.lastname"
-        :role="teacher.role"
-        :registrationDate="teacher.registration_date"
-        :img="teacher.img"
-      />
+
+    <div class="p-8 overflow-hidden">
+      <!-- Teachers Cards -->
+      <h1 class="py-4 px-3 text-2xl text-black font-semibold tracking-wide border-b-[2px] border-b-green-900 dark:text-light-text">Teachers</h1>
+      <div class="my-4 px-2 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(415px,_1fr))]">
+        <UserCard
+          v-for="teacher in currentClass.teachers"
+          :key="teacher.email"
+          :email="teacher.email"
+          :firstname="teacher.firstname"
+          :lastname="teacher.lastname"
+          :role="teacher.role"
+          :registrationDate="teacher.registration_date"
+          :img="teacher.img"
+        />
       </div>
-      <h2 class="mx-4 px-2 py-4 text-2xl font-bold border-b-gray-400 border-b-[1px] dark:text-light-text">Students</h2>
-      <div class="mx-4 py-4 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(415px,_1fr))]">
-      <UserCard
-        v-for="student in currentClass.students"
-        :key="student.email"
-        :email="student.email"
-        :firstname="student.firstname"
-        :lastname="student.lastname"
-        :role="student.role"
-        :registrationDate="student.registration_date"
-        :img="student.img"
+
+      <!-- Students Cards -->
+      <h1 class="py-4 px-3 text-2xl text-black font-semibold tracking-wide border-b-[2px] border-b-green-900 dark:text-light-text">Students</h1>
+      <div class="my-4 px-2 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(415px,_1fr))]">
+        <UserCard
+          v-for="student in currentClass.students"
+          :key="student.email"
+          :email="student.email"
+          :firstname="student.firstname"
+          :lastname="student.lastname"
+          :role="student.role"
+          :registrationDate="student.registration_date"
+          :img="student.img"
       />
       </div>
     </div>

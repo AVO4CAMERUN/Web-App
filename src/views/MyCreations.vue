@@ -1,10 +1,10 @@
 <template>
   <div class="flex flex-col justify-center">
 
-    <div class="flex flex-row gap-2 m-8 mb-2 bg-none p-2">
-      <hr class="rounded border-[2px] border-green-700 self-center grow">
-      <p class="grow-0 text-green-800 text-xl font-semibold">Your own courses</p>
-      <hr class="rounded border-[2px] border-green-700 self-center grow">
+    <div class="flex flex-row gap-2 m-8 mb-2 p-2">
+      <hr class="rounded h-1 bg-green-700 self-center grow">
+      <p class="text-green-800 text-xl font-semibold grow-0">Your own courses</p>
+      <hr class="rounded h-1 bg-green-700 self-center grow">
     </div>
 
     <!-- Courses Grid -->
@@ -26,10 +26,10 @@
       />
     </div>
 
-    <div class="flex flex-row gap-2 m-8 mb-2 bg-none p-2">
-      <hr class="rounded border-[2px] border-green-700 self-center grow">
-      <p class="grow-0 text-green-800 text-xl font-semibold">Your own classes</p>
-      <hr class="rounded border-[2px] border-green-700 self-center grow">
+    <div class="flex flex-row gap-2 m-8 mb-2 p-2">
+      <hr class="rounded h-1 bg-green-700 self-center grow">
+      <p class="text-green-800 text-xl font-semibold grow-0">Your own classes</p>
+      <hr class="rounded h-1 bg-green-700 self-center grow">
     </div>
 
     <!-- Class Grid -->
