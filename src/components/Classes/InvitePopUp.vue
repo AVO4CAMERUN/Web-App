@@ -10,14 +10,15 @@
           </svg>
         </div>
         <!-- Text -->
-        <div class="flex flex-col gap-8 w-full h-full px-4 pt-3">
-          <h3 class="text-xl leading-6 font-medium text-gray-900 tracking-wide">Invite a new student!</h3>
+        <div class="flex flex-col gap-2 w-full h-full px-4 pt-3">
+          <h3 class="text-xl leading-6 pb-6 font-medium text-gray-900 tracking-wide">Invite a new student!</h3>
           <input class="w-full py-2 px-2 rounded-md text-sm bg-transparent border border-gray-300 text-gray-700 focus:outline-none"
             type="text"
             placeholder="Student's email address"
             v-model="email"
           >
         </div>
+        <i class="fa-solid fa-square-plus self-end cursor-pointer text-[36px] text-green-700 hover:text-green-800"></i>
       </div>
       <!-- Buttons -->
       <div class="flex flex-row-reverse justify-start px-4 py-3 gap-2">
