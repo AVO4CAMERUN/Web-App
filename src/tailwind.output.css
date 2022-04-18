@@ -480,6 +480,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-width: 0;
 }
 
+.fixed {
+  position: fixed;
+}
+
 .absolute {
   position: absolute;
 }
@@ -536,8 +540,48 @@ Ensure the default browser behavior of the `hidden` attribute.
   right: 6%;
 }
 
+.right-3\/4 {
+  right: 75%;
+}
+
+.right-1\/4 {
+  right: 25%;
+}
+
+.right-1\/3 {
+  right: 33.333333%;
+}
+
+.right-\[4\%\] {
+  right: 4%;
+}
+
+.right-\[25px\] {
+  right: 25px;
+}
+
+.right-\[50\] {
+  right: 50;
+}
+
+.right-\[50px\] {
+  right: 50px;
+}
+
+.right-\[150px\] {
+  right: 150px;
+}
+
+.right-\[125px\] {
+  right: 125px;
+}
+
 .z-0 {
   z-index: 0;
+}
+
+.z-50 {
+  z-index: 50;
 }
 
 .col-span-full {
@@ -777,6 +821,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   max-height: 174px;
 }
 
+.max-h-\[172px\] {
+  max-height: 172px;
+}
+
 .w-16 {
   width: 4rem;
 }
@@ -954,6 +1002,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 .scale-0 {
   --tw-scale-x: 0;
   --tw-scale-y: 0;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.scale-100 {
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
@@ -1591,6 +1645,18 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-top: 0.5rem;
 }
 
+.pr-2 {
+  padding-right: 0.5rem;
+}
+
+.pr-4 {
+  padding-right: 1rem;
+}
+
+.pr-1 {
+  padding-right: 0.25rem;
+}
+
 .text-center {
   text-align: center;
 }
@@ -2022,6 +2088,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
 }
 
+.hover\:fill-green-700:hover {
+  fill: #15803d;
+}
+
 .hover\:font-semibold:hover {
   font-weight: 600;
 }
@@ -2086,9 +2156,19 @@ Ensure the default browser behavior of the `hidden` attribute.
   z-index: 10;
 }
 
+.focus\:scale-125:focus {
+  --tw-scale-x: 1.25;
+  --tw-scale-y: 1.25;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
 .focus\:border-green-500:focus {
   --tw-border-opacity: 1;
   border-color: rgb(34 197 94 / var(--tw-border-opacity));
+}
+
+.focus\:fill-green-700:focus {
+  fill: #15803d;
 }
 
 .focus\:shadow:focus {

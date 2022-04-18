@@ -5,7 +5,8 @@
 
       <div class="flex flex-row justify-start">
         <!-- Class Image -->
-        <img :src="`data:image/png;base64,${this.currentClass.img_cover}`" alt="Class Image" class="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-full">
+        <img v-if="true" :src="`data:image/png;base64,${this.currentClass.img_cover}`" alt="Class Image" class="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-full">
+        <img v-else src="@/assets/img_default.png" alt="Class Image" class="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-full">
 
         <!-- ClassName & Partecipats -->
         <div class="flex flex-col justify-between p-2">

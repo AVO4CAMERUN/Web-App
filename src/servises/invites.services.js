@@ -6,9 +6,9 @@ async function createInvite (inviteObj) {
   return await service.genericRequestWithAuth('invites', 'POST', inviteObj)
 }
 
-// Function for get class by filter (GET)
-async function getInviteByEmail (filter) {
-  // return await service.genericRequestWithAuth(`invites?${filter}`, 'GET', {}) // cambiare con query string
+// Function for get invites by email (by token) (GET)
+async function getInviteByEmail () {
+  return await service.genericRequestWithAuth('invites', 'GET', {})
 }
 
 // Function for update class (PUT)

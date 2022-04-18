@@ -40,7 +40,7 @@
           class="px-4 py-2 inline-flex justify-center rounded-md border border-transparent shadow-sm bg-green-700 text-base font-medium text-white hover:bg-green-800
             focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-300"
           type="button"
-          @click="email !== '' ? createInvite() : null"
+          @click="users.length !== 0 ? createInvite() : null"
         >
           Confirm
         </button>
