@@ -2,7 +2,7 @@
   <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
     <!-- Main -->
     <div class="w-[450px] bg-white rounded-lg shadow-xl border">
-      <div class="flex flex-row px-4 py-8 bg-white">
+      <div class="flex flex-row px-4 pt-8 pb-6 bg-white">
         <!-- Icon -->
         <div class="flex flex-col items-center justify-center w-14 h-14 aspect-square rounded-full bg-green-100">
           <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="green">
@@ -25,11 +25,11 @@
         />
       </div>
       <!-- Added Users -->
-      <div class="flex flex-row justify-center w-full border-grey border-b py-1 "
+      <div class="flex flex-row justify-between items-center pl-24 pr-4 mb-3"
         v-for="(email, index) in users"
         :key="email"
       >
-        <span class="justify-start">{{email}}</span>
+        <span class="text-sm">{{email}}</span>
         <i class="bx bxs-minus-circle text-rose-600 cursor-pointer text-[32px]"
           @click="removeUser(index)"
         />
