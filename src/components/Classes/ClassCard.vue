@@ -4,7 +4,7 @@
     <article class="w-[480px] cursor-pointer bg-white overflow-hidden outline outline-[1px] outline-gray-200 rounded-lg hover:shadow-lg transition-shadow dark:shadow-slate-700 dark:outline-gray-700 dark:bg-slate-900">
 
       <!-- Image -->
-      <div class="h-[200px] relative flex flex-row justify-end"> <!-- opacity-25 -->
+      <div class="h-[200px] relative flex flex-row justify-end" :class="groupClass.archived ? 'opacity-25' : ''">
         <img
           v-if="groupClass.img_cover !== '' && groupClass.img_cover != null"
           :src="`data:image/png;base64,${groupClass.img_cover}`"
@@ -15,7 +15,7 @@
       </div>
 
       <!-- Header -->
-      <header class="flex flex-row items-center justify-between leading-tight p-4"> <!-- opacity-25 -->
+      <header class="flex flex-row items-center justify-between leading-tight p-4" :class="groupClass.archived ? 'opacity-25' : ''">
 
         <!-- Name -->
         <h1 class="overflow-hidden text-black text-xl font-bold capitalize dark:text-white">
@@ -29,7 +29,7 @@
       </header>
 
       <!-- Description -->
-      <p class="h-[9ex] w-[calc(100%_-_2rem)] m-2 mx-4 break-words overflow-hidden text-sm dark:text-white" :class="groupClass.description === null ? 'text-slate-700' : ''"> <!-- opacity-25 -->
+      <p class="h-[9ex] w-[calc(100%_-_2rem)] m-2 mx-4 break-words overflow-hidden text-sm dark:text-white" :class="[groupClass.description === null ? 'text-slate-700' : '', groupClass.archived ? 'opacity-25' : '']">
         {{groupClass.description === null || groupClass.description === '' || !groupClass.description ? 'no description provided' : groupClass.description}}
       </p>
 
@@ -37,16 +37,15 @@
       <footer class="flex flex-row justify-between items-center gap-8 p-4">
 
         <!-- Participants -->
-        <div class="text-sm dark:invert"> <!-- opacity-25 -->
+        <div class="text-sm dark:invert" :class="groupClass.archived === true ? 'opacity-25' : ''">
           Participants {{participants}}
         </div>
 
         <!-- Buttons -->
         <div v-if="parent === 'mycreations'" class="flex flex-row gap-2">
-          <i @click.stop="this.$emit('setEdit', groupClass.id)" class="cursor-pointer bx bx-edit text-black text-[32px] dark:invert"></i> <!-- Edit opacity-25 -->
-          <i @click.stop="updateClass()" class="cursor-pointer bx bx-box text-green-900 text-[32px] dark:invert"></i> <!-- Archive -->
-          <!-- <i @click.stop="updateClass()" class="cursor-pointer bx bxs-box text-green-900 text-[32px] dark:invert"></i> --> <!-- Archived -->
-          <i @click.stop="deleteClass" class="cursor-pointer bx bx-trash text-rose-600 text-[32px] dark:invert"></i> <!-- Delete opacity-25 -->
+          <i @click.stop="this.$emit('setEdit', groupClass.id)" class="cursor-pointer bx bx-edit text-black text-[32px] dark:invert" :class="groupClass.archived ? 'opacity-25' : ''" /> <!-- Edit -->
+          <i @click.stop="updateClass()" class="cursor-pointer bx text-green-900 text-[32px] dark:invert" :class="groupClass.archived ? 'bxs-box' : 'bx-box'"/> <!-- Archive -->
+          <i @click.stop="deleteClass" class="cursor-pointer bx bx-trash text-rose-600 text-[32px]" :class="groupClass.archived === true ? 'opacity-25' : ''" /> <!-- Delete -->
         </div>
       </footer>
     </article>
@@ -72,7 +71,7 @@ export default {
       const obj = { archived: !this.groupClass.archived }
       cs.updateClassByID(this.groupClass.id, obj)
         .then((response) => {
-          if (response.code === 200) return response.json()
+          if (response.status === 200) this.$emit('newClass', this.groupClass.id)
         })
     },
     setCurrentClass (id) {
