@@ -3,8 +3,10 @@
     <div class="flex flex-row justify-center gap-4">
       <div v-for="(option) in options" :key="option.name">
         <div class="flex flex-row justify-center items-center gap-2">
-          <input type="checkbox" v-model="option.value" @click="changeTheme">
-          <label>{{option.label}}</label>
+
+          <i class="fa-solid aspect-square rounded-full text-[32px] cursor-pointer" @click="changeTheme" :class="darkTheme ? 'fa-sun text-amber-400' : 'fa-moon text-blue-800'"></i>
+
+          <label>Change Theme</label>
         </div>
       </div>
     </div>
@@ -28,7 +30,7 @@ export default {
   mounted () {},
   methods: {
     changeTheme () {
-      if (this.options[0].value) store.commit('generic/setDarkTheme', { darkTheme: false })
+      if (this.darkTheme) store.commit('generic/setDarkTheme', { darkTheme: false })
       else store.commit('generic/setDarkTheme', { darkTheme: true })
     }
   },

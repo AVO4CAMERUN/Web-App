@@ -5,7 +5,7 @@
       <div class="flex flex-row justify-center p-4 w-[75%] h-[75%] items-center">
 
         <!-- Img -->
-        <div class="rounded-full group cursor-pointer relative">
+        <div class="flex flex-col aspect-square rounded-full group cursor-pointer relative">
           <div class="rounded-full h-full w-full opacity-0 absolute flex justify-center items-center group-hover:opacity-100 duration-300">
             <p class="font-semibold text-white text-xl dark:text-white">
               <i class="fa-solid fa-image"></i>
@@ -19,11 +19,16 @@
             draggable="false"
           >
           <img v-else
-            class="w-12 h-12 rounded-full object-cover group-hover:opacity-40 duration-200"
+            class="rounded-full w-[150px] h-[150px] cursor-pointer object-cover group-hover:ring-4 group-hover:ring-primary-light duration-500"
             src="@/assets/user_placeholder.png"
             draggable="false"
           >
           <input type="file" @change="setImage" class="absolute inset-0 cursor-pointer opacity-0">
+
+          <!-- Remove Image -->
+          <div class="w-[28px] h-[28px] self-end aspect-square rounded-full absolute m-1 hover:scale-125 transition">
+            <i class="fa-solid fa-circle-xmark cursor-pointer text-[28px] text-red-900 bg-transparent"></i>
+          </div>
         </div>
 
         <!-- Name and username -->

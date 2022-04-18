@@ -11,7 +11,7 @@
 
       <!-- FirstName, LastName & Email -->
       <div class="flex flex-col justify-center gap-2">
-        <span class="text-base font-semibold text-gray-900 dark:text-light-text">{{lastname}} {{firstname}}</span>
+        <span class="text-base font-semibold text-gray-900 dark:text-light-text">{{lastname}} {{firstname}} <i v-if="email === storeEmail" class="fa-solid fa-user"></i></span>
         <span class="text-sm font-normal text-gray-500 dark:text-gray-400">{{email}}</span>
       </div>
     </div>
@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import store from '@/store/index'
 export default {
   name: 'UserCard',
   data: function () {
@@ -40,7 +41,10 @@ export default {
   },
   methods: {},
   components: {},
-  mounted () {}
+  mounted () {},
+  computed: {
+    storeEmail () { return store.state.login.email }
+  }
 }
 </script>
 

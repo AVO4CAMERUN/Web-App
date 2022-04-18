@@ -1,32 +1,30 @@
 <template>
   <div class="flex flex-col w-[60%] p-8 gap-4 rounded-xl shadow-xl border border-green-700 bg-white">
-
-        <div class="flex flex-col items-left gap-4">
-
-          <div v-for="(option, index) in options" :key="option.name" class="flex flex-row justify-between">
-            <fieldset class="py-5 px-4 rounded-lg w-[50%] border border-emerald-800">
-              <legend class="font-semibold">{{option.label}}</legend>
-              <span v-if="!option.editable" class="w-full h-full text-lg">{{option.actualValue}}</span>
-              <input v-else type="text" class="w-full h-full text-lg pb-[1px] focus:outline-none" :placeholder="option.actualValue" v-model="option.newValue">
-            </fieldset>
-            <div class="flex flex-row items-end gap-2 w-[45%] justify-end">
-              <button
-                class="py-4 px-4 rounded-lg bg-green-800 text-white w-[50%] h-[90%] hover:bg-green-900" :class="option.name === 'email' ? 'cursor-not-allowed': ''" :disabled="option.name === 'email' ? true : false"
-                @click="!option.editable ? option.editable = !option.editable : setNew(index)"
-              >
-                {{!option.editable ? 'Edit' : 'Save Changes'}} {{}}
-              </button>
-              <button
-                v-if="option.editable"
-                class="py-4 px-4 rounded-lg bg-red-800 text-white w-[50%] h-[90%] hover:bg-red-900"
-                @click="option.editable = !option.editable"
-              >
-                Discard Changes
-              </button>
-            </div>
-          </div>
+    <div class="flex flex-col items-left gap-4">
+      <div v-for="(option, index) in options" :key="option.name" class="flex flex-row justify-between">
+        <fieldset class="py-5 px-4 rounded-lg w-[50%] border border-emerald-800">
+          <legend class="font-semibold">{{option.label}}</legend>
+          <span v-if="!option.editable" class="w-full h-full text-lg">{{option.actualValue}}</span>
+          <input v-else type="text" class="w-full h-full text-lg pb-[1px] focus:outline-none" :placeholder="option.actualValue" v-model="option.newValue">
+        </fieldset>
+        <div class="flex flex-row items-end gap-2 w-[45%] justify-end">
+          <button
+            class="py-4 px-4 rounded-lg bg-green-800 text-white w-[50%] h-[90%] hover:bg-green-900" :class="option.name === 'email' ? 'cursor-not-allowed': ''" :disabled="option.name === 'email' ? true : false"
+            @click="!option.editable ? option.editable = !option.editable : setNew(index)"
+          >
+            {{!option.editable ? 'Edit' : 'Save Changes'}} {{}}
+          </button>
+          <button
+            v-if="option.editable"
+            class="py-4 px-4 rounded-lg bg-red-800 text-white w-[50%] h-[90%] hover:bg-red-900"
+            @click="option.editable = !option.editable"
+          >
+            Discard Changes
+          </button>
         </div>
       </div>
+    </div>
+  </div>
 </template>
 
 <script>

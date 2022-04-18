@@ -1,6 +1,6 @@
 <template>
   <!-- Main -->
-  <div class="absolute top-[7%] right-[125px] fixed z-50">
+  <div class="absolute top-[7%] right-[125px] fixed z-50" id="notification">
     <div class="max-h-[174px] max-w-sm overflow-y-auto" :class="notifications === 0 ? 'rounded-xl' : 'rounded-l-xl'">
       <!-- Notification -->
       <div class="max-w-sm p-4 pr-2 text-gray-500 bg-white dark:bg-gray-800 dark:text-gray-400"
@@ -106,3 +106,17 @@ export default {
   }
 }
 </script>
+
+<style>
+  #notification ::-webkit-scrollbar {
+    width: 12px;
+  }
+  #notification ::-webkit-scrollbar-thumb {
+    background-color: whitesmoke;
+    border-radius: 20px;
+    border: 4px solid #1f2937;
+  }
+  #notification ::-webkit-scrollbar-track {
+    background: #1f2937;
+  }
+</style>
