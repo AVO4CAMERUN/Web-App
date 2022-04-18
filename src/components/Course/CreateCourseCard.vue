@@ -21,13 +21,13 @@
           src="@/assets/img_default.png"
           draggable="false"
         >
-        <input type="file" accept="image/*" @change="setImage" class="absolute inset-0 cursor-pointer opacity-0" />
+        <input type="file" accept="image/*" @input="setImage" class="absolute inset-0 cursor-pointer opacity-0" />
 
         <!-- Remove Image -->
         <div class="w-[28px] h-[28px] aspect-square rounded-full absolute m-2 hover:scale-125 transition">
           <i class="fa-solid fa-circle-xmark cursor-pointer text-[28px] text-red-900 bg-transparent"
             v-if="newCourse.img_cover"
-            @click.prevent="newCourse.img_cover = ''"
+            @click.prevent="newCourse.img_cover = null"
           />
         </div>
       </div>
@@ -111,7 +111,7 @@ export default {
       newCourse: {
         name: '',
         description: '',
-        img_cover: '',
+        img_cover: null,
         subject: 'Select subject'
       },
       subjects: ['Select subject']
@@ -141,7 +141,7 @@ export default {
           this.newCourse = {
             name: '',
             description: '',
-            img_cover: '',
+            img_cover: null,
             subject: 'Select subject'
           }
         })

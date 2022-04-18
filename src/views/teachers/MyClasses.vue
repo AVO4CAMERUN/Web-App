@@ -39,7 +39,7 @@ export default {
       store.dispatch('classes/fetchClasses', '')
         .then((response) => {
           this.classes = response
-          if (this.classes.length === 0) {
+          if (this.classes === undefined || this.classes?.length === 0) {
             this.empty = true
             return
           }

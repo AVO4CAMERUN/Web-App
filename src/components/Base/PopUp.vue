@@ -54,14 +54,7 @@ export default {
   data: function () {
     return {}
   },
-  props: {
-    type: String,
-    color: String,
-    message: String,
-    content: String
-  }
+  emits: ['doAction', 'noAction'],
+  props: ['type', 'message', 'content'] // type: confirm, success, error
 }
 </script>
-
-<style>
-</style>

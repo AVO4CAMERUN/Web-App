@@ -166,6 +166,7 @@ export default {
       store.dispatch('classes/fetchClasses', '')
         .then((response) => {
           this.classesCards = response
+          if (this.classesCards === undefined || this.classesCards?.length === 0) return
           this.classesCards.forEach(c => {
             const date = new Date(c.creation_date)
             c.creation_date = `${date.getUTCDate()}/${date.getUTCMonth() + 1}/${date.getUTCFullYear()}`

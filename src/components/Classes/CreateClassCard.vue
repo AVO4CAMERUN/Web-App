@@ -22,13 +22,13 @@
           src="@/assets/img_default.png"
           draggable="false"
         >
-        <input type="file" @change="setImage" class="absolute inset-0 cursor-pointer opacity-0">
+        <input type="file" @input="setImage" class="absolute inset-0 cursor-pointer opacity-0">
 
         <!-- Remove Image -->
         <div class="w-[28px] h-[28px] aspect-square rounded-full absolute m-2 hover:scale-125 transition">
           <i class="fa-solid fa-circle-xmark cursor-pointer text-[28px] text-red-900 bg-transparent"
             v-if="newClass.img_cover"
-            @click.prevent="newClass.img_cover = ''"
+            @click.prevent="newClass.img_cover = null"
           />
         </div>
       </div>
@@ -103,7 +103,7 @@ export default {
     return {
       newClass: {
         name: '',
-        img_cover: '',
+        img_cover: null,
         description: ''
       }
     }
@@ -128,7 +128,7 @@ export default {
           // reset class data
           this.newClass = {
             name: '',
-            img_cover: '',
+            img_cover: null,
             description: ''
           }
         })
@@ -145,7 +145,6 @@ export default {
     setImage (e) {
       const files = e.target.files || e.dataTransfer.files
       if (!files.length) return
-
       const reader = new FileReader()
 
       reader.onload = (e) => {
