@@ -8,34 +8,31 @@
       </span>
 
       <!-- Unit Container - View Mode -->
-      <ul v-if="!edit" class="w-full overflow-y-auto scrollbar px-2">
+      <ul v-if="!edit" class="relative w-full overflow-y-auto px-2">
         <li class="flex align-center flex-col mb-1 mt-2"
           v-for="(unit, index) in units"
           :key="unit.id_unit"
         >
-
           <!-- Unit -->
-          <h4
-            @click="display[index] = !display[index]"
-            :class="{'': display[index]}"
-            class="cursor-pointer px-5 pb-3 pt-5 text-black text-center inline-block hover:font-semibold rounded-t-lg select-none dark:text-light-text"
-          >
-            {{unit.name}}
-          </h4>
+          <div class="flex justify-center items-center rounded-lg font-medium cursor-pointer p-4 bg-green-700 text-white hover:bg-green-800"
+              @click="display[index] = !display[index]"
+              :class="{'': display[index]}">
+            <h4 class="select-none">{{unit.name}}</h4>
+          </div>
 
           <!-- Lesson Container -->
           <div
             :class="{'hidden': display[index]}"
-            class="py-4 px-2 rounded-md border-[1px] border-slate-400 dark:border-gray-100"
+            class="py-4 px-2 m-2 mx-4 rounded-md border-[1px] border-slate-400 dark:border-gray-100"
           >
 
             <!-- Lesson -->
-            <div class="cursor-pointer rounded-md m-2 p-2 text-center underline transition-colors select-none dark:text-light-text hover:bg-primary-light dark:hover:text-black hover:decoration-black hover:decoration-2"
+            <div class="cursor-pointer rounded-md m-2 p-2 text-center transition-colors select-none dark:text-light-text hover:bg-primary-light dark:hover:text-black hover:decoration-black hover:decoration-2"
               v-for="(lesson) in unit.lesson"
               :key="lesson"
               @click="changeLesson(lesson.id_lesson)"
             >
-              {{lesson.name}}
+              <p class="">{{lesson.name}}</p>
             </div>
 
           </div>
@@ -43,7 +40,7 @@
       </ul>
 
       <!-- Unit Container - Edit Mode -->
-      <ul v-else class="w-full overflow-y-auto scrollbar px-2">
+      <ul v-else class="w-full overflow-y-auto px-2">
         <draggable
           v-model="localUnits"
           item-key="id_unit"
@@ -238,13 +235,3 @@ export default {
   }
 }
 </script>
-
-<!-- Button -->
-<!-- <li class="flex align-center flex-col mb-1 mt-2">
-  <button class="text-white w-full bg-green-600 rounded-md text-sm py-4 px-5 text-center inline-flex items-center" @click="addUnit">
-    <svg class="mr-2 -ml-2" xmlns="http://www.w3.org/2000/svg" height="25" width="25" viewBox="0 0 512 512" fill="white">
-      <path d="M0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256zM256 368C269.3 368 280 357.3 280 344V280H344C357.3 280 368 269.3 368 256C368 242.7 357.3 232 344 232H280V168C280 154.7 269.3 144 256 144C242.7 144 232 154.7 232 168V232H168C154.7 232 144 242.7 144 256C144 269.3 154.7 280 168 280H232V344C232 357.3 242.7 368 256 368z" />
-    </svg>
-    Add a Unit
-  </button>
-</li> -->
