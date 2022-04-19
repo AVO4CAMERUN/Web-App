@@ -6,9 +6,14 @@ async function createClass (classObj) {
   return await service.genericRequestWithAuth('classes', 'POST', classObj)
 }
 
-// Function for get class by filter (GET)
-async function getClassesByFilter (filter) {
-  return await service.genericRequestWithAuth(`classes?${filter}`, 'GET', {}) // cambiare con query string
+// Get my classes (GET)
+async function getMyClasses () {
+  return await service.genericRequestWithAuth('classes', 'GET', {}) // cambiare con query string
+}
+
+// Get class by id
+async function getClassByID (id) {
+  return await service.genericRequestWithAuth(`classes/${id}`, 'GET', {})
 }
 
 // Function for update class (PUT)
@@ -23,7 +28,8 @@ async function deleteClassByID (idClass) {
 
 export const classesService = {
   createClass,
-  getClassesByFilter,
+  getClassByID,
+  getMyClasses,
   updateClassByID,
   deleteClassByID
 }

@@ -11,14 +11,14 @@ async function getInviteByEmail () {
   return await service.genericRequestWithAuth('invites', 'GET', {})
 }
 
-// Function for update class (PUT)
-async function acceptInviteByID (id, putObj) {
-  // return await service.genericRequestWithAuth(`invites/${id}`, 'PUT', putObj)
+// Accept Invite by invite ID (GET)
+async function acceptInviteByID (id) {
+  return await service.genericRequestWithAuth(`invites/${id}`, 'GET', {})
 }
 
-// Function for delete class (DELETE)
-async function rejectInviteByID (idClass) {
-  // return await service.genericRequestWithAuth(`invites/${idClass}`, 'DELETE', {})
+// Accept Invite by invite ID (DELETE)
+async function rejectInviteByID (id) {
+  return await service.genericRequestWithAuth(`invites/${id}`, 'DELETE', {})
 }
 
 export const invitesServices = {

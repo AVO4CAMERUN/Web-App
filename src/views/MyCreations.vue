@@ -52,14 +52,14 @@
       />
     </div>
 
-    <!-- Confirm Elimination Pop Up (non funziona. designer fate qualcosa)-->
+    <!-- Confirm Elimination Pop Up -->
     <PopUp
       v-if="showConfirm"
       @noAction="showConfirm = false"
       @doAction="doAction"
       :type="'confirm'"
       :message="'Warning'"
-      :content="'Are you sure you want to delete this course?'"
+      :content="`Are you sure you want to delete this ${popUpContent}?`"
     />
   </div>
 </template>
@@ -82,7 +82,8 @@ export default {
       cardToRemove: {},
       showConfirm: false,
       coursesCards: [],
-      classesCards: []
+      classesCards: [],
+      popUpContent: ''
     }
   },
   components: {
@@ -100,7 +101,7 @@ export default {
   methods: {
     // Classes Actions
     fetchClasses () { // Fetch
-      store.dispatch('classes/fetchClasses', '')
+      store.dispatch('classes/fetchMyClasses', '')
         .then((response) => {
           this.classesCards = response
           if (this.classesCards === undefined || this.classesCards?.length === 0) return
@@ -177,6 +178,7 @@ export default {
 
     // Pop UP Actions
     showPopUp (obj) { // Show
+      this.popUpContent = `${obj.type} (${obj.name})`
       this.cardToRemove = obj
       this.showConfirm = true
     },

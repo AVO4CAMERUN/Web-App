@@ -5,7 +5,7 @@
 
       <div class="flex flex-row justify-start">
         <!-- Class Image -->
-        <img v-if="true" :src="`data:image/png;base64,${this.currentClass.img_cover}`" alt="Class Image" class="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-full">
+        <img v-if="this.currentClass.img_cover" :src="`data:image/png;base64,${this.currentClass.img_cover}`" alt="Class Image" class="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-full">
         <img v-else src="@/assets/img_default.png" alt="Class Image" class="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-full">
 
         <!-- ClassName & Partecipats -->
@@ -98,13 +98,30 @@ export default {
   props: {},
   methods: {
     fetchUsers (filter) {
-      store.dispatch('classes/fetchClasses', `${filter}`)
+      store.dispatch('classes/fetchClassbyID', filter)
         .then((response) => {
-          this.currentClass = response[0]
+          if (!response) {
+            console.log('pagina di errore')
+            return
+          }
+          this.currentClass = response
           this.studentsLength = this.currentClass.students.length
           this.teachersLength = this.currentClass.teachers.length
         })
         .catch(() => {})
+    },
+    fetchClasses () {
+      store.dispatch('classes/fetchMyClasses', '')
+        .then((response) => {
+          if (!response[0]) {
+            console.log('pagina di errore')
+            return
+          }
+          store.dispatch('classes/setCurrentClass', response[0].id)
+          this.currentClass = response[0]
+          this.studentsLength = this.currentClass.students.length
+          this.teachersLength = this.currentClass.teachers.length
+        })
     }
   },
   components: {
@@ -113,7 +130,8 @@ export default {
     InvitePopUp
   },
   mounted () {
-    this.fetchUsers(`id=[${this.id}]`)
+    if (this.role === 'STUDENT') this.fetchClasses()
+    else this.fetchUsers(this.id)
   },
   computed: {
     id () { return store.state.classes.id },
@@ -122,11 +140,9 @@ export default {
     role () { return store.state.login.role }
   },
   watch: {
-    id (newValue, oldValue) {
-      this.fetchUsers(`id=[${newValue}]`)
-    },
-    img (newValue, oldValue) {},
-    name (newValue, oldValue) {}
+    id () {
+      this.fetchUsers(this.id)
+    }
   }
 }
 </script>

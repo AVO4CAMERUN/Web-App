@@ -65,7 +65,7 @@ export default {
   props: ['groupClass', 'participants', 'parent'],
   methods: {
     deleteClass () {
-      this.$emit('removeCard', { id: this.groupClass.id, type: 'class' })
+      this.$emit('removeCard', { id: this.groupClass.id, type: 'class', name: this.groupClass.name })
     },
     updateClass () {
       const obj = { archived: !this.groupClass.archived }
@@ -74,7 +74,7 @@ export default {
           if (response.status === 200) this.$emit('newClass', this.groupClass.id)
         })
     },
-    setCurrentClass (id) {
+    setCurrentClass () {
       store.dispatch('classes/setCurrentClass', this.groupClass.id)
         .then(() => {
           if (this.parent !== 'mycreations') router.push({ name: 'class' })

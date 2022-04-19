@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     fetchClasses () {
-      store.dispatch('classes/fetchClasses', '')
+      store.dispatch('classes/fetchMyClasses', '')
         .then((response) => {
           this.classes = response
           if (this.classes === undefined || this.classes?.length === 0) {

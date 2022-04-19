@@ -32,15 +32,17 @@
             <!-- Buttons -->
             <div class="grid grid-cols-2 gap-2">
               <div>
-                <button
-                  class="w-full px-2 py-1.5 justify-center text-xs font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300
-                    dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800">
+                <button class="w-full px-2 py-1.5 justify-center text-xs font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300
+                  dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800"
+                  @click="acceptInvite(invite.id)"
+                >
                   Accept
                 </button>
               </div>
               <div>
                 <button class="w-full px-2 py-1.5 justify-center text-xs font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-600
                   dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"
+                  @click="rejectInvite(invite.id)"
                 >
                   Reject
                 </button>
@@ -71,6 +73,8 @@
 
 <script>
 import { invitesServices as is } from '@/servises/invites.services'
+import router from '@/router/index'
+import store from '@/store/index'
 
 export default {
   name: 'Notification',
@@ -100,6 +104,24 @@ export default {
             invite.ignored = false
             this.notifications++
           })
+        })
+    },
+    acceptInvite (id) {
+      is.acceptInviteByID(id)
+        .then((response) => {
+          if (response?.status === 200) {
+            this.fetchInvites()
+            store.dispatch('classes/setCurrentClass', id)
+              .then(() => {
+                router.push({ name: 'class' })
+              })
+          }
+        })
+    },
+    rejectInvite (id) {
+      is.rejectInviteByID(id)
+        .then((response) => {
+          if (response?.status === 200) this.fetchInvites()
         })
     }
   }

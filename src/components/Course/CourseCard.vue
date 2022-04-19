@@ -93,7 +93,7 @@ export default {
         })
     },
     deleteCourse () {
-      this.$emit('removeCard', { id: this.course.id_course, type: 'course' })
+      this.$emit('removeCard', { id: this.course.id_course, type: 'course', name: this.course.name })
     },
     setCurrentCourse (id) {
       store.dispatch('course/setCurrentCourse', this.course.id_course)

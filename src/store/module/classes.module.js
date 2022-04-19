@@ -31,14 +31,20 @@ const mutations = {
 //
 const actions = {
   async setCurrentClass ({ commit, dispatch }, filter) {
-    const response = await dispatch('fetchClasses', `id=["${filter}"]`)
+    const response = await dispatch('fetchClassbyID', filter)
     // console.log(response)
-    commit('setId', response[0])
-    commit('setName', response[0])
-    commit('setImg', response[0])
+    commit('setId', response)
+    commit('setName', response)
+    commit('setImg', response)
   },
-  async fetchClasses ({ state, rootState }, filter) {
-    return await cs.getClassesByFilter(filter)
+  async fetchMyClasses ({ state, rootState }, filter) {
+    return await cs.getMyClasses(filter)
+      .then((response) => {
+        if (response.status === 200) return response.json()
+      })
+  },
+  async fetchClassbyID ({ state, rootState }, filter) {
+    return await cs.getClassByID(filter)
       .then((response) => {
         if (response.status === 200) return response.json()
       })
