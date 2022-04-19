@@ -100,7 +100,6 @@ export default {
             invite.ignored = false
             this.notifications++
           })
-          console.log(this.classInvites)
         })
     }
   }

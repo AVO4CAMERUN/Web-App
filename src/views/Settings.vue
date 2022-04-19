@@ -26,7 +26,7 @@
           <input type="file" @change="setImage" class="absolute inset-0 cursor-pointer opacity-0">
 
           <!-- Remove Image -->
-          <div class="w-[28px] h-[28px] self-end aspect-square rounded-full absolute m-1 hover:scale-125 transition">
+          <div v-if="imgStore !== null && imgStore !== ''" @click="removeImage" class="w-[28px] h-[28px] self-end aspect-square rounded-full absolute m-1 hover:scale-125 transition">
             <i class="fa-solid fa-circle-xmark cursor-pointer text-[28px] text-red-900 bg-transparent"></i>
           </div>
         </div>
@@ -46,7 +46,7 @@
           class="py-2 px-4 w-[25%] rounded-t-lg rounded-r-lg bg-green-800 text-white hover:bg-green-900 hover:translate-x-2 duration-500"
           v-for="(tab, index) in tabs"
           :key="index"
-          @click="selected = index"
+          @click="setTab(index)"
         >
           {{tab}}
         </button>
@@ -56,12 +56,12 @@
       <ProfileOptions v-if="selected === 0"/>
       <WebsiteOptions v-if="selected === 1"/>
     </div>
-    <div id="google_translate_element"></div>
   </div>
 </template>
 
 <script>
 import store from '@/store/index'
+import router from '@/router/index'
 import { accountService as as } from '@/servises/account.services'
 import ProfileOptions from '@/components/Setting/ProfileOptions.vue'
 import WebsiteOptions from '@/components/Setting/WebsiteOptions.vue'
@@ -70,13 +70,15 @@ export default {
   name: 'settings',
   data: function () {
     return {
-      imgCover: '',
+      imgCover: null,
       selected: 0,
-      tabs: ['Informazioni Personali', 'Impostazioni Sito']
+      tabs: ['Profile', 'Website']
     }
   },
   components: { ProfileOptions, WebsiteOptions },
-  mounted () {},
+  mounted () {
+    if (this.$route.query.tab === '1') this.selected = 1
+  },
   methods: {
     setImage (e) {
       // Convert image cover to Base64 and set preview
@@ -87,16 +89,27 @@ export default {
         const tmp = e.target.result.split(',')
         this.imgCover = tmp[1]
 
-        const obj = { img_profile: this.imgCover }
-        as.putAccount(obj)
-          .then((response) => {
-            if (response.status === 200) return response.json()
-          })
-          .then((json) => {
-            if (json) store.commit('login/setImgProfile', { img_profile: json.img_profile })
-          })
+        this.updateImage()
       }
       reader.readAsDataURL(files[0])
+    },
+    updateImage () {
+      const obj = { img_profile: this.imgCover }
+      as.putAccount(obj)
+        .then((response) => {
+          if (response.status === 200) return response.json()
+        })
+        .then((json) => {
+          if (json) store.commit('login/setImgProfile', { img_profile: json.img_profile })
+        })
+    },
+    removeImage () {
+      this.imgCover = null
+      this.updateImage()
+    },
+    setTab (index) {
+      this.selected = index
+      router.push({ name: 'settings', query: { tab: index } })
     }
   },
   computed: {

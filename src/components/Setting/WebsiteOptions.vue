@@ -1,14 +1,15 @@
 <template>
   <div class="flex flex-col w-[60%] p-8 gap-4 rounded-xl shadow-xl border border-green-700 bg-white">
     <div class="flex flex-row justify-center gap-4">
-      <div v-for="(option) in options" :key="option.name">
-        <div class="flex flex-row justify-center items-center gap-2">
 
-          <i class="fa-solid aspect-square rounded-full text-[32px] cursor-pointer" @click="changeTheme" :class="darkTheme ? 'fa-sun text-amber-400' : 'fa-moon text-blue-800'"></i>
+      <!-- Change Theme -->
+      <label>Change Theme</label>
+      <i class="fa-solid aspect-square rounded-full text-[32px] cursor-pointer" @click="changeTheme" :class="darkTheme ? 'fa-sun text-amber-400' : 'fa-moon text-blue-800'" />
+    </div>
 
-          <label>Change Theme</label>
-        </div>
-      </div>
+    <!-- Change Language -->
+    <div class="flex pt-4 flex-row justify-center gap-4"> <button @click="refresh">asd </button>
+      <div v-if="true" id="google_translate_element"></div>
     </div>
   </div>
 </template>
@@ -21,9 +22,7 @@ export default {
   data: function () {
     return {
       editable: false,
-      options: [
-        { name: 'theme', label: 'Dark Mode', value: store.state.generic.darkTheme }
-      ]
+      render: false
     }
   },
   components: {},
@@ -32,6 +31,9 @@ export default {
     changeTheme () {
       if (this.darkTheme) store.commit('generic/setDarkTheme', { darkTheme: false })
       else store.commit('generic/setDarkTheme', { darkTheme: true })
+    },
+    refresh () {
+      location.reload()
     }
   },
   computed: {
