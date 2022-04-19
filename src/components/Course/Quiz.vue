@@ -1,5 +1,5 @@
 <template>
-  <template v-if="quiz !== null">
+  <template v-if="quiz === null">
     <div class="p-4 col-span-full rounded-md shadow-lg bg-white dark:bg-dark-sidebar dark:text-light-text">
 
       <!-- Title -->
@@ -49,7 +49,7 @@
         </button>
       </div>
 
-      <div class="w-full flex flex-col mt-4 pb-2 border-b border-gray-400">
+      <div class="w-full flex flex-col mt-4 pb-2 p-2 rounded-lg border border-gray-400">
         <div class="flex flex-col gap-4 m-2">
 
           <!-- Question, Answer Type -->
