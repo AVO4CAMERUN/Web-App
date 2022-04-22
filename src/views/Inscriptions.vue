@@ -1,7 +1,7 @@
 <template>
   <div v-if="empty" class="bg-yellow-100 border-t border-b border-l border-r border-yellow-500 text-yellow-700 px-4 py-3 mx-5 my-5">
-    <p class="font-bold">Nessun corso aggiunto</p>
-    <p class="text-sm">Vai nella sezione Esplora per inserire il tuo primo corso.</p>
+    <p class="font-bold">You are not subscribed to any course</p>
+    <p class="text-sm">Go to the search page to add your new course.</p>
   </div>
   <div class="m-8 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(360px,_1fr))]">
     <CourseCard

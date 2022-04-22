@@ -1,5 +1,9 @@
 <template>
-  <div>
+  <div v-if="empty" class="bg-yellow-100 border-t border-b border-l border-r border-yellow-500 text-yellow-700 px-4 py-3 mx-5 my-5">
+    <p class="font-bold"> {{empty ? 'Not Found' : ''}}</p>
+    <p class="text-sm">{{empty ? 'You are not in any class. Ask a teacher of the class to invite you' : ''}}</p>
+  </div>
+  <div v-else-if="empty === false">
     <!-- Header -->
     <div class="flex flex-row justify-between px-8 py-4">
 
@@ -10,7 +14,7 @@
 
         <!-- ClassName & Partecipats -->
         <div class="flex flex-col justify-between p-2">
-          <span class="text-2xl text-gray-800 dark:text-light-text">{{currentClass.name}}</span>
+          <span class="text-2xl text-gray-800 dark:text-light-text notranslate">{{currentClass.name}}</span>
           <span class="text-md text-gray-800 dark:text-light-text">Partecipants: {{studentsLength + teachersLength}}</span>
         </div>
       </div>
@@ -92,7 +96,8 @@ export default {
       currentClass: {},
       studentsLength: null,
       teachersLength: null,
-      showPopUp: false
+      showPopUp: false,
+      empty: null
     }
   },
   props: {},
@@ -101,7 +106,6 @@ export default {
       store.dispatch('classes/fetchClassbyID', filter)
         .then((response) => {
           if (!response) {
-            console.log('pagina di errore')
             return
           }
           this.currentClass = response
@@ -114,9 +118,10 @@ export default {
       store.dispatch('classes/fetchMyClasses', '')
         .then((response) => {
           if (!response[0]) {
-            console.log('pagina di errore')
+            this.empty = true
             return
           }
+          this.empty = true
           store.dispatch('classes/setCurrentClass', response[0].id)
           this.currentClass = response[0]
           this.studentsLength = this.currentClass.students.length
@@ -146,6 +151,3 @@ export default {
   }
 }
 </script>
-
-<style>
-</style>

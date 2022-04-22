@@ -29,7 +29,7 @@
         v-for="(email, index) in users"
         :key="email"
       >
-        <span class="text-sm">{{email}}</span>
+        <span class="text-sm notranslate">{{email}}</span>
         <i class="bx bxs-minus-circle text-rose-600 cursor-pointer text-[32px]"
           @click="removeUser(index)"
         />

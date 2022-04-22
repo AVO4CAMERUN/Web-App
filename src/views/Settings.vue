@@ -32,7 +32,7 @@
         </div>
 
         <!-- Name and username -->
-        <div class="flex flex-col justify-left ml-10 gap-2">
+        <div class="flex flex-col justify-left ml-10 gap-2 notranslate">
           <span class="text-4xl dark:text-white"> {{firstname}} {{lastname}} </span>
           <span class="text-lg dark:text-white"> {{username}} </span>
         </div>

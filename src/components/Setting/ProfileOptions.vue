@@ -4,8 +4,8 @@
       <div v-for="(option, index) in options" :key="option.name" class="flex flex-row justify-between">
         <fieldset class="py-5 px-4 rounded-lg w-[50%] border border-emerald-800">
           <legend class="font-semibold">{{option.label}}</legend>
-          <span v-if="!option.editable" class="w-full h-full text-lg">{{option.actualValue}}</span>
-          <input v-else type="text" class="w-full h-full text-lg pb-[1px] focus:outline-none" :placeholder="option.actualValue" v-model="option.newValue">
+          <span v-if="!option.editable" class="w-full h-full text-lg notranslate">{{option.actualValue}}</span>
+          <input v-else type="text" class="w-full h-full text-lg pb-[1px] focus:outline-none notranslate" :placeholder="option.actualValue" v-model="option.newValue">
         </fieldset>
         <div class="flex flex-row items-end gap-2 w-[45%] justify-end">
           <button

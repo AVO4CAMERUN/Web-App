@@ -39,9 +39,7 @@ export default {
   components: {
     YouTube
   },
-  props: {
-    videoID: String
-  },
+  props: ['videoID', 'edit'],
   mounted () {
     setTimeout(this.timeout, 100)
   },

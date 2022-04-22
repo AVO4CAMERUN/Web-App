@@ -4,11 +4,16 @@
 
       <!-- Change Theme -->
       <label>Change Theme</label>
-      <i class="fa-solid aspect-square rounded-full text-[32px] cursor-pointer" @click="changeTheme" :class="darkTheme ? 'fa-sun text-amber-400' : 'fa-moon text-blue-800'" />
+      <i
+        class="fa-solid aspect-square rounded-full text-[32px] cursor-pointer"
+        :class="darkTheme ? 'fa-sun text-amber-400' : 'fa-moon text-blue-800'"
+        @click="changeTheme"
+      />
     </div>
 
     <!-- Change Language -->
-    <div class="flex pt-4 flex-row justify-center gap-4"> <button @click="refresh">asd </button>
+    <div class="flex flex-row pt-4 justify-center gap-4"><br>
+      <button @click="refresh">Choose Language</button>
       <div v-if="true" id="google_translate_element"></div>
     </div>
   </div>
@@ -21,8 +26,7 @@ export default {
   name: 'settings',
   data: function () {
     return {
-      editable: false,
-      render: false
+      editable: false
     }
   },
   components: {},

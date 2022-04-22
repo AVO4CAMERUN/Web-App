@@ -1,6 +1,6 @@
 <template>
   <!-- Main -->
-  <div class="flex flex-wrap" @click="setCurrentCourse">
+  <div class="flex flex-wrap notranslate" @click="setCurrentCourse">
     <article class="w-[480px] cursor-pointer bg-white overflow-hidden outline outline-[1px] outline-gray-200 rounded-lg hover:shadow-lg transition-shadow dark:shadow-slate-700 dark:outline-gray-700 dark:bg-slate-900">
 
       <!-- Image -->
@@ -25,17 +25,17 @@
           <span class="text-lg lg:whitespace-nowrap font-semibold dark:text-white">
             {{course.name}}
           </span>
-          <div class="text-sm dark:text-white">
+          <div class="text-sm dark:text-white translate">
             <i>{{course.subject}}</i>
           </div>
         </h1>
-        <div class="text-sm self-start pt-[4px] dark:text-white">
+        <div class="text-sm self-start pt-[4px] dark:text-white translate">
           {{course.creation_date}}
         </div>
       </header>
 
       <!-- Description -->
-      <p class="h-[9ex] w-[calc(100%_-_2rem)] break-words overflow-hidden m-2 mx-4 text-sm dark:text-white" :class="course.description === null ? 'text-slate-700' : ''">
+      <p class="h-[9ex] w-[calc(100%_-_2rem)] break-words overflow-hidden m-2 mx-4 text-sm dark:text-white" :class="course.description === null || course.description === '' ? 'text-slate-700 translate' : ''">
         {{course.description === null || course.description === '' ? 'no description provided' : course.description}}
       </p>
 

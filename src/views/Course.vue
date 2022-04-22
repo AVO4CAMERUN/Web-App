@@ -5,6 +5,7 @@
     <!-- Video Component -->
     <Video
       :videoID="lesson.link_video"
+      :edit="edit"
       :courseName="name"
     />
 
@@ -22,6 +23,7 @@
     <!-- Quiz Component -->
     <Quiz
       :quiz="lesson.quiz"
+      :edit="edit"
       :key="lesson.quiz"
     />
 

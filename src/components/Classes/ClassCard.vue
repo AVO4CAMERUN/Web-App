@@ -1,6 +1,6 @@
 <template>
   <!-- Main -->
-  <div class="flex flex-nowrap" @click="setCurrentClass">
+  <div class="flex flex-nowrap notranslate" @click="setCurrentClass">
     <article class="w-[480px] cursor-pointer bg-white overflow-hidden outline outline-[1px] outline-gray-200 rounded-lg hover:shadow-lg transition-shadow dark:shadow-slate-700 dark:outline-gray-700 dark:bg-slate-900">
 
       <!-- Image -->
@@ -29,8 +29,10 @@
       </header>
 
       <!-- Description -->
-      <p class="h-[9ex] w-[calc(100%_-_2rem)] m-2 mx-4 break-words overflow-hidden text-sm dark:text-white" :class="[groupClass.description === null ? 'text-slate-700' : '', groupClass.archived ? 'opacity-25' : '']">
-        {{groupClass.description === null || groupClass.description === '' || !groupClass.description ? 'no description provided' : groupClass.description}}
+      <p class="h-[9ex] w-[calc(100%_-_2rem)] m-2 mx-4 break-words overflow-hidden text-sm dark:text-white"
+        :class="[groupClass.description === undefined || groupClass.description === '' ? 'text-slate-700 translate' : '', groupClass.archived ? 'opacity-25' : '']"
+      >
+        {{groupClass.description === undefined || groupClass.description === '' || !groupClass.description ? 'no description provided' : groupClass.description}}
       </p>
 
       <!-- Footer -->
