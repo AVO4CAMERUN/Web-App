@@ -3,7 +3,7 @@
     <p class="font-bold"> {{empty ? 'Not Found' : ''}}</p>
     <p class="text-sm">{{empty ? 'You are not in any class. Ask a teacher of the class to invite you' : ''}}</p>
   </div>
-  <div v-else-if="empty === false">
+  <div v-else>
     <!-- Header -->
     <div class="flex flex-row justify-between px-8 py-4">
 
@@ -54,7 +54,7 @@
           :lastname="teacher.lastname"
           :role="teacher.role"
           :registrationDate="teacher.registration_date"
-          :img="teacher.img"
+          :img="teacher.img_profile"
         />
       </div>
 
@@ -69,7 +69,7 @@
           :lastname="student.lastname"
           :role="student.role"
           :registrationDate="student.registration_date"
-          :img="student.img"
+          :img="student.img_profile"
       />
       </div>
     </div>
@@ -109,6 +109,7 @@ export default {
             return
           }
           this.currentClass = response
+          console.log(response)
           this.studentsLength = this.currentClass.students.length
           this.teachersLength = this.currentClass.teachers.length
         })

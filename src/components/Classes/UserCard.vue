@@ -6,9 +6,9 @@
     <div class="flex flex-row gap-4">
       <!-- ProfileImage -->
       <div class="h-full aspect-square border-transparent rounded-full overflow-hidden">
-        <img src="https://demo.themesberg.com/windster/images/users/neil-sims.png" alt="Profile Image" class="w-full h-full object-cover" draggable="false">
+        <img v-if="img" :src="`data:image/png;base64,${img}`" alt="Profile Image" class="w-full h-full object-cover" draggable="false">
+        <img v-else src="@/assets/user_placeholder.png" alt="Profile Image" class="w-full h-full object-cover" draggable="false">
       </div>
-
       <!-- FirstName, LastName & Email -->
       <div class="flex flex-col justify-center gap-2">
         <span class="text-base font-semibold text-gray-900 dark:text-light-text notranslate">{{lastname}} {{firstname}} <i v-if="email === storeEmail" class="fa-solid fa-user"></i></span>

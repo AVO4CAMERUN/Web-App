@@ -22,7 +22,7 @@
           src="@/assets/img_default.png"
           draggable="false"
         >
-        <input type="file" @input="setImage" class="absolute inset-0 cursor-pointer opacity-0">
+        <input type="file" @input="setImage" accept="image/*" class="absolute inset-0 cursor-pointer opacity-0">
 
         <!-- Remove Image -->
         <div class="w-[28px] h-[28px] aspect-square rounded-full absolute m-2 hover:scale-125 transition">

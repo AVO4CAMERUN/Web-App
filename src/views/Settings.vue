@@ -23,7 +23,7 @@
             src="@/assets/user_placeholder.png"
             draggable="false"
           >
-          <input type="file" @change="setImage" class="absolute inset-0 cursor-pointer opacity-0">
+          <input type="file" @change="setImage" accept="image/*" class="absolute inset-0 cursor-pointer opacity-0">
 
           <!-- Remove Image -->
           <div v-if="imgStore !== null && imgStore !== ''" @click="removeImage" class="w-[28px] h-[28px] self-end aspect-square rounded-full absolute m-1 hover:scale-125 transition">
