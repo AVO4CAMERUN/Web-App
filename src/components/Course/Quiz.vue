@@ -62,7 +62,7 @@
       <!-- Single Quiz -->
       <div
         class="w-full flex flex-col mt-4 pb-2 p-2 rounded-lg border border-gray-400"
-        v-for="(newQuiz, index) in createdQuiz.quiz"
+        v-for="(newQuiz, qindex) in createdQuiz.quiz"
         :key="newQuiz"
       >
         <div class="flex flex-col gap-4 m-2">
@@ -83,8 +83,9 @@
               <select
                 class="bg-transparent text-gray-700 border border-gray-300 p-2 rounded-lg leading-tight focus:outline-none dark:text-white"
                 v-model="newQuiz.type"
+                @change="resetCorrectAnswers(qindex)"
               >
-                <option class="dark:text-black" value="single" selected>Single</option>
+                <option class="dark:text-black" value="single" >Single</option>
                 <option class="dark:text-black" value="multiple">Multiple</option>
               </select>
             </div>
@@ -95,28 +96,29 @@
           <div class="flex flex-row justify-start items-center">
             <button
               class="py-1.5 px-3 text-white text-sm font-semibold rounded-md hover:bg-emerald-500 bg-emerald-600 dark:text-white dark:bg-blue-600 dark:hover:bg-blue-500 duration-200"
-              @click="addAnswer(index)"
+              @click="addAnswer(qindex)"
             >
               Add Answer
             </button>
           </div>
 
           <!-- Answers -->
-          <div class="flex flex-col gap-4 pl-4 py-2"> {{quiz}}
+          <div class="flex flex-col gap-4 pl-4 py-2">
             <div
               class="flex flex-row justify-between"
-              v-for="answer in quiz"
+              v-for="(answer, aindex) in newQuiz.answers"
               :key="answer"
             >
+              <input :type="newQuiz.type === 'single' ? 'radio' : 'checkbox'" :name="qindex" class="self-center mr-4" @change="addCorrectAnswer(qindex, aindex)">
               <input type="text" placeholder="Answer" class="w-full p-2 border-b-2 border-[#e5e7eb] bg-transparent text-gray-700 leading-tight focus:outline-none dark:text-white">
               <i class="ml-2 bx bxs-minus-circle text-rose-600 cursor-pointer text-[32px]"></i>
             </div>
           </div>
 
-          <!-- Correct Answer/Answers -->
+          <!-- Correct Answer/Answers
           <select class="bg-transparent text-gray-700 border border-gray-300 p-2 rounded-lg leading-tight focus:outline-none dark:text-white">
             <option class="dark:text-black">Correct Answer/Answers</option>
-          </select>
+          </select> -->
         </div>
       </div>
 
@@ -137,7 +139,7 @@ export default {
       quizAnswers: [],
       createdQuiz: {
         title: '',
-        quiz: [{ type: 'single', answers: ['asd'] }]
+        quiz: [{ type: 'single', answers: [''], correct_answers: [] }]
       }
     }
   },
@@ -161,14 +163,24 @@ export default {
 
     // Quiz Creation
     addQuestion () {
-      this.createdQuiz.quiz.push({ type: 'single' })
+      // may add max questions
+      this.createdQuiz.quiz.push({ type: 'single', answers: [''], correct_answers: [] })
     },
-    addAnswer (index) {
-      console.log(this.createdQuiz.quiz[index].answers)
-      this.createdQuiz.quiz[index].answers.push('sad')
+    addAnswer (qindex) {
+      // may add max answers
+      this.createdQuiz.quiz[qindex].answers.push('')
+    },
+    addCorrectAnswer (qindex, aindex) {
+      let correctAnswers = this.createdQuiz.quiz[qindex].correct_answers
+      const i = correctAnswers.findIndex(e => e === aindex)
+      if (this.createdQuiz.quiz[qindex].type === 'single') correctAnswers = [aindex]
+      else if (i === -1) correctAnswers.push(aindex)
+      else correctAnswers.splice(i, 1)
+    },
+    resetCorrectAnswers (qindex) {
+      this.createdQuiz.quiz[qindex].correct_answers = []
     }
-  },
-  computed: {}
+  }
 }
 </script>
 
