@@ -112,6 +112,11 @@ export default {
       popupEmailConfirm: false,
       popupError: false,
       errorMessage: '',
+      nameIN: '',
+      surnameIN: '',
+      usernameIN: '',
+      emailIN: '',
+      passwordIN: '',
       inputs: [
         { name: 'name', value: '', placeholder: 'Name', type: 'text', disabled: false, error: true },
         { name: 'surname', value: '', placeholder: 'Surname', type: 'text', disabled: false, error: true },
@@ -158,7 +163,7 @@ export default {
       this.errorMessage = this.errorMessage.substring(0, this.errorMessage.length - 2) // change to better messages
       // Check all user input
       if (sum === 6) {
-        as.createAccount(this.name, this.surname, this.email, this.username, this.password)
+        as.createAccount(this.inputs[0].value, this.inputs[1].value, this.inputs[3].value, this.inputs[2].value, this.inputs[4].value)
           .then(() => { this.popupEmailConfirm = !this.popupEmailConfirm })
       } else {
         this.popupError = !this.popupError

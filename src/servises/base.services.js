@@ -1,5 +1,7 @@
 import store from '@/store/index'
 
+const baseURIAPI = 'http://localhost/api/v1/'
+
 // Function for generic http requets => return a obj or err
 async function genericRequest (uri, method, bodyObj) {
   // Option for http request
@@ -16,7 +18,7 @@ async function genericRequest (uri, method, bodyObj) {
   if (method === 'GET') delete optionRequest.body
 
   // Return a parse JSON response in native JavaScript objects .json()
-  return await fetch(`http://localhost/api/v1/${uri}`, optionRequest)
+  return await fetch((baseURIAPI + uri), optionRequest)
   // return await fetch(`http://api.avo4camerun.kirinsecurity.com:8081/${uri}`, optionRequest)
 }
 
@@ -38,13 +40,13 @@ async function genericRequestWithAuth (uri, method, bodyObj) {
   if (method === 'GET') delete optionRequest.body
 
   // Return a parse JSON response in native JavaScript objects .json()
-  let res = await fetch(`http://localhost/api/v1/${uri}`, optionRequest)
+  let res = await fetch((baseURIAPI + uri), optionRequest)
 
   // refreshToken expired refresh
   if (res.status === 401) {
     await store.dispatch('login/refresh')
     optionRequest.headers.Authorization = `Bearer ${store.state.login.accessToken}`
-    res = await fetch(`http://localhost/api/v1/${uri}`, optionRequest)
+    res = await fetch((baseURIAPI + uri), optionRequest)
   }
   return res
 }
