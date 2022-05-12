@@ -1,7 +1,8 @@
 <template>
   <!-- Main -->
   <div class="flex flex-wrap notranslate" @click="setCurrentCourse">
-    <article class="w-[480px] cursor-pointer bg-white overflow-hidden outline outline-[1px] outline-gray-200 rounded-lg hover:shadow-lg transition-shadow dark:shadow-slate-700 dark:outline-gray-700 dark:bg-slate-900">
+    <article class="w-[480px] bg-white overflow-hidden outline outline-[1px] outline-gray-200 rounded-lg hover:shadow-lg transition-shadow dark:shadow-slate-700 dark:outline-gray-700 dark:bg-slate-900"
+      :class="this.parent !== 'search' ? 'cursor-pointer' : ''">
 
       <!-- Image -->
       <div class="h-[200px] relative flex flex-row justify-end">
@@ -98,8 +99,8 @@ export default {
     setCurrentCourse (id) {
       store.dispatch('course/setCurrentCourse', this.course.id_course)
         .then(() => {
-          if (this.parent !== 'mycreations') router.push({ name: 'course' })
-          else router.push({ name: 'course', query: { edit: 'on' } })
+          if (this.parent === 'inscriptions') router.push({ name: 'course' })
+          else if (this.parent === 'mycreations') router.push({ name: 'course', query: { edit: 'on' } })
         })
     }
   },

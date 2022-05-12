@@ -1,8 +1,8 @@
 import service from './base.services'
 
 // Function for create personal avo4cum
-async function createAccount (name, surname, email, username, password) {
-  return await service.genericRequest('account', 'POST', { name, surname, email, username, password })
+async function createAccount (firstname, lastname, email, username, password) {
+  return await service.genericRequest('account', 'POST', { firstname, lastname, email, username, password })
 }
 
 // Function for get account by filter avo4cum

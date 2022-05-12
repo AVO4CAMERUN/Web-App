@@ -97,7 +97,7 @@ export default {
       studentsLength: null,
       teachersLength: null,
       showPopUp: false,
-      empty: null
+      empty: true
     }
   },
   props: {},
@@ -122,7 +122,7 @@ export default {
             this.empty = true
             return
           }
-          this.empty = true
+          this.empty = false
           store.dispatch('classes/setCurrentClass', response[0].id)
           this.currentClass = response[0]
           this.studentsLength = this.currentClass.students.length

@@ -5,7 +5,7 @@
         <fieldset class="py-5 px-4 rounded-lg w-[50%] border border-emerald-800">
           <legend class="font-semibold">{{option.label}}</legend>
           <span v-if="!option.editable" class="w-full h-full text-lg notranslate">{{option.actualValue}}</span>
-          <input v-else type="text" class="w-full h-full text-lg pb-[1px] focus:outline-none notranslate" :placeholder="option.actualValue" v-model="option.newValue">
+          <input v-else type="text" class="w-full h-full text-lg pb-[1px] focus:outline-none notranslate" :placeholder="option.actualValue" v-model="option.newValue" @keyup.enter="setNew(index  )">
         </fieldset>
         <div class="flex flex-row items-end gap-2 w-[45%] justify-end">
           <button
@@ -31,8 +31,8 @@
 import store from '@/store/index'
 import {
   nameChecker,
-  usernameChecker,
-  emailChecker
+  usernameChecker
+  // emailChecker
 } from '@/Utils/input_checker.util'
 import { accountService as as } from '@/servises/account.services'
 
@@ -43,8 +43,8 @@ export default {
       options: [
         { name: 'firstname', label: 'Name', actualValue: store.state.login.firstname, newValue: '', checker: nameChecker, editable: false },
         { name: 'lastname', label: 'Surname', actualValue: store.state.login.lastname, newValue: '', checker: nameChecker, editable: false },
-        { name: 'username', label: 'Username', actualValue: store.state.login.username, newValue: '', checker: usernameChecker, editable: false },
-        { name: 'email', label: 'Email', actualValue: store.state.login.email, newValue: '', checker: emailChecker, editable: false }
+        { name: 'username', label: 'Username', actualValue: store.state.login.username, newValue: '', checker: usernameChecker, editable: false }
+        // { name: 'email', label: 'Email', actualValue: store.state.login.email, newValue: '', checker: emailChecker, editable: false }
       ]
     }
   },

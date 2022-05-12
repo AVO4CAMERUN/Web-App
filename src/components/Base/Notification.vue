@@ -25,7 +25,7 @@
 
               <!-- Description -->
               <div class="text-sm font-normal break-word">
-                You have been invited to join the class {{invite.id_class}}
+                You have been invited to join a class
               </div>
             </div>
 

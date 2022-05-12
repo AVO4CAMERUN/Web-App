@@ -10,12 +10,12 @@
         </div>
         <div class="mt-8 space-y-6">
           <div class="rounded-md shadow-sm -space-y-px">
-            <BaseInputText name="Name" v-model="this.inputs[0].value" :type="this.inputs[0].type" :disabled="popupEmailConfirm || popupError" top />
-            <BaseInputText name="Surname" v-model="this.inputs[1].value" :type="this.inputs[1].type" :disabled="popupEmailConfirm || popupError" />
-            <BaseInputText name="Username" v-model="this.inputs[2].value" :type="this.inputs[2].type" :disabled="popupEmailConfirm || popupError" />
-            <BaseInputText name="Email" v-model="this.inputs[3].value" :type="this.inputs[3].type" :disabled="popupEmailConfirm || popupError" />
-            <BaseInputText name="Password" v-model="this.inputs[4].value" :type="this.inputs[4].type" :disabled="popupEmailConfirm || popupError" />
-            <BaseInputText name="Password" v-model="this.inputs[5].value" :type="this.inputs[5].type" :disabled="popupEmailConfirm || popupError" bottom />
+            <BaseInputText name="Name" v-model="this.inputs[0].value" :type="this.inputs[0].type" :disabled="popupEmailConfirm || popupError" top @keyup.enter="register" />
+            <BaseInputText name="Surname" v-model="this.inputs[1].value" :type="this.inputs[1].type" :disabled="popupEmailConfirm || popupError" @keyup.enter="register" />
+            <BaseInputText name="Username" v-model="this.inputs[2].value" :type="this.inputs[2].type" :disabled="popupEmailConfirm || popupError" @keyup.enter="register" />
+            <BaseInputText name="Email" v-model="this.inputs[3].value" :type="this.inputs[3].type" :disabled="popupEmailConfirm || popupError" @keyup.enter="register" />
+            <BaseInputText name="Password" v-model="this.inputs[4].value" :type="this.inputs[4].type" :disabled="popupEmailConfirm || popupError" @keyup.enter="register" />
+            <BaseInputText name="Password" v-model="this.inputs[5].value" :type="this.inputs[5].type" :disabled="popupEmailConfirm || popupError" bottom @keyup.enter="register" />
           </div>
 
           <div class="flex items-center justify-between">
@@ -118,12 +118,12 @@ export default {
       emailIN: '',
       passwordIN: '',
       inputs: [
-        { name: 'name', value: '', placeholder: 'Name', type: 'text', disabled: false, error: true },
-        { name: 'surname', value: '', placeholder: 'Surname', type: 'text', disabled: false, error: true },
-        { name: 'username', value: '', placeholder: 'Username', type: 'text', disabled: false, error: true },
-        { name: 'email', value: '', placeholder: 'Email', type: 'text', disabled: false, error: true },
-        { name: 'password', value: '', placeholder: 'Password', type: 'password', disabled: false, error: true },
-        { name: 'confirm_password', value: '', placeholder: 'Password', type: 'password', disabled: false, error: true }
+        { name: 'name', value: '', placeholder: 'Name', type: 'text', disabled: false, error: true, errorText: 'Name can contain only letters and spaces' },
+        { name: 'surname', value: '', placeholder: 'Surname', type: 'text', disabled: false, error: true, errorText: 'Surname can contain only letters and spaces' },
+        { name: 'username', value: '', placeholder: 'Username', type: 'text', disabled: false, error: true, errorText: 'Username can contain only lower case letters, numbers and . - _' },
+        { name: 'email', value: '', placeholder: 'Email', type: 'text', disabled: false, error: true, errorText: 'Email not valid' },
+        { name: 'password', value: '', placeholder: 'Password', type: 'password', disabled: false, error: true, errorText: 'Password must be at least 8 characters and contains at least one number, one special character, one upper case and one lower case letter' },
+        { name: 'confirm_password', value: '', placeholder: 'Password', type: 'password', disabled: false, error: true, errorText: 'Password don\'t match' }
       ]
     }
   },
@@ -148,19 +148,22 @@ export default {
       if (this.inputs[4].value === this.inputs[5].value) {
         this.inputs[4].error = passwordChecker(this.inputs[4].value)
       } else {
-        this.inputs[4].error = false
+        this.inputs[5].error = false
       }
     },
     // Methods on submit
     register () {
       this.checker() // Checking inputs
       let sum = 0
-      this.errorMessage = 'Invalid '
-      this.inputs.forEach(input => {
+      this.errorMessage = ''
+      for (const input of this.inputs) {
         sum += input.error // sum for check
-        if (!input.error) this.errorMessage += `${input.name}, `
-      })
-      this.errorMessage = this.errorMessage.substring(0, this.errorMessage.length - 2) // change to better messages
+        if (!input.error) {
+          this.errorMessage = input?.errorText
+          break
+        }
+      }
+
       // Check all user input
       if (sum === 6) {
         as.createAccount(this.inputs[0].value, this.inputs[1].value, this.inputs[3].value, this.inputs[2].value, this.inputs[4].value)

@@ -10,8 +10,8 @@
         </div>
         <div class="mt-8 space-y-6">
           <div class="rounded-md shadow-sm -space-y-px">
-            <BaseInputText name="Username" v-model="usernameIN" type="text" top />
-            <BaseInputText name="Password" v-model="passwordIN" :type="type" bottom />
+            <BaseInputText name="Username" v-model="usernameIN" type="text" top @keyup.enter="login" />
+            <BaseInputText name="Password" v-model="passwordIN" :type="type" bottom @keyup.enter="login" />
           </div>
           <div class="flex items-center justify-between">
             <div class="flex items-center">
