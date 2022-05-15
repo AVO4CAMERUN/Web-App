@@ -25,6 +25,13 @@
       </div>
     </div>
   </div>
+  <PopUp
+      v-if="popupError"
+      :type="'error'"
+      :message="'Error'"
+      :content="'Username has already been taken'"
+      @noAction="this.popupError = !this.popupError"
+    />
 </template>
 
 <script>
@@ -35,6 +42,7 @@ import {
   // emailChecker
 } from '@/Utils/input_checker.util'
 import { accountService as as } from '@/servises/account.services'
+import PopUp from '@/components/Base/PopUp.vue'
 
 export default {
   name: 'settings',
@@ -45,10 +53,11 @@ export default {
         { name: 'lastname', label: 'Surname', actualValue: store.state.login.lastname, newValue: '', checker: nameChecker, editable: false },
         { name: 'username', label: 'Username', actualValue: store.state.login.username, newValue: '', checker: usernameChecker, editable: false }
         // { name: 'email', label: 'Email', actualValue: store.state.login.email, newValue: '', checker: emailChecker, editable: false }
-      ]
+      ],
+      popupError: false
     }
   },
-  components: {},
+  components: { PopUp },
   mounted () {},
   methods: {
     setNew (index) {
@@ -64,8 +73,13 @@ export default {
       as.putAccount(newData)
         .then((response) => {
           if (response.status === 200) return response.json()
+          else return null
         })
         .then((json) => {
+          if (json === null) {
+            this.popupError = true
+            return
+          }
           store.commit('login/setUsername', { username: json.username })
           store.commit('login/setFirstname', { firstname: json.firstname })
           store.commit('login/setLastname', { lastname: json.lastname })

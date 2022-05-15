@@ -5,36 +5,43 @@
 
       <!-- Title -->
       <p class="p-2 border-b-2 border-[#e5e7eb] select-none text-3xl font-semibold">Quiz: {{quiz.title}}</p>
+      <form @submit.prevent="submitAnswers(e)">
+        <div v-for="(question, qindex) in quiz.quiz" :key="question">
+          <!-- Question -->
+          <p class="px-6 pt-2.5 pb-1 text-lg font-bold border-slate-300">{{question.question}}</p>
 
-      <div v-for="question in quiz.quiz" :key="question">
-        <!-- Question -->
-        <p class="px-6 pt-2.5 pb-1 text-lg font-bold border-slate-300">{{question.question}}</p>
+          <!-- Answer Type -->
+          <p v-if="question.type == 'multiple'" class="px-6 pb-2 text-sm text-gray-500 dark:text-gray-300">(Multiple Choice)</p>
+          <p v-else class="px-6 pb-2 text-sm text-gray-500 dark:text-gray-300">(Single Choice)</p>
+          <div v-for="(answer, aindex) in question.answers" :key="answer">
+            <!-- :checked="aindex == 0" v-model="quizAnswers[qindex]" -->
+            <input
+              :type="typeInput(question.type)"
+              :value="aindex"
+              :name="question.question"
+              class="accent-input ml-12 m-2"
+              v-model="quizAnswers[qindex]"
+              required
+              :disabled="submit"
+            />
 
-        <!-- Answer Type -->
-        <p v-if="question.type == 'multiple'" class="px-6 pb-2 text-sm text-gray-500 dark:text-gray-300">(Multiple Choice)</p>
-        <p v-else class="px-6 pb-2 text-sm text-gray-500 dark:text-gray-300">(Single Choice)</p>
-        <div v-for="(answer, aindex) in question.answers" :key="answer">
-           <!-- :checked="aindex == 0" v-model="quizAnswers[qindex]" -->
-          <input
-            :type="typeInput(question.type)"
-            :value="aindex"
-            :name="question.question"
-            class="accent-input ml-12 m-2"
-          />
-
-          <!-- Answer -->
-          <label class="ml-2">{{answer}}</label>
+            <!-- Answer -->
+            <label class="mx-2" :class="submit ? !correct(aindex, qindex) && quizAnswers[qindex] === aindex ? 'text-red-500 line-through' : !correct(aindex, qindex) ? '' : 'text-green-700 underline' : ''">
+              {{answer}}
+            </label>
+            <i v-if="correct(aindex, qindex) && submit" class="fa-solid fa-check text-[20px] text-green-700"></i>
+            <i v-else-if="!correct(aindex, qindex) && quizAnswers[qindex] === aindex && submit" class="fa-solid fa-x text-[16px] text-red-500"></i>
+          </div>
         </div>
-      </div>
 
-      <!-- Submit -->
-      <div class="p-4 flex flex-row justify-start items-center">
-        <button
-          type="submit"
-          class="py-3 px-6 text-white text-sm font-semibold rounded-md hover:bg-emerald-500 bg-emerald-600 dark:text-white dark:bg-blue-600 dark:hover:bg-blue-500 duration-200"
-          @click="checkQuiz"
-        >Submit</button>
-      </div>
+        <!-- Submit -->
+        <div class="p-4 flex flex-row justify-start items-center">
+          <button
+            type="submit"
+            class="py-3 px-6 text-white text-sm font-semibold rounded-md hover:bg-emerald-500 bg-emerald-600 dark:text-white dark:bg-blue-600 dark:hover:bg-blue-500 duration-200"
+          >Submit</button>
+        </div>
+      </form>
     </div>
   </template>
 
@@ -140,21 +147,33 @@ export default {
       createdQuiz: {
         title: '',
         quiz: [{ type: 'single', answers: [''], correct_answers: [] }]
-      }
+      },
+      submit: false
     }
   },
   props: ['quiz', 'edit'],
   mounted () {
-    if (this.quiz) this.quiz.quiz.forEach(() => this.quizAnswers.push(0))
+    if (this.quiz) this.quiz.quiz.forEach(() => this.quizAnswers.push(null))
   },
   methods: {
-    checkQuiz () {
-      this.quizAnswers.forEach((element, index) => {
-        if (this.quiz.quiz[index].correct_answers[0] !== element) {
-          // azione se sbagli
+    correct (aindex, qindex) {
+      let correct = false
+      const correctAnswers = this.quiz.quiz[qindex].correct_answers
+      // console.log(aindex)
+      correctAnswers.forEach((element) => {
+        if (aindex === element) {
+          correct = true
         }
       })
-      // azione tutto corretto
+      return correct
+    },
+    submitAnswers (e) {
+      let compiled = true
+      this.quizAnswers.forEach(e => {
+        if (e === null) compiled = false
+      })
+      console.log(compiled)
+      if (compiled) this.submit = true
     },
     typeInput (type) {
       if (type === 'multiple') return 'checkbox'

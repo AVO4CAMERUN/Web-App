@@ -21,13 +21,23 @@
 
       <div v-if="role === 'TEACHER'" class="flex flex-row gap-2 self-center">
         <!-- Remove People Button -->
-        <!-- <button class="cursor-pointer px-5 py-2.5 text-sm text-white font-medium rounded-lg bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 focus:outline-none">
-          Remove People
-        </button> -->
+        <button class="cursor-pointer px-5 py-2.5 text-sm text-white font-medium rounded-lg bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 focus:outline-none"
+          @click="toggleRemove = !toggleRemove; tmpDeletedUsers = []"
+        >
+          {{!toggleRemove ? 'Remove Users' : 'Discard changes'}}
+        </button>
+        <!-- Confirm elimination Button -->
+        <button v-if="toggleRemove" class="cursor-pointer px-5 py-2.5 text-sm text-white font-medium rounded-lg bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 focus:outline-none"
+          @click="removeUsers"
+        >
+          Confirm removing
+        </button>
 
         <!-- Add People Button -->
-        <button class="cursor-pointer px-5 py-2.5 text-sm text-white font-medium rounded-lg bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 focus:outline-none"
+        <button class="px-5 py-2.5 text-sm text-white font-medium rounded-lg bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 focus:outline-none"
+          :class="toggleRemove ? 'cursor-not-allowed' : 'cursor-pointer'"
           @click="showPopUp = true"
+          :disabled="toggleRemove"
         >
           Add People
         </button>
@@ -40,7 +50,6 @@
       <div class="h-96 w-[75%] p-2 border-2 border-gray-200 rounded-lg lg:w-full md:block bg-white dark:bg-slate-900"><Statistics /></div>
       <div class="h-96 w-[75%] p-2 border-2 border-gray-200 rounded-lg lg:w-full md:block bg-white dark:bg-slate-900"><Statistics /></div>
     </div>
-
     <!-- Users Cards -->
     <div class="p-8 overflow-hidden">
       <!-- Teachers Cards -->
@@ -63,13 +72,16 @@
       <div class="my-4 px-2 grid gap-3 grid-cols-[repeat(auto-fill,_minmax(415px,_1fr))]">
         <UserCard
           v-for="student in currentClass.students"
+          v-show ="isRemoved(student.email)"
           :key="student.email"
           :email="student.email"
           :firstname="student.firstname"
           :lastname="student.lastname"
           :role="student.role"
+          :remove="toggleRemove"
           :registrationDate="student.registration_date"
           :img="student.img_profile"
+          @email="addTmpRemove"
       />
       </div>
     </div>
@@ -97,7 +109,9 @@ export default {
       studentsLength: null,
       teachersLength: null,
       showPopUp: false,
-      empty: true
+      empty: true,
+      toggleRemove: false,
+      tmpDeletedUsers: []
     }
   },
   props: {},
@@ -108,8 +122,8 @@ export default {
           if (!response) {
             return
           }
+          this.empty = false
           this.currentClass = response
-          console.log(response)
           this.studentsLength = this.currentClass.students.length
           this.teachersLength = this.currentClass.teachers.length
         })
@@ -128,6 +142,19 @@ export default {
           this.studentsLength = this.currentClass.students.length
           this.teachersLength = this.currentClass.teachers.length
         })
+    },
+    addTmpRemove (email) {
+      const i = this.tmpDeletedUsers.findIndex(e => e === email)
+      if (i === -1) this.tmpDeletedUsers.push(email)
+    },
+    isRemoved (email) {
+      const i = this.tmpDeletedUsers.findIndex(e => e === email)
+      if (i === -1) return true
+      return false
+    },
+    removeUsers () {
+      this.toggleRemove = !this.toggleRemove
+      // gabbo sei inutile
     }
   },
   components: {

@@ -14,7 +14,7 @@
           :key="unit.id_unit"
         >
           <!-- Unit -->
-          <div class="flex justify-center items-center rounded-lg font-medium cursor-pointer p-4 bg-green-700 text-white hover:bg-green-800"
+          <div class="flex justify-center items-center rounded-lg font-medium cursor-pointer p-4 bg-green-700 text-white hover:bg-green-800 dark:text-white dark:bg-blue-600 dark:hover:bg-blue-500"
               @click="display[index] = !display[index]"
               :class="{'': display[index]}">
             <h4 class="select-none">{{unit.name}}</h4>
@@ -27,12 +27,18 @@
           >
 
             <!-- Lesson -->
-            <div class="cursor-pointer rounded-md m-2 p-2 text-center transition-colors select-none dark:text-light-text hover:bg-primary-light dark:hover:text-black hover:decoration-black hover:decoration-2"
+            <div class="flex flex-col justify-start relative cursor-pointer rounded-md m-2 p-2 transition-colors select-none hover:bg-primary-light hover:decoration-black hover:decoration-2 dark:text-white dark:hover:bg-blue-500"
               v-for="(lesson) in unit.lesson"
               :key="lesson"
               @click="changeLesson(lesson.id_lesson)"
             >
-              <p class="">{{lesson.name}}</p>
+              <p>{{lesson.name}}</p>
+
+              <!-- Download Button -->
+              <div class="self-end aspect-square rounded-full absolute hover:scale-125 transition self-end">
+                <i @click.stop="" class="fa-solid fa-circle-down text-[24px] text-green-700 align-middle dark:text-blue-900"></i>
+              </div>
+
             </div>
 
           </div>

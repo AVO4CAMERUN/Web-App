@@ -1,5 +1,8 @@
 <template>
-  <div v-if="units.length !== 0 || edit" class="grid lg:grid-cols-[80%,_20%] p-8 gap-4">
+  <div
+    v-if="units.length !== 0 || edit"
+    class="grid lg:grid-cols-[80%,_20%] p-8 gap-4"
+  >
     <!-- <p class="py-4 bg-primary text-white text-center text-3xl rounded-md col-span-full">{{ name }}</p> -->
 
     <!-- Video Component -->
@@ -27,14 +30,15 @@
       :key="lesson.quiz"
     />
 
-    <!-- Descriptio Component -->
+    <!-- Description Component -->
     <VideoDescription
+      v-if="false"
       :lessonID="lesson.id_lesson"
       :lessonName="lesson.name"
     />
 
   </div>
-  <div v-else>oh no douma ha sfasciato tutto 🤡</div>
+  <div v-else> Error </div>
 </template>
 
 <script>
