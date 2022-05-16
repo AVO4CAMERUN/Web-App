@@ -11,7 +11,9 @@ async function getLessonsByFilter (filter = '') {
 }
 
 // Function for update course by id (PUT)
-async function updateLessonsByID () {}
+async function updateLessonsByID (filter, body) {
+  return await service.genericRequestWithAuth(`lessons/${filter}`, 'PUT', body)
+}
 
 // Function for delete course by id (DELETE)
 async function deleteLessonsByID () {}

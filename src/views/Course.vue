@@ -8,6 +8,9 @@
     <!-- Video Component -->
     <Video
       :videoID="lesson.link_video"
+      :lessonID="lesson.id_lesson"
+      :unitID="lesson.id_unit"
+      :courseID="id"
       :edit="edit"
       :courseName="name"
     />
@@ -61,6 +64,7 @@ export default {
         name: '',
         creation_date: '',
         link_video: '',
+        id_unit: null,
         quiz: {
           title: '',
           quiz: []

@@ -1690,6 +1690,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   font-size: 36px;
 }
 
+.text-\[16px\] {
+  font-size: 16px;
+}
+
+.text-\[24px\] {
+  font-size: 24px;
+}
+
 .text-\[14px\] {
   font-size: 14px;
 }
@@ -1700,14 +1708,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .text-\[17px\] {
   font-size: 17px;
-}
-
-.text-\[16px\] {
-  font-size: 16px;
-}
-
-.text-\[24px\] {
-  font-size: 24px;
 }
 
 .font-bold {
@@ -1846,6 +1846,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(5 150 105 / var(--tw-text-opacity));
 }
 
+.text-red-500 {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity));
+}
+
 .text-amber-400 {
   --tw-text-opacity: 1;
   color: rgb(251 191 36 / var(--tw-text-opacity));
@@ -1859,11 +1864,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-\[\#707070\] {
   --tw-text-opacity: 1;
   color: rgb(112 112 112 / var(--tw-text-opacity));
-}
-
-.text-red-500 {
-  --tw-text-opacity: 1;
-  color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 
 .underline {
@@ -2415,11 +2415,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .dark .dark\:hover\:text-white:hover {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.dark .dark\:hover\:text-black:hover {
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
 .dark .dark\:focus\:ring-blue-800:focus {

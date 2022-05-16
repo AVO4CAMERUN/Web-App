@@ -114,11 +114,20 @@
             <div
               class="flex flex-row justify-between"
               v-for="(answer, aindex) in newQuiz.answers"
-              :key="answer"
+              :key="aindex"
             >
-              <input :type="newQuiz.type === 'single' ? 'radio' : 'checkbox'" :name="qindex" class="self-center mr-4" @change="addCorrectAnswer(qindex, aindex)">
-              <input type="text" placeholder="Answer" class="w-full p-2 border-b-2 border-[#e5e7eb] bg-transparent text-gray-700 leading-tight focus:outline-none dark:text-white">
-              <i class="ml-2 bx bxs-minus-circle text-rose-600 cursor-pointer text-[32px]"></i>
+              <input
+                :type="newQuiz.type === 'single' ? 'radio' : 'checkbox'"
+                :name="qindex" class="self-center mr-4"
+                @change="addCorrectAnswer(qindex, aindex)"
+              >
+              <input
+                type="text"
+                placeholder="Answer"
+                class="w-full p-2 border-b-2 border-[#e5e7eb] bg-transparent text-gray-700 leading-tight focus:outline-none dark:text-white"
+                v-model="newQuiz.answers[aindex]"
+              >
+              <i class="ml-2 bx bxs-minus-circle text-rose-600 cursor-pointer text-[32px]" />
             </div>
           </div>
 
@@ -191,6 +200,7 @@ export default {
     },
     addCorrectAnswer (qindex, aindex) {
       let correctAnswers = this.createdQuiz.quiz[qindex].correct_answers
+      console.log(qindex)
       const i = correctAnswers.findIndex(e => e === aindex)
       if (this.createdQuiz.quiz[qindex].type === 'single') correctAnswers = [aindex]
       else if (i === -1) correctAnswers.push(aindex)
