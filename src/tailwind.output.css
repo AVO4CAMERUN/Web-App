@@ -598,6 +598,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-right: 0.5rem;
 }
 
+.my-2 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
 .mt-8 {
   margin-top: 2rem;
 }
@@ -1106,14 +1111,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   gap: 1.5rem;
 }
 
-.gap-\[10px\] {
-  gap: 10px;
-}
-
-.gap-\[20px\] {
-  gap: 20px;
-}
-
 .space-y-6 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
@@ -1321,6 +1318,16 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border-emerald-800 {
   --tw-border-opacity: 1;
   border-color: rgb(6 95 70 / var(--tw-border-opacity));
+}
+
+.border-blue-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(59 130 246 / var(--tw-border-opacity));
+}
+
+.border-green-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(34 197 94 / var(--tw-border-opacity));
 }
 
 .border-b-green-900 {
@@ -2029,6 +2036,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-color: rgb(20 83 45 / var(--tw-border-opacity));
 }
 
+.hover\:border-primary-light:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(99 179 119 / var(--tw-border-opacity));
+}
+
 .hover\:bg-red-800:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(153 27 27 / var(--tw-bg-opacity));
@@ -2220,9 +2232,28 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-ring-offset-width: 2px;
 }
 
+.group:hover .group-hover\:bg-green-800 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(22 101 52 / var(--tw-bg-opacity));
+}
+
+.group:hover .group-hover\:bg-primary-light {
+  --tw-bg-opacity: 1;
+  background-color: rgb(99 179 119 / var(--tw-bg-opacity));
+}
+
 .group:hover .group-hover\:text-green-400 {
   --tw-text-opacity: 1;
   color: rgb(74 222 128 / var(--tw-text-opacity));
+}
+
+.group:hover .group-hover\:decoration-black {
+  -webkit-text-decoration-color: #000;
+          text-decoration-color: #000;
+}
+
+.group:hover .group-hover\:decoration-2 {
+  text-decoration-thickness: 2px;
 }
 
 .group:hover .group-hover\:opacity-100 {
@@ -2262,6 +2293,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .dark .dark\:border-slate-500 {
   --tw-border-opacity: 1;
   border-color: rgb(100 116 139 / var(--tw-border-opacity));
+}
+
+.dark .dark\:border-blue-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(59 130 246 / var(--tw-border-opacity));
 }
 
 .dark .dark\:bg-dark-bg {
@@ -2395,6 +2431,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-color: rgb(30 58 138 / var(--tw-border-opacity));
 }
 
+.dark .dark\:hover\:border-blue-500:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(59 130 246 / var(--tw-border-opacity));
+}
+
 .dark .dark\:hover\:bg-blue-600:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(37 99 235 / var(--tw-bg-opacity));
@@ -2428,6 +2469,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .dark .dark\:focus\:ring-gray-700:focus {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(55 65 81 / var(--tw-ring-opacity));
+}
+
+.dark .group:hover .dark\:group-hover\:bg-blue-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(59 130 246 / var(--tw-bg-opacity));
 }
 
 @media (min-width: 640px) {
