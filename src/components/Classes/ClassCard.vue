@@ -45,9 +45,9 @@
 
         <!-- Buttons -->
         <div v-if="parent === 'mycreations'" class="flex flex-row gap-2">
-          <i @click.stop="this.$emit('setEdit', groupClass.id)" class="cursor-pointer bx bx-edit text-black text-[32px] dark:invert" :class="groupClass.archived ? 'opacity-25' : ''" /> <!-- Edit -->
-          <i @click.stop="updateClass()" class="cursor-pointer bx text-green-900 text-[32px] dark:invert" :class="groupClass.archived ? 'bxs-box' : 'bx-box'"/> <!-- Archive -->
-          <i @click.stop="deleteClass" class="cursor-pointer bx bx-trash text-rose-600 text-[32px]" :class="groupClass.archived === true ? 'opacity-25' : ''" /> <!-- Delete -->
+          <i @click.stop="this.$emit('setEdit', groupClass.id)" class="cursor-pointer bx bx-edit text-black text-[32px] dark:invert" :class="groupClass.archived ? 'opacity-25' : ''" title="Modifica classe"/> <!-- Edit -->
+          <i @click.stop="updateClass()" class="cursor-pointer bx text-green-900 text-[32px] dark:invert" :class="groupClass.archived ? 'bxs-box' : 'bx-box'" title="Archivia classe"/> <!-- Archive -->
+          <i @click.stop="deleteClass" class="cursor-pointer bx bx-trash text-rose-600 text-[32px]" :class="groupClass.archived === true ? 'opacity-25' : ''" title="Elimina classe"/> <!-- Delete -->
         </div>
       </footer>
     </article>

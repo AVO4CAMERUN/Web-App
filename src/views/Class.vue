@@ -45,11 +45,11 @@
     </div>
 
     <!-- Statistics -->
-    <div class="px-8 py-2 grid place-items-center gap-4 lg:grid-cols-3 sm:grid-cols-1">
-      <div class="h-96 w-[75%] p-2 border-2 border-gray-200 rounded-lg lg:w-full md:block bg-white dark:bg-slate-900"><Statistics /></div>
-      <div class="h-96 w-[75%] p-2 border-2 border-gray-200 rounded-lg lg:w-full md:block bg-white dark:bg-slate-900"><Statistics /></div>
-      <div class="h-96 w-[75%] p-2 border-2 border-gray-200 rounded-lg lg:w-full md:block bg-white dark:bg-slate-900"><Statistics /></div>
-    </div>
+    <!--div class="px-8 py-2 grid place-items-center gap-4 lg:grid-cols-3 sm:grid-cols-1">
+      <div class="h-96 w-[75%] p-2 border-2 border-gray-200 rounded-lg lg:w-full md:block bg-white dark:bg-slate-900"><Statistics nomeCorso="Work In Progress" /></div>
+      <div class="h-96 w-[75%] p-2 border-2 border-gray-200 rounded-lg lg:w-full md:block bg-white dark:bg-slate-900"><Statistics nomeCorso="Work In Progress" /></div>
+      <div class="h-96 w-[75%] p-2 border-2 border-gray-200 rounded-lg lg:w-full md:block bg-white dark:bg-slate-900"><Statistics nomeCorso="Work In Progress" /></div>
+    </div-->
     <!-- Users Cards -->
     <div class="p-8 overflow-hidden">
       <!-- Teachers Cards -->
@@ -96,7 +96,7 @@
 
 <script>
 import UserCard from '@/components/Classes/UserCard.vue'
-import Statistics from '@/components/Classes/Statistics.vue'
+// import Statistics from '@/components/Classes/Statistics.vue'
 import InvitePopUp from '@/components/Classes/InvitePopUp.vue'
 // import { classesService as cs } from '@/servises/classes.services'
 import store from '@/store/index'
@@ -159,7 +159,7 @@ export default {
   },
   components: {
     UserCard,
-    Statistics,
+    // Statistics,
     InvitePopUp
   },
   mounted () {

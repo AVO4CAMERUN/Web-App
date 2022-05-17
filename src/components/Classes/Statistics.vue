@@ -1,5 +1,5 @@
 <template>
-    <canvas id="myChart">Testo di fallback</canvas>
+    <div class="text-center text-gray-400 text-2xl" id="myChart">{{nomeCorso}}</div>
     <!-- Esempio del file messo su Drive
     Da mettere charts.js https://www.chartjs.org/docs/latest/
     Per provarlo con CDN: <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

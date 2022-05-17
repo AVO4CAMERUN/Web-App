@@ -49,15 +49,15 @@
         </div>
         <!-- Buttons Conditional Rendering -->
         <div v-if="parent === 'inscriptions'" class="cursor-pointer">
-          <i @click.stop="removeCourse" class="bx bxs-minus-circle text-rose-600 text-[32px]" /> <!-- Remove Course -->
+          <i @click.stop="removeCourse" class="bx bxs-minus-circle text-rose-600 text-[32px]" title="Elimina iscrizione corso"/> <!-- Remove Course -->
         </div>
         <div v-else-if="parent === 'search'" class="cursor-pointer">
-          <i v-if="!subscribed" @click.stop="addCourses" class="bx bxs-plus-circle text-black text-[32px] dark:invert" /> <!-- Add Course -->
-          <i v-else class="bx bxs-check-circle text-emerald-600 text-[32px]"/> <!-- Already Added Course -->
+          <i v-if="!subscribed" @click.stop="addCourses" class="bx bxs-plus-circle text-black text-[32px] dark:invert" title="Aggiungi corso"/> <!-- Add Course -->
+          <i v-else class="bx bxs-check-circle text-emerald-600 text-[32px]" title="Corso già aggiunto"/> <!-- Already Added Course -->
         </div>
         <div v-else-if="parent === 'mycreations'" class="cursor-pointer">
-          <i @click.stop="this.$emit('setEdit', courseID)" class='bx bx-edit text-black text-[32px] dark:invert' /> <!-- Edit Course -->
-          <i @click.stop="deleteCourse" class="bx bx-trash text-rose-600 text-[32px]" /> <!-- Delete Course -->
+          <i @click.stop="this.$emit('setEdit', courseID)" class='bx bx-edit text-black text-[32px] dark:invert' title="Modifica corso"/> <!-- Edit Course -->
+          <i @click.stop="deleteCourse" class="bx bx-trash text-rose-600 text-[32px]" title="Elimina corso"/> <!-- Delete Course -->
         </div>
       </footer>
     </article>

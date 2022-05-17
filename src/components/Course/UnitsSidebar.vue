@@ -27,7 +27,7 @@
           >
 
             <!-- Lesson -->
-            <div class="flex flex-col justify-start relative cursor-pointer rounded-md m-2 p-2 transition-colors select-none hover:bg-primary-light hover:decoration-black hover:decoration-2 dark:text-white dark:hover:bg-blue-500"
+            <div class="flex flex-row justify-between items-center relative cursor-pointer rounded-md m-2 p-2 transition-colors select-none hover:bg-primary-light hover:decoration-black hover:decoration-2 dark:text-white dark:hover:bg-blue-500"
               v-for="(lesson) in unit.lesson"
               :key="lesson"
               @click="changeLesson(lesson.id_lesson)"
@@ -35,8 +35,8 @@
               <p>{{lesson.name}}</p>
 
               <!-- Download Button -->
-              <div class="self-end aspect-square rounded-full absolute hover:scale-125 transition self-end">
-                <i @click.stop="" class="fa-solid fa-circle-down text-[24px] text-green-700 align-middle dark:text-blue-900"></i>
+              <div class="aspect-square rounded-full hover:scale-125 transition">
+                <i @click.stop="" class="fa-solid fa-circle-down text-[24px] text-green-700 dark:text-blue-300"></i>
               </div>
 
             </div>
@@ -53,7 +53,7 @@
           tag="transition-group"
         >
           <template class="border border-black mt-3 cursor-move" #item="{element, index}">
-            <li class="flex align-center flex-col mb-1 mt-2 flex flex-row gap-2">
+            <li class="flex align-center flex-col mb-1 mt-2 gap-2">
 
               <!-- Unit Edit Input -->
               <template class="flex flex-row gap-2">
@@ -93,7 +93,7 @@
         </draggable>
 
         <!-- Unit Add Input -->
-        <li class="flex align-center flex-col mb-1 mt-2 flex flex-row gap-2">
+        <li class="flex align-center flex-col mb-1 mt-2 gap-2">
           <template class="flex flex-row gap-2">
             <input class="appearance-none w-full px-4 rounded-md focus:outline-none dark:bg-dark-sidebar dark:text-light-text"
               v-model="newUnit"

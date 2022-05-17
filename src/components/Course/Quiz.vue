@@ -14,19 +14,19 @@
           <p v-if="question.type == 'multiple'" class="px-6 pb-2 text-sm text-gray-500 dark:text-gray-300">(Multiple Choice)</p>
           <p v-else class="px-6 pb-2 text-sm text-gray-500 dark:text-gray-300">(Single Choice)</p>
           <div v-for="(answer, aindex) in question.answers" :key="answer">
-            <!-- :checked="aindex == 0" v-model="quizAnswers[qindex]" -->
-            <input
-              :type="typeInput(question.type)"
-              :value="aindex"
-              :name="question.question"
-              class="accent-input ml-12 m-2"
-              v-model="quizAnswers[qindex]"
-              required
-              :disabled="submit"
-            />
-
             <!-- Answer -->
             <label class="mx-2" :class="submit ? !correct(aindex, qindex) && quizAnswers[qindex] === aindex ? 'text-red-500 line-through' : !correct(aindex, qindex) ? '' : 'text-green-700 underline' : ''">
+              <!-- :checked="aindex == 0" v-model="quizAnswers[qindex]" -->
+              <input
+                :type="typeInput(question.type)"
+                :value="aindex"
+                :name="question.question"
+                class="accent-input ml-12 m-2"
+                v-model="quizAnswers[qindex]"
+                required
+                :disabled="submit"
+              />
+
               {{answer}}
             </label>
             <i v-if="correct(aindex, qindex) && submit" class="fa-solid fa-check text-[20px] text-green-700"></i>
