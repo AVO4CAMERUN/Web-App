@@ -24,6 +24,7 @@
       @newUnit="addNewUnit"
       @deletedUnit="removeUnit"
       @updatedUnit="updateUnit"
+      @deletedLesson="removeLesson"
     />
 
     <!-- Quiz Component -->
@@ -125,6 +126,11 @@ export default {
       const i = this.units.findIndex(oldUnit => oldUnit.id_unit === newUnit.id_unit)
       this.units[i] = newUnit
       this.units.sort((a, b) => a.seqNumber - b.seqNumber)
+    },
+    removeLesson (idLesson, idUnit) {
+      const i = this.units.findIndex(unit => unit.id_unit === idUnit)
+      const k = this.units[i].lesson.findIndex(lesson => lesson.id_lesson === idLesson)
+      this.units[i].lesson.splice(k, 1)
     }
   },
   computed: {

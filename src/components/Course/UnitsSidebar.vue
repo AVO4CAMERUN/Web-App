@@ -89,32 +89,38 @@
 
                 <!-- Lesson Container -->
                 <div class="py-4 px-2 my-2 mx-2 rounded-md border-[1px] border-slate-400 dark:border-gray-100">
-
                   <!-- Lesson -->
-                  <div class="flex flex-row justify-between items-center relative cursor-pointer rounded-md p-2 border border-black transition-colors select-none dark:text-white">
+                  <div class="flex flex-row justify-between items-center relative cursor-pointer rounded-md p-2 border border-black transition-colors select-none dark:text-white"
+                    v-for="(lesson, lessonIndex) in element.lesson"
+                    :key="lesson"
+                  >
                     <input class="appearance-none w-full px-4 rounded-md focus:outline-none dark:bg-dark-sidebar dark:text-light-text"
                       type="text"
                       maxlength="20"
-                      value="Nome Lezione"
+                      :value="lesson.name"
+                      :disabled="k === lessonIndex ? false : true"
                     >
                     <div class="flex flex-row justify-center items-center">
                       <!-- Edit -->
-                      <svg xmlns="http://www.w3.org/2000/svg" height="25" width="25" viewBox="0 0 512 512">
+                      <svg xmlns="http://www.w3.org/2000/svg" height="25" width="25" viewBox="0 0 512 512"
+                        v-if="k === lessonIndex ? false : true"
+                        @click="k = lessonIndex"
+                      >
                         <path d="M490.3 40.4C512.2 62.27 512.2 97.73 490.3 119.6L460.3 149.7L362.3 51.72L392.4 21.66C414.3-.2135 449.7-.2135 471.6 21.66L490.3 40.4zM172.4 241.7L339.7 74.34L437.7 172.3L270.3 339.6C264.2 345.8 256.7 350.4 248.4 353.2L159.6 382.8C150.1 385.6 141.5 383.4 135 376.1C128.6 370.5 126.4 361 129.2 352.4L158.8 263.6C161.6 255.3 166.2 247.8 172.4 241.7V241.7zM192 63.1C209.7 63.1 224 78.33 224 95.1C224 113.7 209.7 127.1 192 127.1H96C78.33 127.1 64 142.3 64 159.1V416C64 433.7 78.33 448 96 448H352C369.7 448 384 433.7 384 416V319.1C384 302.3 398.3 287.1 416 287.1C433.7 287.1 448 302.3 448 319.1V416C448 469 405 512 352 512H96C42.98 512 0 469 0 416V159.1C0 106.1 42.98 63.1 96 63.1H192z"/>
                       </svg>
                       <!-- Update -->
-                      <svg xmlns="http://www.w3.org/2000/svg" height="25" width="25" viewBox="0 0 448 512" fill="green">
+                      <svg xmlns="http://www.w3.org/2000/svg" height="25" width="25" viewBox="0 0 448 512" fill="green"
+                        v-else
+                      >
                         <path d="M384 32C419.3 32 448 60.65 448 96V416C448 451.3 419.3 480 384 480H64C28.65 480 0 451.3 0 416V96C0 60.65 28.65 32 64 32H384zM339.8 211.8C350.7 200.9 350.7 183.1 339.8 172.2C328.9 161.3 311.1 161.3 300.2 172.2L192 280.4L147.8 236.2C136.9 225.3 119.1 225.3 108.2 236.2C97.27 247.1 97.27 264.9 108.2 275.8L172.2 339.8C183.1 350.7 200.9 350.7 211.8 339.8L339.8 211.8z"/>
                       </svg>
                       <!-- Remove -->
-                      <svg class="cursor-pointer" xmlns="http://www.w3.org/2000/svg" height="25" width="25" viewBox="0 0 448 512" fill="red">
+                      <svg class="cursor-pointer" xmlns="http://www.w3.org/2000/svg" height="25" width="25" viewBox="0 0 448 512" fill="red"
+                        @click="removeLesson(lesson.id_lesson, element.id_unit)"
+                      >
                         <path d="M384 32C419.3 32 448 60.65 448 96V416C448 451.3 419.3 480 384 480H64C28.65 480 0 451.3 0 416V96C0 60.65 28.65 32 64 32H384zM143 208.1L190.1 255.1L143 303C133.7 312.4 133.7 327.6 143 336.1C152.4 346.3 167.6 346.3 176.1 336.1L223.1 289.9L271 336.1C280.4 346.3 295.6 346.3 304.1 336.1C314.3 327.6 314.3 312.4 304.1 303L257.9 255.1L304.1 208.1C314.3 199.6 314.3 184.4 304.1 175C295.6 165.7 280.4 165.7 271 175L223.1 222.1L176.1 175C167.6 165.7 152.4 165.7 143 175C133.7 184.4 133.7 199.6 143 208.1V208.1z"/>
                       </svg>
                     </div>
-                    <!-- Download Button -->
-                    <!-- <div class="aspect-square rounded-full hover:scale-125 transition">
-                      <i class="fa-solid fa-circle-down text-[24px] text-green-700 dark:text-blue-300"></i>
-                    </div> -->
                   </div>
 
                   <!-- Lesson Add Input -->
@@ -123,11 +129,15 @@
                       <input class="appearance-none w-full px-4 rounded-md focus:outline-none dark:bg-dark-sidebar dark:text-light-text"
                         type="text"
                         placeholder="Lesson Name"
+                        v-model="newLesson"
                       >
                       <div class="flex flex-col justify-center items-center">
 
                         <!-- Add -->
-                        <svg xmlns="http://www.w3.org/2000/svg" height="25" width="25" viewBox="0 0 448 512" fill="green">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="25" width="25" viewBox="0 0 448 512" fill="green"
+                          @click="newLesson === '' ? '' : addLesson(element.id_unit)"
+                          :class="newLesson === '' ? 'cursor-not-allowed' : 'cursor-pointer'"
+                        >
                           <path d="M384 32C419.3 32 448 60.65 448 96V416C448 451.3 419.3 480 384 480H64C28.65 480 0 451.3 0 416V96C0 60.65 28.65 32 64 32H384zM339.8 211.8C350.7 200.9 350.7 183.1 339.8 172.2C328.9 161.3 311.1 161.3 300.2 172.2L192 280.4L147.8 236.2C136.9 225.3 119.1 225.3 108.2 236.2C97.27 247.1 97.27 264.9 108.2 275.8L172.2 339.8C183.1 350.7 200.9 350.7 211.8 339.8L339.8 211.8z"/>
                         </svg>
                       </div>
@@ -167,6 +177,7 @@
 import store from '@/store/index'
 import draggable from 'vuedraggable'
 import { unitsService as us } from '@/servises/units.services'
+import { lessonService as ls } from '@/servises/lesson.services'
 
 export default {
   data: function () {
@@ -174,15 +185,17 @@ export default {
       currentLesson: 0,
       display: [],
       newUnit: '',
+      newLesson: '',
       updatedUnit: '',
-      i: -1,
+      i: -1, // units pointer
+      k: -1, // lesson pointer
       localUnits: []
     }
   },
   components: {
     draggable
   },
-  emits: ['lessonID', 'newUnit', 'deletedUnit', 'updatedUnit'],
+  emits: ['lessonID', 'newUnit', 'deletedUnit', 'updatedUnit', 'deletedLesson'],
   props: ['edit', 'units'],
   methods: {
     // Emit the lesson selected
@@ -260,6 +273,44 @@ export default {
             })
         }
       })
+    },
+
+    // Create lesson
+    addLesson (idUnit) {
+      const obj = { name: this.newLesson, id_unit: idUnit, id_course: this.courseID, quiz: '', link_video: '' }
+      ls.createLessons(obj)
+        .then((response) => {
+          if (response.status === 200) {
+            ls.getLessonsByFilter(`name=["${obj.name}"]&id_unit=[${obj.id_unit}]`)
+              .then((response) => {
+                if (response.status === 200) return response.json()
+              })
+              .then((lesson) => {
+                this.$emit('newLesson', lesson[0])
+                this.newLesson = ''
+              })
+          } else if (response.status === 500) {
+            // const i = this.units.findIndex(unit => unit.name === obj.name)
+            // if (i !== -1) console.log('nome già in uso')
+          }
+        })
+        .then(() => {
+          this.localUnits = this.units
+        })
+    },
+
+    // Delete Lesson
+    removeLesson (idLesson, idUnit) {
+      const obj = { id_unit: idUnit, id_course: this.courseID }
+      ls.deleteLessonsByID(idLesson, obj)
+        .then((response) => {
+          if (response.status === 200) {
+            this.$emit('deletedLesson', idLesson, idUnit)
+          }
+        })
+        .then(() => {
+          this.localUnits = this.units
+        })
     }
   },
   computed: {
@@ -285,6 +336,7 @@ export default {
       this.display.push(true)
       this.localUnits.push(unit)
     }
+    console.log(this.localUnits)
   }
 }
 </script>
