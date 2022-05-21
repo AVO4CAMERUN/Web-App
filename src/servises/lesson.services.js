@@ -7,7 +7,7 @@ async function createLessons (body) {
 
 // Function for get units by filter (GET)
 async function getLessonsByFilter (filter = '') {
-  return await service.genericRequestWithAuth(`lessons${filter}`, 'GET', {})
+  return await service.genericRequestWithAuth(`lessons?${filter}`, 'GET', {})
 }
 
 // Function for update course by id (PUT)

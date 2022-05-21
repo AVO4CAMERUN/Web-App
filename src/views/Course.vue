@@ -7,12 +7,8 @@
 
     <!-- Video Component -->
     <Video
-      :videoID="lesson.link_video"
-      :lessonID="lesson.id_lesson"
-      :unitID="lesson.id_unit"
-      :courseID="id"
+      :lesson="lesson"
       :edit="edit"
-      :courseName="name"
     />
 
     <!-- Units Sidebar Component -->
@@ -25,6 +21,8 @@
       @deletedUnit="removeUnit"
       @updatedUnit="updateUnit"
       @deletedLesson="removeLesson"
+      @newLesson="addNewLesson"
+      @updatedLesson="updateLesson"
     />
 
     <!-- Quiz Component -->
@@ -89,7 +87,7 @@ export default {
           // cambiare in ordine lezioni dinamico
           if (this.units[0]?.lesson[0] !== undefined) {
             this.lessonID = this.units[0].lesson[0].id_lesson
-            this.fetchLesson(`?id_lesson=["${this.lessonID}"]`)
+            this.fetchLesson(`id_lesson=["${this.lessonID}"]`)
           }
         })
     },
@@ -113,7 +111,7 @@ export default {
     },
     getLessonID (id) {
       this.lessonID = id
-      this.fetchLesson(`?id_lesson=["${id}"]`)
+      this.fetchLesson(`id_lesson=["${id}"]`)
     },
     addNewUnit (unit) {
       this.units.push(unit)
@@ -123,14 +121,23 @@ export default {
       this.units.splice(i, 1)
     },
     updateUnit (newUnit) {
-      const i = this.units.findIndex(oldUnit => oldUnit.id_unit === newUnit.id_unit)
-      this.units[i] = newUnit
+      const i = this.units.findIndex(unit => unit.id_unit === newUnit.id_unit)
+      this.units[i].name = newUnit.name
       this.units.sort((a, b) => a.seqNumber - b.seqNumber)
     },
     removeLesson (idLesson, idUnit) {
       const i = this.units.findIndex(unit => unit.id_unit === idUnit)
       const k = this.units[i].lesson.findIndex(lesson => lesson.id_lesson === idLesson)
       this.units[i].lesson.splice(k, 1)
+    },
+    addNewLesson (lesson, idUnit) {
+      const i = this.units.findIndex(unit => unit.id_unit === idUnit)
+      this.units[i].lesson.push(lesson)
+    },
+    updateLesson (newLesson, idUnit) {
+      const i = this.units.findIndex(unit => unit.id_unit === idUnit)
+      const j = this.units[i].lesson.findIndex(lesson => lesson.id_lesson === newLesson.id_lesson)
+      this.units[i].lesson[j].name = newLesson.name
     }
   },
   computed: {
