@@ -46,7 +46,7 @@
   </template>
 
   <!-- Quiz Creation -->
-  <template v-else-if="edit"> {{createdQuiz}}
+  <template v-else-if="edit">
     <!-- Creazione Quiz -->
     <div class="p-4 col-span-full rounded-md shadow-lg bg-white dark:bg-dark-sidebar da">
       <!-- Title -->
@@ -208,6 +208,12 @@ export default {
     },
     resetCorrectAnswers (qindex) {
       this.createdQuiz.quiz[qindex].correct_answers = []
+    }
+  },
+  watch: {
+    quiz () {
+      this.submit = false
+      this.quizAnswers = []
     }
   }
 }

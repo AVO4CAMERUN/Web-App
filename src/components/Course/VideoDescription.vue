@@ -21,10 +21,7 @@ export default {
   methods: {},
   components: {
   },
-  props: {
-    lessonID: Number,
-    lessonName: String
-  }
+  props: ['lesson']
 }
 </script>
 

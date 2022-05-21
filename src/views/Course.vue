@@ -27,20 +27,18 @@
 
     <!-- Quiz Component -->
     <Quiz
-      :quiz="lesson.quiz"
+      :quiz="lesson?.quiz"
       :edit="edit"
-      :key="lesson.quiz"
     />
 
     <!-- Description Component -->
     <VideoDescription
       v-if="false"
-      :lessonID="lesson.id_lesson"
-      :lessonName="lesson.name"
+      :lesson="lesson"
     />
 
   </div>
-  <div v-else> Error </div>
+  <div v-else> Non c'è nulla da vedere qui, procedere </div>
 </template>
 
 <script>
@@ -59,16 +57,7 @@ export default {
       edit: false,
       units: [],
       lessonID: null,
-      lesson: {
-        name: '',
-        creation_date: '',
-        link_video: '',
-        id_unit: null,
-        quiz: {
-          title: '',
-          quiz: []
-        }
-      },
+      lesson: {},
       fetched: false // flag to render units component only when finished fetching
     }
   },

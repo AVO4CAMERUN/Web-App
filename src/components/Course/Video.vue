@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col justify-between items-center bg-white rounded-lg w-full p-4 aspect-video shadow-xl dark:bg-dark-sidebar">
     <YouTube
-      v-if="!edit && render && lesson.link_video.length === 11"
+      v-if="!edit && render && lesson?.link_video?.length === 11"
       :src="`${lesson.link_video}`"
       :vars="vars"
       width="100%"
