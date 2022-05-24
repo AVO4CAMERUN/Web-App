@@ -176,7 +176,14 @@ export default {
 
       // Check all user input
       if (sum === 6) {
-        as.createAccount(this.inputs[0].value, this.inputs[1].value, this.inputs[3].value, this.inputs[2].value, this.inputs[4].value)
+        const obj = {
+          firstname: this.inputs[0].value,
+          lastname: this.inputs[1].value,
+          username: this.inputs[2].value,
+          email: this.inputs[3].value,
+          password: this.inputs[4].value
+        }
+        as.createAccount(obj)
           .then(() => { this.popupEmailConfirm = !this.popupEmailConfirm })
       } else {
         this.popupError = !this.popupError
