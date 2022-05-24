@@ -1,6 +1,6 @@
 import store from '@/store/index'
 
-const baseURIAPI = 'http://localhost/api/v1/'
+const baseURIAPI = 'https://api.avo4camerun.kirinsecurity.com/api/v1/'
 
 // Function for generic http requets => return a obj or err
 async function genericRequest (uri, method, bodyObj) {
