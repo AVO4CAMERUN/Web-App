@@ -1,22 +1,12 @@
 <template>
-  <div class="flex justify-center items-center place-items-center bg-gradient-to-r from-[#3f87a6] to-[#63b377] h-[85vh]">
-    <div class="pt-24">
-        <a href="https://www.avo4camerun.kirinsecurity.com/">
-            <div class="bg-slate-100 rounded-[5px] p-1 absolute left-10 top-10">
-                <img src="home.png" class="bg-white rounded-full inline-block" alt="Avo4Camerun Logo" draggable="false">
-                <p class="xl inline-block">
-                    Back to home
-                </p>
-            </div>
-        </a>
-    </div>
+  <div class="flex justify-center items-center place-items-center bg-gradient-to-r from-[#3f87a6] to-[#63b377] h-screen">
     <div
       class="flex items-center justify-center w-[110] h-[600px] p-8 rounded-[18px] bg-slate-100 shadow-lg shadow-gray-700"
       :class="{'opacity-[.15]': popupEmailConfirm || popupError}"
     >
       <div class="max-w-md w-full">
         <div>
-          <img src="../assets/logo_esteso-min.png" alt="Avo4Camerun Logo" draggable="false" />
+          <img src="../assets/logo_esteso_2.png" alt="Avo4Camerun Logo" draggable="false" />
         </div>
         <div class="mt-8 space-y-6">
           <div class="rounded-md shadow-sm -space-y-px">
@@ -72,12 +62,20 @@
             </button>
           </div>
 
-          <div class="flex items-center justify-center">
+          <div class="flex items-center justify-between">
             <div class="text-sm">
               Have already an account?
               <router-link to="/login" class="font-medium text-green-700 hover:text-green-600 hover:underline">
                 Sign-in
               </router-link>
+            </div>
+            <div>
+              <a href="https://www.avo4camerun.kirinsecurity.com/">
+                <i class="bx bxs-home text-lg mr-2" alt="home"></i>
+                <p class="inline-block">
+                    Back to home
+                </p>
+              </a>
             </div>
           </div>
         </div>
