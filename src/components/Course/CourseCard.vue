@@ -1,6 +1,6 @@
 <template>
   <!-- Main -->
-  <div class="flex flex-wrap notranslate" @click="this.parent !== 'search' ? setCurrentCourse() : null">
+  <div class="flex flex-wrap" @click="this.parent !== 'search' ? setCurrentCourse() : null">
     <article class="w-[480px] bg-white overflow-hidden outline outline-[1px] outline-gray-200 rounded-lg hover:shadow-lg transition-shadow dark:shadow-slate-700 dark:outline-gray-700 dark:bg-slate-900"
       :class="this.parent !== 'search' ? 'cursor-pointer' : ''">
 
@@ -36,7 +36,10 @@
       </header>
 
       <!-- Description -->
-      <p class="h-[9ex] w-[calc(100%_-_2rem)] break-words overflow-hidden m-2 mx-4 text-sm dark:text-white" :class="course.description === null || course.description === '' ? 'text-slate-700 translate' : ''">
+      <p
+        class="h-[9ex] w-[calc(100%_-_2rem)] break-words overflow-hidden m-2 mx-4 text-sm dark:text-white"
+        :class="course.description === null || course.description === '' ? 'text-slate-700 translate' : ''"
+      >
         {{course.description === null || course.description === '' ? 'no description provided' : course.description}}
       </p>
 

@@ -1,4 +1,11 @@
 <template>
+  <!-- Header -->
+  <div class="flex flex-row gap-2 m-8 mb-2 p-2">
+    <hr class="rounded h-1 bg-green-700 border border-green-700 self-center grow">
+    <p class="text-green-800 text-xl font-semibold grow-0">My Courses</p>
+    <hr class="rounded h-1 bg-green-700 border border-green-700 self-center grow">
+  </div>
+
   <div v-if="empty" class="bg-yellow-100 border-t border-b border-l border-r border-yellow-500 text-yellow-700 px-4 py-3 mx-5 my-5">
     <p class="font-bold">You are not subscribed to any course</p>
     <p class="text-sm">Go to the search page to add your new course.</p>

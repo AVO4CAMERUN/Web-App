@@ -38,7 +38,7 @@
     />
 
   </div>
-  <div v-else> Non c'è nulla da vedere qui, procedere </div>
+  <div v-else> NOT FOUND </div>
 </template>
 
 <script>

@@ -1,6 +1,6 @@
 <template>
     <!-- Main -->
-    <div class="flex flex-col bg-white rounded-md w-full h-full lg:aspect-[9/16] overflow-y-auto shadow-md dark:bg-dark-sidebar notranslate">
+    <div class="flex flex-col bg-white rounded-md w-full h-full lg:aspect-[9/16] overflow-y-auto shadow-md dark:bg-dark-sidebar">
 
       <!-- Title -->
       <span class="border-b-[1px] border-slate-400 p-2 text-2xl font-semibold text-center dark:text-light-text">

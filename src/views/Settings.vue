@@ -1,4 +1,11 @@
 <template>
+  <!-- Header -->
+  <div class="flex flex-row gap-2 m-8 mb-2 p-2">
+    <hr class="rounded h-1 bg-green-700 border border-green-700 self-center grow">
+    <p class="text-green-800 text-xl font-semibold grow-0">Settings</p>
+    <hr class="rounded h-1 bg-green-700 border border-green-700 self-center grow">
+  </div>
+
   <div class="flex flex-col items-center">
     <div class="flex flex-col p-4 m-4 gap-4 w-[100%] h-[100%] items-center">
 

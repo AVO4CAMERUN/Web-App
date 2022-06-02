@@ -1,7 +1,7 @@
 <template>
   <!-- Quiz -->
   <template v-if="quiz">
-    <div class="p-4 col-span-full rounded-md shadow-lg bg-white dark:bg-dark-sidebar dark:text-light-text notranslate">
+    <div class="p-4 col-span-full rounded-md shadow-lg bg-white dark:bg-dark-sidebar dark:text-light-text">
 
       <!-- Title -->
       <p class="p-2 border-b-2 border-[#e5e7eb] select-none text-3xl font-semibold">Quiz: {{quiz.title}}</p>

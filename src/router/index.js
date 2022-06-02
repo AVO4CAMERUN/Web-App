@@ -2,7 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Inscriptions from '@/views/Inscriptions.vue'
 import Search from '@/views/Search.vue'
 import MyClasses from '@/views/teachers/MyClasses'
-import MyCreations from '@/views/MyCreations'
+import CreatedClasses from '@/views/CreatedClasses'
+import CreatedCourses from '@/views/CreatedCourses'
 import Class from '@/views/Class'
 import Settings from '@/views/Settings.vue'
 import Login from '@/views/Login.vue'
@@ -41,9 +42,14 @@ const routes = [
     component: MyClasses
   },
   {
-    path: '/mycreations',
-    name: 'mycreations',
-    component: MyCreations
+    path: '/createdcourses',
+    name: 'createdcourses',
+    component: CreatedCourses
+  },
+  {
+    path: '/createdclasses',
+    name: 'createdclasses',
+    component: CreatedClasses
   },
   {
     path: '/class',

@@ -1,4 +1,11 @@
-<template v-on>
+<template>
+  <!-- Header -->
+  <div class="flex flex-row gap-2 m-8 mb-2 p-2">
+    <hr class="rounded h-1 bg-green-700 border border-green-700 self-center grow">
+    <p class="text-green-800 text-xl font-semibold grow-0">Search Courses</p>
+    <hr class="rounded h-1 bg-green-700 border border-green-700 self-center grow">
+  </div>
+
   <BaseSearchBar @inputSearch="searchCourses"/>
   <!-- Error message when course already added
   <div v-if="error == 400" class="bg-yellow-100 border-t border-b border-l border-r border-yellow-500 text-yellow-700 px-4 py-3 mx-5 my-5">

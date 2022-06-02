@@ -1,6 +1,5 @@
 <template>
-  <div class="">
-    <!-- farla dinamica in base al role-->
+  <div>
     <nav
       class="bg-white dark:bg-dark-sidebar w-[250px] h-screen py-[10px] px-[14px] transition-[width] duration-300"
       :class="{'w-[88px]': isClose}"
@@ -60,11 +59,11 @@ export default {
       isClose: true,
       buttons: [
         { icon: 'bx bx-search icon', message: 'Search', path: '/search', event: this.empty },
-        { icon: 'bx bx-book-bookmark icon', message: 'Inscriptions', path: '/inscriptions', event: this.empty },
+        { icon: 'bx bx-book-bookmark icon', message: 'My Courses', path: '/inscriptions', event: this.empty },
         { icon: 'bx bx-chalkboard icon', message: 'My Class', path: '/class', event: this.empty },
-        { icon: 'bx bx-folder-plus', message: 'My Creations', path: '/mycreations', event: this.empty },
+        { icon: 'bx bxs-videos', message: 'Created Courses', path: '/createdcourses', event: this.empty },
+        { icon: 'bx bx-folder-plus', message: 'Created Classes', path: '/createdclasses', event: this.empty },
         { icon: 'bx bx-cog icon', message: 'Settings', path: '/settings', event: this.empty },
-        // { icon: 'bx bx-bug-alt icon', message: 'Bug Report', path: '/', event: this.empty },
         { icon: 'bx bx-log-out', message: 'Logout', path: '', event: this.logout }
       ]
     }
