@@ -15,7 +15,7 @@
             <BaseInputText name="Username" v-model="this.inputs[2].value" :type="this.inputs[2].type" :disabled="popupEmailConfirm || popupError" @keyup.enter="register" />
             <BaseInputText name="Email" v-model="this.inputs[3].value" :type="this.inputs[3].type" :disabled="popupEmailConfirm || popupError" @keyup.enter="register" />
             <BaseInputText name="Password" v-model="this.inputs[4].value" :type="this.inputs[4].type" :disabled="popupEmailConfirm || popupError" @keyup.enter="register" />
-            <BaseInputText name="Password" v-model="this.inputs[5].value" :type="this.inputs[5].type" :disabled="popupEmailConfirm || popupError" bottom @keyup.enter="register" />
+            <BaseInputText name="Confirm Password" v-model="this.inputs[5].value" :type="this.inputs[5].type" :disabled="popupEmailConfirm || popupError" bottom @keyup.enter="register" />
           </div>
 
           <div class="flex items-center justify-between">
@@ -131,7 +131,7 @@ export default {
         { name: 'username', value: '', placeholder: 'Username', type: 'text', disabled: false, error: true, errorText: 'Username can contain only lower case letters, numbers and . - _' },
         { name: 'email', value: '', placeholder: 'Email', type: 'text', disabled: false, error: true, errorText: 'Email not valid' },
         { name: 'password', value: '', placeholder: 'Password', type: 'password', disabled: false, error: true, errorText: 'Password must be at least 8 characters and contains at least one number, one special character, one upper case and one lower case letter' },
-        { name: 'confirm_password', value: '', placeholder: 'Password', type: 'password', disabled: false, error: true, errorText: 'Password don\'t match' }
+        { name: 'confirm_password', value: '', placeholder: 'Confirm Password', type: 'password', disabled: false, error: true, errorText: 'Password don\'t match' }
       ]
     }
   },

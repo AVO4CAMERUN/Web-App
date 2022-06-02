@@ -1,4 +1,11 @@
 <template>
+  <!-- Header -->
+  <div class="flex flex-row gap-2 m-8 mb-2 p-2">
+    <hr class="rounded h-1 bg-green-700 border border-green-700 self-center grow">
+    <p class="text-green-800 text-xl font-semibold grow-0">My Class</p>
+    <hr class="rounded h-1 bg-green-700 border border-green-700 self-center grow">
+  </div>
+
   <div v-if="empty" class="bg-yellow-100 border-t border-b border-l border-r border-yellow-500 text-yellow-700 px-4 py-3 mx-5 my-5">
     <p class="font-bold"> {{empty ? 'Not Found' : ''}}</p>
     <p class="text-sm">{{empty ? 'You are not in any class. Ask a teacher of the class to invite you' : ''}}</p>
@@ -50,6 +57,7 @@
       <div class="h-96 w-[75%] p-2 border-2 border-gray-200 rounded-lg lg:w-full md:block bg-white dark:bg-slate-900"><Statistics nomeCorso="Work In Progress" /></div>
       <div class="h-96 w-[75%] p-2 border-2 border-gray-200 rounded-lg lg:w-full md:block bg-white dark:bg-slate-900"><Statistics nomeCorso="Work In Progress" /></div>
     </div-->
+
     <!-- Users Cards -->
     <div class="p-8 overflow-hidden">
       <!-- Teachers Cards -->

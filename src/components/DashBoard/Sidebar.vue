@@ -83,7 +83,7 @@ export default {
         const index = this.buttons.findIndex(element => element.message === 'My Class')
         this.buttons[index].message = 'My Classes'
         this.buttons[index].path = '/myclasses'
-      } else if (this.role === 'STUDENT') this.buttons.splice(3, 1)
+      } else if (this.role === 'STUDENT') this.buttons.splice(3, 2)
     }
   },
   computed: {

@@ -81,7 +81,7 @@ router.beforeEach((to, from, next) => {
   const loggedIn = store.state.login.isLogged
   const role = store.state.login.role
 
-  if (to.name === 'mycreations' && role === 'STUDENT') return next('/settings') // da cambiare in pagina di errore
+  if ((to.name === 'createdcourses' || to.name === 'createdclasses') && role === 'STUDENT') return next('/settings') // da cambiare in pagina di errore
   if (to.name === 'myclasses' && role === 'STUDENT') return next('/settings') // da cambiare in pagina di errore
 
   if (loggedIn && !authRequired) return next('/inscriptions')

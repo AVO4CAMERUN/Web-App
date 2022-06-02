@@ -58,7 +58,7 @@ export default {
   methods: {
     notification () {
       this.showNotification = !this.showNotification
-      setTimeout(this.showNotification = !this.showNotification, 30000)
+      if (this.showNotification) setTimeout(() => { if (this.showNotification) this.showNotification = !this.showNotification }, 10000)
     },
     changeTheme () {
       if (this.darkTheme) store.commit('generic/setDarkTheme', { darkTheme: false })
