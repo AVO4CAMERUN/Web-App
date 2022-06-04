@@ -1,4 +1,13 @@
 <template>
+  <!-- Pop Up -->
+  <PopUp
+    v-if="showPopUp"
+    :type="'error'"
+    :message="'Warning'"
+    :content="'You have to answer all questions'"
+    @noAction="showPopUp = !showPopUp"
+  />
+
   <!-- Quiz -->
   <template v-if="quiz">
     <div class="p-4 col-span-full rounded-md shadow-lg bg-white dark:bg-dark-sidebar dark:text-light-text">
@@ -23,7 +32,6 @@
                 :name="question.question"
                 class="accent-input ml-12 m-2"
                 v-model="quizAnswers[qindex]"
-                required
                 :disabled="submit"
               />
 
@@ -43,6 +51,7 @@
         </div>
       </form>
     </div>
+    {{quizAnswers}}
   </template>
 
   <!-- Quiz Creation -->
@@ -149,9 +158,12 @@
 </template>
 
 <script>
+import PopUp from '@/components/Base/PopUp.vue'
+
 export default {
   data: function () {
     return {
+      showPopUp: false,
       quizAnswers: [],
       createdQuiz: {
         title: '',
@@ -161,8 +173,9 @@ export default {
     }
   },
   props: ['quiz', 'edit'],
+  components: { PopUp },
   mounted () {
-    if (this.quiz) this.quiz.quiz.forEach(() => this.quizAnswers.push(null))
+    if (this.quiz) this.quiz.quiz.forEach(() => this.quizAnswers.push([]))
   },
   methods: {
     correct (aindex, qindex) {
@@ -176,13 +189,15 @@ export default {
       })
       return correct
     },
-    submitAnswers (e) {
+    submitAnswers () {
       let compiled = true
       this.quizAnswers.forEach(e => {
-        if (e === null) compiled = false
+        console.log(e.toString() !== '')
+        if (e.toString() === '') compiled = false
       })
       console.log(compiled)
       if (compiled) this.submit = true
+      else this.showPopUp = !this.showPopUp
     },
     typeInput (type) {
       if (type === 'multiple') return 'checkbox'
@@ -214,6 +229,7 @@ export default {
     quiz () {
       this.submit = false
       this.quizAnswers = []
+      if (this.quiz) this.quiz.quiz.forEach(() => this.quizAnswers.push([]))
     }
   }
 }
