@@ -1,10 +1,10 @@
 <template>
   <div>
     <nav
-      class="bg-white dark:bg-dark-sidebar w-[250px] h-screen py-[10px] px-[14px] transition-[width] duration-300"
-      :class="{'w-[88px]': isClose}"
+      class="bg-white dark:bg-dark-sidebar absolute z-50 md:relative w-full h-screen py-[10px] transition-[width] duration-300 md:w-[250px] md:px-[14px]"
+      :class="{'w-[0px] md:w-[88px]': isClose}"
     >
-      <header class="relative">
+      <header class="relative ml-[14px] md:m-0">
         <div class="mt-[10px] flex align-middle"> <!-- image-text -->
           <span class="flex align-middle justify-center min-w-[60px]"> <!-- image -->
             <img class="w-[40px] rounded-[6px] dark:invert" src="@/assets/logo.png"
@@ -18,9 +18,12 @@
           </div>
         </div>
 
-        <button class="absolute top-[20%] -right-[1.75rem] w-6 aspect-square bg-primary text-white rounded-full"
+        <button class="absolute top-[20%] left-14 w-6 aspect-square bg-primary text-white rounded-full md:block md:-right-[1.75rem]"
           @click="isClose = !isClose"
+          :class="{'ml-[170px]': !isClose}"
         >
+        <!-- Da capire come fare la transizione sulla positizione
+        del bottone no mobile, senza usare transition-all -->
           <i class="flex justify-center items-center text-[22px] translate-y-[1px] transition-transform bx bx-chevron-right"
             :class="{'rotate-180 translate-y-[-1px]': !isClose}"
           />
@@ -28,7 +31,10 @@
       </header>
 
       <!-- div elenco button -->
-      <section class="relative h-[90%] text-[#707070] text-[17px] font-semibold dark:text-white">
+      <section
+      class="relative invisible w-[222px] h-[90%] ml-[14px] text-[#707070] text-[17px] font-semibold dark:text-white md:m-0 md:w-auto md:visible"
+      :class="{'!visible': !isClose}"
+      >
         <ul>
           <li v-for="button in buttons" :key="button.message">
             <router-link
@@ -61,8 +67,8 @@ export default {
         { icon: 'bx bx-search icon', message: 'Search', path: '/search', event: this.empty },
         { icon: 'bx bx-book-bookmark icon', message: 'My Courses', path: '/inscriptions', event: this.empty },
         { icon: 'bx bx-chalkboard icon', message: 'My Class', path: '/class', event: this.empty },
-        { icon: 'bx bxs-videos', message: 'Created Courses', path: '/createdcourses', event: this.empty },
-        { icon: 'bx bx-folder-plus', message: 'Created Classes', path: '/createdclasses', event: this.empty },
+        { icon: 'bx bxs-book-add', message: 'Created Courses', path: '/createdcourses', event: this.empty },
+        { icon: 'bx bx-clinic', message: 'Created Classes', path: '/createdclasses', event: this.empty },
         { icon: 'bx bx-cog icon', message: 'Settings', path: '/settings', event: this.empty },
         { icon: 'bx bx-log-out', message: 'Logout', path: '', event: this.logout }
       ]

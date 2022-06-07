@@ -38,6 +38,7 @@
               {{answer}}
             </label>
             <i v-if="correct(aindex, qindex) && submit" class="fa-solid fa-check text-[20px] text-green-700"></i>
+            <!--i v-else-if="correct(aindex, qindex)" class="fa-solid fa-check text-[20px] text-blue-700"></i-->
             <i v-else-if="!correct(aindex, qindex) && quizAnswers[qindex] === aindex && submit" class="fa-solid fa-x text-[16px] text-red-500"></i>
           </div>
         </div>

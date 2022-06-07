@@ -38,7 +38,11 @@
     />
 
   </div>
-  <div v-else> NOT FOUND </div>
+  <ErrorPage
+    v-else
+    :text="'Serach lead to no result!'"
+    :error="'404'"
+  />
 </template>
 
 <script>
@@ -46,6 +50,7 @@ import UnitsSidebar from '@/components/Course/UnitsSidebar.vue'
 import Video from '@/components/Course/Video.vue'
 import VideoDescription from '@/components/Course/VideoDescription.vue'
 import Quiz from '@/components/Course/Quiz.vue'
+import ErrorPage from '@/components/Base/ErrorPage.vue'
 import { lessonService as ls } from '@/servises/lesson.services'
 import { unitsService as us } from '@/servises/units.services'
 import store from '@/store/index'
@@ -144,7 +149,8 @@ export default {
     UnitsSidebar,
     Video,
     Quiz,
-    VideoDescription
+    VideoDescription,
+    ErrorPage
   }
 }
 </script>

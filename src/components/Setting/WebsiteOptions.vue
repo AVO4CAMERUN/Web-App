@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col w-[60%] p-8 gap-4 rounded-xl shadow-xl border border-green-700 bg-white">
+  <div class="flex flex-col w-[60%] p-8 gap-4 rounded-xl shadow-xl border border-green-700 bg-white dark:bg-slate-900 dark:text-light-text">
     <div class="flex flex-row justify-center gap-4">
 
       <!-- Change Theme -->

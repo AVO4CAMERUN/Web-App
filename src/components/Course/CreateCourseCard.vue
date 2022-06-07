@@ -1,6 +1,6 @@
 <template>
   <!-- Main -->
-  <div class="flex flex-wrap">
+  <div class="flex flex-wrap ml-auto mr-auto md:m-0">
     <article class="w-[480px] bg-white overflow-hidden outline outline-[1px] outline-gray-200 rounded-lg hover:shadow-lg transition-shadow dark:shadow-slate-700 dark:outline-gray-700 dark:bg-slate-900">
 
       <!-- Image -->

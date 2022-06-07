@@ -48,9 +48,9 @@
       <hr class="border border-green-900 w-[70%]">
 
       <!-- Tabs -->
-      <div class="flex flex-row w-[70%] p-8 gap-8 justify-left">
+      <div class="flex flex-col md:flex-row w-[70%] p-8 gap-8 justify-left">
         <button
-          class="py-2 px-4 w-[25%] rounded-t-lg rounded-r-lg bg-green-800 text-white hover:bg-green-900 hover:translate-x-2 duration-500"
+          class="py-2 px-4 w-full md:w-[25%] break-words rounded-t-lg rounded-r-lg bg-green-800 text-white hover:bg-green-900 hover:translate-x-2 duration-500"
           v-for="(tab, index) in tabs"
           :key="index"
           @click="setTab(index)"

@@ -1,6 +1,6 @@
 <template>
   <!-- Main -->
-  <div class="flex flex-nowrap notranslate" @click="setCurrentClass">
+  <div class="flex flex-nowrap ml-auto mr-auto md:m-0 notranslate" @click="setCurrentClass">
     <article class="w-[480px] cursor-pointer bg-white overflow-hidden outline outline-[1px] outline-gray-200 rounded-lg hover:shadow-lg transition-shadow dark:shadow-slate-700 dark:outline-gray-700 dark:bg-slate-900">
 
       <!-- Image -->
